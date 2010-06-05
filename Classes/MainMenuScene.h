@@ -51,6 +51,7 @@
     CCLayer * towerScrollLayer;
     
     CCBitmapFontAtlas * usernameDisplay;
+    CCBitmapFontAtlas * difficultyDisplay;
     
     NSMutableArray * motd;
     NSMutableArray * motdLabels;
@@ -72,6 +73,10 @@
 
 +(id) scene;
 
+- (void) onEasy: (id) sender;
+- (void) onMedium: (id) sender;
+- (void) onHard: (id) sender;
+- (void)refreshDifficultyDisplay;
 - (void)updateScrollOffsetWithDeltaX:(float)DeltaX;
 - (float)distanceBetweenPointsA:(CGPoint)a B:(CGPoint)b;
 - (CCSprite*) createTowerCardForType:(int)towerType x:(int)x y:(int)y;

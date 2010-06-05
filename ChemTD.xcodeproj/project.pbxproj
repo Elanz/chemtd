@@ -10,6 +10,11 @@
 		4002D95011B2A22E0057117D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4002D94F11B2A22E0057117D /* CoreLocation.framework */; };
 		4002DA9211B2BD740057117D /* newGameBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4002DA9111B2BD740057117D /* newGameBtn.png */; };
 		4002E4A911B2DE470057117D /* LoginBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 4002E4A811B2DE470057117D /* LoginBackground.png */; };
+		4010FA3F11BABC2E00E85749 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4010FA3E11BABC2E00E85749 /* Reachability.m */; };
+		4010FB0411BACC4300E85749 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4010FB0311BACC4300E85749 /* SystemConfiguration.framework */; };
+		4010FB6D11BADD4A00E85749 /* easybtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4010FB6A11BADD4A00E85749 /* easybtn.png */; };
+		4010FB6E11BADD4A00E85749 /* hardbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4010FB6B11BADD4A00E85749 /* hardbtn.png */; };
+		4010FB6F11BADD4A00E85749 /* mediumbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4010FB6C11BADD4A00E85749 /* mediumbtn.png */; };
 		401CCC7611B1EF100001C20C /* PauseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 401CCC7511B1EF100001C20C /* PauseBtn.png */; };
 		401CCC9C11B1F3100001C20C /* mini-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 401CCC9B11B1F3100001C20C /* mini-menu.png */; };
 		401CCCAB11B1F5AE0001C20C /* mainMenuBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 401CCCA911B1F5AE0001C20C /* mainMenuBtn.png */; };
@@ -368,6 +373,12 @@
 		4002D94F11B2A22E0057117D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4002DA9111B2BD740057117D /* newGameBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newGameBtn.png; sourceTree = "<group>"; };
 		4002E4A811B2DE470057117D /* LoginBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginBackground.png; sourceTree = "<group>"; };
+		4010FA3D11BABC2E00E85749 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		4010FA3E11BABC2E00E85749 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		4010FB0311BACC4300E85749 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4010FB6A11BADD4A00E85749 /* easybtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = easybtn.png; sourceTree = "<group>"; };
+		4010FB6B11BADD4A00E85749 /* hardbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hardbtn.png; sourceTree = "<group>"; };
+		4010FB6C11BADD4A00E85749 /* mediumbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mediumbtn.png; sourceTree = "<group>"; };
 		4014584511B00248003683A5 /* USEnglishStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USEnglishStrings.h; sourceTree = "<group>"; };
 		401CCC7511B1EF100001C20C /* PauseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PauseBtn.png; sourceTree = "<group>"; };
 		401CCC9B11B1F3100001C20C /* mini-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-menu.png"; sourceTree = "<group>"; };
@@ -773,6 +784,7 @@
 				40F178AC11985C5700C6A7DF /* AVFoundation.framework in Frameworks */,
 				40F178AD11985C5700C6A7DF /* libcocos2d libraries.a in Frameworks */,
 				4002D95011B2A22E0057117D /* CoreLocation.framework in Frameworks */,
+				4010FB0411BACC4300E85749 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +851,7 @@
 				506EDB87102F4C4000A389B3 /* libz.dylib */,
 				506EDBA4102F4C9F00A389B3 /* AVFoundation.framework */,
 				4002D94F11B2A22E0057117D /* CoreLocation.framework */,
+				4010FB0311BACC4300E85749 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -851,6 +864,8 @@
 				401458D411B016AF003683A5 /* Field */,
 				1F3B9A2C0EF2145700286867 /* ChemTDAppDelegate.h */,
 				1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */,
+				4010FA3D11BABC2E00E85749 /* Reachability.h */,
+				4010FA3E11BABC2E00E85749 /* Reachability.m */,
 				4088BE0D11B197D400DCF16B /* UserManager.h */,
 				4088BE0E11B197D400DCF16B /* UserManager.m */,
 			);
@@ -973,6 +988,9 @@
 		4088BCE711B1892D00DCF16B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4010FB6A11BADD4A00E85749 /* easybtn.png */,
+				4010FB6B11BADD4A00E85749 /* hardbtn.png */,
+				4010FB6C11BADD4A00E85749 /* mediumbtn.png */,
 				40DFAE9611B4543100697D95 /* towercardtemplate.png */,
 				40DFAE7511B443DA00697D95 /* exploreBackground.png */,
 				40DFAD9311B42EF100697D95 /* overallRankingBackground.png */,
@@ -1682,6 +1700,9 @@
 				40DFAE7611B443DA00697D95 /* exploreBackground.png in Resources */,
 				40DFAE9711B4543100697D95 /* towercardtemplate.png in Resources */,
 				40718C7811B59AAF00EA3AA3 /* ammonia.png in Resources */,
+				4010FB6D11BADD4A00E85749 /* easybtn.png in Resources */,
+				4010FB6E11BADD4A00E85749 /* hardbtn.png in Resources */,
+				4010FB6F11BADD4A00E85749 /* mediumbtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1743,6 +1764,7 @@
 				40DBF70F11B6E2F600FE3CD7 /* TylenolTower.m in Sources */,
 				40DBF71F11B6E44B00FE3CD7 /* ValiumTower.m in Sources */,
 				40DBF72811B6E4E400FE3CD7 /* VitaminCTower.m in Sources */,
+				4010FA3F11BABC2E00E85749 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

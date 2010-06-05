@@ -131,6 +131,9 @@
         case UITEXTURE_OVERALLRANKINGBACKGROUND: return [self LoadTextureWithName:@"overallRankingBackground.png" textureKey:textureKey isPVR:NO]; break;
         case UITEXTURE_EXPLORERBACKGROUND: return [self LoadTextureWithName:@"exploreBackground.png" textureKey:textureKey isPVR:NO]; break;
         case UITEXTURE_TOWERCARDBACKGROUND: return [self LoadTextureWithName:@"towercardtemplate.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_EASYBTN: return [self LoadTextureWithName:@"easybtn.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_MEDIUMBTN: return [self LoadTextureWithName:@"mediumbtn.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_HARDBTN: return [self LoadTextureWithName:@"hardbtn.png" textureKey:textureKey isPVR:NO]; break;
         default:
             break;
     }

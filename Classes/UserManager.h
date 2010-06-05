@@ -14,6 +14,10 @@
 #define StatType_Score 1
 #define StatType_DamageDone 2
 
+#define DIFFICULTY_EASY 1
+#define DIFFICULTY_MEDIUM 2
+#define DIFFICULTY_HARD 3
+
 @interface LevelStat : NSObject
 {
     int statType;
@@ -72,10 +76,15 @@
 @interface UserManager : NSObject {
     
     int gameid;
-    
+    BOOL online;
+    int difficultyid;
 }
 
 @property (nonatomic) int gameid;
+@property (nonatomic) int difficultyid;
+@property (nonatomic) BOOL online;
+
+- (void) reachabilityChanged: (NSNotification* )note;
 
 - (NSArray*) getOveralRanking;
 

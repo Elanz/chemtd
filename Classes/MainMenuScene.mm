@@ -174,10 +174,20 @@
     NSString * username = [userManager getUserName];
     if (username)
     {
-        [usernameDisplay setString:[NSString stringWithFormat:@"%@ %@",String_WelcomeLabel, username]];
         if (![userManager login:username])
         {
             [self showLogin];
+        }
+        else
+        {
+            if (userManager.online)
+            {
+                [usernameDisplay setString:[NSString stringWithFormat:@"%@ %@",String_WelcomeLabel, username]];
+            }
+            else
+            {
+                [usernameDisplay setString:String_OfflineString];
+            }
         }
     }
     else 
@@ -187,41 +197,95 @@
     [self unschedule:@selector(doLoginCheck:)];
 }
 
+-(void)refreshDifficultyDisplay
+{
+    switch (userManager.difficultyid) {
+        case DIFFICULTY_EASY: [difficultyDisplay setString:String_DifficultyEasy]; break;
+        case DIFFICULTY_MEDIUM: [difficultyDisplay setString:String_DifficultyMedium]; break;
+        case DIFFICULTY_HARD: [difficultyDisplay setString:String_DifficultyHard]; break;
+        default:
+            break;
+    }
+}
+
+- (void) onEasy: (id) sender
+{
+    userManager.difficultyid = DIFFICULTY_EASY;
+    [self refreshDifficultyDisplay];
+}
+
+- (void) onMedium: (id) sender
+{
+    userManager.difficultyid = DIFFICULTY_MEDIUM;
+    [self refreshDifficultyDisplay];    
+}
+
+- (void) onHard: (id) sender
+{
+    userManager.difficultyid = DIFFICULTY_HARD;
+    [self refreshDifficultyDisplay];    
+}
+
 -(void) onPlay: (id) sender
 {
+    minimenuLayer = [[CCLayer alloc] init];
+    minimenuLayer.tag = CCNodeTag_Minimenu;
+    [minimenuLayer setContentSize:CGSizeMake(1024, 768)];
+    minimenuLayer.position = ccp(0,0);
+    
+    miniMenuBackground = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MINIMENU]];
+    miniMenuBackground.position = ccp(device_width/2, device_height/2);
+    [minimenuLayer addChild:miniMenuBackground];
+    
+    newGameBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_NEWGAMEBTN]];
+    menuItemNewGame = [CCMenuItemSprite itemFromNormalSprite:newGameBtn selectedSprite:newGameBtn 
+                                               disabledSprite:newGameBtn target:self selector:@selector(onNewGame:)];
+    resumeBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_RESUMEBTN]];
+    menuItemResume = [CCMenuItemSprite itemFromNormalSprite:resumeBtn selectedSprite:resumeBtn 
+                                             disabledSprite:resumeBtn target:self selector:@selector(onResume:)];
+    miniMenu = [CCMenu menuWithItems: menuItemResume, menuItemNewGame, nil];
+    miniMenu.position = ccp(device_width/2-10, device_height/2);
+    [miniMenu alignItemsVerticallyWithPadding:20];
+    [minimenuLayer addChild:miniMenu z:1];
+    //self.isTouchEnabled = NO;
+    //menuItemChallenges.isEnabled = NO;
+    menuItemExplore.isEnabled = NO;
+    menuItemPlay.isEnabled = NO;
+    menuItemRanking.isEnabled = NO;
+    menuItemChangeUser.isEnabled = NO;
+    
+    userManager.difficultyid = DIFFICULTY_EASY;
+    
+    difficultyDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+    difficultyDisplay.position = ccp(device_width/2, device_height-165);
+    difficultyDisplay.color = Color_Black;
+    [self refreshDifficultyDisplay];
+    [minimenuLayer addChild:difficultyDisplay];
+    
+    CCSprite * easyBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_EASYBTN]];
+    CCSprite * mediumBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MEDIUMBTN]];
+    CCSprite * hardBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_HARDBTN]];
+    
+    CCMenuItemSprite * menuItemEasy = [CCMenuItemSprite itemFromNormalSprite:easyBtn selectedSprite:easyBtn 
+                                                               disabledSprite:easyBtn target:self selector:@selector(onEasy:)];
+    CCMenuItemSprite * menuItemMedium = [CCMenuItemSprite itemFromNormalSprite:mediumBtn selectedSprite:mediumBtn 
+                                                              disabledSprite:mediumBtn target:self selector:@selector(onMedium:)];
+    CCMenuItemSprite * menuItemHard = [CCMenuItemSprite itemFromNormalSprite:hardBtn selectedSprite:hardBtn 
+                                                                disabledSprite:hardBtn target:self selector:@selector(onHard:)];
+    
+    CCMenu * difficultyMenu = [CCMenu menuWithItems: menuItemEasy, menuItemMedium, menuItemHard, nil];
+    [difficultyMenu alignItemsHorizontallyWithPadding:20];
+    difficultyMenu.position = ccp(device_width/2,device_height-207);
+    [minimenuLayer addChild:difficultyMenu z:4];
+    
+    [[CCDirector sharedDirector].runningScene addChild: minimenuLayer z:2]; 
     if (![userManager hasSavedGame])
     {
-        CCScene * scene = [GameFieldScene scene];
-        [[CCDirector sharedDirector] replaceScene:scene];
+        menuItemResume.isEnabled = NO;
     }
-    else 
+    else
     {
-        minimenuLayer = [[CCLayer alloc] init];
-        minimenuLayer.tag = CCNodeTag_Minimenu;
-        [minimenuLayer setContentSize:CGSizeMake(1024, 768)];
-        minimenuLayer.position = ccp(0,0);
-        
-        miniMenuBackground = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MINIMENU]];
-        miniMenuBackground.position = ccp(device_width/2, device_height/2);
-        [minimenuLayer addChild:miniMenuBackground];
-        
-        newGameBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_NEWGAMEBTN]];
-        menuItemNewGame = [CCMenuItemSprite itemFromNormalSprite:newGameBtn selectedSprite:newGameBtn 
-                                                   disabledSprite:newGameBtn target:self selector:@selector(onNewGame:)];
-        resumeBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_RESUMEBTN]];
-        menuItemResume = [CCMenuItemSprite itemFromNormalSprite:resumeBtn selectedSprite:resumeBtn 
-                                                 disabledSprite:resumeBtn target:self selector:@selector(onResume:)];
-        miniMenu = [CCMenu menuWithItems: menuItemResume, menuItemNewGame, nil];
-        miniMenu.position = ccp(device_width/2-10, device_height/2);
-        [miniMenu alignItemsVerticallyWithPadding:20];
-        [minimenuLayer addChild:miniMenu z:1];
-        //self.isTouchEnabled = NO;
-        //menuItemChallenges.isEnabled = NO;
-        menuItemExplore.isEnabled = NO;
-        menuItemPlay.isEnabled = NO;
-        menuItemRanking.isEnabled = NO;
-        menuItemChangeUser.isEnabled = NO;
-        [[CCDirector sharedDirector].runningScene addChild: minimenuLayer z:2]; 
+        menuItemResume.isEnabled = YES;
     }
 }
 
@@ -600,7 +664,14 @@
     if ([userManager login:[textField.text uppercaseString]])
     {
         [userManager clearSaveGame];
-        [usernameDisplay setString:[NSString stringWithFormat:@"%@ %@",String_WelcomeLabel, [textField.text uppercaseString]]];
+        if (userManager.online)
+        {
+            [usernameDisplay setString:[NSString stringWithFormat:@"%@ %@",String_WelcomeLabel, [textField.text uppercaseString]]];
+        }
+        else
+        {
+            [usernameDisplay setString:String_OfflineString];
+        }
         [textField resignFirstResponder];
         [[CCDirector sharedDirector].runningScene removeChild: minimenuLayer cleanup:YES];
         [userNameField removeFromSuperview];

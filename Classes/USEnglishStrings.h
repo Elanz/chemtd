@@ -55,6 +55,12 @@
 #define String_TargetTypeTrap @"Trap"
 #define String_TargetTypeCloud @"Cloud"
 
+#define String_OfflineString @"Offline"
+
+#define String_DifficultyEasy @"Easy"
+#define String_DifficultyMedium @"Medium"
+#define String_DifficultyHard @"Hard"
+
 // MARK: tower strings
 
 #define String_TowerName_Base @"Empty Block"

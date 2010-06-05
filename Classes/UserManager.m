@@ -9,6 +9,7 @@
 #import "UserManager.h"
 #import "GameFieldScene.h"
 #import "MainMenuScene.h"
+#import "Reachability.h"
 
 @implementation LevelStat
 
@@ -41,6 +42,47 @@
 @implementation UserManager
 
 @synthesize gameid;
+@synthesize online;
+@synthesize difficultyid;
+
+- (id) init
+{
+    if( (self=[super init] )) 
+    {
+        online = false;
+        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+        
+        Reachability* hostReach = [[Reachability reachabilityWithHostName: @"www.200Monkeys.com"] retain];
+        [hostReach startNotifer];
+        
+        Reachability* internetReach = [[Reachability reachabilityForInternetConnection] retain];
+        [internetReach startNotifer];
+    }
+    return self;
+}
+
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	Reachability* curReach = [note object];
+	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus netStatus = [curReach currentReachabilityStatus];
+    if (netStatus == NotReachable)
+    {
+        if (online == YES)
+        {
+            //printf("network down");
+            online = NO;
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Error." message:@"Make sure this device is connected to the internet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
+            [alert show];
+            [alert release];
+            
+        }
+    }
+    else {
+        online = YES;
+    }
+}
 
 - (void) clearSaveGame
 {
@@ -111,7 +153,31 @@
 
 - (void) submitStartGame
 {
-    gameid = 1;
+    if (online)
+    {
+        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+        NSString * URLforGet = [NSString stringWithFormat:@"http://www.200monkeys.com/chemtd/startgame.php?username=%@&deviceid=%@&difficultyid=%d", [self getUserName], Uid, difficultyid];
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+        [request setURL:[NSURL URLWithString:URLforGet]];  
+        [request setHTTPMethod:@"GET"]; 
+        [request setTimeoutInterval:5.0];
+        NSURLResponse *response;
+        NSError *urlerror;
+        NSData* receivedData = [[NSMutableData data] retain];
+        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+        
+        gameid = [output intValue];
+        if (gameid == 0)
+        {
+            gameid = 1;
+            online = NO;
+        }
+    }
+    else
+    {
+        gameid = 1;
+    }
 }
 
 - (NSArray*) getOveralRanking
@@ -148,41 +214,45 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];        
     [prefs setObject:userName forKey:@"username"];        
     [prefs synchronize];
-//    
-//    NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
-//    NSString * URLforGet = [NSString stringWithFormat:@"http://data.200monkeys.com/login.php?username=%@&deviceid=%@", userName, Uid];
-//    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-//    [request setURL:[NSURL URLWithString:URLforGet]];  
-//    [request setHTTPMethod:@"GET"]; 
-//    [request setTimeoutInterval:5.0];
-//    NSURLResponse *response;
-//    NSError *urlerror;
-//    NSData* receivedData = [[NSMutableData data] retain];
-//    receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-//    NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-//    
-//    NSArray *loginStrings = [output componentsSeparatedByString:@"\n"];
-//    
-//    if ([(NSString *)[loginStrings objectAtIndex:0] isEqualToString:@"yes"])
-//    {
-//        MainMenuScene * mainMenu = (MainMenuScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_MainMenu];
-//        for (NSString * string in loginStrings)
-//        {
-//            if (![string isEqualToString:@"yes"])
-//            {
-//                [mainMenu.motd addObject:string];
-//            }
-//        }
-//        [mainMenu startMOTDcrawl];
-//        return YES;
-//    }
-//    else
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:output delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
-//        [alert show];
-//        [alert release];
-//        return NO;
-//    }
+    
+    if (online)
+    {
+        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+        NSString * URLforGet = [NSString stringWithFormat:@"http://www.200monkeys.com/chemtd/login.php?username=%@&deviceid=%@", userName, Uid];
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+        [request setURL:[NSURL URLWithString:URLforGet]];  
+        [request setHTTPMethod:@"GET"]; 
+        [request setTimeoutInterval:5.0];
+        NSURLResponse *response;
+        NSError *urlerror;
+        NSData* receivedData = [[NSMutableData data] retain];
+        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+        
+        NSArray *loginStrings = [output componentsSeparatedByString:@"\n"];
+        
+        if ([(NSString *)[loginStrings objectAtIndex:0] isEqualToString:@"yes"])
+        {
+            MainMenuScene * mainMenu = (MainMenuScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_MainMenu];
+            for (NSString * string in loginStrings)
+            {
+                if (![string isEqualToString:@"yes"])
+                {
+                    [mainMenu.motd addObject:string];
+                }
+            }
+            [mainMenu startMOTDcrawl];
+            return YES;
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:output delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
+            [alert show];
+            [alert release];
+            online = NO;
+            return YES;
+        }        
+    }
     
     return YES;    
 }
