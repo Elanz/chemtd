@@ -88,7 +88,7 @@
 
 - (NSArray*) getOveralRanking;
 
-- (NSArray*) submitFinishedGame:(BOOL)won;
+- (NSArray*) submitFinishedGame:(BOOL)won towers:(NSString*)towers;
 - (void) submitStartGame;
 
 - (LevelStat*) createFakeStat:(int)statType;

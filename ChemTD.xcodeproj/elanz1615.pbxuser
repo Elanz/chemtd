@@ -2,9 +2,9 @@
 {
 	1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1028, 1768}}";
-			sepNavSelRange = "{694, 0}";
-			sepNavVisRange = "{317, 2084}";
+			sepNavIntBoundsRect = "{{0, 0}, {1055, 1417}}";
+			sepNavSelRange = "{1669, 0}";
+			sepNavVisRange = "{842, 4002}";
 			sepNavWindowFrame = "{{19, 0}, {1304, 878}}";
 		};
 	};
@@ -26,26 +26,26 @@
 		breakpoints = (
 			4001AE3D11A7738800E1A34C /* NSLockError */,
 			4001AE4611A773B400E1A34C /* _NSLockError() */,
-			40CF2D2511AF3E22008789D0 /* GameFieldScene.mm:781 */,
-			40CF2D7411AF4412008789D0 /* GameFieldScene.mm:761 */,
+			40CF2D2511AF3E22008789D0 /* GameFieldScene.mm:807 */,
+			40CF2D7411AF4412008789D0 /* GameFieldScene.mm:787 */,
 			40CF2DEA11AF4B79008789D0 /* LevelManager.m:76 */,
 			40CF2DF111AF4C11008789D0 /* LevelManager.m:99 */,
 			4088BE6B11B19AC100DCF16B /* CCNode.m:287 */,
 			401CCC4011B1EBBC0001C20C /* MainMenuScene.mm:440 */,
 			401CCD7211B206DC0001C20C /* UserManager.m:104 */,
 			401CCD7A11B206E80001C20C /* UserManager.m:101 */,
-			401CCE5211B209F00001C20C /* GameFieldScene.mm:1081 */,
-			401CCE6611B20B320001C20C /* GameFieldScene.mm:1078 */,
-			4002DA5611B2B9A30057117D /* GameFieldScene.mm:789 */,
+			401CCE5211B209F00001C20C /* GameFieldScene.mm:1108 */,
+			401CCE6611B20B320001C20C /* GameFieldScene.mm:1105 */,
+			4002DA5611B2B9A30057117D /* GameFieldScene.mm:815 */,
 			4002DA5D11B2B9CF0057117D /* MainMenuScene.mm:231 */,
-			4002DA8111B2BB5D0057117D /* GameFieldScene.mm:979 */,
-			4002DACD11B2C0310057117D /* GameFieldScene.mm:1025 */,
-			4002DAD511B2C04B0057117D /* GameFieldScene.mm:1027 */,
-			4002DAD711B2C04C0057117D /* GameFieldScene.mm:1026 */,
-			4002DB0F11B2C5EF0057117D /* GameFieldScene.mm:1053 */,
-			4002DB3D11B2CB3E0057117D /* GameFieldScene.mm:1022 */,
-			4002DB5F11B2CCC70057117D /* UserManager.m:265 */,
-			4002DBA611B2D1170057117D /* GameFieldScene.mm:1013 */,
+			4002DA8111B2BB5D0057117D /* GameFieldScene.mm:1005 */,
+			4002DACD11B2C0310057117D /* GameFieldScene.mm:1052 */,
+			4002DAD511B2C04B0057117D /* GameFieldScene.mm:1054 */,
+			4002DAD711B2C04C0057117D /* GameFieldScene.mm:1053 */,
+			4002DB0F11B2C5EF0057117D /* GameFieldScene.mm:1080 */,
+			4002DB3D11B2CB3E0057117D /* GameFieldScene.mm:1049 */,
+			4002DB5F11B2CCC70057117D /* UserManager.m:298 */,
+			4002DBA611B2D1170057117D /* GameFieldScene.mm:1040 */,
 			4082D48E11B3598E00117D89 /* MainMenuScene.mm:162 */,
 			4082D4A911B35C7600117D89 /* MainMenuScene.mm:165 */,
 			4082D4B011B35C9000117D89 /* MainMenuScene.mm:166 */,
@@ -58,6 +58,7 @@
 			40DFB23511B4A53700697D95 /* MainMenuScene.mm:345 */,
 			40DFB23811B4A54700697D95 /* MainMenuScene.mm:346 */,
 			4010FB8511BAE1C200E85749 /* UserManager.m:170 */,
+			40AFA7F111BB113C00113877 /* GameFieldScene.mm:597 */,
 		);
 		codeSenseManager = 40A4572E11984EE80001025F /* Code sense */;
 		executables = (
@@ -146,21 +147,46 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 297450028;
-			PBXWorkspaceStateSaveDate = 297450028;
+			PBXPerProjectTemplateStateSaveDate = 297464053;
+			PBXWorkspaceStateSaveDate = 297464053;
 		};
 		perUserProjectItems = {
-			4010FAEB11BAC8C600E85749 /* PBXTextBookmark */ = 4010FAEB11BAC8C600E85749 /* PBXTextBookmark */;
-			4010FB2311BACE8100E85749 /* PBXTextBookmark */ = 4010FB2311BACE8100E85749 /* PBXTextBookmark */;
-			4010FB4711BADA8200E85749 /* PBXTextBookmark */ = 4010FB4711BADA8200E85749 /* PBXTextBookmark */;
-			4010FB4811BADA8200E85749 /* PBXTextBookmark */ = 4010FB4811BADA8200E85749 /* PBXTextBookmark */;
-			4010FB4911BADA8200E85749 /* PBXTextBookmark */ = 4010FB4911BADA8200E85749 /* PBXTextBookmark */;
-			4010FB6211BADD2600E85749 /* PBXTextBookmark */ = 4010FB6211BADD2600E85749 /* PBXTextBookmark */;
-			4010FB6311BADD2600E85749 /* PBXTextBookmark */ = 4010FB6311BADD2600E85749 /* PBXTextBookmark */;
-			4010FB8011BAE1A500E85749 /* PBXTextBookmark */ = 4010FB8011BAE1A500E85749 /* PBXTextBookmark */;
-			4010FB8111BAE1A500E85749 /* PBXTextBookmark */ = 4010FB8111BAE1A500E85749 /* PBXTextBookmark */;
-			4010FB8711BAE1C400E85749 /* PBXTextBookmark */ = 4010FB8711BAE1C400E85749 /* PBXTextBookmark */;
-			4010FB9111BAE46900E85749 /* PBXTextBookmark */ = 4010FB9111BAE46900E85749 /* PBXTextBookmark */;
+			4010FAEB11BAC8C600E85749 = 4010FAEB11BAC8C600E85749 /* PBXTextBookmark */;
+			4010FB2311BACE8100E85749 = 4010FB2311BACE8100E85749 /* PBXTextBookmark */;
+			4010FB4711BADA8200E85749 = 4010FB4711BADA8200E85749 /* PBXTextBookmark */;
+			4010FB4811BADA8200E85749 = 4010FB4811BADA8200E85749 /* PBXTextBookmark */;
+			4010FB4911BADA8200E85749 = 4010FB4911BADA8200E85749 /* PBXTextBookmark */;
+			4010FB6211BADD2600E85749 = 4010FB6211BADD2600E85749 /* PBXTextBookmark */;
+			4010FB6311BADD2600E85749 = 4010FB6311BADD2600E85749 /* PBXTextBookmark */;
+			4010FB8011BAE1A500E85749 = 4010FB8011BAE1A500E85749 /* PBXTextBookmark */;
+			4010FB8111BAE1A500E85749 = 4010FB8111BAE1A500E85749 /* PBXTextBookmark */;
+			4010FB8711BAE1C400E85749 = 4010FB8711BAE1C400E85749 /* PBXTextBookmark */;
+			4010FB9111BAE46900E85749 = 4010FB9111BAE46900E85749 /* PBXTextBookmark */;
+			40AFA77411BAF0F700113877 /* PBXTextBookmark */ = 40AFA77411BAF0F700113877 /* PBXTextBookmark */;
+			40AFA79311BAFB7F00113877 /* PBXTextBookmark */ = 40AFA79311BAFB7F00113877 /* PBXTextBookmark */;
+			40AFA7A211BB03F700113877 /* PBXTextBookmark */ = 40AFA7A211BB03F700113877 /* PBXTextBookmark */;
+			40AFA7A411BB04B400113877 /* PBXTextBookmark */ = 40AFA7A411BB04B400113877 /* PBXTextBookmark */;
+			40AFA7B911BB0C4200113877 /* PBXTextBookmark */ = 40AFA7B911BB0C4200113877 /* PBXTextBookmark */;
+			40AFA7BA11BB0C4200113877 /* PBXTextBookmark */ = 40AFA7BA11BB0C4200113877 /* PBXTextBookmark */;
+			40AFA7BB11BB0C4200113877 /* PBXTextBookmark */ = 40AFA7BB11BB0C4200113877 /* PBXTextBookmark */;
+			40AFA7D011BB0ED900113877 /* PBXTextBookmark */ = 40AFA7D011BB0ED900113877 /* PBXTextBookmark */;
+			40AFA7D111BB0ED900113877 /* PBXTextBookmark */ = 40AFA7D111BB0ED900113877 /* PBXTextBookmark */;
+			40AFA7D211BB0ED900113877 /* PBXTextBookmark */ = 40AFA7D211BB0ED900113877 /* PBXTextBookmark */;
+			40AFA7D311BB0ED900113877 /* PBXTextBookmark */ = 40AFA7D311BB0ED900113877 /* PBXTextBookmark */;
+			40AFA7D411BB0ED900113877 /* PBXTextBookmark */ = 40AFA7D411BB0ED900113877 /* PBXTextBookmark */;
+			40AFA7D511BB0ED900113877 /* PBXTextBookmark */ = 40AFA7D511BB0ED900113877 /* PBXTextBookmark */;
+			40AFA7E611BB10D800113877 /* PBXTextBookmark */ = 40AFA7E611BB10D800113877 /* PBXTextBookmark */;
+			40AFA7E711BB10D800113877 /* PBXTextBookmark */ = 40AFA7E711BB10D800113877 /* PBXTextBookmark */;
+			40AFA7E811BB10D800113877 /* PBXTextBookmark */ = 40AFA7E811BB10D800113877 /* PBXTextBookmark */;
+			40AFA7E911BB10D800113877 /* PBXTextBookmark */ = 40AFA7E911BB10D800113877 /* PBXTextBookmark */;
+			40AFA7EA11BB10D800113877 /* PBXTextBookmark */ = 40AFA7EA11BB10D800113877 /* PBXTextBookmark */;
+			40AFA7EB11BB10D800113877 /* PBXTextBookmark */ = 40AFA7EB11BB10D800113877 /* PBXTextBookmark */;
+			40AFA7EC11BB10D800113877 /* PBXTextBookmark */ = 40AFA7EC11BB10D800113877 /* PBXTextBookmark */;
+			40AFA7ED11BB10D800113877 /* PBXTextBookmark */ = 40AFA7ED11BB10D800113877 /* PBXTextBookmark */;
+			40AFA7EE11BB10D800113877 /* PBXTextBookmark */ = 40AFA7EE11BB10D800113877 /* PBXTextBookmark */;
+			40AFA7F511BB114800113877 /* PBXTextBookmark */ = 40AFA7F511BB114800113877 /* PBXTextBookmark */;
+			40AFA7F811BB11A600113877 /* PBXTextBookmark */ = 40AFA7F811BB11A600113877 /* PBXTextBookmark */;
+			40AFA7F911BB11E200113877 /* PBXTextBookmark */ = 40AFA7F911BB11E200113877 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 40A4572D11984EE80001025F /* Source Control */;
 		userBuildSettings = {
@@ -184,7 +210,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		location = "";
-		modificationTime = 297460647.451989;
+		modificationTime = 297472481.286853;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 		symbolName = NSLockError;
@@ -200,12 +226,12 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		location = "";
-		modificationTime = 297460647.452031;
+		modificationTime = 297472481.286903;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 		symbolName = "_NSLockError()";
 	};
-	4002DA5611B2B9A30057117D /* GameFieldScene.mm:789 */ = {
+	4002DA5611B2B9A30057117D /* GameFieldScene.mm:815 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -217,9 +243,9 @@
 		functionName = "-initField";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 789;
+		lineNumber = 815;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572483;
+		modificationTime = 297472329.20398;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -237,11 +263,11 @@
 		ignoreCount = 0;
 		lineNumber = 231;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572505;
+		modificationTime = 297472329.20404;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DA8111B2BB5D0057117D /* GameFieldScene.mm:979 */ = {
+	4002DA8111B2BB5D0057117D /* GameFieldScene.mm:1005 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -253,12 +279,12 @@
 		functionName = "-check1x1SpaceWalkable::";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 979;
-		modificationTime = 297460232.572545;
+		lineNumber = 1005;
+		modificationTime = 297472329.204063;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
-	4002DACD11B2C0310057117D /* GameFieldScene.mm:1025 */ = {
+	4002DACD11B2C0310057117D /* GameFieldScene.mm:1052 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -270,13 +296,13 @@
 		functionName = "-loadGame:levelData:gameString:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1025;
+		lineNumber = 1052;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572573;
+		modificationTime = 297472329.204115;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DAD511B2C04B0057117D /* GameFieldScene.mm:1027 */ = {
+	4002DAD511B2C04B0057117D /* GameFieldScene.mm:1054 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -288,13 +314,13 @@
 		functionName = "-loadGame:levelData:gameString:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1027;
+		lineNumber = 1054;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.5726;
+		modificationTime = 297472329.204175;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DAD711B2C04C0057117D /* GameFieldScene.mm:1026 */ = {
+	4002DAD711B2C04C0057117D /* GameFieldScene.mm:1053 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -306,13 +332,13 @@
 		functionName = "-loadGame:levelData:gameString:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1026;
+		lineNumber = 1053;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.57263;
+		modificationTime = 297472329.204233;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DB0F11B2C5EF0057117D /* GameFieldScene.mm:1053 */ = {
+	4002DB0F11B2C5EF0057117D /* GameFieldScene.mm:1080 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -324,13 +350,13 @@
 		functionName = "-levelsToData";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1053;
+		lineNumber = 1080;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572649;
+		modificationTime = 297472329.204286;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DB3D11B2CB3E0057117D /* GameFieldScene.mm:1022 */ = {
+	4002DB3D11B2CB3E0057117D /* GameFieldScene.mm:1049 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -342,13 +368,13 @@
 		functionName = "-loadGame:levelData:gameString:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1022;
+		lineNumber = 1049;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.57268;
+		modificationTime = 297472329.204338;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DB5F11B2CCC70057117D /* UserManager.m:265 */ = {
+	4002DB5F11B2CCC70057117D /* UserManager.m:298 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -360,13 +386,13 @@
 		functionName = "-loadGameWithField:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 265;
+		lineNumber = 298;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572703;
+		modificationTime = 297472329.204395;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	4002DBA611B2D1170057117D /* GameFieldScene.mm:1013 */ = {
+	4002DBA611B2D1170057117D /* GameFieldScene.mm:1040 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -378,9 +404,9 @@
 		functionName = "-loadGame:levelData:gameString:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1013;
+		lineNumber = 1040;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572783;
+		modificationTime = 297472329.204419;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -498,20 +524,20 @@
 		delayBeforeContinue = 0;
 		fileReference = 4088BE0E11B197D400DCF16B /* UserManager.m */;
 		functionName = "-submitStartGame";
-		hitCount = 1;
+		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 170;
 		location = "ChemTD-iPad";
-		modificationTime = 297460243.71723;
+		modificationTime = 297472329.20499;
 		originalNumberOfMultipleMatches = 1;
-		state = 1;
+		state = 2;
 	};
 	4010FB8711BAE1C400E85749 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
 		name = "UserManager.m: 159";
 		rLen = 0;
-		rLoc = 6228;
+		rLoc = 6245;
 		rType = 0;
 		vrLen = 1492;
 		vrLoc = 5522;
@@ -521,7 +547,7 @@
 		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
 		name = "UserManager.m: 170";
 		rLen = 0;
-		rLoc = 6858;
+		rLoc = 6875;
 		rType = 0;
 		vrLen = 1634;
 		vrLoc = 5811;
@@ -547,7 +573,7 @@
 		ignoreCount = 0;
 		lineNumber = 440;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572156;
+		modificationTime = 297472329.203775;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -565,7 +591,7 @@
 		ignoreCount = 0;
 		lineNumber = 104;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572259;
+		modificationTime = 297472329.2038;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -583,11 +609,11 @@
 		ignoreCount = 0;
 		lineNumber = 101;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.57237;
+		modificationTime = 297472329.203822;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	401CCE5211B209F00001C20C /* GameFieldScene.mm:1081 */ = {
+	401CCE5211B209F00001C20C /* GameFieldScene.mm:1108 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -599,13 +625,13 @@
 		functionName = "-mapToData";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1081;
+		lineNumber = 1108;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572439;
+		modificationTime = 297472329.203844;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	401CCE6611B20B320001C20C /* GameFieldScene.mm:1078 */ = {
+	401CCE6611B20B320001C20C /* GameFieldScene.mm:1105 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -617,9 +643,9 @@
 		functionName = "-mapToData";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 1078;
+		lineNumber = 1105;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572464;
+		modificationTime = 297472329.203917;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -632,7 +658,7 @@
 	};
 	4039938711A058DE00C5F00A /* TowerManager.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1055, 1807}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1055, 1781}}";
 			sepNavSelRange = "{175, 0}";
 			sepNavVisRange = "{4043, 1599}";
 		};
@@ -646,9 +672,9 @@
 	};
 	403FC445119EFB7F00618E7F /* TowerMixer.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1041, 4420}}";
-			sepNavSelRange = "{11491, 0}";
-			sepNavVisRange = "{7094, 1193}";
+			sepNavIntBoundsRect = "{{0, 0}, {1041, 4368}}";
+			sepNavSelRange = "{12151, 0}";
+			sepNavVisRange = "{10426, 2374}";
 		};
 	};
 	403FC6D3119F34EA00618E7F /* Recipe.h */ = {
@@ -786,9 +812,9 @@
 	};
 	40718D2511B5A80500EA3AA3 /* CarbonMonoxideTower.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1114, 806}}";
-			sepNavSelRange = "{174, 0}";
-			sepNavVisRange = "{0, 1169}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 832}}";
+			sepNavSelRange = "{1725, 27}";
+			sepNavVisRange = "{473, 1361}";
 		};
 	};
 	4082D48E11B3598E00117D89 /* MainMenuScene.mm:162 */ = {
@@ -804,7 +830,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 162;
-		modificationTime = 297460232.57281;
+		modificationTime = 297472329.204473;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -822,7 +848,7 @@
 		ignoreCount = 0;
 		lineNumber = 165;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572853;
+		modificationTime = 297472329.204497;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -840,22 +866,22 @@
 		ignoreCount = 0;
 		lineNumber = 166;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572902;
+		modificationTime = 297472329.204521;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
 	4088BE0D11B197D400DCF16B /* UserManager.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1028, 1404}}";
-			sepNavSelRange = "{2078, 0}";
-			sepNavVisRange = "{1481, 1160}";
+			sepNavSelRange = "{2233, 0}";
+			sepNavVisRange = "{1519, 1147}";
 		};
 	};
 	4088BE0E11B197D400DCF16B /* UserManager.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1545, 3341}}";
-			sepNavSelRange = "{6858, 0}";
-			sepNavVisRange = "{5811, 1634}";
+			sepNavIntBoundsRect = "{{0, 0}, {1545, 4199}}";
+			sepNavSelRange = "{13158, 8}";
+			sepNavVisRange = "{11812, 1805}";
 			sepNavWindowFrame = "{{19, 0}, {1304, 878}}";
 		};
 	};
@@ -873,7 +899,7 @@
 		ignoreCount = 0;
 		lineNumber = 287;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.57213;
+		modificationTime = 297472329.203752;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -916,14 +942,14 @@
 	};
 	408A793A1198D503007BC8B0 /* BaseTower.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 2106}}";
-			sepNavSelRange = "{227, 0}";
-			sepNavVisRange = "{512, 1129}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 2015}}";
+			sepNavSelRange = "{581, 0}";
+			sepNavVisRange = "{128, 1138}";
 		};
 	};
 	408A793B1198D503007BC8B0 /* BaseTower.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1033, 5239}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 5239}}";
 			sepNavSelRange = "{218, 0}";
 			sepNavVisRange = "{0, 1113}";
 		};
@@ -970,18 +996,286 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
+	40AFA77411BAF0F700113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 170";
+		rLen = 0;
+		rLoc = 6875;
+		rType = 0;
+		vrLen = 1599;
+		vrLoc = 5846;
+	};
+	40AFA79311BAFB7F00113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 159";
+		rLen = 0;
+		rLoc = 6189;
+		rType = 0;
+		vrLen = 1496;
+		vrLoc = 5846;
+	};
+	40AFA7A211BB03F700113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 206";
+		rLen = 0;
+		rLoc = 9318;
+		rType = 0;
+		vrLen = 2041;
+		vrLoc = 7559;
+	};
+	40AFA7A411BB04B400113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 206";
+		rLen = 0;
+		rLoc = 9318;
+		rType = 0;
+		vrLen = 2047;
+		vrLoc = 7559;
+	};
+	40AFA7B911BB0C4200113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0D11B197D400DCF16B /* UserManager.h */;
+		name = "UserManager.h: 91";
+		rLen = 0;
+		rLoc = 2233;
+		rType = 0;
+		vrLen = 1147;
+		vrLoc = 1519;
+	};
+	40AFA7BA11BB0C4200113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 190";
+		rLen = 25;
+		rLoc = 7354;
+		rType = 0;
+		vrLen = 2185;
+		vrLoc = 6986;
+	};
+	40AFA7BB11BB0C4200113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 194";
+		rLen = 0;
+		rLoc = 7492;
+		rType = 0;
+		vrLen = 2192;
+		vrLoc = 6986;
+	};
+	40AFA7D011BB0ED900113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4088BE0E11B197D400DCF16B /* UserManager.m */;
+		name = "UserManager.m: 303";
+		rLen = 8;
+		rLoc = 13158;
+		rType = 0;
+		vrLen = 1805;
+		vrLoc = 11812;
+	};
+	40AFA7D111BB0ED900113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40DBF7D911B6E9D400FE3CD7 /* Towers.h */;
+		name = "Towers.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 857;
+		vrLoc = 0;
+	};
+	40AFA7D211BB0ED900113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 408A793B1198D503007BC8B0 /* BaseTower.m */;
+		name = "BaseTower.m: 12";
+		rLen = 0;
+		rLoc = 218;
+		rType = 0;
+		vrLen = 1113;
+		vrLoc = 0;
+	};
+	40AFA7D311BB0ED900113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 408A793A1198D503007BC8B0 /* BaseTower.h */;
+		name = "BaseTower.h: 109";
+		rLen = 9;
+		rLoc = 2497;
+		rType = 0;
+		vrLen = 1356;
+		vrLoc = 1954;
+	};
+	40AFA7D411BB0ED900113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
+		name = "GameFieldScene.mm: 584";
+		rLen = 0;
+		rLoc = 24119;
+		rType = 0;
+		vrLen = 1745;
+		vrLoc = 22904;
+	};
+	40AFA7D511BB0ED900113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
+		name = "GameFieldScene.mm: 601";
+		rLen = 0;
+		rLoc = 25057;
+		rType = 0;
+		vrLen = 1691;
+		vrLoc = 23309;
+	};
+	40AFA7E611BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
+		name = "GameFieldScene.mm: 601";
+		rLen = 0;
+		rLoc = 25057;
+		rType = 0;
+		vrLen = 1815;
+		vrLoc = 23309;
+	};
+	40AFA7E711BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4039938711A058DE00C5F00A /* TowerManager.m */;
+		name = "TowerManager.m: 10";
+		rLen = 0;
+		rLoc = 175;
+		rType = 0;
+		vrLen = 1599;
+		vrLoc = 4043;
+	};
+	40AFA7E811BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 408A793A1198D503007BC8B0 /* BaseTower.h */;
+		name = "BaseTower.h: 26";
+		rLen = 0;
+		rLoc = 581;
+		rType = 0;
+		vrLen = 1138;
+		vrLoc = 128;
+	};
+	40AFA7E911BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40718D2511B5A80500EA3AA3 /* CarbonMonoxideTower.m */;
+		name = "CarbonMonoxideTower.m: 54";
+		rLen = 27;
+		rLoc = 1725;
+		rType = 0;
+		vrLen = 1361;
+		vrLoc = 473;
+	};
+	40AFA7EA11BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40BC4EF711AEA67D00A8F497 /* TextureLibrary.h */;
+		name = "TextureLibrary.h: 28";
+		rLen = 0;
+		rLoc = 759;
+		rType = 0;
+		vrLen = 1319;
+		vrLoc = 38;
+	};
+	40AFA7EB11BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */;
+		name = "TextureLibrary.m: 35";
+		rLen = 0;
+		rLoc = 813;
+		rType = 0;
+		vrLen = 4254;
+		vrLoc = 968;
+	};
+	40AFA7EC11BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 403FC445119EFB7F00618E7F /* TowerMixer.m */;
+		name = "TowerMixer.m: 326";
+		rLen = 0;
+		rLoc = 12151;
+		rType = 0;
+		vrLen = 2374;
+		vrLoc = 10426;
+	};
+	40AFA7ED11BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
+		name = "ChemTDAppDelegate.m: 31";
+		rLen = 0;
+		rLoc = 694;
+		rType = 0;
+		vrLen = 1950;
+		vrLoc = 317;
+	};
+	40AFA7EE11BB10D800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
+		name = "ChemTDAppDelegate.m: 54";
+		rLen = 0;
+		rLoc = 1669;
+		rType = 0;
+		vrLen = 3872;
+		vrLoc = 842;
+	};
+	40AFA7F111BB113C00113877 /* GameFieldScene.mm:597 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
+		functionName = "-midLevelUpdate:";
+		hitCount = 1;
+		ignoreCount = 0;
+		lineNumber = 597;
+		location = "ChemTD-iPad";
+		modificationTime = 297472416.629158;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	40AFA7F511BB114800113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
+		name = "ChemTDAppDelegate.m: 54";
+		rLen = 0;
+		rLoc = 1669;
+		rType = 0;
+		vrLen = 3872;
+		vrLoc = 842;
+	};
+	40AFA7F811BB11A600113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
+		name = "ChemTDAppDelegate.m: 54";
+		rLen = 0;
+		rLoc = 1669;
+		rType = 0;
+		vrLen = 3872;
+		vrLoc = 842;
+	};
+	40AFA7F911BB11E200113877 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
+		name = "ChemTDAppDelegate.m: 54";
+		rLen = 0;
+		rLoc = 1669;
+		rType = 0;
+		vrLen = 4002;
+		vrLoc = 842;
+	};
 	40BC4EF711AEA67D00A8F497 /* TextureLibrary.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1028, 1534}}";
-			sepNavSelRange = "{2877, 0}";
-			sepNavVisRange = "{2205, 1577}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 1521}}";
+			sepNavSelRange = "{759, 0}";
+			sepNavVisRange = "{38, 1319}";
 		};
 	};
 	40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1132, 2574}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 2509}}";
 			sepNavSelRange = "{813, 0}";
-			sepNavVisRange = "{437, 866}";
+			sepNavVisRange = "{968, 4254}";
 		};
 	};
 	40BC4F6911AEB2BF00A8F497 /* TouchHandler.h */ = {
@@ -1057,7 +1351,7 @@
 			sepNavWindowFrame = "{{19, 0}, {957, 878}}";
 		};
 	};
-	40CF2D2511AF3E22008789D0 /* GameFieldScene.mm:781 */ = {
+	40CF2D2511AF3E22008789D0 /* GameFieldScene.mm:807 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -1069,13 +1363,13 @@
 		functionName = "-updateScrollOffsetWithDeltaX:DeltaY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 781;
+		lineNumber = 807;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572015;
+		modificationTime = 297472329.203131;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40CF2D7411AF4412008789D0 /* GameFieldScene.mm:761 */ = {
+	40CF2D7411AF4412008789D0 /* GameFieldScene.mm:787 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -1087,9 +1381,9 @@
 		functionName = "-updateScrollOffsetWithDeltaX:DeltaY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 761;
+		lineNumber = 787;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572069;
+		modificationTime = 297472329.203622;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1107,7 +1401,7 @@
 		ignoreCount = 0;
 		lineNumber = 76;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572091;
+		modificationTime = 297472329.20369;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1125,7 +1419,7 @@
 		ignoreCount = 0;
 		lineNumber = 99;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572113;
+		modificationTime = 297472329.203715;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1383,9 +1677,9 @@
 	};
 	40DBF7D911B6E9D400FE3CD7 /* Towers.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1182, 455}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1028, 557}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 806}";
+			sepNavVisRange = "{0, 857}";
 		};
 	};
 	40DE6D96119A17EB00BDA120 /* bitmapFontTest4.fnt */ = {
@@ -1409,7 +1703,7 @@
 		ignoreCount = 0;
 		lineNumber = 331;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572945;
+		modificationTime = 297472329.204546;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1427,7 +1721,7 @@
 		ignoreCount = 0;
 		lineNumber = 334;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.572986;
+		modificationTime = 297472329.2048;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1445,7 +1739,7 @@
 		ignoreCount = 0;
 		lineNumber = 392;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.573028;
+		modificationTime = 297472329.204822;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1463,7 +1757,7 @@
 		ignoreCount = 0;
 		lineNumber = 390;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.573074;
+		modificationTime = 297472329.204857;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1481,7 +1775,7 @@
 		ignoreCount = 0;
 		lineNumber = 398;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.573119;
+		modificationTime = 297472329.204876;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1499,7 +1793,7 @@
 		ignoreCount = 0;
 		lineNumber = 438;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.573163;
+		modificationTime = 297472329.204899;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1531,7 +1825,7 @@
 		ignoreCount = 0;
 		lineNumber = 345;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.5732;
+		modificationTime = 297472329.204941;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1549,7 +1843,7 @@
 		ignoreCount = 0;
 		lineNumber = 346;
 		location = "ChemTD-iPad";
-		modificationTime = 297460232.573247;
+		modificationTime = 297472329.204961;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1634,9 +1928,9 @@
 	};
 	40F1796611988B8400C6A7DF /* GameFieldScene.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1286, 14482}}";
-			sepNavSelRange = "{20865, 1317}";
-			sepNavVisRange = "{18876, 3421}";
+			sepNavIntBoundsRect = "{{0, 0}, {957, 14677}}";
+			sepNavSelRange = "{23926, 0}";
+			sepNavVisRange = "{23628, 943}";
 			sepNavWindowFrame = "{{19, 0}, {957, 878}}";
 		};
 	};

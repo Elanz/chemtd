@@ -575,7 +575,33 @@
         lastStablekills += killedThisRound;
         lastStabledamage += damageThisRound;
         
-        statArray = [userManager submitFinishedGame:won];
+        NSString * towerstring = @"";
+        NSMutableDictionary * towerDictionary = [[NSMutableDictionary alloc] init];
+        for (BaseTower * t in towers)
+        {
+            if (t.towerType > 0)
+            {
+                if ([towerDictionary objectForKey:[NSNumber numberWithInt:t.towerType]])
+                {
+                    int currentValue = [(NSNumber*)[towerDictionary objectForKey:[NSNumber numberWithInt:t.towerType]] intValue];
+                    currentValue +=1;
+                    [towerDictionary setObject:[NSNumber numberWithInt:currentValue] forKey:[NSNumber numberWithInt:t.towerType]];
+                }
+                else 
+                {
+                    [towerDictionary setObject:[NSNumber numberWithInt:1] forKey:[NSNumber numberWithInt:t.towerType]];
+                }
+            }
+        }
+        
+        for (NSNumber * key in [towerDictionary allKeys])
+        {
+            towerstring = [towerstring stringByAppendingFormat:@"%dB%dA", [key intValue], [(NSNumber*)[towerDictionary objectForKey:key] intValue]];
+        }
+        
+        towerstring = [towerstring substringToIndex:[towerstring length] - 1];
+
+        statArray = [userManager submitFinishedGame:won towers:towerstring];
     }
     
     timeStat = [statArray objectAtIndex:StatType_CompletionTime];
@@ -996,7 +1022,7 @@
 
 - (void)loadGame:(NSString*)towerData levelData:(NSString*)levelData gameString:(NSString*)gameString
 {
-    //"level:lives:score:energy:gametime:kills:damage:gameid"
+    //"level:lives:score:energy:gametime:kills:damage:gameid:difficultyid"
     NSArray *gameProperties = [gameString componentsSeparatedByString:@":"];
     levelManager.currentLevel = [(NSString*)[gameProperties objectAtIndex:0] intValue];
     lives = [(NSString*)[gameProperties objectAtIndex:1] intValue];
@@ -1009,6 +1035,7 @@
     lastStablekills = [(NSString*)[gameProperties objectAtIndex:5] intValue];
     lastStabledamage = [(NSString*)[gameProperties objectAtIndex:6] intValue];
     userManager.gameid = [(NSString*)[gameProperties objectAtIndex:7] intValue];
+    userManager.difficultyid = [(NSString*)[gameProperties objectAtIndex:8] intValue];
     
     NSArray *towerBytes = [towerData componentsSeparatedByString:@":"];
     NSArray *levelBytes = [levelData componentsSeparatedByString:@":"];

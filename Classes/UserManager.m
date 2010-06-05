@@ -113,9 +113,9 @@
         [levelData writeToFile:writablePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         
         //"level:lives:score:energy:gametime:kills:damage:gameid"
-        NSString *saveString = [NSString stringWithFormat:@"%d:%d:%d:%d:%lf:%d:%d:%d", gameField.lastStablecurrentRound, gameField.lastStablelives
+        NSString *saveString = [NSString stringWithFormat:@"%d:%d:%d:%d:%lf:%d:%d:%d:%d", gameField.lastStablecurrentRound, gameField.lastStablelives
                                 , gameField.lastStablescore, gameField.lastStableenergy, gameField.lastStablegameTimer
-                                , gameField.lastStablekills, gameField.lastStabledamage, gameid];
+                                , gameField.lastStablekills, gameField.lastStabledamage, gameid, difficultyid];
         writablePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedata.txt"];
         [fileManager removeItemAtPath:writablePath error:nil];
         [saveString writeToFile:writablePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
@@ -187,8 +187,24 @@
     return overallStats;
 }
 
-- (NSArray*) submitFinishedGame:(BOOL)won
+- (NSArray*) submitFinishedGame:(BOOL)won towers:(NSString*)towers
 {
+    //http://www.200monkeys.com/chemtd/finishgame.php?gameid=3&won=1&towers=1B2A5B20A6B3
+    if (online)
+    {
+        NSString * URLforGet = [NSString stringWithFormat:
+                                @"http://www.200monkeys.com/chemtd/finishgame.php?gameid=%d&won=%d&towers=%@"
+                                , gameid, won, towers];
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+        [request setURL:[NSURL URLWithString:URLforGet]];  
+        [request setHTTPMethod:@"GET"]; 
+        [request setTimeoutInterval:5.0];
+        NSURLResponse *response;
+        NSError *urlerror;
+        NSData* receivedData = [[NSMutableData data] retain];
+        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    }
     NSArray * gameStats = [[NSArray alloc] initWithObjects:[self createFakeStat:StatType_CompletionTime]
                             ,[self createFakeStat:StatType_Score],[self createFakeStat:StatType_DamageDone],nil];
     return gameStats;
@@ -197,6 +213,23 @@
 - (NSArray*) submitLevelStats:(int)levelId completionTime:(int)completionTime damageDone:(int)damageDone score:(int)score
                  creepsKilled:(int)creepsKilled
 {
+    //http://www.200monkeys.com/chemtd/levelstats.php?username=test&deviceid=test&gameid=1&levelid=2&time=1234&damage=546&score=439&killed=34211
+    if (online)
+    {
+        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+        NSString * URLforGet = [NSString stringWithFormat:
+                                @"http://www.200monkeys.com/chemtd/levelstats.php?username=%@&deviceid=%@&gameid=%d&levelid=%d&time=%d&damage=%d&score=%d&killed=%d"
+                                , [self getUserName], Uid, gameid, levelId, completionTime, damageDone, score, creepsKilled];
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+        [request setURL:[NSURL URLWithString:URLforGet]];  
+        [request setHTTPMethod:@"GET"]; 
+        [request setTimeoutInterval:5.0];
+        NSURLResponse *response;
+        NSError *urlerror;
+        NSData* receivedData = [[NSMutableData data] retain];
+        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    }
     NSArray * levelStats = [[NSArray alloc] initWithObjects:[self createFakeStat:StatType_CompletionTime]
                             ,[self createFakeStat:StatType_Score],[self createFakeStat:StatType_DamageDone],nil];
     return levelStats;

@@ -323,7 +323,6 @@
     [self populate4ElementRecipe:C :18 :H :27 :N :1 :O :3 :TowerType_Capsaicin];
     [self populate2ElementRecipe:C :1 :O :2 :TowerType_CarbonDioxide];
     [self populate2ElementRecipe:C :1 :O :1 :TowerType_CarbonMonoxide];
-    [self populate2ElementRecipe:C :1 :O :1 :TowerType_Oxygen];
     [self populate3ElementRecipe:C :1 :H :1 :Cl :3 :TowerType_Chloroform];
     [self populate3ElementRecipe:H :1 :C :1 :N :1 :TowerType_Cyanide];
     [self populate3ElementRecipe:C :2 :H :6 :O :1 :TowerType_Ethanol];

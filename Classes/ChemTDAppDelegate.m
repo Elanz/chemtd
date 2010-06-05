@@ -51,7 +51,7 @@
     BaseTower * constructedTower = nil;
     
     switch (towerType) {      
-        case TowerType_Acetylene: constructedTower = [[HydrogenTower alloc] initWithGameField:gameField addToField:addToField]; break;
+        case TowerType_Acetylene: constructedTower = [[AcetyleneTower alloc] initWithGameField:gameField addToField:addToField]; break;
         case TowerType_Ammonia: constructedTower = [[AmmoniaTower alloc] initWithGameField:gameField addToField:addToField]; break;
         case TowerType_Aspirin: constructedTower = [[AspirinTower alloc] initWithGameField:gameField addToField:addToField]; break;
         case TowerType_BakingSoda: constructedTower = [[BakingSodaTower alloc] initWithGameField:gameField addToField:addToField]; break;
