@@ -14,12 +14,14 @@
 
 #define CreepTarget 0
 #define FieldTarget 1
+#define TowerTarget 2
 
 @interface BaseEffect : NSObject {
 
     int effectType;
     BaseTower * source;
     Creep * creep;
+    BaseTower * tower;
     GameFieldScene * field;
     CGPoint position;
     int targetType;
@@ -29,6 +31,7 @@
 
 @property (nonatomic) int effectType;
 
+- (id) initWithTargetTower:(BaseTower*)targetTower;
 - (id) initWithSource:(BaseTower*)sourceTower target:(Creep*)targetCreep;
 - (id) initWithSourceField:(BaseTower*)sourceTower target:(GameFieldScene*)targetField position:(CGPoint)targetPosition;
 - (void) startEffect;

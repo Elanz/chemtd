@@ -1,2 +1,6 @@
 #import "BurnEffect.h"
-#import "AOETrapEffect.h"
+#import "AOESpriteTrapEffect.h"
+#import "RangeBoostEffect.h"
+#import "DamageBoostEffect.h"
+#import "SpeedBoostEffect.h"
+#import "SleepEffect.h"

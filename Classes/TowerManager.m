@@ -100,6 +100,10 @@
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         currentTower = [delegate constructTowerWithType:newTower.towerType gameField:gameField addToField:YES];
         [currentTower setPower:newTower.towerPower];
+        currentTower.shotRange = newTower.shotRange;
+        currentTower.minDamage = newTower.minDamage;
+        currentTower.maxDamage = newTower.maxDamage;
+        currentTower.shotInterval = newTower.shotInterval;
         actualTower = newTower;
         [currentTower setPositionWithX:34 Y:109];
         [currentTower removeFromLayer];

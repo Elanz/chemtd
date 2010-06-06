@@ -244,7 +244,7 @@
     BaseTower * found = nil;
     for (BaseTower * tower in gameField.pendingTowers)
     {
-        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp((cellX-1)*cellSize, (originalY+2)*cellSize)];
+        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp((cellX)*cellSize, (originalY)*cellSize)];
         if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
         {
             bestDistance = thisDistance;
@@ -262,6 +262,7 @@
         [gameField.pendingTowers addObject:temp];
         [temp show];
         gameField.currentTower = temp;
+        [temp towerPicked];
         [gameField StartCreepsPhase];
     }    
 }

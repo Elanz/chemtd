@@ -13,5 +13,6 @@
 }
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
+- (void)towerPicked;
 
 @end

@@ -37,6 +37,7 @@
     float maxHealth;
     float health;
     float speed;
+    float baseSpeed;
     
     int direction;
 
@@ -59,6 +60,7 @@
 @property (nonatomic) CGPoint start;
 @property (nonatomic) CGPoint goal;
 @property (nonatomic) float speed;
+@property (nonatomic) float baseSpeed;
 @property (nonatomic) float health;
 @property (nonatomic) float maxHealth;
 @property (nonatomic, retain) CreepSpawner *mySpawner;

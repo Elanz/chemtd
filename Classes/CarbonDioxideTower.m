@@ -7,6 +7,7 @@
 //
 
 #import "CarbonDioxideTower.h"
+#import "CombatManager.h"
 
 @implementation CarbonDioxideTower
 
@@ -23,8 +24,11 @@
         towerEffects = String_TowerEffect_CarbonDioxide;
         formula = String_TowerFormula_CarbonDioxide;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_None;
+        hitParticleFileName = Effect_SingleTargetBlackSmoke;
+        maxTargets = 3;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 3;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -37,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 200;
         baseMinDamage = 20;
         baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
@@ -51,9 +55,16 @@
         
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         library = delegate.textureLibrary;
-        [towerSprite setTexture:[library GetTextureWithKey:TOWERTEXTURE_CARBONDIOXIDE]];     
+        [towerSprite setTexture:[library GetTextureWithKey:TOWERTEXTURE_CARBONDIOXIDE]];   
     }
     return self;
+}
+
+- (void)towerPicked
+{
+//    CCPointParticleSystem * smokeSystem = [CCPointParticleSystem particleWithFile:Effect_GrayCloud];
+//    smokeSystem.position = ccp(towerSize/2, towerSize/2);
+//    [towerSprite addChild:smokeSystem z:2];
 }
 
 - (void)dealloc {

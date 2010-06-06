@@ -19,6 +19,19 @@
 		401CCC9C11B1F3100001C20C /* mini-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 401CCC9B11B1F3100001C20C /* mini-menu.png */; };
 		401CCCAB11B1F5AE0001C20C /* mainMenuBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 401CCCA911B1F5AE0001C20C /* mainMenuBtn.png */; };
 		401CCCAC11B1F5AE0001C20C /* resumeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 401CCCAA11B1F5AE0001C20C /* resumeBtn.png */; };
+		4029ACDE11BC141400A91D20 /* RangeBoostEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029ACDD11BC141400A91D20 /* RangeBoostEffect.m */; };
+		4029ADB411BC219E00A91D20 /* DamageBoostEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029ADB311BC219E00A91D20 /* DamageBoostEffect.m */; };
+		4029ADCF11BC22BD00A91D20 /* SpeedBoostEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029ADCE11BC22BD00A91D20 /* SpeedBoostEffect.m */; };
+		4029AE0811BC26A300A91D20 /* pepperexplosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AE0611BC26A300A91D20 /* pepperexplosion.plist */; };
+		4029AE0911BC26A300A91D20 /* peppershot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AE0711BC26A300A91D20 /* peppershot.plist */; };
+		4029AE2911BC299F00A91D20 /* graycloud.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AE2811BC299F00A91D20 /* graycloud.plist */; };
+		4029AE6411BC2EC300A91D20 /* blacksmoke.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AE6311BC2EC300A91D20 /* blacksmoke.plist */; };
+		4029AEA511BC32AF00A91D20 /* carbonhit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AEA311BC32AF00A91D20 /* carbonhit.plist */; };
+		4029AEA611BC32AF00A91D20 /* carbonshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AEA411BC32AF00A91D20 /* carbonshot.plist */; };
+		4029AEB311BC33EA00A91D20 /* chlorinehit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AEB111BC33EA00A91D20 /* chlorinehit.plist */; };
+		4029AEB411BC33EA00A91D20 /* chlorineshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AEB211BC33EA00A91D20 /* chlorineshot.plist */; };
+		4029AEDA11BC36C500A91D20 /* sleep.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4029AED911BC36C500A91D20 /* sleep.plist */; };
+		4029AEE111BC36F900A91D20 /* SleepEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029AEE011BC36F900A91D20 /* SleepEffect.m */; };
 		4039938511A058D400C5F00A /* TowerManager.png in Resources */ = {isa = PBXBuildFile; fileRef = 4039938411A058D400C5F00A /* TowerManager.png */; };
 		4039938811A058DE00C5F00A /* TowerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4039938711A058DE00C5F00A /* TowerManager.m */; };
 		4039938B11A05B0100C5F00A /* arial16.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 4039938911A05B0100C5F00A /* arial16.fnt */; };
@@ -40,7 +53,7 @@
 		4045998211BBD99F00DA11EF /* cometshotgreen.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4045998111BBD99F00DA11EF /* cometshotgreen.plist */; };
 		404599DA11BBE51F00DA11EF /* explosiongreen.plist in Resources */ = {isa = PBXBuildFile; fileRef = 404599D911BBE51F00DA11EF /* explosiongreen.plist */; };
 		40459A1011BBEBF100DA11EF /* whitesmoke.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40459A0F11BBEBF100DA11EF /* whitesmoke.plist */; };
-		40459A4811BBEFFD00DA11EF /* AOETrapEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40459A4711BBEFFD00DA11EF /* AOETrapEffect.m */; };
+		40459A4811BBEFFD00DA11EF /* AOESpriteTrapEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40459A4711BBEFFD00DA11EF /* AOESpriteTrapEffect.m */; };
 		40459A5611BBF1CB00DA11EF /* bleachtrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 40459A5511BBF1CB00DA11EF /* bleachtrap.png */; };
 		40459B0B11BBFBDF00DA11EF /* greenbubbles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40459B0A11BBFBDF00DA11EF /* greenbubbles.plist */; };
 		4059935A11A9E78000FC6F9C /* background1_lowerleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4059935611A9E78000FC6F9C /* background1_lowerleft.png */; };
@@ -393,6 +406,23 @@
 		401CCC9B11B1F3100001C20C /* mini-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mini-menu.png"; sourceTree = "<group>"; };
 		401CCCA911B1F5AE0001C20C /* mainMenuBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenuBtn.png; sourceTree = "<group>"; };
 		401CCCAA11B1F5AE0001C20C /* resumeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resumeBtn.png; sourceTree = "<group>"; };
+		4029ACDC11BC141400A91D20 /* RangeBoostEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeBoostEffect.h; sourceTree = "<group>"; };
+		4029ACDD11BC141400A91D20 /* RangeBoostEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeBoostEffect.m; sourceTree = "<group>"; };
+		4029ADB211BC219E00A91D20 /* DamageBoostEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DamageBoostEffect.h; sourceTree = "<group>"; };
+		4029ADB311BC219E00A91D20 /* DamageBoostEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DamageBoostEffect.m; sourceTree = "<group>"; };
+		4029ADCD11BC22BD00A91D20 /* SpeedBoostEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedBoostEffect.h; sourceTree = "<group>"; };
+		4029ADCE11BC22BD00A91D20 /* SpeedBoostEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedBoostEffect.m; sourceTree = "<group>"; };
+		4029AE0611BC26A300A91D20 /* pepperexplosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pepperexplosion.plist; sourceTree = "<group>"; };
+		4029AE0711BC26A300A91D20 /* peppershot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = peppershot.plist; sourceTree = "<group>"; };
+		4029AE2811BC299F00A91D20 /* graycloud.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = graycloud.plist; sourceTree = "<group>"; };
+		4029AE6311BC2EC300A91D20 /* blacksmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blacksmoke.plist; sourceTree = "<group>"; };
+		4029AEA311BC32AF00A91D20 /* carbonhit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = carbonhit.plist; sourceTree = "<group>"; };
+		4029AEA411BC32AF00A91D20 /* carbonshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = carbonshot.plist; sourceTree = "<group>"; };
+		4029AEB111BC33EA00A91D20 /* chlorinehit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = chlorinehit.plist; sourceTree = "<group>"; };
+		4029AEB211BC33EA00A91D20 /* chlorineshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = chlorineshot.plist; sourceTree = "<group>"; };
+		4029AED911BC36C500A91D20 /* sleep.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sleep.plist; sourceTree = "<group>"; };
+		4029AEDF11BC36F900A91D20 /* SleepEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepEffect.h; sourceTree = "<group>"; };
+		4029AEE011BC36F900A91D20 /* SleepEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepEffect.m; sourceTree = "<group>"; };
 		4039938411A058D400C5F00A /* TowerManager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TowerManager.png; sourceTree = "<group>"; };
 		4039938611A058DE00C5F00A /* TowerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerManager.h; sourceTree = "<group>"; };
 		4039938711A058DE00C5F00A /* TowerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TowerManager.m; sourceTree = "<group>"; };
@@ -417,8 +447,8 @@
 		4045998111BBD99F00DA11EF /* cometshotgreen.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cometshotgreen.plist; sourceTree = "<group>"; };
 		404599D911BBE51F00DA11EF /* explosiongreen.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = explosiongreen.plist; sourceTree = "<group>"; };
 		40459A0F11BBEBF100DA11EF /* whitesmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = whitesmoke.plist; sourceTree = "<group>"; };
-		40459A4611BBEFFD00DA11EF /* AOETrapEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOETrapEffect.h; sourceTree = "<group>"; };
-		40459A4711BBEFFD00DA11EF /* AOETrapEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOETrapEffect.m; sourceTree = "<group>"; };
+		40459A4611BBEFFD00DA11EF /* AOESpriteTrapEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOESpriteTrapEffect.h; sourceTree = "<group>"; };
+		40459A4711BBEFFD00DA11EF /* AOESpriteTrapEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOESpriteTrapEffect.m; sourceTree = "<group>"; };
 		40459A5511BBF1CB00DA11EF /* bleachtrap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bleachtrap.png; sourceTree = "<group>"; };
 		40459B0A11BBFBDF00DA11EF /* greenbubbles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = greenbubbles.plist; sourceTree = "<group>"; };
 		4059935611A9E78000FC6F9C /* background1_lowerleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1_lowerleft.png; sourceTree = "<group>"; };
@@ -1066,8 +1096,16 @@
 		40AFA8B411BB1DBC00113877 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				40459A4611BBEFFD00DA11EF /* AOETrapEffect.h */,
-				40459A4711BBEFFD00DA11EF /* AOETrapEffect.m */,
+				4029ADCD11BC22BD00A91D20 /* SpeedBoostEffect.h */,
+				4029ADCE11BC22BD00A91D20 /* SpeedBoostEffect.m */,
+				4029ADB211BC219E00A91D20 /* DamageBoostEffect.h */,
+				4029ADB311BC219E00A91D20 /* DamageBoostEffect.m */,
+				4029ACDC11BC141400A91D20 /* RangeBoostEffect.h */,
+				4029ACDD11BC141400A91D20 /* RangeBoostEffect.m */,
+				40459A4611BBEFFD00DA11EF /* AOESpriteTrapEffect.h */,
+				40459A4711BBEFFD00DA11EF /* AOESpriteTrapEffect.m */,
+				4029AEDF11BC36F900A91D20 /* SleepEffect.h */,
+				4029AEE011BC36F900A91D20 /* SleepEffect.m */,
 				40AFA8B511BB1DCE00113877 /* BurnEffect.h */,
 				40AFA8B611BB1DCE00113877 /* BurnEffect.m */,
 				40AFA8B811BB1E8000113877 /* BaseEffect.h */,
@@ -1195,6 +1233,14 @@
 		40EDDBDD11A4C01C00F05608 /* Paticles */ = {
 			isa = PBXGroup;
 			children = (
+				4029AEB111BC33EA00A91D20 /* chlorinehit.plist */,
+				4029AEB211BC33EA00A91D20 /* chlorineshot.plist */,
+				4029AEA311BC32AF00A91D20 /* carbonhit.plist */,
+				4029AEA411BC32AF00A91D20 /* carbonshot.plist */,
+				4029AE6311BC2EC300A91D20 /* blacksmoke.plist */,
+				4029AE2811BC299F00A91D20 /* graycloud.plist */,
+				4029AE0611BC26A300A91D20 /* pepperexplosion.plist */,
+				4029AE0711BC26A300A91D20 /* peppershot.plist */,
 				40459B0A11BBFBDF00DA11EF /* greenbubbles.plist */,
 				40459A0F11BBEBF100DA11EF /* whitesmoke.plist */,
 				404599D911BBE51F00DA11EF /* explosiongreen.plist */,
@@ -1472,6 +1518,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4029AED911BC36C500A91D20 /* sleep.plist */,
 				40EDDBDD11A4C01C00F05608 /* Paticles */,
 				40DE6E14119A1D2200BDA120 /* Fonts */,
 				40DE6E13119A1D0300BDA120 /* Textures */,
@@ -1752,6 +1799,15 @@
 				40459A1011BBEBF100DA11EF /* whitesmoke.plist in Resources */,
 				40459A5611BBF1CB00DA11EF /* bleachtrap.png in Resources */,
 				40459B0B11BBFBDF00DA11EF /* greenbubbles.plist in Resources */,
+				4029AE0811BC26A300A91D20 /* pepperexplosion.plist in Resources */,
+				4029AE0911BC26A300A91D20 /* peppershot.plist in Resources */,
+				4029AE2911BC299F00A91D20 /* graycloud.plist in Resources */,
+				4029AE6411BC2EC300A91D20 /* blacksmoke.plist in Resources */,
+				4029AEA511BC32AF00A91D20 /* carbonhit.plist in Resources */,
+				4029AEA611BC32AF00A91D20 /* carbonshot.plist in Resources */,
+				4029AEB311BC33EA00A91D20 /* chlorinehit.plist in Resources */,
+				4029AEB411BC33EA00A91D20 /* chlorineshot.plist in Resources */,
+				4029AEDA11BC36C500A91D20 /* sleep.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1816,7 +1872,11 @@
 				4010FA3F11BABC2E00E85749 /* Reachability.m in Sources */,
 				40AFA8B711BB1DCE00113877 /* BurnEffect.m in Sources */,
 				40AFA8BA11BB1E8000113877 /* BaseEffect.m in Sources */,
-				40459A4811BBEFFD00DA11EF /* AOETrapEffect.m in Sources */,
+				40459A4811BBEFFD00DA11EF /* AOESpriteTrapEffect.m in Sources */,
+				4029ACDE11BC141400A91D20 /* RangeBoostEffect.m in Sources */,
+				4029ADB411BC219E00A91D20 /* DamageBoostEffect.m in Sources */,
+				4029ADCF11BC22BD00A91D20 /* SpeedBoostEffect.m in Sources */,
+				4029AEE111BC36F900A91D20 /* SleepEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

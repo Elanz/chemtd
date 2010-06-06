@@ -7,6 +7,7 @@
 //
 
 #import "CarbonMonoxideTower.h"
+#import "CombatManager.h"
 
 @implementation CarbonMonoxideTower
 
@@ -23,8 +24,11 @@
         towerEffects = String_TowerEffect_CarbonMonoxide;
         formula = String_TowerFormula_CarbonMonoxide;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_None;
+        hitParticleFileName = Effect_SingleTargetBlackSmoke;
+        maxTargets = 2;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 2;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -37,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 160;
+        baseMinDamage = 15;
+        baseMaxDamage = 20;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

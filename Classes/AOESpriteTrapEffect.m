@@ -6,12 +6,12 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "AOETrapEffect.h"
+#import "AOESpriteTrapEffect.h"
 #import "BaseTower.h"
 #import "Creep.h"
 #import "CreepSpawner.h"
 
-@implementation AOETrapEffect
+@implementation AOESpriteTrapEffect
 
 - (id) initWithSourceField:(BaseTower*)sourceTower target:(GameFieldScene*)targetField position:(CGPoint)targetPosition
 {

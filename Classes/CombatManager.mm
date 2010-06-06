@@ -79,14 +79,20 @@
         case TowerEffectType_Burn:
             [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
             break;
+        case TowerEffectType_Sleep:
+            if (1 + arc4random() % 4 == 1)
+            {
+                [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            }
+            break;
         case TowerEffectType_AOETrap:
-            [gameField addEffect:[[AOETrapEffect alloc] initWithSourceField:theContainer.tower target:gameField position:theContainer.creep.creepSprite.position]];
+            [gameField addEffect:[[AOESpriteTrapEffect alloc] initWithSourceField:theContainer.tower target:gameField position:theContainer.creep.creepSprite.position]];
             break;
         case TowerEffectType_ExplodeOnImpact:
             system = [CCPointParticleSystem particleWithFile:theContainer.tower.hitParticleFileName];
-            system.position = theContainer.creep.creepSprite.position;
+            system.position = ccp(creepSize/2, creepSize/2);
             system.autoRemoveOnFinish = YES;
-            [gameField addChild:system z:1];
+            [theContainer.creep.creepSprite addChild:system z:1];
         default:
             break;
     }

@@ -312,7 +312,7 @@
     }
     ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
     BaseTower * tower;
-    tower = [delegate constructTowerWithType:TowerType_Bleach gameField:self addToField:YES];
+    tower = [delegate constructTowerWithType:TowerType_Chloroform gameField:self addToField:YES];
 //    switch (towerForThisRound) {
 //        case 1: tower = [delegate constructTowerWithType:TowerType_Hydrogen gameField:self addToField:YES]; break;
 //        case 2: tower = [delegate constructTowerWithType:TowerType_Oxygen gameField:self addToField:YES]; break;

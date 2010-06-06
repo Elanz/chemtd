@@ -10,6 +10,7 @@
 #import "Creep.h"
 #import "CreepSpawner.h"
 #import "CombatManager.h"
+#import "BaseEffect.h"
 
 @implementation BaseTower
 
@@ -33,6 +34,10 @@
 @synthesize shotParticleFileName;
 @synthesize hitParticleFileName;
 @synthesize trapTextureKey;
+@synthesize baseRange;
+@synthesize baseMinDamage;
+@synthesize baseMaxDamage;
+@synthesize baseInterval;
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField
 {
@@ -45,6 +50,7 @@
         powerDisplay.color = ccBLACK;
         [powerDisplay setString:String_NULL];
         
+        effects = [[NSMutableArray alloc] init];
         targets = [[NSMutableArray alloc] init];
         maxTargets = 1;
         
@@ -98,6 +104,17 @@
             [gameField addChild:towerSprite z:1];
     }
     return self;
+}
+
+- (void)towerPicked
+{
+    
+}
+
+- (void)addEffect:(BaseEffect*)effect
+{
+    [effects addObject:effect];
+    [effect startEffect];
 }
 
 - (void)prepareCard:(CCSprite*)towerCard
@@ -266,11 +283,15 @@
 
 - (void) setPower:(int)newPower
 {
+    if (towerPower == newPower)
+        return;
+    
     towerPower = newPower;
     
     minDamage = (float)baseMinDamage + ((float)baseMinDamage * towerPower * 0.10);
     maxDamage = (float)baseMaxDamage + ((float)baseMaxDamage * towerPower * 0.10);
-    shotRange = (float)baseRange + ((float)baseRange * towerPower * 0.10);
+    shotRange = (float)baseRange + ((float)baseRange * (towerPower-1) * 0.10);
+    printf("range from power = %d\n", shotRange);
     shotInterval = baseInterval - (baseInterval * towerPower * 0.05);
     if (shotInterval < 0.1)
     {
@@ -282,7 +303,7 @@
     }
     else 
     {
-         [powerDisplay setString:[NSString stringWithFormat:@"%d", towerPower]];   
+        [powerDisplay setString:[NSString stringWithFormat:@"%d", towerPower]];   
     }
 }
 

@@ -7,6 +7,9 @@
 //
 
 #import "CaffeineTower.h"
+#import "Effects.h"
+#import "BaseEffect.h"
+#import "CombatManager.h"
 
 @implementation CaffeineTower
 
@@ -24,7 +27,7 @@
         formula = String_TowerFormula_Caffeine;
         targetType = TowerTargetType_Single;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 5;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 8;
@@ -37,10 +40,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 200;
+        baseMinDamage = 100;
+        baseMaxDamage = 150;
+        baseInterval = 1.5;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
@@ -51,9 +54,38 @@
         
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         library = delegate.textureLibrary;
-        [towerSprite setTexture:[library GetTextureWithKey:TOWERTEXTURE_CAFFEINE]];     
+        [towerSprite setTexture:[library GetTextureWithKey:TOWERTEXTURE_CAFFEINE]];   
+        
+        targetTowers = [[NSMutableArray alloc] init];
+        effectRange = 400;
     }
     return self;
+}
+
+- (void) UpdateTargets:(double)elapsed
+{
+    [super UpdateTargets:elapsed];
+    
+    for (BaseTower * t in gameField.towers)
+    {
+        if (t != self && t.towerType != TowerType_Base)
+        {
+            float rangeToTower = [gameField distanceBetweenPointsA:t.towerSprite.position B:towerSprite.position];
+            if (rangeToTower < effectRange && ![targetTowers containsObject:t])
+            {
+                printf("applying effect to tower\n");
+                BaseEffect * effect = [[RangeBoostEffect alloc] initWithTargetTower:t];
+                [t addEffect:effect];
+                [targetTowers addObject:t];
+                effect = [[DamageBoostEffect alloc] initWithTargetTower:t];
+                [t addEffect:effect];
+                [targetTowers addObject:t];
+                effect = [[SpeedBoostEffect alloc] initWithTargetTower:t];
+                [t addEffect:effect];
+                [targetTowers addObject:t];
+            }
+        }
+    }
 }
 
 - (void)dealloc {

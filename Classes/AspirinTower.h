@@ -9,9 +9,11 @@
 #import "BaseTower.h"
 
 @interface AspirinTower : BaseTower {
-
+    NSMutableArray * targetTowers; 
+    int effectRange;
 }
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
+- (void) UpdateTargets:(double)elapsed;
 
 @end

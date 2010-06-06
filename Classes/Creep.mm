@@ -26,6 +26,7 @@
 @synthesize speed;
 @synthesize health;
 @synthesize maxHealth;
+@synthesize baseSpeed;
 
 - (id)initWithPoint:(CGPoint)startPoint {
     if ((self = [super init])) {
@@ -54,6 +55,7 @@
         nextWaypointY *= cellSize;
         
         speed = 2;
+        baseSpeed = speed;
         
         hpbar = [CCSprite spriteWithTexture:[gameField.textureLibrary GetTextureWithKey:COLORTEXTURE_PURPLE]];
         [hpbar setTextureRect:CGRectMake(hpbar.position.x, hpbar.position.y, creepSize, 5)];
@@ -85,6 +87,9 @@
         switch (effectType) {
             case TowerEffectType_Burn:
                 effect = [[BurnEffect alloc] initWithSource:sourceTower target:self];
+                break;
+            case TowerEffectType_Sleep:
+                effect = [[SleepEffect alloc] initWithSource:sourceTower target:self];
                 break;
             default:
                 break;

@@ -99,6 +99,7 @@
     creep.start = location;
     creep.mySpawner = self;
     creep.speed = [gameField.levelManager GetCurrentLevel].speed;
+    creep.baseSpeed = creep.speed;
     creep.maxHealth = [gameField.levelManager GetCurrentLevel].baseHealth;
     creep.health = creep.maxHealth;
     [creeps addObject:creep];

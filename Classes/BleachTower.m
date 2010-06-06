@@ -29,7 +29,8 @@
         shotParticleFileName = Effect_SingleTargetFireballGreen;
         hitParticleFileName = Effect_GreenBubbles;
         towerPower = 1;
-        towerClass = 3;
+        towerClass = 2;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_SODIUM;
         formulaQuantity1 = 1;

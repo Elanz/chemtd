@@ -7,6 +7,7 @@
 //
 
 #import "CapsaicinTower.h"
+#import "CombatManager.h"
 
 @implementation CapsaicinTower
 
@@ -22,9 +23,12 @@
         chemicalDescription = String_ChemDescription_Capsaicin;
         towerEffects = String_TowerEffect_Capsaicin;
         formula = String_TowerFormula_Capsaicin;
-        targetType = TowerTargetType_Single;
+        targetType = TowerTargetType_Multi;
+        shotParticleFileName = Effect_SingleTargetFireballPepper;
+        hitParticleFileName = Effect_SingleTargetExplosionPepper;
+        maxTargets = 20;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 5;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 18;
@@ -37,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 300;
+        baseMinDamage = 35;
+        baseMaxDamage = 50;
+        baseInterval = 0.20;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

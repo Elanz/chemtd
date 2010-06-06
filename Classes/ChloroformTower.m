@@ -7,6 +7,7 @@
 //
 
 #import "ChloroformTower.h"
+#import "CombatManager.h"
 
 @implementation ChloroformTower
 
@@ -23,8 +24,11 @@
         towerEffects = String_TowerEffect_Chloroform;
         formula = String_TowerFormula_Chloroform;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        effectType = TowerEffectType_Sleep;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 3;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -37,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 200;
+        baseMinDamage = 4;
+        baseMaxDamage = 6;
+        baseInterval = 2.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

@@ -307,7 +307,7 @@
     [self populateSingleElementRecipe:TowerType_Carbon];
     [self populateSingleElementRecipe:TowerType_Chlorine];
     
-    [recipeList addObject:[[Recipe alloc] initWithTower1:TowerType_Bleach power1:1 product:TowerType_Bleach power:1]];
+    [recipeList addObject:[[Recipe alloc] initWithTower1:TowerType_Chloroform power1:1 product:TowerType_Chloroform power:1]];
     
     int O = TowerType_Oxygen;
     int N = TowerType_Nitrogen;

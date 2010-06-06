@@ -7,6 +7,7 @@
 //
 
 #import "CarbonTower.h"
+#import "CombatManager.h"
 
 @implementation CarbonTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Carbon;
         formula = String_TowerFormula_Carbon;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetCarbonShot;
+        hitParticleFileName = Effect_SingleTargetCarbonHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;

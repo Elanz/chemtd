@@ -15,6 +15,18 @@
 
 @synthesize effectType;
 
+- (id) initWithTargetTower:(BaseTower*)targetTower
+{
+    if ((self = [super init])) 
+    {
+        targetType = TowerTarget;
+        tower = targetTower;
+        creep = nil;
+        field = nil;
+    }
+    return self;
+}
+
 - (id) initWithSource:(BaseTower*)sourceTower target:(Creep*)targetCreep
 {
     if ((self = [super init])) {
@@ -22,6 +34,7 @@
         targetType = CreepTarget;
         creep = targetCreep;
         field = nil;
+        tower = nil;
     }
     return self;
 }
@@ -34,6 +47,7 @@
         position = targetPosition;
         creep = nil;
         field = targetField;
+        tower = nil;
     }
     return self;
 }

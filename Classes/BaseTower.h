@@ -59,6 +59,7 @@
 #define TowerEffectType_ExplodeOnImpact 0
 #define TowerEffectType_Burn 1
 #define TowerEffectType_AOETrap 2
+#define TowerEffectType_Sleep 3
 
 @class Creep;
 @class CreepSpawner;
@@ -74,6 +75,7 @@
     TextureLibrary * library;
     
     NSMutableArray * targets;
+    NSMutableArray * effects;
     int maxTargets;
     float shotTimer;
     float shotInterval;
@@ -134,8 +136,12 @@
 @property (nonatomic) int towerType;
 @property (nonatomic, retain) CreepSpawner * currentSpawner;
 @property (nonatomic, retain) NSString * towerName;
+@property (nonatomic) int baseMinDamage;
+@property (nonatomic) int baseMaxDamage;
+@property (nonatomic) float baseInterval;
 @property (nonatomic) float shotInterval;
 @property (nonatomic) int shotRange;
+@property (nonatomic) int baseRange;
 @property (nonatomic) int minDamage;
 @property (nonatomic) int maxDamage;
 @property (nonatomic) int targetType;
@@ -143,6 +149,8 @@
 @property (nonatomic) BOOL usedByMixer;
 @property (nonatomic, retain) CCSprite * towerSprite;
 
+- (void)towerPicked;
+- (void)addEffect:(BaseEffect*)effect;
 - (void)makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string towerCard:(CCSprite*)towerCard;
 - (void)prepareCard:(CCSprite*)towerCard;
 - (void)addIcon:(CCSprite*)towerCard;

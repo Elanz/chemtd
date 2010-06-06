@@ -48,7 +48,6 @@
 
 - (void) updateEffect: (double) elapsed
 {
-    burnSystem.angle = 270.0;;
     dotElapsed += elapsed;
     duration -= elapsed;
     if (dotElapsed > dotTimer)

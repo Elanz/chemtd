@@ -7,6 +7,7 @@
 //
 
 #import "ChlorineTower.h"
+#import "CombatManager.h"
 
 @implementation ChlorineTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Chlorine;
         formula = String_TowerFormula_Chlorine;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        hitParticleFileName = Effect_SingleTargetChlorineHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;

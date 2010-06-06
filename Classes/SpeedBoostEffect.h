@@ -1,5 +1,5 @@
 //
-//  TrapEffect.h
+//  SpeedBoostEffect.h
 //  ChemTD
 //
 //  Created by Eric Lanz on 6/6/10.
@@ -10,15 +10,11 @@
 #import "BaseEffect.h"
 #import "cocos2d.h"
 
-@interface AOETrapEffect : BaseEffect {
-    
-    CCSprite * trapSprite;
-    float dotTimer;
-    float dotElapsed;
-    int range;
+@interface SpeedBoostEffect : BaseEffect {
+
 }
 
-- (id) initWithSourceField:(BaseTower*)sourceTower target:(GameFieldScene*)targetField position:(CGPoint)targetPosition;
+- (id) initWithTargetTower:(BaseTower*)targetTower;
 - (void) startEffect;
 - (void) finishEffect;
 - (void) updateEffect: (double) elapsed;

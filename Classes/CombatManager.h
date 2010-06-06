@@ -10,12 +10,21 @@
 #import "GameFieldScene.h"
 
 #define Effect_None @""
+#define Effect_SingleTargetChlorineShot @"chlorineshot.plist"
+#define Effect_SingleTargetChlorineHit @"chlorinehit.plist"
+#define Effect_SingleTargetCarbonShot @"carbonshot.plist"
+#define Effect_SingleTargetCarbonHit @"carbonhit.plist"
 #define Effect_SingleTargetFireball @"cometshot.plist"
 #define Effect_SingleTargetExplosion @"explosion.plist"
 #define Effect_SingleTargetFireballGreen @"cometshotgreen.plist"
 #define Effect_SingleTargetExplosionGreen @"explosiongreen.plist"
 #define Effect_SingleTargetWhiteSmoke @"whitesmoke.plist"
+#define Effect_SingleTargetBlackSmoke @"blacksmoke.plist"
 #define Effect_GreenBubbles @"greenbubbles.plist"
+#define Effect_SingleTargetFireballPepper @"peppershot.plist"
+#define Effect_SingleTargetExplosionPepper @"pepperexplosion.plist"
+#define Effect_GrayCloud @"graycloud.plist"
+#define Effect_Sleep @"sleep.plist"
 
 @class BaseTower;
 @class Creep;
