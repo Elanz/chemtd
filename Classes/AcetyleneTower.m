@@ -23,8 +23,10 @@
         towerEffects = String_TowerEffect_Acetylene;
         formula = String_TowerFormula_Acetylene;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_Burn;
         towerPower = 1;
         towerClass = 2;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 2;
@@ -38,13 +40,17 @@
         formulaQuantity5 = 0;
         
         baseRange = 240;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.60;
+        baseMinDamage = 5;
+        baseMaxDamage = 7;
+        baseInterval = 2.0;
+        baseDotMin = 7;
+        baseDotMax = 10;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         shotInterval = baseInterval;
         
         [self setPower:towerPower];

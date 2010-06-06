@@ -307,6 +307,8 @@
     [self populateSingleElementRecipe:TowerType_Carbon];
     [self populateSingleElementRecipe:TowerType_Chlorine];
     
+    [recipeList addObject:[[Recipe alloc] initWithTower1:TowerType_Acetylene power1:1 product:TowerType_Acetylene power:1]];
+    
     int O = TowerType_Oxygen;
     int N = TowerType_Nitrogen;
     int C = TowerType_Carbon;

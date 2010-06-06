@@ -73,6 +73,8 @@
 		408A794D1198D5E1007BC8B0 /* Creep.mm in Sources */ = {isa = PBXBuildFile; fileRef = 408A794C1198D5E1007BC8B0 /* Creep.mm */; };
 		408A79531198D62C007BC8B0 /* creep.png in Resources */ = {isa = PBXBuildFile; fileRef = 408A79521198D62C007BC8B0 /* creep.png */; };
 		408A79631198D735007BC8B0 /* CreepSpawner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 408A79621198D735007BC8B0 /* CreepSpawner.mm */; };
+		40AFA8B711BB1DCE00113877 /* BurnEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AFA8B611BB1DCE00113877 /* BurnEffect.m */; };
+		40AFA8BA11BB1E8000113877 /* BaseEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AFA8B911BB1E8000113877 /* BaseEffect.m */; };
 		40BC4EF911AEA67D00A8F497 /* TextureLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */; };
 		40BC4F6B11AEB2BF00A8F497 /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.m */; };
 		40BC50D211AEE03900A8F497 /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC50D111AEE03900A8F497 /* LevelManager.m */; };
@@ -458,6 +460,11 @@
 		408A79521198D62C007BC8B0 /* creep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creep.png; sourceTree = "<group>"; };
 		408A79611198D735007BC8B0 /* CreepSpawner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreepSpawner.h; sourceTree = "<group>"; };
 		408A79621198D735007BC8B0 /* CreepSpawner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CreepSpawner.mm; sourceTree = "<group>"; };
+		40AFA8B511BB1DCE00113877 /* BurnEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurnEffect.h; sourceTree = "<group>"; };
+		40AFA8B611BB1DCE00113877 /* BurnEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurnEffect.m; sourceTree = "<group>"; };
+		40AFA8B811BB1E8000113877 /* BaseEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEffect.h; sourceTree = "<group>"; };
+		40AFA8B911BB1E8000113877 /* BaseEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEffect.m; sourceTree = "<group>"; };
+		40AFA8D711BB203E00113877 /* Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effects.h; sourceTree = "<group>"; };
 		40BC4EF711AEA67D00A8F497 /* TextureLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureLibrary.h; sourceTree = "<group>"; };
 		40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureLibrary.m; sourceTree = "<group>"; };
 		40BC4F6911AEB2BF00A8F497 /* TouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchHandler.h; sourceTree = "<group>"; };
@@ -1029,6 +1036,7 @@
 		408A79371198D4E9007BC8B0 /* Towers */ = {
 			isa = PBXGroup;
 			children = (
+				40AFA8B411BB1DBC00113877 /* Effects */,
 				40DBF73111B6E58200FE3CD7 /* O-Z */,
 				40DBF69F11B6DCBA00FE3CD7 /* D-N */,
 				40DBF61B11B6B20A00FE3CD7 /* A-C */,
@@ -1037,6 +1045,18 @@
 				40DBF7D911B6E9D400FE3CD7 /* Towers.h */,
 			);
 			name = Towers;
+			sourceTree = "<group>";
+		};
+		40AFA8B411BB1DBC00113877 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				40AFA8B511BB1DCE00113877 /* BurnEffect.h */,
+				40AFA8B611BB1DCE00113877 /* BurnEffect.m */,
+				40AFA8B811BB1E8000113877 /* BaseEffect.h */,
+				40AFA8B911BB1E8000113877 /* BaseEffect.m */,
+				40AFA8D711BB203E00113877 /* Effects.h */,
+			);
+			name = Effects;
 			sourceTree = "<group>";
 		};
 		40DBF61B11B6B20A00FE3CD7 /* A-C */ = {
@@ -1765,6 +1785,8 @@
 				40DBF71F11B6E44B00FE3CD7 /* ValiumTower.m in Sources */,
 				40DBF72811B6E4E400FE3CD7 /* VitaminCTower.m in Sources */,
 				4010FA3F11BABC2E00E85749 /* Reachability.m in Sources */,
+				40AFA8B711BB1DCE00113877 /* BurnEffect.m in Sources */,
+				40AFA8BA11BB1E8000113877 /* BaseEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

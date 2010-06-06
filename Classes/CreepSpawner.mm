@@ -123,7 +123,7 @@
     {
         for (Creep * creep in creeps)
         {
-            [creep Update];
+            [creep Update:elapsed];
         }
         moveTimer = 0.0;
     }

@@ -19,6 +19,7 @@
 @class GameFieldScene;
 @class PathFinding;
 @class CreepSpawner;
+@class BaseEffect;
 
 @interface Creep : NSObject {
 
@@ -38,6 +39,8 @@
     
     int direction;
 
+    NSMutableArray * effects;
+    
     GameFieldScene *gameField;
     PathFinding *pathFinder;
     CreepSpawner *mySpawner;
@@ -59,9 +62,11 @@
 @property (nonatomic) float maxHealth;
 @property (nonatomic, retain) CreepSpawner *mySpawner;
 
+- (void) addEffect:(BaseEffect*)effect;
+- (void) removeEffect:(BaseEffect*)effect;
 - (void) shoot:(int)damage;
 - (id)initWithPoint:(CGPoint)startPoint;
-- (void) Update;
+- (void) Update: (double) elapsed;
 - (void) SetDirection:(int)newDirection;
 - (CGPoint) getNextWaypoint;
 

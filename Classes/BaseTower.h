@@ -54,8 +54,10 @@
 #define TowerTargetType_Multi 2
 #define TowerTargetType_Splash 3
 #define TowerTargetType_Trap 4
-#define TowerTargetType_Cloud 5
-#define TowerTargetType_SingleBurn 6 
+#define TowerTargetType_Cloud 5 
+
+#define TowerEffectType_ExplodeOnImpact 0
+#define TowerEffectType_Burn 1
 
 @class Creep;
 @class CreepSpawner;
@@ -77,17 +79,24 @@
     int baseRange;
     int baseMinDamage;
     int baseMaxDamage;
+    int baseDotMin;
+    int baseDotMax;
     float baseInterval;
     
     int towerClass;
     int shotRange;
     int minDamage;
     int maxDamage;
+    int dotMin;
+    int dotMax;
     int towerType;
     int towerPower;
     int targetType;
     
     BOOL usedByMixer;
+    BOOL switchTargetsAfterHit;
+    
+    int effectType;
     
     NSString * towerName;
     NSString * chemicalDescription;
@@ -106,6 +115,12 @@
     int formulaQuantity5;
 }
 
+@property (nonatomic) int effectType;
+@property (nonatomic) BOOL switchTargetsAfterHit;
+@property (nonatomic) int dotMin;
+@property (nonatomic) int dotMax;
+@property (nonatomic) int baseDotMin;
+@property (nonatomic) int baseDotMax;
 @property (nonatomic) int towerType;
 @property (nonatomic, retain) CreepSpawner * currentSpawner;
 @property (nonatomic, retain) NSString * towerName;

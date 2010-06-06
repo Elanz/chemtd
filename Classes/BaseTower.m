@@ -24,6 +24,12 @@
 @synthesize towerPower;
 @synthesize towerSprite;
 @synthesize usedByMixer;
+@synthesize effectType;
+@synthesize switchTargetsAfterHit;
+@synthesize dotMin;
+@synthesize dotMax;
+@synthesize baseDotMin;
+@synthesize baseDotMax;
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField
 {
@@ -39,8 +45,10 @@
         towerType = TowerType_Base;
         towerName = String_TowerName_Base;
         targetType = TowerTargetType_None;
+        effectType = TowerEffectType_ExplodeOnImpact;
         towerPower = 0;
         towerClass = 0;
+        switchTargetsAfterHit = NO;
         
         formulaComponent1 = -1;
         formulaQuantity1 = 2;
@@ -57,10 +65,14 @@
         baseMinDamage = 0;
         baseMaxDamage = 0;
         baseInterval = 0;
+        baseDotMin = 0;
+        baseDotMax = 0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         shotInterval = baseInterval;
         
         [self setPower:towerPower];
@@ -337,21 +349,32 @@
         if (target && [gameField distanceBetweenPointsA:target.creepSprite.position B:towerSprite.position] < shotRange)
         {
             [gameField.combatManager shootWithTower:self creep:target];
+            printf("shooting target\n");
+            if (switchTargetsAfterHit)
+            {
+                target = nil;
+                printf("switching target 1\n");
+            }
         }
         else 
         {
             target = nil;
+            printf("switching target 2\n");
         }
         shotTimer = 0.0;
     }
     if (target == nil)
     {
+        float bestdistance = 10000.0;
+        float thisdistance;
         for (Creep * creep in currentSpawner.creeps)
         {
-            if ([gameField distanceBetweenPointsA:creep.creepSprite.position B:towerSprite.position] < shotRange)
+            thisdistance = [gameField distanceBetweenPointsA:creep.creepSprite.position B:towerSprite.position];
+            if (thisdistance < bestdistance && thisdistance < shotRange)
             {
+                bestdistance = thisdistance;
                 target = creep;
-                break;
+                printf("new target\n");
             }
         }
     }

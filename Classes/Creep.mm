@@ -11,6 +11,7 @@
 #import "PathFinding.h"
 #import "CreepSpawner.h"
 #import "TextureLibrary.h"
+#import "BaseEffect.h"
 
 @implementation Creep
 
@@ -27,6 +28,7 @@
 - (id)initWithPoint:(CGPoint)startPoint {
     if ((self = [super init])) {
         waypoints = [[NSMutableArray alloc] init];
+        effects = [[NSMutableArray alloc] init];
         nextGoalId = 0;
         
         gameField = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_GameField];
@@ -61,6 +63,33 @@
     return self;
 }
 
+- (void) addEffect:(BaseEffect*)effect
+{
+    BaseEffect * found = nil;
+    for (BaseEffect * e in effects)
+    {
+        if (e.effectType == effect.effectType)
+        {
+            found = e;
+        }
+    }
+    if (found)
+    {
+        [found refreshEffect];
+    }
+    else
+    {
+        [effects addObject:effect];
+        [effect startEffect];
+    }
+}
+
+- (void) removeEffect:(BaseEffect*)effect
+{
+    [effect finishEffect];
+    [effects removeObject:effect];
+}
+
 - (CGPoint) getNextWaypoint
 {
     int waypointX = static_cast<PathFindNode*>([waypoints objectAtIndex:nextWaypointId])->nodeX;
@@ -74,6 +103,7 @@
 - (void) shoot:(int)damage
 {
     health = health - damage;
+    [gameField updateDPS:damage];
     if (health <= 0)
         [mySpawner Died:self];
 }
@@ -120,9 +150,14 @@
     hpbar.scaleX = percentage;
 }
 
-- (void) Update
+- (void) Update: (double) elapsed
 {
     [self UpdateHPBar];
+    
+    for (BaseEffect * effect in effects)
+    {
+        [effect updateEffect:elapsed];
+    }
     
     float X = self.creepSprite.position.x;
     float Y = self.creepSprite.position.y;

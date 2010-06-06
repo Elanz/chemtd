@@ -9,8 +9,8 @@
 #import "CombatManager.h"
 #import "Towers.h"
 #import "Creep.h"
-
-
+#import "BaseTower.h"
+#import "Effects.h"
 
 @implementation ShotContainer
 
@@ -36,7 +36,8 @@
 {
     CCParticleSystem * emitter = [CCPointParticleSystem particleWithFile:Effect_SingleTargetFireball];
     emitter.position = [tower getTowerPosition];
-    emitter.autoRemoveOnFinish = YES;
+    //emitter.autoRemoveOnFinish = YES;
+    //emitter.duration = 0.5;
     
     ShotContainer * newContainer = [[ShotContainer alloc] init];
     newContainer.tower = tower;
@@ -49,24 +50,33 @@
                  nil];
     
     [emitter runAction:action];
-    [gameField addChild:emitter z:2];
+    [gameField addChild:emitter z:5];
     //[creep shoot:damage];
 }
 
 - (void) shotFinishedCallback:(id)sender data:(void*)data
 {
     ShotContainer * theContainer = reinterpret_cast<ShotContainer *>(data);
-    [gameField removeChild:theContainer.emitter cleanup:NO];
+    [gameField removeChild:theContainer.emitter cleanup:YES];
     //[theContainer.emitter stopSystem];
     
     int damage = theContainer.tower.minDamage + arc4random() % theContainer.tower.maxDamage;
-    [gameField updateDPS:damage];
     [theContainer.creep shoot:damage];
     
-    CCParticleSystem * explosion = [CCPointParticleSystem particleWithFile:Effect_SingleTargetExplosion];
-    explosion.position = theContainer.creep.creepSprite.position;
-    explosion.autoRemoveOnFinish = YES;
-    [gameField addChild:explosion z:1];
+    CCParticleSystem * system;
+    
+    switch (theContainer.tower.effectType) {
+        case TowerEffectType_Burn:
+            [theContainer.creep addEffect:[[BurnEffect alloc] initWithSource:theContainer.tower target:theContainer.creep]];
+            break;
+        case TowerEffectType_ExplodeOnImpact:
+            system = [CCPointParticleSystem particleWithFile:Effect_SingleTargetExplosion];
+            system.position = theContainer.creep.creepSprite.position;
+            system.autoRemoveOnFinish = YES;
+            [gameField addChild:system z:1];
+        default:
+            break;
+    }
 }
 
 @end

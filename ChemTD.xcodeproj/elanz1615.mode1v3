@@ -270,8 +270,7 @@
 								<string>29B97314FDCFA39411CA2CEA</string>
 								<string>2D500B1D0D5A766B00DBA0E3</string>
 								<string>408A79371198D4E9007BC8B0</string>
-								<string>40DBF61B11B6B20A00FE3CD7</string>
-								<string>401458D511B016D5003683A5</string>
+								<string>40AFA8B411BB1DBC00113877</string>
 								<string>401458D411B016AF003683A5</string>
 								<string>50F414EB1069373D002A0D5E</string>
 								<string>40DE6E13119A1D0300BDA120</string>
@@ -282,13 +281,15 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>67</integer>
+									<integer>10</integer>
+									<integer>6</integer>
+									<integer>5</integer>
 									<integer>4</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 630}, {210, 764}}</string>
+							<string>{{0, 0}, {210, 764}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -325,7 +326,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ChemTDAppDelegate.m</string>
+								<string>BurnEffect.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -333,23 +334,23 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ChemTDAppDelegate.m</string>
+										<string>BurnEffect.m</string>
 										<key>_historyCapacity</key>
 										<integer>10</integer>
 										<key>bookmark</key>
-										<string>40AFA7F911BB11E200113877</string>
+										<string>40AFA93011BB251900113877</string>
 										<key>history</key>
 										<array>
-											<string>40AFA7D111BB0ED900113877</string>
-											<string>40AFA7D211BB0ED900113877</string>
-											<string>40AFA7E611BB10D800113877</string>
-											<string>40AFA7E711BB10D800113877</string>
-											<string>40AFA7E811BB10D800113877</string>
-											<string>40AFA7E911BB10D800113877</string>
-											<string>40AFA7EA11BB10D800113877</string>
-											<string>40AFA7EB11BB10D800113877</string>
-											<string>40AFA7EC11BB10D800113877</string>
-											<string>40AFA7ED11BB10D800113877</string>
+											<string>40AFA90611BB234200113877</string>
+											<string>40AFA90711BB234200113877</string>
+											<string>40AFA90911BB234200113877</string>
+											<string>40AFA90A11BB234200113877</string>
+											<string>40AFA92211BB249B00113877</string>
+											<string>40AFA92311BB249B00113877</string>
+											<string>40AFA92511BB249B00113877</string>
+											<string>40AFA92611BB249B00113877</string>
+											<string>40AFA92A11BB24B500113877</string>
+											<string>40AFA92B11BB24B500113877</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -571,12 +572,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>CreepSpawner.mm</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -879,6 +882,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
