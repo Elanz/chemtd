@@ -219,18 +219,15 @@
             gameField.currentTower = tower;
         }
     }
-    if (gameField.currentTower == nil)
+    for (BaseTower * tower in gameField.towers)
     {
-        for (BaseTower * tower in gameField.towers)
+        if (tower.towerType != TowerType_Base)
         {
-            if (tower.towerType != TowerType_Base)
+            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
+            if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
             {
-                float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
-                if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
-                {
-                    bestDistance = thisDistance;
-                    gameField.currentTower = tower;
-                }
+                bestDistance = thisDistance;
+                gameField.currentTower = tower;
             }
         }
     }
@@ -247,7 +244,7 @@
     BaseTower * found = nil;
     for (BaseTower * tower in gameField.pendingTowers)
     {
-        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
+        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp((cellX-1)*cellSize, (originalY+2)*cellSize)];
         if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
         {
             bestDistance = thisDistance;
@@ -362,9 +359,9 @@
 {
     int adjustment = originalY+1;
     
-    if (adjustment > 4)
+    if (adjustment > 2)
     {
-        adjustment = 4;
+        adjustment = 2;
     }
     
     originalY += adjustment;

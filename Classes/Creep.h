@@ -20,6 +20,7 @@
 @class PathFinding;
 @class CreepSpawner;
 @class BaseEffect;
+@class BaseTower;
 
 @interface Creep : NSObject {
 
@@ -62,7 +63,7 @@
 @property (nonatomic) float maxHealth;
 @property (nonatomic, retain) CreepSpawner *mySpawner;
 
-- (void) addEffect:(BaseEffect*)effect;
+- (void) addEffect:(int)effectType sourceTower:(BaseTower*)sourceTower;
 - (void) removeEffect:(BaseEffect*)effect;
 - (void) shoot:(int)damage;
 - (id)initWithPoint:(CGPoint)startPoint;

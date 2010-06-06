@@ -26,31 +26,40 @@
 
 - (void) startEffect
 {
-    id action2 = [CCTintBy actionWithDuration:1 red:-255 green:-255 blue:-255];
+    id action2 = [CCTintBy actionWithDuration:1 red:-255 green:0 blue:0];
     id action2Back = [action2 reverse];
     repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
     
-    [target.creepSprite runAction:repeat];
+    [creep.creepSprite runAction:repeat];
+    
+    burnSystem = [CCPointParticleSystem particleWithFile:@"burn.plist"];
+    burnSystem.position = ccp(creepSize/2, -(creepSize/2));
+    [creep.hpbar addChild:burnSystem];
 }
 
 - (void) finishEffect
 {
-    [target.creepSprite stopAction:repeat];
+    [burnSystem stopSystem];
+    burnSystem.autoRemoveOnFinish = YES;
+    burnSystem.duration = 0.3;
+    creep.creepSprite.color = ccWHITE;
+    [creep.creepSprite stopAction:repeat];
 }
 
 - (void) updateEffect: (double) elapsed
 {
+    burnSystem.angle = 270.0;;
     dotElapsed += elapsed;
     duration -= elapsed;
     if (dotElapsed > dotTimer)
     {
         int damage = source.dotMin + arc4random() % source.dotMax;
-        [target shoot:damage];
+        [creep shoot:damage];
         dotElapsed = 0.0;
     }
     if (duration < 0)
     {
-        [target removeEffect:self];
+        [creep removeEffect:self];
     }
 }
 

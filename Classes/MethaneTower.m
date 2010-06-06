@@ -14,7 +14,7 @@
 {
     if ((self = [super initWithGameField:theGameField addToField:addToField])) {
         // Initialization code
-        target = nil;
+        
         gameField = theGameField;
         
         towerType = TowerType_Methane;

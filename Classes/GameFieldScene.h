@@ -49,6 +49,7 @@
 @class LevelManager;
 @class UserManager;
 @class LevelStat;
+@class BaseEffect;
 
 @interface GameFieldScene : CCLayer {
 
@@ -66,6 +67,7 @@
     NSMutableDictionary * goalpoints;
     NSMutableArray * towers;
     NSMutableArray * pendingTowers;
+    NSMutableArray * fieldEffects;
     
     float field_offsetX;
     float field_offsetY;
@@ -179,6 +181,8 @@
 +(id) scene;
 +(id) sceneWithLoad;
 
+- (void)addEffect:(BaseEffect*)effect;
+- (void)removeEffect:(BaseEffect*)effect;
 - (void)onContinue:(id)sender;
 - (void)onScore:(id)sender;
 - (void)onTime:(id)sender;

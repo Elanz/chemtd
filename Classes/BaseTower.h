@@ -58,6 +58,7 @@
 
 #define TowerEffectType_ExplodeOnImpact 0
 #define TowerEffectType_Burn 1
+#define TowerEffectType_AOETrap 2
 
 @class Creep;
 @class CreepSpawner;
@@ -72,7 +73,8 @@
     GameFieldScene * gameField;
     TextureLibrary * library;
     
-    Creep * target;
+    NSMutableArray * targets;
+    int maxTargets;
     float shotTimer;
     float shotInterval;
     
@@ -91,12 +93,17 @@
     int dotMax;
     int towerType;
     int towerPower;
+    int maxPower;
     int targetType;
     
     BOOL usedByMixer;
     BOOL switchTargetsAfterHit;
     
     int effectType;
+    int trapTextureKey;
+    
+    NSString * shotParticleFileName;
+    NSString * hitParticleFileName;
     
     NSString * towerName;
     NSString * chemicalDescription;
@@ -115,6 +122,9 @@
     int formulaQuantity5;
 }
 
+@property (nonatomic) int trapTextureKey;
+@property (nonatomic, retain) NSString * shotParticleFileName;
+@property (nonatomic, retain) NSString * hitParticleFileName;
 @property (nonatomic) int effectType;
 @property (nonatomic) BOOL switchTargetsAfterHit;
 @property (nonatomic) int dotMin;
@@ -144,7 +154,7 @@
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
 
-- (void) UpdateSingleTarget:(double)elapsed;
+- (void) UpdateTargets:(double)elapsed;
 
 - (void) show;
 - (void) hide;

@@ -12,6 +12,8 @@
 #import "CreepSpawner.h"
 #import "TextureLibrary.h"
 #import "BaseEffect.h"
+#import "BaseTower.h"
+#import "Effects.h"
 
 @implementation Creep
 
@@ -55,7 +57,7 @@
         
         hpbar = [CCSprite spriteWithTexture:[gameField.textureLibrary GetTextureWithKey:COLORTEXTURE_PURPLE]];
         [hpbar setTextureRect:CGRectMake(hpbar.position.x, hpbar.position.y, creepSize, 5)];
-        [gameField addChild:[hpbar retain]];
+        [gameField addChild:[hpbar retain] z:4];
 //        hpbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, creepSize, 3)];
 //        hpbar.backgroundColor = [UIColor greenColor];
 //        [self addSubview:hpbar];
@@ -63,12 +65,12 @@
     return self;
 }
 
-- (void) addEffect:(BaseEffect*)effect
+- (void) addEffect:(int)effectType sourceTower:(BaseTower*)sourceTower
 {
     BaseEffect * found = nil;
     for (BaseEffect * e in effects)
     {
-        if (e.effectType == effect.effectType)
+        if (e.effectType == effectType)
         {
             found = e;
         }
@@ -79,6 +81,14 @@
     }
     else
     {
+        BaseEffect * effect;
+        switch (effectType) {
+            case TowerEffectType_Burn:
+                effect = [[BurnEffect alloc] initWithSource:sourceTower target:self];
+                break;
+            default:
+                break;
+        }
         [effects addObject:effect];
         [effect startEffect];
     }

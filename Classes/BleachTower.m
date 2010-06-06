@@ -7,6 +7,7 @@
 //
 
 #import "BleachTower.h"
+#import "CombatManager.h"
 
 @implementation BleachTower
 
@@ -14,17 +15,21 @@
 {
     if ((self = [super initWithGameField:theGameField addToField:addToField])) {
         // Initialization code
-        target = nil;
+        
         gameField = theGameField;
         
         towerType = TowerType_Bleach;
         towerName = String_TowerName_Bleach;
         chemicalDescription = String_ChemDescription_Bleach;
         towerEffects = String_TowerEffect_Bleach;
+        trapTextureKey = FIELDTEXTURE_BLEACHTRAP;
         formula = String_TowerFormula_Bleach;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_AOETrap;
+        shotParticleFileName = Effect_SingleTargetFireballGreen;
+        hitParticleFileName = Effect_GreenBubbles;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 3;
         
         formulaComponent1 = TOWERTEXTURE_SODIUM;
         formulaQuantity1 = 1;
@@ -37,14 +42,18 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 250;
+        baseMinDamage = 4;
+        baseMaxDamage = 6;
+        baseInterval = 2.0;
+        baseDotMin = 4;
+        baseDotMax = 6;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         shotInterval = baseInterval;
         
         [self setPower:towerPower];

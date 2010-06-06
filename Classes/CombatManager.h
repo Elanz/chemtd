@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "GameFieldScene.h"
 
+#define Effect_None @""
 #define Effect_SingleTargetFireball @"cometshot.plist"
 #define Effect_SingleTargetExplosion @"explosion.plist"
+#define Effect_SingleTargetFireballGreen @"cometshotgreen.plist"
+#define Effect_SingleTargetExplosionGreen @"explosiongreen.plist"
+#define Effect_SingleTargetWhiteSmoke @"whitesmoke.plist"
+#define Effect_GreenBubbles @"greenbubbles.plist"
 
 @class BaseTower;
 @class Creep;

@@ -7,6 +7,7 @@
 //
 
 #import "BakingSodaTower.h"
+#import "CombatManager.h"
 
 @implementation BakingSodaTower
 
@@ -14,7 +15,7 @@
 {
     if ((self = [super initWithGameField:theGameField addToField:addToField])) {
         // Initialization code
-        target = nil;
+        
         gameField = theGameField;
         
         towerType = TowerType_BakingSoda;
@@ -22,9 +23,12 @@
         chemicalDescription = String_ChemDescription_BakingSoda;
         towerEffects = String_TowerEffect_BakingSoda;
         formula = String_TowerFormula_BakingSoda;
-        targetType = TowerTargetType_Single;
+        targetType = TowerTargetType_Multi;
+        shotParticleFileName = Effect_None;
+        hitParticleFileName = Effect_SingleTargetWhiteSmoke;
+        maxTargets = 30;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 3;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -37,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 200;
+        baseMinDamage = 4;
+        baseMaxDamage = 6;
+        baseInterval = 0.5;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

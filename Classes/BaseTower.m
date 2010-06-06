@@ -30,6 +30,9 @@
 @synthesize dotMax;
 @synthesize baseDotMin;
 @synthesize baseDotMax;
+@synthesize shotParticleFileName;
+@synthesize hitParticleFileName;
+@synthesize trapTextureKey;
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField
 {
@@ -42,11 +45,18 @@
         powerDisplay.color = ccBLACK;
         [powerDisplay setString:String_NULL];
         
+        targets = [[NSMutableArray alloc] init];
+        maxTargets = 1;
+        
         towerType = TowerType_Base;
         towerName = String_TowerName_Base;
         targetType = TowerTargetType_None;
         effectType = TowerEffectType_ExplodeOnImpact;
+        trapTextureKey = 0;
+        shotParticleFileName = Effect_SingleTargetFireball;
+        hitParticleFileName = Effect_SingleTargetExplosion;
         towerPower = 0;
+        maxPower = 1;
         towerClass = 0;
         switchTargetsAfterHit = NO;
         
@@ -278,7 +288,10 @@
 
 - (void) upgrade
 {
-    [self setPower:towerPower+1];
+    if (towerPower < maxPower)
+    {
+        [self setPower:towerPower+1];
+    }
 }
 
 - (void) setScale:(float)newScale
@@ -341,41 +354,56 @@
         [towerSprite setVisible:NO];
 }
 
-- (void) UpdateSingleTarget:(double)elapsed
+- (void) UpdateTargets:(double)elapsed
 {
     shotTimer += elapsed;
     if (shotTimer > shotInterval)
     {
-        if (target && [gameField distanceBetweenPointsA:target.creepSprite.position B:towerSprite.position] < shotRange)
+        NSMutableArray * toRemove = [[NSMutableArray alloc] init];
+        for (Creep * target in targets)
         {
-            [gameField.combatManager shootWithTower:self creep:target];
-            printf("shooting target\n");
-            if (switchTargetsAfterHit)
+            if (target && [gameField distanceBetweenPointsA:target.creepSprite.position B:towerSprite.position] < shotRange)
             {
-                target = nil;
-                printf("switching target 1\n");
+                [gameField.combatManager shootWithTower:self creep:target];
+                printf("shooting target\n");
+                if (switchTargetsAfterHit)
+                {
+                    [toRemove addObject:target];
+                    printf("switching target 1\n");
+                }
+            }
+            else 
+            {
+                [toRemove addObject:target];
+                printf("switching target 2\n");
             }
         }
-        else 
+        for (Creep * target in toRemove)
         {
-            target = nil;
-            printf("switching target 2\n");
+            [targets removeObject:target];
         }
         shotTimer = 0.0;
     }
-    if (target == nil)
+    if ([targets count] < maxTargets)
     {
-        float bestdistance = 10000.0;
-        float thisdistance;
-        for (Creep * creep in currentSpawner.creeps)
+        int targetsToFind = maxTargets - [targets count];
+        for (int i = 0; i < targetsToFind; i++)
         {
-            thisdistance = [gameField distanceBetweenPointsA:creep.creepSprite.position B:towerSprite.position];
-            if (thisdistance < bestdistance && thisdistance < shotRange)
+            float bestdistance = 10000.0;
+            float thisdistance;
+            Creep * target = nil;
+            for (Creep * creep in currentSpawner.creeps)
             {
-                bestdistance = thisdistance;
-                target = creep;
-                printf("new target\n");
+                thisdistance = [gameField distanceBetweenPointsA:creep.creepSprite.position B:towerSprite.position];
+                if (thisdistance < bestdistance && thisdistance < shotRange && ![targets containsObject:creep])
+                {
+                    bestdistance = thisdistance;
+                    target = creep;
+                    printf("new target\n");
+                }
             }
+            if (target)
+                [targets addObject:target];
         }
     }
 }
@@ -384,7 +412,8 @@
 {
     switch (targetType) {
         case TowerTargetType_None: break;
-        case TowerTargetType_Single: [self UpdateSingleTarget:elapsed]; break;
+        case TowerTargetType_Single: [self UpdateTargets:elapsed]; break;
+        case TowerTargetType_Multi: [self UpdateTargets:elapsed]; break;
         default:
             break;
     }
@@ -392,8 +421,11 @@
 
 - (void) creepGone:(Creep*)creep
 {
-    if (target == creep)
-        target = nil;
+    if ([targets containsObject:creep])
+    {
+        [targets removeObject:creep];
+    }
+        
 }
 
 /*

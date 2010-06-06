@@ -34,30 +34,40 @@
 
 -(void) shootWithTower:(BaseTower*)tower creep:(Creep*)creep
 {
-    CCParticleSystem * emitter = [CCPointParticleSystem particleWithFile:Effect_SingleTargetFireball];
-    emitter.position = [tower getTowerPosition];
-    //emitter.autoRemoveOnFinish = YES;
-    //emitter.duration = 0.5;
-    
-    ShotContainer * newContainer = [[ShotContainer alloc] init];
-    newContainer.tower = tower;
-    newContainer.creep = creep;
-    newContainer.emitter = emitter;
-    
-    id action = [CCSequence actions:
-                 [CCMoveTo actionWithDuration: .5 position:[creep getNextWaypoint]],
-                 [CCCallFuncND actionWithTarget:self selector:@selector(shotFinishedCallback:data:) data:(void*)newContainer],
-                 nil];
-    
-    [emitter runAction:action];
-    [gameField addChild:emitter z:5];
-    //[creep shoot:damage];
+    if ([tower.shotParticleFileName isEqualToString:Effect_None])
+    {
+        ShotContainer * newContainer = [[ShotContainer alloc] init];
+        newContainer.tower = tower;
+        newContainer.creep = creep;
+        newContainer.emitter = nil;
+        [self shotFinishedCallback:nil data:newContainer];
+    }
+    else 
+    {
+        CCParticleSystem * emitter = [CCPointParticleSystem particleWithFile:tower.shotParticleFileName];
+        emitter.position = [tower getTowerPosition];
+        ShotContainer * newContainer = [[ShotContainer alloc] init];
+        newContainer.tower = tower;
+        newContainer.creep = creep;
+        newContainer.emitter = emitter;
+        
+        id action = [CCSequence actions:
+                     [CCMoveTo actionWithDuration: .5 position:[creep getNextWaypoint]],
+                     [CCCallFuncND actionWithTarget:self selector:@selector(shotFinishedCallback:data:) data:(void*)newContainer],
+                     nil];
+        
+        [emitter runAction:action];
+        [gameField addChild:emitter z:5];        
+    }
 }
 
 - (void) shotFinishedCallback:(id)sender data:(void*)data
 {
     ShotContainer * theContainer = reinterpret_cast<ShotContainer *>(data);
-    [gameField removeChild:theContainer.emitter cleanup:YES];
+    if (theContainer.emitter)
+    {
+        [gameField removeChild:theContainer.emitter cleanup:YES];
+    }
     //[theContainer.emitter stopSystem];
     
     int damage = theContainer.tower.minDamage + arc4random() % theContainer.tower.maxDamage;
@@ -67,10 +77,13 @@
     
     switch (theContainer.tower.effectType) {
         case TowerEffectType_Burn:
-            [theContainer.creep addEffect:[[BurnEffect alloc] initWithSource:theContainer.tower target:theContainer.creep]];
+            [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            break;
+        case TowerEffectType_AOETrap:
+            [gameField addEffect:[[AOETrapEffect alloc] initWithSourceField:theContainer.tower target:gameField position:theContainer.creep.creepSprite.position]];
             break;
         case TowerEffectType_ExplodeOnImpact:
-            system = [CCPointParticleSystem particleWithFile:Effect_SingleTargetExplosion];
+            system = [CCPointParticleSystem particleWithFile:theContainer.tower.hitParticleFileName];
             system.position = theContainer.creep.creepSprite.position;
             system.autoRemoveOnFinish = YES;
             [gameField addChild:system z:1];

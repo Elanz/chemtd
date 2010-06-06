@@ -9,6 +9,7 @@
 #import "BaseEffect.h"
 #import "BaseTower.h"
 #import "Creep.h"
+#import "GameFieldScene.h"
 
 @implementation BaseEffect
 
@@ -18,11 +19,24 @@
 {
     if ((self = [super init])) {
         source = sourceTower;
-        target = targetCreep;
+        targetType = CreepTarget;
+        creep = targetCreep;
+        field = nil;
     }
     return self;
 }
 
+- (id) initWithSourceField:(BaseTower*)sourceTower target:(GameFieldScene*)targetField position:(CGPoint)targetPosition
+{
+    if ((self = [super init])) {
+        source = sourceTower;
+        targetType = CreepTarget;
+        position = targetPosition;
+        creep = nil;
+        field = targetField;
+    }
+    return self;
+}
 
 - (void) refreshEffect
 {

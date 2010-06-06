@@ -1,8 +1,8 @@
 //
-//  BurnEffect.h
+//  TrapEffect.h
 //  ChemTD
 //
-//  Created by Eric Lanz on 6/5/10.
+//  Created by Eric Lanz on 6/6/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,18 +10,15 @@
 #import "BaseEffect.h"
 #import "cocos2d.h"
 
-@class BaseTower;
-@class Creep;
-
-@interface BurnEffect : BaseEffect {
-
+@interface AOETrapEffect : BaseEffect {
+    
+    CCSprite * trapSprite;
     float dotTimer;
     float dotElapsed;
-    CCRepeatForever *repeat;
-    CCParticleSystem * burnSystem;
+    int range;
 }
 
-- (id) initWithSource:(BaseTower*)sourceTower target:(Creep*)targetCreep;
+- (id) initWithSourceField:(BaseTower*)sourceTower target:(GameFieldScene*)targetField position:(CGPoint)targetPosition;
 - (void) startEffect;
 - (void) finishEffect;
 - (void) updateEffect: (double) elapsed;

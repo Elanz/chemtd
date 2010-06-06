@@ -23,6 +23,7 @@
 #import "ChemTDAppDelegate.h"
 #import "MainMenuScene.h"
 #import "UserManager.h"
+#import "BaseEffect.h"
 
 @implementation GameFieldScene
 
@@ -127,6 +128,7 @@
         goalpoints = [[NSMutableDictionary alloc] init];
         towers = [[NSMutableArray alloc] init];
         pendingTowers = [[NSMutableArray alloc] init];
+        fieldEffects = [[NSMutableArray alloc] init];
         startPosition = [self parseMap];
         
         rangeIndicatorSprite = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:FIELDTEXTURE_RANGEINDICATOR]];
@@ -179,6 +181,18 @@
         [self updateScrollOffsetWithDeltaX:0 DeltaY:0];
 	}
 	return self;
+}
+
+- (void)addEffect:(BaseEffect*)effect
+{
+    [fieldEffects addObject:effect];
+    [effect startEffect];
+}
+
+- (void)removeEffect:(BaseEffect*)effect
+{
+    [effect finishEffect];
+    [fieldEffects removeObject:effect];
 }
 
 - (void) initUILayer
@@ -267,6 +281,11 @@
     
     roundTimer += elapsed;
     
+    for (BaseEffect * effect in fieldEffects)
+    {
+        [effect updateEffect:elapsed];
+    }
+    
     if (mainSpawner) [mainSpawner tick:elapsed];
     if (currentGamePhase == GamePhase_Creeps)
     {
@@ -293,7 +312,7 @@
     }
     ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
     BaseTower * tower;
-    tower = [delegate constructTowerWithType:TowerType_Acetylene gameField:self addToField:YES];
+    tower = [delegate constructTowerWithType:TowerType_Bleach gameField:self addToField:YES];
 //    switch (towerForThisRound) {
 //        case 1: tower = [delegate constructTowerWithType:TowerType_Hydrogen gameField:self addToField:YES]; break;
 //        case 2: tower = [delegate constructTowerWithType:TowerType_Oxygen gameField:self addToField:YES]; break;

@@ -7,6 +7,7 @@
 //
 
 #import "AmmoniaTower.h"
+#import "CombatManager.h"
 
 @implementation AmmoniaTower
 
@@ -14,7 +15,7 @@
 {
     if ((self = [super initWithGameField:theGameField addToField:addToField])) {
         // Initialization code
-        target = nil;
+        
         gameField = theGameField;
         
         towerType = TowerType_Ammonia;
@@ -22,7 +23,10 @@
         chemicalDescription = String_ChemDescription_Ammonia;
         towerEffects = String_TowerEffect_Ammonia;
         formula = String_TowerFormula_Ammonia;
-        targetType = TowerTargetType_Single;
+        targetType = TowerTargetType_Multi;
+        shotParticleFileName = Effect_SingleTargetFireballGreen;
+        hitParticleFileName = Effect_SingleTargetExplosionGreen;
+        maxTargets = 3;
         towerPower = 1;
         towerClass = 2;
         
@@ -37,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 240;
-        baseMinDamage = 40;
-        baseMaxDamage = 45;
-        baseInterval = 0.65;
+        baseRange = 220;
+        baseMinDamage = 15;
+        baseMaxDamage = 20;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

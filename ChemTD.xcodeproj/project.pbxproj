@@ -36,6 +36,13 @@
 		403FC5FF119F213700618E7F /* transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 403FC5FE119F213700618E7F /* transparent.png */; };
 		403FC69A119F2A2600618E7F /* redX.png in Resources */ = {isa = PBXBuildFile; fileRef = 403FC699119F2A2600618E7F /* redX.png */; };
 		403FC6D5119F34EA00618E7F /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FC6D4119F34EA00618E7F /* Recipe.m */; };
+		4045991C11BBCFEF00DA11EF /* burn.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4045991B11BBCFEF00DA11EF /* burn.plist */; };
+		4045998211BBD99F00DA11EF /* cometshotgreen.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4045998111BBD99F00DA11EF /* cometshotgreen.plist */; };
+		404599DA11BBE51F00DA11EF /* explosiongreen.plist in Resources */ = {isa = PBXBuildFile; fileRef = 404599D911BBE51F00DA11EF /* explosiongreen.plist */; };
+		40459A1011BBEBF100DA11EF /* whitesmoke.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40459A0F11BBEBF100DA11EF /* whitesmoke.plist */; };
+		40459A4811BBEFFD00DA11EF /* AOETrapEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40459A4711BBEFFD00DA11EF /* AOETrapEffect.m */; };
+		40459A5611BBF1CB00DA11EF /* bleachtrap.png in Resources */ = {isa = PBXBuildFile; fileRef = 40459A5511BBF1CB00DA11EF /* bleachtrap.png */; };
+		40459B0B11BBFBDF00DA11EF /* greenbubbles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40459B0A11BBFBDF00DA11EF /* greenbubbles.plist */; };
 		4059935A11A9E78000FC6F9C /* background1_lowerleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4059935611A9E78000FC6F9C /* background1_lowerleft.png */; };
 		4059935B11A9E78000FC6F9C /* background1_lowerright.png in Resources */ = {isa = PBXBuildFile; fileRef = 4059935711A9E78000FC6F9C /* background1_lowerright.png */; };
 		4059935C11A9E78000FC6F9C /* background1_upperleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 4059935811A9E78000FC6F9C /* background1_upperleft.png */; };
@@ -406,6 +413,14 @@
 		403FC699119F2A2600618E7F /* redX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redX.png; sourceTree = "<group>"; };
 		403FC6D3119F34EA00618E7F /* Recipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipe.h; sourceTree = "<group>"; };
 		403FC6D4119F34EA00618E7F /* Recipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipe.m; sourceTree = "<group>"; };
+		4045991B11BBCFEF00DA11EF /* burn.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = burn.plist; sourceTree = "<group>"; };
+		4045998111BBD99F00DA11EF /* cometshotgreen.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cometshotgreen.plist; sourceTree = "<group>"; };
+		404599D911BBE51F00DA11EF /* explosiongreen.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = explosiongreen.plist; sourceTree = "<group>"; };
+		40459A0F11BBEBF100DA11EF /* whitesmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = whitesmoke.plist; sourceTree = "<group>"; };
+		40459A4611BBEFFD00DA11EF /* AOETrapEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AOETrapEffect.h; sourceTree = "<group>"; };
+		40459A4711BBEFFD00DA11EF /* AOETrapEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AOETrapEffect.m; sourceTree = "<group>"; };
+		40459A5511BBF1CB00DA11EF /* bleachtrap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bleachtrap.png; sourceTree = "<group>"; };
+		40459B0A11BBFBDF00DA11EF /* greenbubbles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = greenbubbles.plist; sourceTree = "<group>"; };
 		4059935611A9E78000FC6F9C /* background1_lowerleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1_lowerleft.png; sourceTree = "<group>"; };
 		4059935711A9E78000FC6F9C /* background1_lowerright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1_lowerright.png; sourceTree = "<group>"; };
 		4059935811A9E78000FC6F9C /* background1_upperleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1_upperleft.png; sourceTree = "<group>"; };
@@ -976,6 +991,7 @@
 		4088BCE511B188E700DCF16B /* Field */ = {
 			isa = PBXGroup;
 			children = (
+				40459A5511BBF1CB00DA11EF /* bleachtrap.png */,
 				4059935611A9E78000FC6F9C /* background1_lowerleft.png */,
 				4059935711A9E78000FC6F9C /* background1_lowerright.png */,
 				4059935811A9E78000FC6F9C /* background1_upperleft.png */,
@@ -1050,6 +1066,8 @@
 		40AFA8B411BB1DBC00113877 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
+				40459A4611BBEFFD00DA11EF /* AOETrapEffect.h */,
+				40459A4711BBEFFD00DA11EF /* AOETrapEffect.m */,
 				40AFA8B511BB1DCE00113877 /* BurnEffect.h */,
 				40AFA8B611BB1DCE00113877 /* BurnEffect.m */,
 				40AFA8B811BB1E8000113877 /* BaseEffect.h */,
@@ -1177,6 +1195,11 @@
 		40EDDBDD11A4C01C00F05608 /* Paticles */ = {
 			isa = PBXGroup;
 			children = (
+				40459B0A11BBFBDF00DA11EF /* greenbubbles.plist */,
+				40459A0F11BBEBF100DA11EF /* whitesmoke.plist */,
+				404599D911BBE51F00DA11EF /* explosiongreen.plist */,
+				4045998111BBD99F00DA11EF /* cometshotgreen.plist */,
+				4045991B11BBCFEF00DA11EF /* burn.plist */,
 				40EDDBDB11A4C01800F05608 /* explosion.plist */,
 				40EDDA9211A4AF5600F05608 /* cometshot.plist */,
 			);
@@ -1723,6 +1746,12 @@
 				4010FB6D11BADD4A00E85749 /* easybtn.png in Resources */,
 				4010FB6E11BADD4A00E85749 /* hardbtn.png in Resources */,
 				4010FB6F11BADD4A00E85749 /* mediumbtn.png in Resources */,
+				4045991C11BBCFEF00DA11EF /* burn.plist in Resources */,
+				4045998211BBD99F00DA11EF /* cometshotgreen.plist in Resources */,
+				404599DA11BBE51F00DA11EF /* explosiongreen.plist in Resources */,
+				40459A1011BBEBF100DA11EF /* whitesmoke.plist in Resources */,
+				40459A5611BBF1CB00DA11EF /* bleachtrap.png in Resources */,
+				40459B0B11BBFBDF00DA11EF /* greenbubbles.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1787,6 +1816,7 @@
 				4010FA3F11BABC2E00E85749 /* Reachability.m in Sources */,
 				40AFA8B711BB1DCE00113877 /* BurnEffect.m in Sources */,
 				40AFA8BA11BB1E8000113877 /* BaseEffect.m in Sources */,
+				40459A4811BBEFFD00DA11EF /* AOETrapEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

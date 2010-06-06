@@ -149,6 +149,7 @@
         case FIELDTEXTURE_BACKGROUND1UL: return [self LoadTextureWithName:@"background1_upperleft.png" textureKey:textureKey isPVR:NO]; break;
         case FIELDTEXTURE_BACKGROUND1UR: return [self LoadTextureWithName:@"background1_upperright.png" textureKey:textureKey isPVR:NO]; break;   
         case FIELDTEXTURE_RANGEINDICATOR: return [self LoadTextureWithName:@"RangeIndicator.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_BLEACHTRAP: return [self LoadTextureWithName:@"bleachtrap.png" textureKey:textureKey isPVR:NO]; break;
         default:
             break;
     }

@@ -14,7 +14,7 @@
 {
     if ((self = [super initWithGameField:theGameField addToField:addToField])) {
         // Initialization code
-        target = nil;
+        
         gameField = theGameField;
         
         towerType = TowerType_Sodium;
@@ -24,6 +24,7 @@
         formula = String_TowerFormula_Sodium;
         targetType = TowerTargetType_Single;
         towerPower = 1;
+        maxPower = 30;
         towerClass = 1;
         
         formulaComponent1 = TOWERTEXTURE_SODIUM;
