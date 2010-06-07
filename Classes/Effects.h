@@ -4,3 +4,5 @@
 #import "DamageBoostEffect.h"
 #import "SpeedBoostEffect.h"
 #import "SleepEffect.h"
+#import "PoisonEffect.h"
+#import "NitrousEffect.h"

@@ -7,7 +7,7 @@
 //
 
 #import "NitrousTower.h"
-
+#import "CombatManager.h"
 
 @implementation NitrousTower
 
@@ -23,9 +23,12 @@
         chemicalDescription = String_ChemDescription_Nitrous;
         towerEffects = String_TowerEffect_Nitrous;
         formula = String_TowerFormula_Nitrous;
+        shotParticleFileName = Effect_NitrousShot;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_Nitrous;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 2;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_NITROGEN;
         formulaQuantity1 = 2;
@@ -38,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 160;
+        baseMinDamage = 10;
+        baseMaxDamage = 12;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

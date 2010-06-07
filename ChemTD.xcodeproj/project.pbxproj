@@ -71,6 +71,12 @@
 		40718D0A11B5A63200EA3AA3 /* CarbonTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40718D0911B5A63200EA3AA3 /* CarbonTower.m */; };
 		40718D1911B5A70600EA3AA3 /* CarbonDioxideTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40718D1811B5A70600EA3AA3 /* CarbonDioxideTower.m */; };
 		40718D2611B5A80500EA3AA3 /* CarbonMonoxideTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40718D2511B5A80500EA3AA3 /* CarbonMonoxideTower.m */; };
+		40761EEF11BC6A02004A7064 /* PoisonEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40761EEE11BC6A02004A7064 /* PoisonEffect.m */; };
+		40761F3511BC7006004A7064 /* NitrousEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40761F3411BC7006004A7064 /* NitrousEffect.m */; };
+		40761F6A11BC73F9004A7064 /* nitroushit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40761F6811BC73F9004A7064 /* nitroushit.plist */; };
+		40761F6B11BC73F9004A7064 /* nitrousshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40761F6911BC73F9004A7064 /* nitrousshot.plist */; };
+		40761FD711BC7A52004A7064 /* bigexplosiondebris.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40761FD511BC7A52004A7064 /* bigexplosiondebris.plist */; };
+		40761FD811BC7A52004A7064 /* bigexplosionring.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40761FD611BC7A52004A7064 /* bigexplosionring.plist */; };
 		4082D4D211B363D000117D89 /* continueBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4082D4D011B363D000117D89 /* continueBtn.png */; };
 		4082D5C311B3807000117D89 /* damagebtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4082D5C011B3807000117D89 /* damagebtn.png */; };
 		4082D5C411B3807000117D89 /* scorebtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4082D5C111B3807000117D89 /* scorebtn.png */; };
@@ -477,6 +483,14 @@
 		40718D1811B5A70600EA3AA3 /* CarbonDioxideTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarbonDioxideTower.m; sourceTree = "<group>"; };
 		40718D2411B5A80500EA3AA3 /* CarbonMonoxideTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarbonMonoxideTower.h; sourceTree = "<group>"; };
 		40718D2511B5A80500EA3AA3 /* CarbonMonoxideTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarbonMonoxideTower.m; sourceTree = "<group>"; };
+		40761EED11BC6A02004A7064 /* PoisonEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoisonEffect.h; sourceTree = "<group>"; };
+		40761EEE11BC6A02004A7064 /* PoisonEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoisonEffect.m; sourceTree = "<group>"; };
+		40761F3311BC7006004A7064 /* NitrousEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NitrousEffect.h; sourceTree = "<group>"; };
+		40761F3411BC7006004A7064 /* NitrousEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NitrousEffect.m; sourceTree = "<group>"; };
+		40761F6811BC73F9004A7064 /* nitroushit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nitroushit.plist; sourceTree = "<group>"; };
+		40761F6911BC73F9004A7064 /* nitrousshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nitrousshot.plist; sourceTree = "<group>"; };
+		40761FD511BC7A52004A7064 /* bigexplosiondebris.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bigexplosiondebris.plist; sourceTree = "<group>"; };
+		40761FD611BC7A52004A7064 /* bigexplosionring.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bigexplosionring.plist; sourceTree = "<group>"; };
 		4082D4D011B363D000117D89 /* continueBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = continueBtn.png; sourceTree = "<group>"; };
 		4082D5C011B3807000117D89 /* damagebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = damagebtn.png; sourceTree = "<group>"; };
 		4082D5C111B3807000117D89 /* scorebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorebtn.png; sourceTree = "<group>"; };
@@ -1096,6 +1110,10 @@
 		40AFA8B411BB1DBC00113877 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
+				40761F3311BC7006004A7064 /* NitrousEffect.h */,
+				40761F3411BC7006004A7064 /* NitrousEffect.m */,
+				40761EED11BC6A02004A7064 /* PoisonEffect.h */,
+				40761EEE11BC6A02004A7064 /* PoisonEffect.m */,
 				4029ADCD11BC22BD00A91D20 /* SpeedBoostEffect.h */,
 				4029ADCE11BC22BD00A91D20 /* SpeedBoostEffect.m */,
 				4029ADB211BC219E00A91D20 /* DamageBoostEffect.h */,
@@ -1233,6 +1251,11 @@
 		40EDDBDD11A4C01C00F05608 /* Paticles */ = {
 			isa = PBXGroup;
 			children = (
+				40761FD511BC7A52004A7064 /* bigexplosiondebris.plist */,
+				40761FD611BC7A52004A7064 /* bigexplosionring.plist */,
+				4029AED911BC36C500A91D20 /* sleep.plist */,
+				40761F6811BC73F9004A7064 /* nitroushit.plist */,
+				40761F6911BC73F9004A7064 /* nitrousshot.plist */,
 				4029AEB111BC33EA00A91D20 /* chlorinehit.plist */,
 				4029AEB211BC33EA00A91D20 /* chlorineshot.plist */,
 				4029AEA311BC32AF00A91D20 /* carbonhit.plist */,
@@ -1518,7 +1541,6 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4029AED911BC36C500A91D20 /* sleep.plist */,
 				40EDDBDD11A4C01C00F05608 /* Paticles */,
 				40DE6E14119A1D2200BDA120 /* Fonts */,
 				40DE6E13119A1D0300BDA120 /* Textures */,
@@ -1808,6 +1830,10 @@
 				4029AEB311BC33EA00A91D20 /* chlorinehit.plist in Resources */,
 				4029AEB411BC33EA00A91D20 /* chlorineshot.plist in Resources */,
 				4029AEDA11BC36C500A91D20 /* sleep.plist in Resources */,
+				40761F6A11BC73F9004A7064 /* nitroushit.plist in Resources */,
+				40761F6B11BC73F9004A7064 /* nitrousshot.plist in Resources */,
+				40761FD711BC7A52004A7064 /* bigexplosiondebris.plist in Resources */,
+				40761FD811BC7A52004A7064 /* bigexplosionring.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1877,6 +1903,8 @@
 				4029ADB411BC219E00A91D20 /* DamageBoostEffect.m in Sources */,
 				4029ADCF11BC22BD00A91D20 /* SpeedBoostEffect.m in Sources */,
 				4029AEE111BC36F900A91D20 /* SleepEffect.m in Sources */,
+				40761EEF11BC6A02004A7064 /* PoisonEffect.m in Sources */,
+				40761F3511BC7006004A7064 /* NitrousEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

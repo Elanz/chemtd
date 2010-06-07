@@ -11,6 +11,7 @@
 #import "Creep.h"
 #import "BaseTower.h"
 #import "Effects.h"
+#import "CreepSpawner.h"
 
 @implementation ShotContainer
 
@@ -76,7 +77,16 @@
     CCParticleSystem * system;
     
     switch (theContainer.tower.effectType) {
+        case TowerEffectType_SplashHuge:
+            [self handleHugeExplosion:theContainer];
+            break;
         case TowerEffectType_Burn:
+            [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            break;
+        case TowerEffectType_Poison:
+            [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            break;
+        case TowerEffectType_Nitrous:
             [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
             break;
         case TowerEffectType_Sleep:
@@ -95,6 +105,33 @@
             [theContainer.creep.creepSprite addChild:system z:1];
         default:
             break;
+    }
+}
+
+- (void) handleHugeExplosion:(ShotContainer*)container
+{
+    CCPointParticleSystem * system = [CCPointParticleSystem particleWithFile:Effect_BigExplosionRing];
+    system.position = container.creep.creepSprite.position;
+    system.autoRemoveOnFinish = YES;
+    [gameField addChild:system z:5];
+    
+    system = [CCPointParticleSystem particleWithFile:Effect_BigExplosionDebris];
+    system.position = container.creep.creepSprite.position;
+    system.autoRemoveOnFinish = YES;
+    [gameField addChild:system z:5];
+    
+    for (Creep * foundCreep in gameField.mainSpawner.creeps)
+    {
+        float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
+        if (thisdistance < 150.0)
+        {
+            CCPointParticleSystem * explodeSystem = [CCPointParticleSystem particleWithFile:Effect_SingleTargetExplosionPepper];
+            explodeSystem.position = foundCreep.creepSprite.position;
+            explodeSystem.autoRemoveOnFinish = YES;
+            [gameField addChild:explodeSystem z:5];
+            int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
+            [foundCreep shoot:damage];
+        }
     }
 }
 

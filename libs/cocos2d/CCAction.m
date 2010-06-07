@@ -48,7 +48,7 @@
 -(id) init
 {
 	if( (self=[super init]) ) {	
-		originalTarget = 
+		originalTarget = nil;
 		tag = kActionTagInvalid;
 	}
 	return self;

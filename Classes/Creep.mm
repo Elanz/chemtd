@@ -83,13 +83,19 @@
     }
     else
     {
-        BaseEffect * effect;
+        BaseEffect * effect = nil;
         switch (effectType) {
             case TowerEffectType_Burn:
                 effect = [[BurnEffect alloc] initWithSource:sourceTower target:self];
                 break;
+            case TowerEffectType_Poison:
+                effect = [[PoisonEffect alloc] initWithSource:sourceTower target:self];
+                break;
             case TowerEffectType_Sleep:
                 effect = [[SleepEffect alloc] initWithSource:sourceTower target:self];
+                break;
+            case TowerEffectType_Nitrous:
+                effect = [[NitrousEffect alloc] initWithSource:sourceTower target:self];
                 break;
             default:
                 break;

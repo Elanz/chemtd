@@ -25,6 +25,10 @@
 #define Effect_SingleTargetExplosionPepper @"pepperexplosion.plist"
 #define Effect_GrayCloud @"graycloud.plist"
 #define Effect_Sleep @"sleep.plist"
+#define Effect_NitrousShot @"nitrousshot.plist"
+#define Effect_NitrousHit @"nitroushit.plist"
+#define Effect_BigExplosionRing @"bigexplosionring.plist"
+#define Effect_BigExplosionDebris @"bigexplosiondebris.plist"
 
 @class BaseTower;
 @class Creep;
@@ -54,5 +58,7 @@
 -(void) shootWithTower:(BaseTower*)tower creep:(Creep*)creep;
 
 -(void) shotFinishedCallback:(id)sender data:(void*)data;
+
+- (void) handleHugeExplosion:(ShotContainer*)container;
 
 @end

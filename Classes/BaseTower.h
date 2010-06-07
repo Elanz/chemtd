@@ -60,6 +60,9 @@
 #define TowerEffectType_Burn 1
 #define TowerEffectType_AOETrap 2
 #define TowerEffectType_Sleep 3
+#define TowerEffectType_Poison 4
+#define TowerEffectType_Nitrous 5
+#define TowerEffectType_SplashHuge 6
 
 @class Creep;
 @class CreepSpawner;

@@ -7,6 +7,7 @@
 //
 
 #import "CyanideTower.h"
+#import "CombatManager.h"
 
 @implementation CyanideTower
 
@@ -22,9 +23,13 @@
         chemicalDescription = String_ChemDescription_Cyanide;
         towerEffects = String_TowerEffect_Cyanide;
         formula = String_TowerFormula_Cyanide;
+        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        hitParticleFileName = Effect_SingleTargetChlorineHit;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_Poison;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 2;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_HYDROGEN;
         formulaQuantity1 = 1;
@@ -37,11 +42,15 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 200;
         baseMinDamage = 20;
         baseMaxDamage = 25;
         baseInterval = 0.75;
+        baseDotMin = 6;
+        baseDotMax = 9;
         
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;

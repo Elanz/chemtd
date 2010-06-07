@@ -7,6 +7,7 @@
 //
 
 #import "NitroglycerineTower.h"
+#import "CombatManager.h"
 
 @implementation NitroglycerineTower
 
@@ -23,8 +24,9 @@
         towerEffects = String_TowerEffect_Nitroglycerine;
         formula = String_TowerFormula_Nitroglycerine;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_SplashHuge;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 4;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 3;
@@ -37,10 +39,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 300;
+        baseMinDamage = 60;
+        baseMaxDamage = 75;
+        baseInterval = 2.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

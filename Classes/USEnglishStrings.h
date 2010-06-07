@@ -138,12 +138,12 @@
 #define String_TowerName_Chloroform @"Chloroform"
 #define String_TowerFormula_Chloroform @"C+H+Cl3"
 #define String_ChemDescription_Chloroform @""
-#define String_TowerEffect_Chloroform @""
+#define String_TowerEffect_Chloroform @"Has a 25% chance to put the enemy to sleep for 1 second with each shot"
 
 #define String_TowerName_Cyanide @"Cyanide"
 #define String_TowerFormula_Cyanide @"H+C+N"
 #define String_ChemDescription_Cyanide @""
-#define String_TowerEffect_Cyanide @""
+#define String_TowerEffect_Cyanide @"poisons a single enemy with every shot"
 
 #define String_TowerName_Ethanol @"Ethanol"
 #define String_TowerFormula_Ethanol @"C2+H6+O"
@@ -163,17 +163,17 @@
 #define String_TowerName_NitricAcid @"Nitric Acid"
 #define String_TowerFormula_NitricAcid @"H+N+O3"
 #define String_ChemDescription_NitricAcid @""
-#define String_TowerEffect_NitricAcid @""
+#define String_TowerEffect_NitricAcid @"poisons 2 targets with each shot"
 
 #define String_TowerName_Nitroglycerine @"Nitroglycerine"
 #define String_TowerFormula_Nitroglycerine @"C3+H5+N3+O9"
 #define String_ChemDescription_Nitroglycerine @""
-#define String_TowerEffect_Nitroglycerine @""
+#define String_TowerEffect_Nitroglycerine @"higly explosive splash damage at point of impact"
 
 #define String_TowerName_Nitrous @"Nitrous"
 #define String_TowerFormula_Nitrous @"N2+O"
 #define String_ChemDescription_Nitrous @""
-#define String_TowerEffect_Nitrous @""
+#define String_TowerEffect_Nitrous @"Slows the target to 60% for 3 seconds"
 
 #define String_TowerName_RDX @"RDX (C-4)"
 #define String_TowerFormula_RDX @"C3+H6+N6+O6"

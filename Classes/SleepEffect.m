@@ -16,7 +16,7 @@
 - (id) initWithSource:(BaseTower*)sourceTower target:(Creep*)targetCreep
 {
     if ((self = [super initWithSource:sourceTower target:targetCreep])) {
-        maxDuration = 5.0;
+        maxDuration = 1.0;
         duration = maxDuration;
         effectType = TowerEffectType_Burn;
     }
@@ -28,7 +28,7 @@
     creep.speed = 0.0;
     sleepSystem = [CCPointParticleSystem particleWithFile:Effect_Sleep];
     sleepSystem.position = ccp(creepSize/2, -(creepSize/2));
-    [creep.hpbar addChild:sleepSystem];
+    [creep.hpbar addChild:sleepSystem z:1];
 }
 
 - (void) finishEffect

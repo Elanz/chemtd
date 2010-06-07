@@ -7,6 +7,7 @@
 //
 
 #import "NitricAcidTower.h"
+#import "CombatManager.h"
 
 @implementation NitricAcidTower
 
@@ -23,8 +24,14 @@
         towerEffects = String_TowerEffect_NitricAcid;
         formula = String_TowerFormula_NitricAcid;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        hitParticleFileName = Effect_SingleTargetChlorineHit;
+        targetType = TowerTargetType_Multi;
+        effectType = TowerEffectType_Poison;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 3;
+        maxTargets = 2;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_HYDROGEN;
         formulaQuantity1 = 1;
@@ -37,11 +44,15 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 200;
         baseMinDamage = 20;
         baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseInterval = 1.0;
+        baseDotMin = 9;
+        baseDotMax = 12;
         
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
