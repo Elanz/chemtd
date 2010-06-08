@@ -88,6 +88,13 @@
             case TowerEffectType_Burn:
                 effect = [[BurnEffect alloc] initWithSource:sourceTower target:self];
                 break;
+            case TowerEffectType_SlowPoison:
+                effect = [[SlowEffect alloc] initWithSource:sourceTower target:self];
+                effect = [[PoisonEffect alloc] initWithSource:sourceTower target:self];
+                break;
+            case TowerEffectType_Rubber:
+                effect = [[RubberEffect alloc] initWithSource:sourceTower target:self];
+                break;
             case TowerEffectType_Poison:
                 effect = [[PoisonEffect alloc] initWithSource:sourceTower target:self];
                 break;
@@ -96,6 +103,9 @@
                 break;
             case TowerEffectType_Nitrous:
                 effect = [[NitrousEffect alloc] initWithSource:sourceTower target:self];
+                break;
+            case TowerEffectType_Ethanol:
+                effect = [[EthanolEffect alloc] initWithSource:sourceTower target:self];
                 break;
             default:
                 break;

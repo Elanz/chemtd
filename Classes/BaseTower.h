@@ -63,6 +63,11 @@
 #define TowerEffectType_Poison 4
 #define TowerEffectType_Nitrous 5
 #define TowerEffectType_SplashHuge 6
+#define TowerEffectType_Ethanol 7
+#define TowerEffectType_SplashBig 8
+#define TowerEffectType_SlowPoison 9
+#define TowerEffectType_Rubber 10
+#define TowerEffectType_WaterSplash 11
 
 @class Creep;
 @class CreepSpawner;

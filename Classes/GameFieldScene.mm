@@ -312,18 +312,17 @@
     }
     ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
     BaseTower * tower;
-    tower = [delegate constructTowerWithType:TowerType_NitricAcid gameField:self addToField:YES];
-//    switch (towerForThisRound) {
-//        case 1: tower = [delegate constructTowerWithType:TowerType_Hydrogen gameField:self addToField:YES]; break;
-//        case 2: tower = [delegate constructTowerWithType:TowerType_Oxygen gameField:self addToField:YES]; break;
-//        case 3: tower = [delegate constructTowerWithType:TowerType_Nitrogen gameField:self addToField:YES]; break;
-//        case 4: tower = [delegate constructTowerWithType:TowerType_Carbon gameField:self addToField:YES]; break;
-//        case 5: tower = [delegate constructTowerWithType:TowerType_Sodium gameField:self addToField:YES]; break;
-//        case 6: tower = [delegate constructTowerWithType:TowerType_Chlorine gameField:self addToField:YES]; break;
-//        default:
-//            return nil;
-//            break;
-//    }
+    switch (towerForThisRound) {
+        case 1: tower = [delegate constructTowerWithType:TowerType_Hydrogen gameField:self addToField:YES]; break;
+        case 2: tower = [delegate constructTowerWithType:TowerType_Oxygen gameField:self addToField:YES]; break;
+        case 3: tower = [delegate constructTowerWithType:TowerType_Nitrogen gameField:self addToField:YES]; break;
+        case 4: tower = [delegate constructTowerWithType:TowerType_Carbon gameField:self addToField:YES]; break;
+        case 5: tower = [delegate constructTowerWithType:TowerType_Sodium gameField:self addToField:YES]; break;
+        case 6: tower = [delegate constructTowerWithType:TowerType_Chlorine gameField:self addToField:YES]; break;
+        default:
+            return nil;
+            break;
+    }
     [tower setPositionWithX:position.x*cellSize Y:position.y*cellSize];
     [tower show];
     return tower;

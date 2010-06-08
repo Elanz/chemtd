@@ -9,9 +9,11 @@
 #import "BaseTower.h"
 
 @interface TylenolTower : BaseTower {
-
+    NSMutableArray * targetTowers; 
+    int effectRange;
 }
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
+- (void) UpdateTargets:(double)elapsed;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "NitrogenTower.h"
+#import "CombatManager.h"
 
 @implementation NitrogenTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Nitrogen;
         formula = String_TowerFormula_Nitrogen;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetNitrogenShot;
+        hitParticleFileName = Effect_SingleTargetNitrogenHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;

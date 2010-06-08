@@ -7,6 +7,7 @@
 //
 
 #import "EthanolTower.h"
+#import "CombatManager.h"
 
 @implementation EthanolTower
 
@@ -23,8 +24,13 @@
         towerEffects = String_TowerEffect_Ethanol;
         formula = String_TowerFormula_Ethanol;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_NitrousShot;
+        targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_Ethanol;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 3;
+        maxTargets = 2;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 2;
@@ -37,10 +43,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 220;
+        baseMinDamage = 10;
+        baseMaxDamage = 12;
+        baseInterval = 1.5;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

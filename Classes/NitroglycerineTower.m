@@ -26,7 +26,7 @@
         targetType = TowerTargetType_Single;
         effectType = TowerEffectType_SplashHuge;
         towerPower = 1;
-        towerClass = 4;
+        towerClass = 5;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 3;

@@ -23,8 +23,9 @@
         towerEffects = String_TowerEffect_RDX;
         formula = String_TowerFormula_RDX;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_SplashBig;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 4;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 3;
@@ -37,10 +38,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 250;
+        baseMinDamage = 50;
+        baseMaxDamage = 60;
+        baseInterval = 2.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

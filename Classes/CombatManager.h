@@ -10,6 +10,15 @@
 #import "GameFieldScene.h"
 
 #define Effect_None @""
+#define Effect_WaterExplosion @"waterexplosion.plist"
+#define Effect_SingleTargetOxygenShot @"oxygenhot.plist"
+#define Effect_SingleTargetOxygenHit @"oxygenhit.plist"
+#define Effect_SingleTargetSodiumShot @"sodiumshot.plist"
+#define Effect_SingleTargetSodiumHit @"sodiumhit.plist"
+#define Effect_SingleTargetHydrogenShot @"hydrogenshot.plist"
+#define Effect_SingleTargetHydrogenHit @"hydrogenhit.plist"
+#define Effect_SingleTargetNitrogenShot @"nitrogenshot.plist"
+#define Effect_SingleTargetNitrogenHit @"nitrogenhit.plist"
 #define Effect_SingleTargetChlorineShot @"chlorineshot.plist"
 #define Effect_SingleTargetChlorineHit @"chlorinehit.plist"
 #define Effect_SingleTargetCarbonShot @"carbonshot.plist"
@@ -29,6 +38,8 @@
 #define Effect_NitrousHit @"nitroushit.plist"
 #define Effect_BigExplosionRing @"bigexplosionring.plist"
 #define Effect_BigExplosionDebris @"bigexplosiondebris.plist"
+#define Effect_SingleTargetGreenSmoke @"greensmoke.plist"
+#define Effect_SingleTargetOrangeSmoke @"orangesmoke.plist"
 
 @class BaseTower;
 @class Creep;
@@ -60,5 +71,7 @@
 -(void) shotFinishedCallback:(id)sender data:(void*)data;
 
 - (void) handleHugeExplosion:(ShotContainer*)container;
+- (void) handleBigExplosion:(ShotContainer*)container;
+- (void) handleWaterExplosion:(ShotContainer*)container;
 
 @end

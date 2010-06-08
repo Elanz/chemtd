@@ -7,7 +7,9 @@
 //
 
 #import "VitaminCTower.h"
-
+#import "Effects.h"
+#import "BaseEffect.h"
+#import "CombatManager.h"
 
 @implementation VitaminCTower
 
@@ -24,8 +26,10 @@
         towerEffects = String_TowerEffect_VitaminC;
         formula = String_TowerFormula_VitaminC;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetOrangeSmoke;
+        hitParticleFileName = Effect_SingleTargetOrangeSmoke;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 4;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 6;
@@ -38,9 +42,9 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
+        baseRange = 250;
+        baseMinDamage = 60;
+        baseMaxDamage = 70;
         baseInterval = 0.75;
         
         shotRange = baseRange;
@@ -55,6 +59,26 @@
         [towerSprite setTexture:[library GetTextureWithKey:TOWERTEXTURE_VITAMINC]];     
     }
     return self;
+}
+
+- (void) UpdateTargets:(double)elapsed
+{
+    [super UpdateTargets:elapsed];
+    
+    for (BaseTower * t in gameField.towers)
+    {
+        if (t != self && t.towerType != TowerType_Base)
+        {
+            float rangeToTower = [gameField distanceBetweenPointsA:t.towerSprite.position B:towerSprite.position];
+            if (rangeToTower < effectRange && ![targetTowers containsObject:t])
+            {
+                printf("applying effect to tower\n");
+                BaseEffect * effect = [[SpeedBoostEffect alloc] initWithTargetTower:t];
+                [t addEffect:effect];
+                [targetTowers addObject:t];
+            }
+        }
+    }
 }
 
 - (void)dealloc {

@@ -80,10 +80,25 @@
         case TowerEffectType_SplashHuge:
             [self handleHugeExplosion:theContainer];
             break;
+        case TowerEffectType_SplashBig:
+            [self handleBigExplosion:theContainer];
+            break;
+        case TowerEffectType_WaterSplash:
+            [self handleWaterExplosion:theContainer];
+            break;
         case TowerEffectType_Burn:
             [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
             break;
+        case TowerEffectType_Rubber:
+            [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            break;
+        case TowerEffectType_SlowPoison:
+            [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            break;
         case TowerEffectType_Poison:
+            [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
+            break;
+        case TowerEffectType_Ethanol:
             [theContainer.creep addEffect:theContainer.tower.effectType sourceTower:theContainer.tower];
             break;
         case TowerEffectType_Nitrous:
@@ -100,11 +115,55 @@
             break;
         case TowerEffectType_ExplodeOnImpact:
             system = [CCPointParticleSystem particleWithFile:theContainer.tower.hitParticleFileName];
-            system.position = ccp(creepSize/2, creepSize/2);
+            system.position = ccp(creepSize/2, -(creepSize/2));
             system.autoRemoveOnFinish = YES;
-            [theContainer.creep.creepSprite addChild:system z:1];
+            [theContainer.creep.hpbar addChild:system z:1];
         default:
             break;
+    }
+}
+
+- (void) handleWaterExplosion:(ShotContainer*)container
+{
+    CCPointParticleSystem * system = [CCPointParticleSystem particleWithFile:Effect_WaterExplosion];
+    system.position = container.creep.creepSprite.position;
+    system.autoRemoveOnFinish = YES;
+    [gameField addChild:system z:5];
+    
+    for (Creep * foundCreep in gameField.mainSpawner.creeps)
+    {
+        float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
+        if (thisdistance < 100.0)
+        {
+            CCPointParticleSystem * explodeSystem = [CCPointParticleSystem particleWithFile:Effect_SingleTargetOxygenHit];
+            explodeSystem.position = foundCreep.creepSprite.position;
+            explodeSystem.autoRemoveOnFinish = YES;
+            [gameField addChild:explodeSystem z:5];
+            int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
+            [foundCreep shoot:damage];
+        }
+    }
+}
+
+- (void) handleBigExplosion:(ShotContainer*)container
+{
+    CCPointParticleSystem * system = [CCPointParticleSystem particleWithFile:Effect_BigExplosionRing];
+    system.position = container.creep.creepSprite.position;
+    system.autoRemoveOnFinish = YES;
+    [gameField addChild:system z:5];
+    
+    for (Creep * foundCreep in gameField.mainSpawner.creeps)
+    {
+        float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
+        if (thisdistance < 125.0)
+        {
+            CCPointParticleSystem * explodeSystem = [CCPointParticleSystem particleWithFile:Effect_SingleTargetExplosion];
+            explodeSystem.position = foundCreep.creepSprite.position;
+            explodeSystem.autoRemoveOnFinish = YES;
+            [gameField addChild:explodeSystem z:5];
+            int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
+            [foundCreep shoot:damage];
+        }
     }
 }
 

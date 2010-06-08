@@ -139,6 +139,20 @@
 		40D6BA6D11AB6ADC00F4666E /* valium.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4D11AB6ADC00F4666E /* valium.png */; };
 		40D6BA6E11AB6ADC00F4666E /* vitaminc.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4E11AB6ADC00F4666E /* vitaminc.png */; };
 		40D6BA6F11AB6ADC00F4666E /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4F11AB6ADC00F4666E /* water.png */; };
+		40DB62FD11BDB609004B361A /* greensmoke.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB62FC11BDB609004B361A /* greensmoke.plist */; };
+		40DB633611BDBB20004B361A /* EthanolEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DB633511BDBB20004B361A /* EthanolEffect.m */; };
+		40DB636311BDBF33004B361A /* hydrogenhit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB635F11BDBF33004B361A /* hydrogenhit.plist */; };
+		40DB636411BDBF33004B361A /* hydrogenshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB636011BDBF33004B361A /* hydrogenshot.plist */; };
+		40DB636511BDBF33004B361A /* nitrogenhit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB636111BDBF33004B361A /* nitrogenhit.plist */; };
+		40DB636611BDBF33004B361A /* nitrogenshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB636211BDBF33004B361A /* nitrogenshot.plist */; };
+		40DB637611BDC45C004B361A /* orangesmoke.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB637511BDC45C004B361A /* orangesmoke.plist */; };
+		40DB63CA11BDCAB4004B361A /* SlowEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DB63C911BDCAB4004B361A /* SlowEffect.m */; };
+		40DB640B11BDCF1D004B361A /* oxygenhit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB640711BDCF1D004B361A /* oxygenhit.plist */; };
+		40DB640C11BDCF1D004B361A /* oxygenshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB640811BDCF1D004B361A /* oxygenshot.plist */; };
+		40DB640D11BDCF1D004B361A /* sodiumhit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB640911BDCF1D004B361A /* sodiumhit.plist */; };
+		40DB640E11BDCF1D004B361A /* sodiumshot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB640A11BDCF1D004B361A /* sodiumshot.plist */; };
+		40DB642C11BDD25D004B361A /* RubberEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DB642B11BDD25D004B361A /* RubberEffect.m */; };
+		40DB647011BDD68D004B361A /* waterexplosion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB646F11BDD68D004B361A /* waterexplosion.plist */; };
 		40DBF5E811B6AA8C00FE3CD7 /* ChlorineTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBF5E711B6AA8C00FE3CD7 /* ChlorineTower.m */; };
 		40DBF5FE11B6AB6700FE3CD7 /* ChloroformTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBF5FD11B6AB6700FE3CD7 /* ChloroformTower.m */; };
 		40DBF60911B6AC6900FE3CD7 /* CyanideTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBF60811B6AC6900FE3CD7 /* CyanideTower.m */; };
@@ -568,6 +582,23 @@
 		40D6BA4D11AB6ADC00F4666E /* valium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = valium.png; path = Towers/valium.png; sourceTree = "<group>"; };
 		40D6BA4E11AB6ADC00F4666E /* vitaminc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vitaminc.png; path = Towers/vitaminc.png; sourceTree = "<group>"; };
 		40D6BA4F11AB6ADC00F4666E /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = Towers/water.png; sourceTree = "<group>"; };
+		40DB62FC11BDB609004B361A /* greensmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = greensmoke.plist; sourceTree = "<group>"; };
+		40DB633411BDBB20004B361A /* EthanolEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EthanolEffect.h; sourceTree = "<group>"; };
+		40DB633511BDBB20004B361A /* EthanolEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EthanolEffect.m; sourceTree = "<group>"; };
+		40DB635F11BDBF33004B361A /* hydrogenhit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hydrogenhit.plist; sourceTree = "<group>"; };
+		40DB636011BDBF33004B361A /* hydrogenshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = hydrogenshot.plist; sourceTree = "<group>"; };
+		40DB636111BDBF33004B361A /* nitrogenhit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nitrogenhit.plist; sourceTree = "<group>"; };
+		40DB636211BDBF33004B361A /* nitrogenshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = nitrogenshot.plist; sourceTree = "<group>"; };
+		40DB637511BDC45C004B361A /* orangesmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = orangesmoke.plist; sourceTree = "<group>"; };
+		40DB63C811BDCAB4004B361A /* SlowEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlowEffect.h; sourceTree = "<group>"; };
+		40DB63C911BDCAB4004B361A /* SlowEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlowEffect.m; sourceTree = "<group>"; };
+		40DB640711BDCF1D004B361A /* oxygenhit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = oxygenhit.plist; sourceTree = "<group>"; };
+		40DB640811BDCF1D004B361A /* oxygenshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = oxygenshot.plist; sourceTree = "<group>"; };
+		40DB640911BDCF1D004B361A /* sodiumhit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sodiumhit.plist; sourceTree = "<group>"; };
+		40DB640A11BDCF1D004B361A /* sodiumshot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sodiumshot.plist; sourceTree = "<group>"; };
+		40DB642A11BDD25D004B361A /* RubberEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubberEffect.h; sourceTree = "<group>"; };
+		40DB642B11BDD25D004B361A /* RubberEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubberEffect.m; sourceTree = "<group>"; };
+		40DB646F11BDD68D004B361A /* waterexplosion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = waterexplosion.plist; sourceTree = "<group>"; };
 		40DBF5E611B6AA8C00FE3CD7 /* ChlorineTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChlorineTower.h; sourceTree = "<group>"; };
 		40DBF5E711B6AA8C00FE3CD7 /* ChlorineTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChlorineTower.m; sourceTree = "<group>"; };
 		40DBF5FC11B6AB6700FE3CD7 /* ChloroformTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChloroformTower.h; sourceTree = "<group>"; };
@@ -1110,6 +1141,12 @@
 		40AFA8B411BB1DBC00113877 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
+				40DB642A11BDD25D004B361A /* RubberEffect.h */,
+				40DB642B11BDD25D004B361A /* RubberEffect.m */,
+				40DB63C811BDCAB4004B361A /* SlowEffect.h */,
+				40DB63C911BDCAB4004B361A /* SlowEffect.m */,
+				40DB633411BDBB20004B361A /* EthanolEffect.h */,
+				40DB633511BDBB20004B361A /* EthanolEffect.m */,
 				40761F3311BC7006004A7064 /* NitrousEffect.h */,
 				40761F3411BC7006004A7064 /* NitrousEffect.m */,
 				40761EED11BC6A02004A7064 /* PoisonEffect.h */,
@@ -1251,6 +1288,17 @@
 		40EDDBDD11A4C01C00F05608 /* Paticles */ = {
 			isa = PBXGroup;
 			children = (
+				40DB646F11BDD68D004B361A /* waterexplosion.plist */,
+				40DB640711BDCF1D004B361A /* oxygenhit.plist */,
+				40DB640811BDCF1D004B361A /* oxygenshot.plist */,
+				40DB640911BDCF1D004B361A /* sodiumhit.plist */,
+				40DB640A11BDCF1D004B361A /* sodiumshot.plist */,
+				40DB637511BDC45C004B361A /* orangesmoke.plist */,
+				40DB635F11BDBF33004B361A /* hydrogenhit.plist */,
+				40DB636011BDBF33004B361A /* hydrogenshot.plist */,
+				40DB636111BDBF33004B361A /* nitrogenhit.plist */,
+				40DB636211BDBF33004B361A /* nitrogenshot.plist */,
+				40DB62FC11BDB609004B361A /* greensmoke.plist */,
 				40761FD511BC7A52004A7064 /* bigexplosiondebris.plist */,
 				40761FD611BC7A52004A7064 /* bigexplosionring.plist */,
 				4029AED911BC36C500A91D20 /* sleep.plist */,
@@ -1834,6 +1882,17 @@
 				40761F6B11BC73F9004A7064 /* nitrousshot.plist in Resources */,
 				40761FD711BC7A52004A7064 /* bigexplosiondebris.plist in Resources */,
 				40761FD811BC7A52004A7064 /* bigexplosionring.plist in Resources */,
+				40DB62FD11BDB609004B361A /* greensmoke.plist in Resources */,
+				40DB636311BDBF33004B361A /* hydrogenhit.plist in Resources */,
+				40DB636411BDBF33004B361A /* hydrogenshot.plist in Resources */,
+				40DB636511BDBF33004B361A /* nitrogenhit.plist in Resources */,
+				40DB636611BDBF33004B361A /* nitrogenshot.plist in Resources */,
+				40DB637611BDC45C004B361A /* orangesmoke.plist in Resources */,
+				40DB640B11BDCF1D004B361A /* oxygenhit.plist in Resources */,
+				40DB640C11BDCF1D004B361A /* oxygenshot.plist in Resources */,
+				40DB640D11BDCF1D004B361A /* sodiumhit.plist in Resources */,
+				40DB640E11BDCF1D004B361A /* sodiumshot.plist in Resources */,
+				40DB647011BDD68D004B361A /* waterexplosion.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1905,6 +1964,9 @@
 				4029AEE111BC36F900A91D20 /* SleepEffect.m in Sources */,
 				40761EEF11BC6A02004A7064 /* PoisonEffect.m in Sources */,
 				40761F3511BC7006004A7064 /* NitrousEffect.m in Sources */,
+				40DB633611BDBB20004B361A /* EthanolEffect.m in Sources */,
+				40DB63CA11BDCAB4004B361A /* SlowEffect.m in Sources */,
+				40DB642C11BDD25D004B361A /* RubberEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

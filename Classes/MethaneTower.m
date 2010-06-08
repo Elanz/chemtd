@@ -7,6 +7,7 @@
 //
 
 #import "MethaneTower.h"
+#import "CombatManager.h"
 
 @implementation MethaneTower
 
@@ -21,10 +22,13 @@
         towerName = String_TowerName_Methane;
         chemicalDescription = String_ChemDescription_Methane;
         towerEffects = String_TowerEffect_Methane;
-        formula = String_TowerFormula_Methane;
-        targetType = TowerTargetType_Single;
+        formula = String_TowerFormula_Methane;        
+        targetType = TowerTargetType_Multi;
+        shotParticleFileName = Effect_None;
+        hitParticleFileName = Effect_SingleTargetGreenSmoke;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 2;
+        maxTargets = 20;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -37,9 +41,9 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
+        baseRange = 200;
+        baseMinDamage = 4;
+        baseMaxDamage = 6;
         baseInterval = 0.75;
         
         shotRange = baseRange;

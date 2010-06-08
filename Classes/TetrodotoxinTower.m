@@ -7,6 +7,7 @@
 //
 
 #import "TetrodotoxinTower.h"
+#import "CombatManager.h"
 
 @implementation TetrodotoxinTower
 
@@ -23,8 +24,11 @@
         towerEffects = String_TowerEffect_Tetrodotoxin;
         formula = String_TowerFormula_Tetrodotoxin;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        effectType = TowerEffectType_SlowPoison;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 5;
+        maxTargets = 20;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 11;
@@ -37,15 +41,19 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 250;
         baseMinDamage = 20;
         baseMaxDamage = 25;
         baseInterval = 0.75;
+        baseDotMin = 15;
+        baseDotMax = 17;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
         shotInterval = baseInterval;
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         
         [self setPower:towerPower];
         

@@ -7,6 +7,7 @@
 //
 
 #import "HydrochloricAcidTower.h"
+#import "CombatManager.h"
 
 @implementation HydrochloricAcidTower
 
@@ -23,9 +24,15 @@
         towerEffects = String_TowerEffect_HydrochloricAcid;
         formula = String_TowerFormula_HydrochloricAcid;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        hitParticleFileName = Effect_SingleTargetChlorineHit;
+        targetType = TowerTargetType_Multi;
+        effectType = TowerEffectType_Poison;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 2;
+        maxTargets = 1; 
         
+        switchTargetsAfterHit = YES;
         formulaComponent1 = TOWERTEXTURE_HYDROGEN;
         formulaQuantity1 = 1;
         formulaComponent2 = TOWERTEXTURE_CHLORINE;
@@ -37,15 +44,19 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 200;
         baseMinDamage = 20;
         baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseInterval = 1.0;
+        baseDotMin = 6;
+        baseDotMax = 9;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
         shotInterval = baseInterval;
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         
         [self setPower:towerPower];
         

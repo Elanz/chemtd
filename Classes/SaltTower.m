@@ -7,6 +7,7 @@
 //
 
 #import "SaltTower.h"
+#import "CombatManager.h"
 
 @implementation SaltTower
 
@@ -23,8 +24,12 @@
         towerEffects = String_TowerEffect_Salt;
         formula = String_TowerFormula_Salt;
         targetType = TowerTargetType_Single;
+        targetType = TowerTargetType_Multi;
+        shotParticleFileName = Effect_SingleTargetWhiteSmoke;
+        hitParticleFileName = Effect_SingleTargetWhiteSmoke;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 2;
+        maxTargets = 3;
         
         formulaComponent1 = TOWERTEXTURE_SODIUM;
         formulaQuantity1 = 1;
@@ -37,10 +42,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = 180;
+        baseMinDamage = 10;
+        baseMaxDamage = 15;
+        baseInterval = 0.25;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

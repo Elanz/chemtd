@@ -7,6 +7,7 @@
 //
 
 #import "OxygenTower.h"
+#import "CombatManager.h"
 
 @implementation OxygenTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Oxygen;
         formula = String_TowerFormula_Oxygen;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetOxygenShot;
+        hitParticleFileName = Effect_SingleTargetOxygenHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;

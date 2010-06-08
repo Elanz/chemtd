@@ -7,6 +7,7 @@
 //
 
 #import "HydrogenTower.h"
+#import "CombatManager.h"
 
 @implementation HydrogenTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Hydrogen;
         formula = String_TowerFormula_Hydrogen;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetHydrogenShot;
+        hitParticleFileName = Effect_SingleTargetHydrogenHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;

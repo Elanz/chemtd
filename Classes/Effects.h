@@ -6,3 +6,6 @@
 #import "SleepEffect.h"
 #import "PoisonEffect.h"
 #import "NitrousEffect.h"
+#import "EthanolEffect.h"
+#import "SlowEffect.h"
+#import "RubberEffect.h"

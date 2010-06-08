@@ -7,6 +7,7 @@
 //
 
 #import "WaterTower.h"
+#import "CombatManager.h"
 
 @implementation WaterTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Water;
         formula = String_TowerFormula_Water;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetOxygenShot;
+        effectType = TowerEffectType_WaterSplash;
         towerPower = 1;
         towerClass = 2;
         
@@ -37,10 +40,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 240;
+        baseRange = 220;
         baseMinDamage = 40;
         baseMaxDamage = 45;
-        baseInterval = 0.65;
+        baseInterval = 0.75;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

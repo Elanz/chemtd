@@ -7,7 +7,7 @@
 //
 
 #import "RubberTower.h"
-
+#import "CombatManager.h"
 
 @implementation RubberTower
 
@@ -23,9 +23,12 @@
         chemicalDescription = String_ChemDescription_Rubber;
         towerEffects = String_TowerEffect_Rubber;
         formula = String_TowerFormula_Rubber;
+        shotParticleFileName = Effect_SingleTargetCarbonShot;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_Rubber;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 4;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 5;
@@ -38,7 +41,7 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 220;
         baseMinDamage = 20;
         baseMaxDamage = 25;
         baseInterval = 0.75;

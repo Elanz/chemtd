@@ -7,6 +7,7 @@
 //
 
 #import "TNTTower.h"
+#import "CombatManager.h"
 
 @implementation TNTTower
 
@@ -23,8 +24,9 @@
         towerEffects = String_TowerEffect_TNT;
         formula = String_TowerFormula_TNT;
         targetType = TowerTargetType_Single;
+        effectType = TowerEffectType_SplashBig;
         towerPower = 1;
-        towerClass = 1;
+        towerClass = 4;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 7;
@@ -37,7 +39,7 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 140;
+        baseRange = 200;
         baseMinDamage = 20;
         baseMaxDamage = 25;
         baseInterval = 0.75;

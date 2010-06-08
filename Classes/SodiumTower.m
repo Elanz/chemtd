@@ -7,6 +7,7 @@
 //
 
 #import "SodiumTower.h"
+#import "CombatManager.h"
 
 @implementation SodiumTower
 
@@ -23,6 +24,8 @@
         towerEffects = String_TowerEffect_Sodium;
         formula = String_TowerFormula_Sodium;
         targetType = TowerTargetType_Single;
+        shotParticleFileName = Effect_SingleTargetSodiumShot;
+        hitParticleFileName = Effect_SingleTargetSodiumHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;
