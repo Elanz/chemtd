@@ -15,28 +15,31 @@
 {
     if( (self=[super init] )) 
     {
-        library = [[NSMutableDictionary alloc] init];
+        //library = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
 - (CCTexture2D *) LoadTextureWithName:(NSString *)textureName textureKey:(int)textureKey isPVR:(BOOL)isPVR
 {
-    if (![library objectForKey:[NSNumber numberWithInt:textureKey]])
-    {
-        if (isPVR)
-        {
-            NSString * realPath = [[NSBundle mainBundle] pathForResource:textureName ofType:nil];
-            [library setObject:[[CCTexture2D alloc] initWithPVRTCFile:realPath] forKey:[NSNumber numberWithInt:textureKey]];
-        }
-        else 
-        {
-            
-            [library setObject:[[CCTexture2D alloc] initWithImage:[UIImage imageNamed:textureName]] forKey:[NSNumber numberWithInt:textureKey]];
-        }
-    }
+//    if (![library objectForKey:[NSNumber numberWithInt:textureKey]])
+//    {
+//        if (isPVR)
+//        {
+//            NSString * realPath = [[NSBundle mainBundle] pathForResource:textureName ofType:nil];
+//            [library setObject:[[CCTexture2D alloc] initWithPVRTCFile:realPath] forKey:[NSNumber numberWithInt:textureKey]];
+//        }
+//        else 
+//        {
+//            
+//            [library setObject:[[CCTexture2D alloc] initWithImage:[UIImage imageNamed:textureName]] forKey:[NSNumber numberWithInt:textureKey]];
+//        }
+//    }
+//    
+//    return [library objectForKey:[NSNumber numberWithInt:textureKey]];     
     
-    return [library objectForKey:[NSNumber numberWithInt:textureKey]];        
+    
+    return [[CCTextureCache sharedTextureCache] addImage:textureName];
 }
 
 - (CCTexture2D *) GetTowerTextureWithKey:(int)textureKey

@@ -103,7 +103,7 @@
 #define CREEPTEXTURE_SCTIONEND 499
 
 @interface TextureLibrary : NSObject {
-    NSMutableDictionary * library;
+    //NSMutableDictionary * library;
 }
 
 - (CCTexture2D *) GetTextureWithKey:(int)textureKey;
