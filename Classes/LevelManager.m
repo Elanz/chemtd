@@ -9,6 +9,7 @@
 #import "LevelManager.h"
 #import "GameFieldScene.h"
 #import "TextureLibrary.h"
+#import "UserManager.h"
 
 @implementation Level
 
@@ -57,7 +58,20 @@
 {
     NSString * item = nil;
     
-    NSString * fullPath = [[NSBundle mainBundle] pathForResource:@"levels" ofType:@"dat"];
+    NSString * fullPath = @"";
+    if (gameField.userManager.difficultyid == 1)
+    {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"levels_easy" ofType:@"dat"];
+    }
+    else if (gameField.userManager.difficultyid == 2)
+    {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"levels_medium" ofType:@"dat"];
+    }
+    else if (gameField.userManager.difficultyid == 3)
+    {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"levels_hard" ofType:@"dat"];
+    }
+    
     NSString * file = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:nil]; 
     
     NSScanner * scanner = [NSScanner scannerWithString:file];

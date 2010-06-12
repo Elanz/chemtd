@@ -108,6 +108,7 @@
     int killedThisRound;
     float multiplier;
     double roundTimer;
+    double dpsTimer;
     
     CCSprite * pauseBtn;
     CCMenuItemSprite * menuItemPause;

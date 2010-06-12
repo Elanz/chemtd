@@ -107,7 +107,7 @@
 		40C0B424119CCCA800FA31D4 /* NitrogenTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C0B423119CCCA800FA31D4 /* NitrogenTower.m */; };
 		40C0B42E119CCDB900FA31D4 /* OxygenTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C0B42D119CCDB900FA31D4 /* OxygenTower.m */; };
 		40C0B4D7119CE13500FA31D4 /* ElementMixer.png in Resources */ = {isa = PBXBuildFile; fileRef = 40C0B4D6119CE13500FA31D4 /* ElementMixer.png */; };
-		40CF2DDC11AF4B51008789D0 /* levels.dat in Resources */ = {isa = PBXBuildFile; fileRef = 40BC50CF11AEDD5200A8F497 /* levels.dat */; };
+		40CF2DDC11AF4B51008789D0 /* levels_easy.dat in Resources */ = {isa = PBXBuildFile; fileRef = 40BC50CF11AEDD5200A8F497 /* levels_easy.dat */; };
 		40D6BA5011AB6ADC00F4666E /* acetylene.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3011AB6ADC00F4666E /* acetylene.png */; };
 		40D6BA5211AB6ADC00F4666E /* aspirin.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3211AB6ADC00F4666E /* aspirin.png */; };
 		40D6BA5311AB6ADC00F4666E /* bakingsoda.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3311AB6ADC00F4666E /* bakingsoda.png */; };
@@ -171,6 +171,8 @@
 		40DBF70F11B6E2F600FE3CD7 /* TylenolTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBF70E11B6E2F600FE3CD7 /* TylenolTower.m */; };
 		40DBF71F11B6E44B00FE3CD7 /* ValiumTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBF71E11B6E44B00FE3CD7 /* ValiumTower.m */; };
 		40DBF72811B6E4E400FE3CD7 /* VitaminCTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40DBF72711B6E4E400FE3CD7 /* VitaminCTower.m */; };
+		40DDADFB11C33A5900E165D3 /* levels_hard.dat in Resources */ = {isa = PBXBuildFile; fileRef = 40DDADF911C33A5900E165D3 /* levels_hard.dat */; };
+		40DDADFC11C33A5900E165D3 /* levels_medium.dat in Resources */ = {isa = PBXBuildFile; fileRef = 40DDADFA11C33A5900E165D3 /* levels_medium.dat */; };
 		40DE6D98119A17EB00BDA120 /* bitmapFontTest4.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 40DE6D96119A17EB00BDA120 /* bitmapFontTest4.fnt */; };
 		40DE6D99119A17EB00BDA120 /* bitmapFontTest4.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DE6D97119A17EB00BDA120 /* bitmapFontTest4.png */; };
 		40DE6E1B119A1D3D00BDA120 /* Brown.png in Resources */ = {isa = PBXBuildFile; fileRef = 40DE6E15119A1D3D00BDA120 /* Brown.png */; };
@@ -542,7 +544,7 @@
 		40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureLibrary.m; sourceTree = "<group>"; };
 		40BC4F6911AEB2BF00A8F497 /* TouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchHandler.h; sourceTree = "<group>"; };
 		40BC4F6A11AEB2BF00A8F497 /* TouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchHandler.m; sourceTree = "<group>"; };
-		40BC50CF11AEDD5200A8F497 /* levels.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = levels.dat; sourceTree = "<group>"; };
+		40BC50CF11AEDD5200A8F497 /* levels_easy.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = levels_easy.dat; sourceTree = "<group>"; };
 		40BC50D011AEE03900A8F497 /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		40BC50D111AEE03900A8F497 /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
 		40C0B422119CCCA800FA31D4 /* NitrogenTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NitrogenTower.h; sourceTree = "<group>"; };
@@ -636,6 +638,8 @@
 		40DBF72611B6E4E400FE3CD7 /* VitaminCTower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VitaminCTower.h; sourceTree = "<group>"; };
 		40DBF72711B6E4E400FE3CD7 /* VitaminCTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VitaminCTower.m; sourceTree = "<group>"; };
 		40DBF7D911B6E9D400FE3CD7 /* Towers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Towers.h; sourceTree = "<group>"; };
+		40DDADF911C33A5900E165D3 /* levels_hard.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = levels_hard.dat; sourceTree = "<group>"; };
+		40DDADFA11C33A5900E165D3 /* levels_medium.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = levels_medium.dat; sourceTree = "<group>"; };
 		40DE6D96119A17EB00BDA120 /* bitmapFontTest4.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bitmapFontTest4.fnt; sourceTree = "<group>"; };
 		40DE6D97119A17EB00BDA120 /* bitmapFontTest4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bitmapFontTest4.png; sourceTree = "<group>"; };
 		40DE6E15119A1D3D00BDA120 /* Brown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Brown.png; sourceTree = "<group>"; };
@@ -1127,6 +1131,7 @@
 		408A79371198D4E9007BC8B0 /* Towers */ = {
 			isa = PBXGroup;
 			children = (
+				40DDAD3811C3261200E165D3 /* Unused */,
 				40AFA8B411BB1DBC00113877 /* Effects */,
 				40DBF73111B6E58200FE3CD7 /* O-Z */,
 				40DBF69F11B6DCBA00FE3CD7 /* D-N */,
@@ -1179,10 +1184,6 @@
 				40718C8C11B59BDA00EA3AA3 /* AmmoniaTower.m */,
 				40718CB311B59F8800EA3AA3 /* AspirinTower.h */,
 				40718CB411B59F8800EA3AA3 /* AspirinTower.m */,
-				40718CC211B5A17D00EA3AA3 /* BakingSodaTower.h */,
-				40718CC311B5A17D00EA3AA3 /* BakingSodaTower.m */,
-				40718CD611B5A2CE00EA3AA3 /* BleachTower.h */,
-				40718CD711B5A2CE00EA3AA3 /* BleachTower.m */,
 				40718CE511B5A3C700EA3AA3 /* CaffeineTower.h */,
 				40718CE611B5A3C700EA3AA3 /* CaffeineTower.m */,
 				40718CFA11B5A57000EA3AA3 /* CapsaicinTower.h */,
@@ -1193,10 +1194,6 @@
 				40718D2511B5A80500EA3AA3 /* CarbonMonoxideTower.m */,
 				40718D0811B5A63200EA3AA3 /* CarbonTower.h */,
 				40718D0911B5A63200EA3AA3 /* CarbonTower.m */,
-				40DBF5E611B6AA8C00FE3CD7 /* ChlorineTower.h */,
-				40DBF5E711B6AA8C00FE3CD7 /* ChlorineTower.m */,
-				40DBF5FC11B6AB6700FE3CD7 /* ChloroformTower.h */,
-				40DBF5FD11B6AB6700FE3CD7 /* ChloroformTower.m */,
 				40DBF60711B6AC6900FE3CD7 /* CyanideTower.h */,
 				40DBF60811B6AC6900FE3CD7 /* CyanideTower.m */,
 			);
@@ -1214,8 +1211,6 @@
 				40DBF63511B6B36B00FE3CD7 /* NitricAcidTower.m */,
 				40DBF62911B6B2E200FE3CD7 /* MethaneTower.h */,
 				40DBF62A11B6B2E200FE3CD7 /* MethaneTower.m */,
-				40DBF61E11B6B23F00FE3CD7 /* HydrochloricAcidTower.h */,
-				40DBF61F11B6B23F00FE3CD7 /* HydrochloricAcidTower.m */,
 				40DBF61211B6AD8500FE3CD7 /* EthanolTower.h */,
 				40DBF61311B6AD8500FE3CD7 /* EthanolTower.m */,
 				40C0B422119CCCA800FA31D4 /* NitrogenTower.h */,
@@ -1231,18 +1226,12 @@
 			children = (
 				40DBF72611B6E4E400FE3CD7 /* VitaminCTower.h */,
 				40DBF72711B6E4E400FE3CD7 /* VitaminCTower.m */,
-				40DBF71D11B6E44B00FE3CD7 /* ValiumTower.h */,
-				40DBF71E11B6E44B00FE3CD7 /* ValiumTower.m */,
 				40DBF70D11B6E2F600FE3CD7 /* TylenolTower.h */,
 				40DBF70E11B6E2F600FE3CD7 /* TylenolTower.m */,
 				40DBF6F011B6E1CF00FE3CD7 /* TNTTower.h */,
 				40DBF6F111B6E1CF00FE3CD7 /* TNTTower.m */,
 				40DBF6DD11B6E0E600FE3CD7 /* TetrodotoxinTower.h */,
 				40DBF6DE11B6E0E600FE3CD7 /* TetrodotoxinTower.m */,
-				40DBF6D011B6E05100FE3CD7 /* SodiumTower.h */,
-				40DBF6D111B6E05100FE3CD7 /* SodiumTower.m */,
-				40DBF6C111B6DF7700FE3CD7 /* SaltTower.h */,
-				40DBF6C211B6DF7700FE3CD7 /* SaltTower.m */,
 				40DBF6B811B6DE4800FE3CD7 /* RubberTower.h */,
 				40DBF6B911B6DE4800FE3CD7 /* RubberTower.m */,
 				40DBF6AF11B6DD8F00FE3CD7 /* RDXTower.h */,
@@ -1253,6 +1242,29 @@
 				40EDDC0611A4C6C100F05608 /* WaterTower.m */,
 			);
 			name = "O-Z";
+			sourceTree = "<group>";
+		};
+		40DDAD3811C3261200E165D3 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				40DBF5E611B6AA8C00FE3CD7 /* ChlorineTower.h */,
+				40DBF5E711B6AA8C00FE3CD7 /* ChlorineTower.m */,
+				40DBF61E11B6B23F00FE3CD7 /* HydrochloricAcidTower.h */,
+				40DBF61F11B6B23F00FE3CD7 /* HydrochloricAcidTower.m */,
+				40DBF5FC11B6AB6700FE3CD7 /* ChloroformTower.h */,
+				40DBF71D11B6E44B00FE3CD7 /* ValiumTower.h */,
+				40DBF71E11B6E44B00FE3CD7 /* ValiumTower.m */,
+				40DBF5FD11B6AB6700FE3CD7 /* ChloroformTower.m */,
+				40DBF6D011B6E05100FE3CD7 /* SodiumTower.h */,
+				40DBF6D111B6E05100FE3CD7 /* SodiumTower.m */,
+				40DBF6C111B6DF7700FE3CD7 /* SaltTower.h */,
+				40DBF6C211B6DF7700FE3CD7 /* SaltTower.m */,
+				40718CC211B5A17D00EA3AA3 /* BakingSodaTower.h */,
+				40718CC311B5A17D00EA3AA3 /* BakingSodaTower.m */,
+				40718CD611B5A2CE00EA3AA3 /* BleachTower.h */,
+				40718CD711B5A2CE00EA3AA3 /* BleachTower.m */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		40DE6E13119A1D0300BDA120 /* Textures */ = {
@@ -1596,7 +1608,9 @@
 				50F414EC1069373D002A0D5E /* Default.png */,
 				50F414EE1069373D002A0D5E /* Icon.png */,
 				50F414EF1069373D002A0D5E /* Info.plist */,
-				40BC50CF11AEDD5200A8F497 /* levels.dat */,
+				40DDADF911C33A5900E165D3 /* levels_hard.dat */,
+				40DDADFA11C33A5900E165D3 /* levels_medium.dat */,
+				40BC50CF11AEDD5200A8F497 /* levels_easy.dat */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1832,7 +1846,7 @@
 				40D6BA6D11AB6ADC00F4666E /* valium.png in Resources */,
 				40D6BA6E11AB6ADC00F4666E /* vitaminc.png in Resources */,
 				40D6BA6F11AB6ADC00F4666E /* water.png in Resources */,
-				40CF2DDC11AF4B51008789D0 /* levels.dat in Resources */,
+				40CF2DDC11AF4B51008789D0 /* levels_easy.dat in Resources */,
 				4088BCF211B1895200DCF16B /* ChallengesBtnDown.png in Resources */,
 				4088BCF311B1895200DCF16B /* ChallengesBtnUp.png in Resources */,
 				4088BCF411B1895200DCF16B /* ChangeUserBtn.png in Resources */,
@@ -1893,6 +1907,8 @@
 				40DB640D11BDCF1D004B361A /* sodiumhit.plist in Resources */,
 				40DB640E11BDCF1D004B361A /* sodiumshot.plist in Resources */,
 				40DB647011BDD68D004B361A /* waterexplosion.plist in Resources */,
+				40DDADFB11C33A5900E165D3 /* levels_hard.dat in Resources */,
+				40DDADFC11C33A5900E165D3 /* levels_medium.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

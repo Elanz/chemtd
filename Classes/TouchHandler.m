@@ -169,11 +169,11 @@
         case GamePhase_Build:
             if (gameField.currentTower)
             {
-                [gameField.currentTower setPositionWithX:(cellX*cellSize+cellSize/2) Y:(cellY*cellSize+cellSize/2)];
+                [gameField.currentTower setPositionWithX:(cellX*cellSize+cellSize/2) Y:([self adjustTouchLocationWithY:cellY]*cellSize+cellSize/2)];
                 
                 gameField.rangeIndicatorSprite.position = [gameField.currentTower getTowerPosition];
                 
-                if ([gameField check1x1SpaceStatus:cellX :cellY :TILE_OPEN])
+                if ([gameField check1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_OPEN])
                 {
                     [gameField.currentTower setColor:Color_White];
                 } else {
@@ -192,15 +192,15 @@
     int cellY = firstTouchLocation.y/cellSize;
     
     gameField.rangeIndicatorSprite.visible = false;
-    if ([gameField check1x1SpaceStatus:cellX :cellY :TILE_OPEN])
+    if ([gameField check1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_OPEN])
     {
         if (gameField.currentTower)
         {
-            if ([gameField.pendingTowers count] == 0) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER1];
-            if ([gameField.pendingTowers count] == 1) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER2];
-            if ([gameField.pendingTowers count] == 2) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER3];
-            if ([gameField.pendingTowers count] == 3) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER4];
-            if ([gameField.pendingTowers count] == 4) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER5];
+            if ([gameField.pendingTowers count] == 0) [gameField set1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_PENDINGTOWER1];
+            if ([gameField.pendingTowers count] == 1) [gameField set1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_PENDINGTOWER2];
+            if ([gameField.pendingTowers count] == 2) [gameField set1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_PENDINGTOWER3];
+            if ([gameField.pendingTowers count] == 3) [gameField set1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_PENDINGTOWER4];
+            if ([gameField.pendingTowers count] == 4) [gameField set1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_PENDINGTOWER5];
             
             [gameField.pendingTowers addObject:gameField.currentTower];
             if ([gameField.pendingTowers count] == towersPerRound)
@@ -371,17 +371,14 @@
 
 - (int)adjustTouchLocationWithY:(int)originalY
 {
-//    int adjustment = originalY;
-//    
-//    if (adjustment > 2)
-//    {
-//        adjustment = 2;
-//    }
-//    
-//    originalY += adjustment;
-//    
-//    if (originalY > 47)
-//        originalY = 47;
+    int adjustment = 1;
+    
+    originalY += adjustment;
+    
+    if (originalY > mapHeight-2)
+        originalY = mapHeight-2;
+    if (originalY < 0)
+        originalY = 0;
     
     return originalY;
 }
@@ -412,7 +409,6 @@
 //    location.y -= gameField.field_offsetY;
 //    
 //    return location;
-    
     
     return [gameField convertToNodeSpace:original];
 }

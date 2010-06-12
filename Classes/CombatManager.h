@@ -11,7 +11,7 @@
 
 #define Effect_None @""
 #define Effect_WaterExplosion @"waterexplosion.plist"
-#define Effect_SingleTargetOxygenShot @"oxygenhot.plist"
+#define Effect_SingleTargetOxygenShot @"oxygenshot.plist"
 #define Effect_SingleTargetOxygenHit @"oxygenhit.plist"
 #define Effect_SingleTargetSodiumShot @"sodiumshot.plist"
 #define Effect_SingleTargetSodiumHit @"sodiumhit.plist"

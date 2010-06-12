@@ -95,15 +95,15 @@
 #define String_ChemDescription_Aspirin @""
 #define String_TowerEffect_Aspirin @"boosts the range of nearby towers by 15%"
 
-#define String_TowerName_BakingSoda @"Baking Soda"
-#define String_TowerFormula_BakingSoda @"C+H+Na+O3"
-#define String_ChemDescription_BakingSoda @""
-#define String_TowerEffect_BakingSoda @"hits all enemies in range"
-
-#define String_TowerName_Bleach @"Bleach"
-#define String_TowerFormula_Bleach @"Na+O+Cl"
-#define String_ChemDescription_Bleach @""
-#define String_TowerEffect_Bleach @"drops a toxic puddle on the ground that damages any enemies that walk on it"
+//#define String_TowerName_BakingSoda @"Baking Soda"
+//#define String_TowerFormula_BakingSoda @"C+H+Na+O3"
+//#define String_ChemDescription_BakingSoda @""
+//#define String_TowerEffect_BakingSoda @"hits all enemies in range"
+//
+//#define String_TowerName_Bleach @"Bleach"
+//#define String_TowerFormula_Bleach @"Na+O+Cl"
+//#define String_ChemDescription_Bleach @""
+//#define String_TowerEffect_Bleach @"drops a toxic puddle on the ground that damages any enemies that walk on it"
 
 #define String_TowerName_Caffeine @"Caffeine"
 #define String_TowerFormula_Caffeine @"C8+H10+N4+O2"
@@ -130,15 +130,15 @@
 #define String_ChemDescription_CarbonMonoxide @""
 #define String_TowerEffect_CarbonMonoxide @"slightly less powerful than Carbon Dioxide, hits only 2 enemies at a time"
 
-#define String_TowerName_Chlorine @"Chlorine"
-#define String_TowerFormula_Chlorine @"Cl"
-#define String_ChemDescription_Chlorine @""
-#define String_TowerEffect_Chlorine @"Basic tower, upgrades to +30, single target"
-
-#define String_TowerName_Chloroform @"Chloroform"
-#define String_TowerFormula_Chloroform @"C+H+Cl3"
-#define String_ChemDescription_Chloroform @""
-#define String_TowerEffect_Chloroform @"Has a 25% chance to put the enemy to sleep for 1 second with each shot"
+//#define String_TowerName_Chlorine @"Chlorine"
+//#define String_TowerFormula_Chlorine @"Cl"
+//#define String_ChemDescription_Chlorine @""
+//#define String_TowerEffect_Chlorine @"Basic tower, upgrades to +30, single target"
+//
+//#define String_TowerName_Chloroform @"Chloroform"
+//#define String_TowerFormula_Chloroform @"C+H+Cl3"
+//#define String_ChemDescription_Chloroform @""
+//#define String_TowerEffect_Chloroform @"Has a 25% chance to put the enemy to sleep for 1 second with each shot"
 
 #define String_TowerName_Cyanide @"Cyanide"
 #define String_TowerFormula_Cyanide @"H+C+N"
@@ -150,10 +150,10 @@
 #define String_ChemDescription_Ethanol @""
 #define String_TowerEffect_Ethanol @"slows up to 2 targets to 40% for 4 seconds"
 
-#define String_TowerName_HydrochloricAcid @"Hydrochloric Acid"
-#define String_TowerFormula_HydrochloricAcid @"H+Cl"
-#define String_ChemDescription_HydrochloricAcid @""
-#define String_TowerEffect_HydrochloricAcid @"poisons 1 target with each shot"
+//#define String_TowerName_HydrochloricAcid @"Hydrochloric Acid"
+//#define String_TowerFormula_HydrochloricAcid @"H+Cl"
+//#define String_ChemDescription_HydrochloricAcid @""
+//#define String_TowerEffect_HydrochloricAcid @"poisons 1 target with each shot"
 
 #define String_TowerName_Methane @"Methane"
 #define String_TowerFormula_Methane @"C+H4"
@@ -185,15 +185,15 @@
 #define String_ChemDescription_Rubber @""
 #define String_TowerEffect_Rubber @"Slows targets by making the bounce"
 
-#define String_TowerName_Salt @"Salt"
-#define String_TowerFormula_Salt @"NaCl"
-#define String_ChemDescription_Salt @""
-#define String_TowerEffect_Salt @"rapid fire at up to 3 targets"
-
-#define String_TowerName_Sodium @"Sodium"
-#define String_TowerFormula_Sodium @"Na"
-#define String_ChemDescription_Sodium @""
-#define String_TowerEffect_Sodium @"Basic tower, upgrades to +30, single target"
+//#define String_TowerName_Salt @"Salt"
+//#define String_TowerFormula_Salt @"NaCl"
+//#define String_ChemDescription_Salt @""
+//#define String_TowerEffect_Salt @"rapid fire at up to 3 targets"
+//
+//#define String_TowerName_Sodium @"Sodium"
+//#define String_TowerFormula_Sodium @"Na"
+//#define String_ChemDescription_Sodium @""
+//#define String_TowerEffect_Sodium @"Basic tower, upgrades to +30, single target"
 
 #define String_TowerName_Tetrodotoxin @"Tetrodotoxin"
 #define String_TowerFormula_Tetrodotoxin @"C11+H17+N3+O8"
@@ -210,10 +210,10 @@
 #define String_ChemDescription_Tylenol @""
 #define String_TowerEffect_Tylenol @"Applies the damage boost effect to all nearby towers"
 
-#define String_TowerName_Valium @"Valium"
-#define String_TowerFormula_Valium @"C16+H13+Cl+N2+O"
-#define String_ChemDescription_Valium @""
-#define String_TowerEffect_Valium @"25% chance to put all mobs in range to sleep for 1 second"
+//#define String_TowerName_Valium @"Valium"
+//#define String_TowerFormula_Valium @"C16+H13+Cl+N2+O"
+//#define String_ChemDescription_Valium @""
+//#define String_TowerEffect_Valium @"25% chance to put all mobs in range to sleep for 1 second"
 
 #define String_TowerName_VitaminC @"Vitamin C"
 #define String_TowerFormula_VitaminC @"C6+H8+O6"

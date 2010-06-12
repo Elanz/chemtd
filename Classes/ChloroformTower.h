@@ -6,14 +6,14 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "BaseTower.h"
-
-@class GameFieldScene;
-
-@interface ChloroformTower : BaseTower {
-
-}
-
-- (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
-
-@end
+//#import "BaseTower.h"
+//
+//@class GameFieldScene;
+//
+//@interface ChloroformTower : BaseTower {
+//
+//}
+//
+//- (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
+//
+//@end

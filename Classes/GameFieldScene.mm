@@ -105,6 +105,7 @@
         energy = Initial_Energy;
         multiplier = Initial_Multiplier;
         roundTimer = 0.0;
+        dpsTimer = 0.0;
         damageThisRound = 0;
         killedThisRound = 0;
         lastStabledamage = 0;
@@ -289,7 +290,8 @@
     if (mainSpawner) [mainSpawner tick:elapsed];
     if (currentGamePhase == GamePhase_Creeps)
     {
-        float DPS = damageThisRound / roundTimer;
+        dpsTimer += elapsed;
+        float DPS = (float)damageThisRound / dpsTimer;
         [DPSDisplay setString:[NSString stringWithFormat:@"%@ %.0f",String_DPSLabel, DPS]];
         multiplier = 1.0 + (DPS/100.0);
         [MultiplierDisplay setString:[NSString stringWithFormat:@"%@ %.1fX",String_MultiplierLabel, multiplier]];
@@ -308,7 +310,7 @@
 - (BaseTower*)GenerateRandomTowerAtPosition:(CGPoint)position {
     if (towerForThisRound == 0)
     {
-        towerForThisRound = 1 + arc4random() % 6;
+        towerForThisRound = 1 + arc4random() % 4;
     }
     ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
     BaseTower * tower;
@@ -317,8 +319,8 @@
         case 2: tower = [delegate constructTowerWithType:TowerType_Oxygen gameField:self addToField:YES]; break;
         case 3: tower = [delegate constructTowerWithType:TowerType_Nitrogen gameField:self addToField:YES]; break;
         case 4: tower = [delegate constructTowerWithType:TowerType_Carbon gameField:self addToField:YES]; break;
-        case 5: tower = [delegate constructTowerWithType:TowerType_Sodium gameField:self addToField:YES]; break;
-        case 6: tower = [delegate constructTowerWithType:TowerType_Chlorine gameField:self addToField:YES]; break;
+//        case 5: tower = [delegate constructTowerWithType:TowerType_Sodium gameField:self addToField:YES]; break;
+//        case 6: tower = [delegate constructTowerWithType:TowerType_Chlorine gameField:self addToField:YES]; break;
         default:
             return nil;
             break;
@@ -653,8 +655,8 @@
     [self createLevelUpdateLabel:col2rankX y:row2Y layer:minimenuLayer string:String_RankingHeaderRank];
     [self createLevelUpdateLabel:col2statX y:row6Y layer:minimenuLayer string:String_KilledLabel];
     [self createLevelUpdateLabel:col2statX y:row3Y layer:minimenuLayer string:String_RankingStatTypeTime];
-    [self createLevelUpdateLabel:col2statX y:row4Y layer:minimenuLayer string:String_RankingStatTypeScore];
-    [self createLevelUpdateLabel:col2statX y:row5Y layer:minimenuLayer string:String_RankingStatTypeDamage];
+    [self createLevelUpdateLabel:col2statX y:row4Y layer:minimenuLayer string:String_RankingStatTypeDamage];
+    [self createLevelUpdateLabel:col2statX y:row5Y layer:minimenuLayer string:String_RankingStatTypeScore];
     
     if (backgroundid == UITEXTURE_LEVELCLEARBACKGROUND)
     {
@@ -749,6 +751,7 @@
     lastStabledamage += damageThisRound;
     
     roundTimer = 0.0;
+    dpsTimer = 0.0;
     multiplier = 1.0;
     damageThisRound = 0;
     scoreForLevel = 0;

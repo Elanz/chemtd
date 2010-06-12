@@ -6,12 +6,12 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import "BaseTower.h"
-
-@interface SaltTower : BaseTower {
-
-}
-
-- (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
-
-@end
+//#import "BaseTower.h"
+//
+//@interface SaltTower : BaseTower {
+//
+//}
+//
+//- (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
+//
+//@end

@@ -25,9 +25,9 @@
 
 - (void) startEffect
 {
-    id action2 = [CCRotateBy actionWithDuration:0.3 angle:35];
-    id action2Back = [action2 reverse];
-    repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
+    id action1 = [CCRotateBy actionWithDuration:0.3 angle:35];
+    id action2 = [CCRotateBy actionWithDuration:0.3 angle:-70];
+    repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action1, action2, [[CCSequence actions: action1, action2, nil] reverse], nil]];
     [creep.creepSprite runAction:repeat];
     
     creep.speed = creep.speed * 0.6;
