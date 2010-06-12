@@ -98,20 +98,22 @@
 
 - (void)HandleSingletouchBegin:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    int cellX = ([self processTouchPoint:firstTouchLocation].x/cellSize);
-    int cellY = ([self processTouchPoint:firstTouchLocation].y/cellSize);
+    firstTouchLocation = [self processTouchPoint:firstTouchLocation];
+    int cellX = firstTouchLocation.x/cellSize;
+    int cellY = firstTouchLocation.y/cellSize;
     
-    cellY = [self adjustTouchLocationWithY:cellY];
+
+//    cellY = [self adjustTouchLocationWithY:cellY];
     
     switch (gameField.currentGamePhase) {
         case GamePhase_Build:
-            gameField.currentTower = [gameField GenerateRandomTowerAtPosition:CGPointMake(cellX, cellY)];
+            gameField.currentTower = [gameField GenerateRandomTowerAtPosition:firstTouchLocation];
             
             towerAttachedToTouch = YES;
             
             [gameField showRangeIndicatorForTower:gameField.currentTower];
             
-            if ([gameField check2x2SpaceStatus:cellX :cellY :TILE_OPEN])
+            if ([gameField check1x1SpaceStatus:cellX :cellY :TILE_OPEN])
             {
                 [gameField.currentTower setColor:Color_White];
             } else {
@@ -155,20 +157,23 @@
 
 - (void)HandleSingletouchMove:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    int cellX = ([self processTouchPoint:firstTouchLocation].x/cellSize);
-    int cellY = ([self processTouchPoint:firstTouchLocation].y/cellSize);
+    firstTouchLocation = [self processTouchPoint:firstTouchLocation];
+    int cellX = firstTouchLocation.x/cellSize;
+    int cellY = firstTouchLocation.y/cellSize;
+
+        printf("x = %d, y = %d\n", cellX, cellY);
     
-    cellY = [self adjustTouchLocationWithY:cellY];
+//    cellY = [self adjustTouchLocationWithY:cellY];
     
     switch (gameField.currentGamePhase) {
         case GamePhase_Build:
             if (gameField.currentTower)
             {
-                [gameField.currentTower setPositionWithX:cellX*cellSize Y:cellY*cellSize];
+                [gameField.currentTower setPositionWithX:(cellX*cellSize+cellSize/2) Y:(cellY*cellSize+cellSize/2)];
                 
                 gameField.rangeIndicatorSprite.position = [gameField.currentTower getTowerPosition];
                 
-                if ([gameField check2x2SpaceStatus:cellX :cellY :TILE_OPEN])
+                if ([gameField check1x1SpaceStatus:cellX :cellY :TILE_OPEN])
                 {
                     [gameField.currentTower setColor:Color_White];
                 } else {
@@ -181,18 +186,21 @@
     }
 }
 
-- (void)HandleTouchEndBuild:(int)cellX cellY:(int)cellY
+- (void)HandleTouchEndBuild:(NSSet*)touches
 {
+    int cellX = firstTouchLocation.x/cellSize;
+    int cellY = firstTouchLocation.y/cellSize;
+    
     gameField.rangeIndicatorSprite.visible = false;
-    if ([gameField check2x2SpaceStatus:cellX :cellY :TILE_OPEN])
+    if ([gameField check1x1SpaceStatus:cellX :cellY :TILE_OPEN])
     {
         if (gameField.currentTower)
         {
-            if ([gameField.pendingTowers count] == 0) [gameField set2x2SpaceStatus:cellX :cellY :TILE_PENDINGTOWER1];
-            if ([gameField.pendingTowers count] == 1) [gameField set2x2SpaceStatus:cellX :cellY :TILE_PENDINGTOWER2];
-            if ([gameField.pendingTowers count] == 2) [gameField set2x2SpaceStatus:cellX :cellY :TILE_PENDINGTOWER3];
-            if ([gameField.pendingTowers count] == 3) [gameField set2x2SpaceStatus:cellX :cellY :TILE_PENDINGTOWER4];
-            if ([gameField.pendingTowers count] == 4) [gameField set2x2SpaceStatus:cellX :cellY :TILE_PENDINGTOWER5];
+            if ([gameField.pendingTowers count] == 0) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER1];
+            if ([gameField.pendingTowers count] == 1) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER2];
+            if ([gameField.pendingTowers count] == 2) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER3];
+            if ([gameField.pendingTowers count] == 3) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER4];
+            if ([gameField.pendingTowers count] == 4) [gameField set1x1SpaceStatus:cellX :cellY :TILE_PENDINGTOWER5];
             
             [gameField.pendingTowers addObject:gameField.currentTower];
             if ([gameField.pendingTowers count] == towersPerRound)
@@ -206,13 +214,14 @@
     }    
 }
 
-- (void)HandleTouchEndPick:(int)cellX cellY:(int)cellY originalY:(int)originalY
+- (void)HandleTouchEndPick:(NSSet*)touches
 {
+    
     float bestDistance = 10000.0;
     gameField.currentTower = nil;
     for (BaseTower * tower in gameField.pendingTowers)
     {
-        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
+        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(firstTouchLocation.x, firstTouchLocation.y)];
         if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
         {
             bestDistance = thisDistance;
@@ -223,7 +232,7 @@
     {
         if (tower.towerType != TowerType_Base)
         {
-            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
+            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(firstTouchLocation.x, firstTouchLocation.y)];
             if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
             {
                 bestDistance = thisDistance;
@@ -238,13 +247,14 @@
     }
 }
 
-- (void)HandleTouchEndPlace:(int)cellX cellY:(int)cellY originalY:(int)originalY
+- (void)HandleTouchEndPlace:(NSSet*)touches
 {
+    
     float bestDistance = 10000.0;
     BaseTower * found = nil;
     for (BaseTower * tower in gameField.pendingTowers)
     {
-        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp((cellX)*cellSize, (originalY)*cellSize)];
+        float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(firstTouchLocation.x, firstTouchLocation.y)];
         if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
         {
             bestDistance = thisDistance;
@@ -269,24 +279,27 @@
 
 - (void)HandleccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    int cellX = ([self processTouchPoint:firstTouchLocation].x/cellSize);
-    int cellY = ([self processTouchPoint:firstTouchLocation].y/cellSize);
-    int originalY = ([self processTouchPoint:firstTouchLocation].y/cellSize);    
+    firstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch locationInView:nil]];
+    previousFirstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch previousLocationInView:nil]];
+    if (secondTouch)
+    {
+        secondTouchLocation = [[CCDirector sharedDirector] convertToGL:[secondTouch locationInView:nil]];
+    }    
     
-    cellY = [self adjustTouchLocationWithY:cellY];
+    firstTouchLocation = [self processTouchPoint:firstTouchLocation];
     
     skipPick = NO;
     
     //int towerid;
     switch (gameField.currentGamePhase) {
         case GamePhase_Build:
-            [self HandleTouchEndBuild:cellX cellY:cellY];
+            [self HandleTouchEndBuild:touches];
             break;
         case GamePhase_Pick:
-            [self HandleTouchEndPick:cellX cellY:cellY originalY:originalY];
+            [self HandleTouchEndPick:touches];
             break;
         case GamePhase_Place:
-            [self HandleTouchEndPlace:cellX cellY:cellY originalY:originalY];
+            [self HandleTouchEndPlace:touches];
             break;
         default:
             break;
@@ -299,7 +312,7 @@
         BaseTower * choice = nil;
         for (BaseTower * tower in gameField.towers)
         {
-            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
+            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(firstTouchLocation.x, firstTouchLocation.y)];
             if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
             {
                 bestDistance = thisDistance;
@@ -309,7 +322,7 @@
         }
         for (BaseTower * tower in gameField.pendingTowers)
         {
-            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(cellX*cellSize, originalY*cellSize)];
+            float thisDistance = [gameField distanceBetweenPointsA:[tower getTowerPosition] B:ccp(firstTouchLocation.x, firstTouchLocation.y)];
             if (thisDistance < RadiusSelect_Threshold && thisDistance < bestDistance)
             {
                 bestDistance = thisDistance;
@@ -358,47 +371,50 @@
 
 - (int)adjustTouchLocationWithY:(int)originalY
 {
-    int adjustment = originalY+1;
-    
-    if (adjustment > 2)
-    {
-        adjustment = 2;
-    }
-    
-    originalY += adjustment;
-    
-    if (originalY > 47)
-        originalY = 47;
+//    int adjustment = originalY;
+//    
+//    if (adjustment > 2)
+//    {
+//        adjustment = 2;
+//    }
+//    
+//    originalY += adjustment;
+//    
+//    if (originalY > 47)
+//        originalY = 47;
     
     return originalY;
 }
 
 - (CGPoint)processTouchPoint:(CGPoint)original
 {
-    CGPoint	location;
+//    CGPoint	location;
+//    
+//    float percentX = original.x / device_width;
+//    float percentY = original.y / device_height;
+//    
+//    float newwidth = 0.0;
+//    float newheight = 0.0;
+//    
+//    if (!gameField.zoomed)
+//    {
+//        newwidth = field_width;
+//        newheight = field_height;
+//    }
+//    if (gameField.zoomed)
+//    {
+//        newwidth = device_width;
+//        newheight = device_height;
+//    }    
+//    
+//    location = ccp(newwidth * percentX, newheight * percentY);
+//    location.x -= gameField.field_offsetX;
+//    location.y -= gameField.field_offsetY;
+//    
+//    return location;
     
-    float percentX = original.x / device_width;
-    float percentY = original.y / device_height;
     
-    float newwidth = 0.0;
-    float newheight = 0.0;
-    
-    if (!gameField.zoomed)
-    {
-        newwidth = field_width;
-        newheight = field_height;
-    }
-    if (gameField.zoomed)
-    {
-        newwidth = device_width;
-        newheight = device_height;
-    }    
-    
-    location = ccp(newwidth * percentX, newheight * percentY);
-    location.x -= gameField.field_offsetX;
-    location.y -= gameField.field_offsetY;
-    
-    return location;
+    return [gameField convertToNodeSpace:original];
 }
 
 @end

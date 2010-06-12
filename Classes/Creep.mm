@@ -53,6 +53,8 @@
         
         nextWaypointX *= cellSize;
         nextWaypointY *= cellSize;
+        nextWaypointX += halfCellSize;
+        nextWaypointY += halfCellSize;
         
         speed = 2;
         baseSpeed = speed;
@@ -127,6 +129,8 @@
     int waypointY = static_cast<PathFindNode*>([waypoints objectAtIndex:nextWaypointId])->nodeY;
     waypointX *= cellSize;
     waypointY *= cellSize;
+    waypointX += halfCellSize;
+    waypointY += halfCellSize;
     
     return ccp(waypointX, waypointY);
 }
@@ -206,6 +210,8 @@
             
             nextWaypointX *= cellSize;
             nextWaypointY *= cellSize;
+            nextWaypointX += halfCellSize;
+            nextWaypointY += halfCellSize;
         } else {
             if (nextGoalId < [gameField.goalpoints count] - 1)
             {
@@ -222,6 +228,8 @@
                 
                 nextWaypointX *= cellSize;
                 nextWaypointY *= cellSize;
+                nextWaypointX += halfCellSize;
+                nextWaypointY += halfCellSize;
                 
                 //printf("new goal #%d = %lf,%lf\n",nextGoalId, goal.x, goal.y);
             } else {

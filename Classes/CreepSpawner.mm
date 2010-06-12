@@ -94,8 +94,8 @@
 {
     Creep * creep = [[Creep alloc] initWithPoint:location];
     creep.creepSprite = [CCSprite spriteWithTexture:[gameField.textureLibrary GetTextureWithKey:[gameField.levelManager GetCurrentLevel].textureId]];
-    creep.creepSprite.position = ccp(location.x*cellSize, location.y*cellSize);
-    creep.hpbar.position = ccp(location.x*cellSize, (location.y*cellSize) + (creepSize/2)+5);
+    creep.creepSprite.position = ccp(location.x*cellSize+halfCellSize, location.y*cellSize+halfCellSize);
+    creep.hpbar.position = ccp(location.x*cellSize+halfCellSize, (location.y*cellSize+halfCellSize) + (creepSize/2)+5);
     creep.start = location;
     creep.mySpawner = self;
     creep.speed = [gameField.levelManager GetCurrentLevel].speed;

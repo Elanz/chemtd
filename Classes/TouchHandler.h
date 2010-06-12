@@ -51,9 +51,9 @@
 - (void)HandleSingletouchMove:(NSSet *)touches withEvent:(UIEvent *)event;
 
 - (void)HandleccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)HandleTouchEndBuild:(int)cellX cellY:(int)cellY;
-- (void)HandleTouchEndPick:(int)cellX cellY:(int)cellY originalY:(int)originalY;
-- (void)HandleTouchEndPlace:(int)cellX cellY:(int)cellY originalY:(int)originalY;
+- (void)HandleTouchEndBuild:(NSSet*)touches;
+- (void)HandleTouchEndPick:(NSSet*)touches;
+- (void)HandleTouchEndPlace:(NSSet*)touches;
 
 - (CGPoint)processTouchPoint:(CGPoint)original;
 - (int)adjustTouchLocationWithY:(int)originalY;

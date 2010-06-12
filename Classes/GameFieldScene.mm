@@ -332,7 +332,7 @@
 {
     int cellX = [tower getTowerPosition].x/cellSize;
     int cellY = [tower getTowerPosition].y/cellSize;
-    [self set2x2SpaceStatus:cellX :cellY :TILE_OPEN];
+    [self set1x1SpaceStatus:cellX :cellY :TILE_OPEN];
     [tower hide];
     [towers removeObject:tower];
 }
@@ -416,8 +416,8 @@
             [towers addObject:tower];
             [tower setPower:tower.towerPower];
             [tower show];
-            [self set2x2SpaceStatus:[tower getTowerPosition].x/cellSize :([tower getTowerPosition].y/cellSize) :TILE_FINALTOWER + tower.towerType];
-            [self set2x2SpaceLevel:[tower getTowerPosition].x/cellSize :([tower getTowerPosition].y/cellSize) :tower.towerPower];
+            [self set1x1SpaceStatus:[tower getTowerPosition].x/cellSize :([tower getTowerPosition].y/cellSize) :TILE_FINALTOWER + tower.towerType];
+            [self set1x1SpaceLevel:[tower getTowerPosition].x/cellSize :([tower getTowerPosition].y/cellSize) :tower.towerPower];
         } else 
         {
             BaseTower * newtower = [[BaseTower alloc] initWithGameField:self addToField:YES];
@@ -425,8 +425,8 @@
             [newtower show];
             [tower hide];
             [towers addObject:newtower];
-            [self set2x2SpaceStatus:[newtower getTowerPosition].x/cellSize :([newtower getTowerPosition].y/cellSize) :TILE_FINALTOWER + newtower.towerType];
-            [self set2x2SpaceLevel:[newtower getTowerPosition].x/cellSize :([newtower getTowerPosition].y/cellSize) :newtower.towerPower];
+            [self set1x1SpaceStatus:[newtower getTowerPosition].x/cellSize :([newtower getTowerPosition].y/cellSize) :TILE_FINALTOWER + newtower.towerType];
+            [self set1x1SpaceLevel:[newtower getTowerPosition].x/cellSize :([newtower getTowerPosition].y/cellSize) :newtower.towerPower];
         }
     }
     [pendingTowers removeAllObjects];
@@ -881,28 +881,39 @@
     
     
     int index = 0;
-    for(y=0;y<=mapHeight/2;y++)
+    for(y=0;y<=mapHeight;y++)
     {
-        for(x=0;x<=mapWidth/2;x++)
+        printf("\n");
+        for(x=0;x<=mapWidth;x++)
         {
+            //CCSprite * temp = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:COLORTEXTURE_BROWN]];
+            
+            int adjustedX = (x);
+            int adjustedY = (mapHeight - (y+1));
+            
+            //temp.position = ccp(((adjustedX*48)+(48/2)), ((adjustedY*48)+(48/2)));
+            //temp.scale = min_zoom;
             if (index < dataLength)
             {
                 if (dataBytes[index] > 48 && dataBytes[index] < 84)
                 {
-                    int adjustedX = (x*2)+1;
-                    int adjustedY = (mapHeight - (y*2))-1;
+                    printf("X");
+                    //[temp setTexture:[textureLibrary GetTextureWithKey:COLORTEXTURE_GRAY]];
+                    //[self addChild:temp];
+
+                    
                     
                     if (dataBytes[index] == 49) {
-                        [self set2x2SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
+                        [self set1x1SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
                     } else if (dataBytes[index] == 50) {
-                        [self set2x2SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
+                        [self set1x1SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
                         
                     } else if (dataBytes[index] == 51) {
                         
                     } else if (dataBytes[index] == 57) {
-                        [self set2x2SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
+                        [self set1x1SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
                     }else if (dataBytes[index] >= 65 && dataBytes[index] <= 72) { //A
-                        [self set2x2SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
+                        [self set1x1SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
                         PathFindNode *goalNode = [PathFindNode node];
                         goalNode->nodeX = adjustedX;
                         goalNode->nodeY = adjustedY;
@@ -910,9 +921,14 @@
                         goalNode->cost = 0;
                         [goalpoints setObject:goalNode forKey:[NSNumber numberWithInt:dataBytes[index]-65]];
                     } else if (dataBytes[index] == 83) {
-                        [self set2x2SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
+                        [self set1x1SpaceStatus:adjustedX :adjustedY :TILE_BLOCKED];
                         startPoint = ccp(adjustedX, adjustedY);
                     }
+                }
+                else
+                {
+                    printf("0");
+                    //[self addChild:temp];
                 }
                 index ++;
             }
@@ -935,89 +951,53 @@
     return value;
 }
 
-- (void)set2x2SpaceLevel:(int)x :(int)y :(int)newLevel
-{
-    int tile1X = x;
-    int tile1Y = y;
-    int tile2X = x+1;
-    int tile2Y = y;
-    int tile3X = x;
-    int tile3Y = y+1;
-    int tile4X = x+1;
-    int tile4Y = y+1;
-    
-    [self set1x1SpaceLevel:tile1X :tile1Y :newLevel];
-    [self set1x1SpaceLevel:tile2X :tile2Y :newLevel];
-    [self set1x1SpaceLevel:tile3X :tile3Y :newLevel];
-    [self set1x1SpaceLevel:tile4X :tile4Y :newLevel];
-}
+//- (void)set2x2SpaceLevel:(int)x :(int)y :(int)newLevel
+//{
+//    int tile1X = x;
+//    int tile1Y = y;
+//    
+//    [self set1x1SpaceLevel:tile1X :tile1Y :newLevel];
+//}
 
 - (void)set1x1SpaceLevel:(int)x :(int)y :(int)newLevel
 {
     levels[x][y] = newLevel;
 }
 
-- (void)set2x2SpaceStatus:(int)x :(int)y :(int)newStatus
-{
-    int tile1X = x;
-    int tile1Y = y;
-    int tile2X = x+1;
-    int tile2Y = y;
-    int tile3X = x;
-    int tile3Y = y+1;
-    int tile4X = x+1;
-    int tile4Y = y+1;
-    
-    [self set1x1SpaceStatus:tile1X :tile1Y :newStatus];
-    [self set1x1SpaceStatus:tile2X :tile2Y :newStatus];
-    [self set1x1SpaceStatus:tile3X :tile3Y :newStatus];
-    [self set1x1SpaceStatus:tile4X :tile4Y :newStatus];
-}
+//- (void)set2x2SpaceStatus:(int)x :(int)y :(int)newStatus
+//{
+//    int tile1X = x;
+//    int tile1Y = y;
+//    
+//    [self set1x1SpaceStatus:tile1X :tile1Y :newStatus];
+//}
 
 - (void)set1x1SpaceStatus:(int)x :(int)y :(int)newStatus
 {
     tileMap[x][y] = newStatus;
 }
 
-- (BOOL)checkAny2x2SpaceStatus:(int)x :(int)y :(int)Status
-{
-    int tile1X = x;
-    int tile1Y = y;
-    int tile2X = x+1;
-    int tile2Y = y;
-    int tile3X = x;
-    int tile3Y = y+1;
-    int tile4X = x+1;
-    int tile4Y = y+1;
-    
-    if ([self check1x1SpaceStatus:tile1X :tile1Y :Status]
-        || [self check1x1SpaceStatus:tile2X :tile2Y :Status]
-        || [self check1x1SpaceStatus:tile3X :tile3Y :Status]
-        || [self check1x1SpaceStatus:tile4X :tile4Y :Status])
-        return YES;
-    else
-        return NO;
-}
-
-- (BOOL)check2x2SpaceStatus:(int)x :(int)y :(int)Status
-{
-    int tile1X = x;
-    int tile1Y = y;
-    int tile2X = x+1;
-    int tile2Y = y;
-    int tile3X = x;
-    int tile3Y = y+1;
-    int tile4X = x+1;
-    int tile4Y = y+1;
-    
-    if ([self check1x1SpaceStatus:tile1X :tile1Y :Status]
-        && [self check1x1SpaceStatus:tile2X :tile2Y :Status]
-        && [self check1x1SpaceStatus:tile3X :tile3Y :Status]
-        && [self check1x1SpaceStatus:tile4X :tile4Y :Status])
-        return YES;
-    else
-        return NO;
-}
+//- (BOOL)checkAny2x2SpaceStatus:(int)x :(int)y :(int)Status
+//{
+//    int tile1X = x;
+//    int tile1Y = y;
+//    
+//    if ([self check1x1SpaceStatus:tile1X :tile1Y :Status])
+//        return YES;
+//    else
+//        return NO;
+//}
+//
+//- (BOOL)check2x2SpaceStatus:(int)x :(int)y :(int)Status
+//{
+//    int tile1X = x;
+//    int tile1Y = y;
+//    
+//    if ([self check1x1SpaceStatus:tile1X :tile1Y :Status])
+//        return YES;
+//    else
+//        return NO;
+//}
 
 - (BOOL)check1x1SpaceWalkable:(int)x :(int)y
 {
@@ -1061,9 +1041,9 @@
     
     int index = 0;
     int x,y = 0;
-    for(y=0;y<mapHeight/2;y++)
+    for(y=0;y<mapHeight;y++)
     {
-        for(x=0;x<mapWidth/2;x++)
+        for(x=0;x<mapWidth;x++)
         {
             int towerValue = [(NSString *)[towerBytes objectAtIndex:index] intValue];
             int levelValue = [(NSString *)[levelBytes objectAtIndex:index] intValue];
@@ -1072,11 +1052,11 @@
             {
                 int towerType = towerValue - 128;
             
-                [self set2x2SpaceStatus:((x*2)-1) :((y*2)-1) :TILE_FINALTOWER + towerType];
+                [self set1x1SpaceStatus:((x)) :((y)) :TILE_FINALTOWER + towerType];
                 
                 ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
                 BaseTower * tower = [delegate constructTowerWithType:towerType gameField:self addToField:YES];
-                [tower setPositionWithX:((x*2)-1)*cellSize Y:((y*2)-1)*cellSize];
+                [tower setPositionWithX:((x))*cellSize Y:((y))*cellSize];
                 [tower show];
                 [tower setPower:levelValue];
                 [tower setColor:Color_White];
@@ -1091,11 +1071,11 @@
 {
     NSString * levelData = @"";
     int x,y = 0;
-    for(y=0;y<mapHeight/2;y++)
+    for(y=0;y<mapHeight;y++)
     {
-        for(x=0;x<mapWidth/2;x++)
+        for(x=0;x<mapWidth;x++)
         {
-            int value = [[NSString stringWithFormat:@"%d", lastStablelevels[x*2][y*2]] intValue];
+            int value = [[NSString stringWithFormat:@"%d", lastStablelevels[x][y]] intValue];
             levelData = [levelData stringByAppendingFormat:@"%d:", value];
         }
     }
@@ -1107,11 +1087,11 @@
     NSString * mapData = @"";
     int x,y = 0;
     int index = 0;
-    for(y=0;y<mapHeight/2;y++)
+    for(y=0;y<mapHeight;y++)
     {
-        for(x=0;x<mapWidth/2;x++)
+        for(x=0;x<mapWidth;x++)
         {
-            int value = [[NSString stringWithFormat:@"%d", lastStabletileMap[x*2][y*2]] intValue];
+            int value = [[NSString stringWithFormat:@"%d", lastStabletileMap[x][y]] intValue];
             if (value >= TILE_FINALTOWER)
             {
                 printf("%d = %d\n", index, value);

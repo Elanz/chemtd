@@ -9,11 +9,12 @@
 #import "cocos2d.h"
 #import "ChemTDAppDelegate.h"
 
-#define mapHeight 48
-#define mapWidth 64
+#define mapHeight 24
+#define mapWidth 32
 
-#define cellSizeZoomed 16
-#define cellSize 24
+//#define cellSizeZoomed 32
+#define halfCellSize 24
+#define cellSize 48
 #define towerSize 48
 #define creepSize 48
 
@@ -212,10 +213,10 @@
 - (void)removeCreep:(Creep*)creep;
 - (void)addCreep:(Creep*)creep;
 - (CGPoint)parseMap;
-- (BOOL)checkAny2x2SpaceStatus:(int)x :(int)y :(int)Status;
-- (BOOL)check2x2SpaceStatus:(int)x :(int)y :(int)Status;
-- (void)set2x2SpaceStatus:(int)x :(int)y :(int)newStatus;
-- (void)set2x2SpaceLevel:(int)x :(int)y :(int)newLevel;
+//- (BOOL)checkAny2x2SpaceStatus:(int)x :(int)y :(int)Status;
+//- (BOOL)check2x2SpaceStatus:(int)x :(int)y :(int)Status;
+//- (void)set2x2SpaceStatus:(int)x :(int)y :(int)newStatus;
+//- (void)set2x2SpaceLevel:(int)x :(int)y :(int)newLevel;
 - (BOOL)check1x1SpaceStatus:(int)x :(int)y :(int)Status;
 - (void)set1x1SpaceStatus:(int)x :(int)y :(int)newStatus;
 - (void)set1x1SpaceLevel:(int)x :(int)y :(int)newLevel;
