@@ -24,8 +24,8 @@
         towerEffects = String_TowerEffect_Carbon;
         formula = String_TowerFormula_Carbon;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetCarbonShot;
-        hitParticleFileName = Effect_SingleTargetCarbonHit;
+        shotParticleKey = iEffect_SingleTargetCarbonShot;
+        hitParticleKey = iEffect_SingleTargetCarbonHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;
@@ -41,7 +41,7 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 150;
+        baseRange = TowerBaseRange*3;
         baseMinDamage = 8;
         baseMaxDamage = 12;
         baseInterval = 1.0;

@@ -34,6 +34,8 @@
         effects = [[NSMutableArray alloc] init];
         nextGoalId = 0;
         
+        creepLock = [[NSLock alloc] init];
+        
         gameField = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_GameField];
         pathFinder = gameField.pathFinder;
         
@@ -43,7 +45,7 @@
         
         waypoints = [pathFinder findPath:start.x :start.y :goal.x :goal.y];
         
-        printf("waypoint count = %d\n", [waypoints count]);
+        //printf("waypoint count = %d\n", [waypoints count]);
         
         direction = -1;
         
@@ -137,10 +139,17 @@
 
 - (void) shoot:(int)damage
 {
+    [creepLock lock];
+    if (health < 0)
+    {
+        [creepLock unlock];
+        return;
+    }
     health = health - damage;
     [gameField updateDPS:damage];
     if (health <= 0)
         [mySpawner Died:self];
+    [creepLock unlock];
 }
 
 - (void) SetDirection:(int)newDirection

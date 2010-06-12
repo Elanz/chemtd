@@ -33,7 +33,7 @@
     
     [creep.creepSprite runAction:repeat];
     
-    poisonSystem = [CCPointParticleSystem particleWithFile:Effect_GreenBubbles];
+    poisonSystem = [field.combatManager getParticleSystemForKey:iEffect_GreenBubbles];
     poisonSystem.position = ccp(creepSize/2, -(creepSize/2));
     [creep.hpbar addChild:poisonSystem z:1];
 }

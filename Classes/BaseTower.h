@@ -12,6 +12,8 @@
 #import "GameFieldScene.h"
 #import "TextureLibrary.h"
 
+#define TowerBaseRange 50
+
 #define TowerType_Base 0
 
 #define TowerType_Acetylene 1
@@ -112,8 +114,8 @@
     int effectType;
     int trapTextureKey;
     
-    NSString * shotParticleFileName;
-    NSString * hitParticleFileName;
+    int shotParticleKey;
+    int hitParticleKey;
     
     NSString * towerName;
     NSString * chemicalDescription;
@@ -133,8 +135,8 @@
 }
 
 @property (nonatomic) int trapTextureKey;
-@property (nonatomic, retain) NSString * shotParticleFileName;
-@property (nonatomic, retain) NSString * hitParticleFileName;
+@property (nonatomic) int shotParticleKey;
+@property (nonatomic) int hitParticleKey;
 @property (nonatomic) int effectType;
 @property (nonatomic) BOOL switchTargetsAfterHit;
 @property (nonatomic) int dotMin;

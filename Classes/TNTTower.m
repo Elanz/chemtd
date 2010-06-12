@@ -23,10 +23,11 @@
         chemicalDescription = String_ChemDescription_TNT;
         towerEffects = String_TowerEffect_TNT;
         formula = String_TowerFormula_TNT;
-        targetType = TowerTargetType_Single;
+        targetType = TowerTargetType_Multi;
         effectType = TowerEffectType_SplashBig;
         towerPower = 1;
-        towerClass = 4;
+        towerClass = 5;
+        maxTargets = 2;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 7;
@@ -39,10 +40,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 200;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = TowerBaseRange*7;
+        baseMinDamage = 40;
+        baseMaxDamage = 60;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

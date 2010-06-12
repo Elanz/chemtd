@@ -23,13 +23,13 @@
         chemicalDescription = String_ChemDescription_Cyanide;
         towerEffects = String_TowerEffect_Cyanide;
         formula = String_TowerFormula_Cyanide;
-        shotParticleFileName = Effect_SingleTargetChlorineShot;
-        hitParticleFileName = Effect_SingleTargetChlorineHit;
-        targetType = TowerTargetType_Multi;
+        shotParticleKey = iEffect_SingleTargetChlorineShot;
+        hitParticleKey = iEffect_SingleTargetChlorineHit;
+        targetType = TowerTargetType_Single;
         effectType = TowerEffectType_Poison;
         towerPower = 1;
         towerClass = 2;
-        maxTargets = 2;
+        maxTargets = 1;
         switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_HYDROGEN;
@@ -43,12 +43,12 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 200;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = TowerBaseRange*4;
+        baseMinDamage = 11;
+        baseMaxDamage = 15;
+        baseInterval = 1.0;
         baseDotMin = 6;
-        baseDotMax = 9;
+        baseDotMax = 8;
         
         dotMin = baseDotMin;
         dotMax = baseDotMax;

@@ -26,7 +26,7 @@
 - (void) startEffect
 {
     creep.speed = 0.0;
-    sleepSystem = [CCPointParticleSystem particleWithFile:Effect_Sleep];
+    sleepSystem = [field.combatManager getParticleSystemForKey:iEffect_Sleep];
     sleepSystem.position = ccp(creepSize/2, -(creepSize/2));
     [creep.hpbar addChild:sleepSystem z:1];
 }

@@ -24,11 +24,14 @@
         towerEffects = String_TowerEffect_Ammonia;
         formula = String_TowerFormula_Ammonia;
         targetType = TowerTargetType_Multi;
-        shotParticleFileName = Effect_SingleTargetFireballGreen;
-        hitParticleFileName = Effect_SingleTargetExplosionGreen;
-        maxTargets = 3;
+        shotParticleKey = iEffect_SingleTargetFireballGreen;
+        hitParticleKey = iEffect_GreenBubbles;
+        effectType = TowerEffectType_AOETrap;
+        trapTextureKey = FIELDTEXTURE_BLEACHTRAP;
+        maxTargets = 2;
         towerPower = 1;
-        towerClass = 2;
+        towerClass = 3;
+        switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_NITROGEN;
         formulaQuantity1 = 1;
@@ -41,14 +44,18 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 220;
+        baseRange = TowerBaseRange*5;
         baseMinDamage = 15;
         baseMaxDamage = 20;
         baseInterval = 1.0;
+        baseDotMin = 7;
+        baseDotMax = 13;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
         maxDamage = baseMaxDamage;
+        dotMin = baseDotMin;
+        dotMax = baseDotMax;
         shotInterval = baseInterval;
         
         [self setPower:towerPower];

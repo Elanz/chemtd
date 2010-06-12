@@ -380,7 +380,7 @@
             if (diff > 8000)
                 duration = 1.0;
             
-            printf("%f, %d\n", diff, newvalue);
+            //printf("%f, %d\n", diff, newvalue);
             
             [towerScrollLayer runAction:[CCMoveTo actionWithDuration:duration position:ccp(newvalue,towerScrollLayer.position.y)]];
             return NO;
@@ -419,7 +419,7 @@
     originalVelocity = scrollVelocity;
     scrollVector = ccp(firstTouchLocation.x - previousFirstTouchLocation.x, firstTouchLocation.y - previousFirstTouchLocation.y);
     
-    printf("velocity = %f, x = %f, d = %f\n", scrollVelocity, scrollVector.x, scrollVector.y);
+    //printf("velocity = %f, x = %f, d = %f\n", scrollVelocity, scrollVector.x, scrollVector.y);
 }
 
 - (float)distanceBetweenPointsA:(CGPoint)a B:(CGPoint)b

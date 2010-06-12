@@ -23,12 +23,12 @@
         chemicalDescription = String_ChemDescription_Tetrodotoxin;
         towerEffects = String_TowerEffect_Tetrodotoxin;
         formula = String_TowerFormula_Tetrodotoxin;
-        targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetChlorineShot;
+        targetType = TowerTargetType_Multi;
+        shotParticleKey = iEffect_SingleTargetChlorineShot;
         effectType = TowerEffectType_SlowPoison;
         towerPower = 1;
-        towerClass = 5;
-        maxTargets = 20;
+        towerClass = 6;
+        maxTargets = 5;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 11;
@@ -41,12 +41,12 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 250;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
-        baseDotMin = 15;
-        baseDotMax = 17;
+        baseRange = TowerBaseRange*8;
+        baseMinDamage = 30;
+        baseMaxDamage = 36;
+        baseInterval = 1.0;
+        baseDotMin = 14;
+        baseDotMax = 18;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

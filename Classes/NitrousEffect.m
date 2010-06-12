@@ -31,7 +31,7 @@
     [creep.creepSprite runAction:repeat];
     
     creep.speed = creep.speed * 0.6;
-    NitrousSystem = [CCPointParticleSystem particleWithFile:Effect_NitrousHit];
+    NitrousSystem = [field.combatManager getParticleSystemForKey:iEffect_NitrousHit];
     NitrousSystem.position = ccp(creepSize/2, creepSize/2);
     [creep.creepSprite addChild:NitrousSystem z:1];
 }

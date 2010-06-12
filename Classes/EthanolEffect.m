@@ -25,13 +25,13 @@
 
 - (void) startEffect
 {
-    id action2 = [CCRotateBy actionWithDuration:0.5 angle:90];
-    id action2Back = [action2 reverse];
-    repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
+    id action1 = [CCRotateBy actionWithDuration:0.4 angle:60];
+    id action2 = [CCRotateBy actionWithDuration:0.4 angle:-120];
+    repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action1, action2, [[CCSequence actions: action1, action2, nil] reverse], nil]];
     [creep.creepSprite runAction:repeat];
     
     creep.speed = creep.speed * 0.4;
-    NitrousSystem = [CCPointParticleSystem particleWithFile:Effect_NitrousHit];
+    NitrousSystem = [field.combatManager getParticleSystemForKey:iEffect_NitrousHit];
     NitrousSystem.position = ccp(creepSize/2, creepSize/2);
     [creep.creepSprite addChild:NitrousSystem z:1];
 }

@@ -39,6 +39,8 @@
     float speed;
     float baseSpeed;
     
+    NSLock * creepLock;
+    
     int direction;
 
     NSMutableArray * effects;

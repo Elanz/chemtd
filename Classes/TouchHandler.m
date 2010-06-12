@@ -34,9 +34,9 @@
 {
     touchCount += [touches count];
     
-    printf("touchCount = %d\n", touchCount);
+    //printf("touchCount = %d\n", touchCount);
     
-    if (firstTouch == nil)
+    if (touchCount == 0 || firstTouch == nil)
     {
         firstTouch = [[[touches allObjects] objectAtIndex:0] retain]; 
         firstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch locationInView:nil]];
@@ -161,7 +161,7 @@
     int cellX = firstTouchLocation.x/cellSize;
     int cellY = firstTouchLocation.y/cellSize;
 
-        printf("x = %d, y = %d\n", cellX, cellY);
+        //printf("x = %d, y = %d\n", cellX, cellY);
     
 //    cellY = [self adjustTouchLocationWithY:cellY];
     
@@ -356,7 +356,7 @@
         originalVelocity = scrollVelocity;
         scrollVector = ccp(firstTouchLocation.x - previousFirstTouchLocation.x, firstTouchLocation.y - previousFirstTouchLocation.y);
         
-        printf("velocity = %f, x = %f, d = %f\n", scrollVelocity, scrollVector.x, scrollVector.y);
+        //printf("velocity = %f, x = %f, d = %f\n", scrollVelocity, scrollVector.x, scrollVector.y);
     }
     if (touchCount > 0)
         secondTouch = nil;

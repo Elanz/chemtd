@@ -41,11 +41,12 @@
 #define String_CompletedLabel @"Completed:"
 #define String_GameSummaryLabel @"Game Summary"
 
-#define String_TowerClass1Label @"Weak"
-#define String_TowerClass2Label @"Decent"
-#define String_TowerClass3Label @"Powerful"
-#define String_TowerClass4Label @"Super"
-#define String_TowerClass5Label @"Godlike"
+#define String_TowerClass1Label @"Base"
+#define String_TowerClass2Label @"Weak"
+#define String_TowerClass3Label @"Decent"
+#define String_TowerClass4Label @"Good"
+#define String_TowerClass5Label @"Great"
+#define String_TowerClass6Label @"Super"
 
 #define String_TargetTypeNone @"None"
 #define String_TargetTypeSingle @"Single" 

@@ -324,13 +324,29 @@
 
 -(id) addChild: (CCNode*) child z:(int)z
 {
+    if (child == nil)
+    {
+        printf("debug here");
+    }
+    
 	NSAssert( child != nil, @"Argument must be non-nil");
+    
+
+    
 	return [self addChild:child z:z tag:child.tag];
 }
 
 -(id) addChild: (CCNode*) child
 {
+    if (child == nil)
+    {
+        printf("debug here");
+    }
+    
 	NSAssert( child != nil, @"Argument must be non-nil");
+    
+
+    
 	return [self addChild:child z:child.zOrder tag:child.tag];
 }
 

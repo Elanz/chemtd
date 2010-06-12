@@ -26,10 +26,10 @@
         towerEffects = String_TowerEffect_Tylenol;
         formula = String_TowerFormula_Tylenol;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetWhiteSmoke;
-        hitParticleFileName = Effect_SingleTargetWhiteSmoke;
+        shotParticleKey = iEffect_SingleTargetWhiteSmoke;
+        hitParticleKey = iEffect_SingleTargetWhiteSmoke;
         towerPower = 1;
-        towerClass = 4;
+        towerClass = 5;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 8;
@@ -42,10 +42,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 250;
-        baseMinDamage = 60;
-        baseMaxDamage = 70;
-        baseInterval = 0.75;
+        baseRange = TowerBaseRange*7;
+        baseMinDamage = 50;
+        baseMaxDamage = 150;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
@@ -72,7 +72,7 @@
             float rangeToTower = [gameField distanceBetweenPointsA:t.towerSprite.position B:towerSprite.position];
             if (rangeToTower < effectRange && ![targetTowers containsObject:t])
             {
-                printf("applying effect to tower\n");
+                //printf("applying effect to tower\n");
                 BaseEffect * effect = [[DamageBoostEffect alloc] initWithTargetTower:t];
                 [t addEffect:effect];
                 [targetTowers addObject:t];

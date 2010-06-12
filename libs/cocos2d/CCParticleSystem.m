@@ -60,6 +60,9 @@
 #import "Support/ZipUtils.h"
 #import "Support/CCFileUtils.h"
 
+#import "GameFieldScene.h"
+#import "CombatManager.h"
+
 @implementation CCParticleSystem
 @synthesize active, duration;
 @synthesize centerOfGravity, posVar;
@@ -534,7 +537,10 @@
 			
 			if( particleCount == 0 && autoRemoveOnFinish_ ) {
 				[self unscheduleUpdate];
-				[parent_ removeChild:self cleanup:YES];
+				[parent_ removeChild:self cleanup:NO];
+                GameFieldScene * field = nil;
+                field = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:1];
+                [field.combatManager releaseParticleSystem:self];
 				return;
 			}
 		}

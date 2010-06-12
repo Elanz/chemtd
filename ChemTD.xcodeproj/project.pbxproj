@@ -110,18 +110,13 @@
 		40CF2DDC11AF4B51008789D0 /* levels_easy.dat in Resources */ = {isa = PBXBuildFile; fileRef = 40BC50CF11AEDD5200A8F497 /* levels_easy.dat */; };
 		40D6BA5011AB6ADC00F4666E /* acetylene.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3011AB6ADC00F4666E /* acetylene.png */; };
 		40D6BA5211AB6ADC00F4666E /* aspirin.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3211AB6ADC00F4666E /* aspirin.png */; };
-		40D6BA5311AB6ADC00F4666E /* bakingsoda.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3311AB6ADC00F4666E /* bakingsoda.png */; };
-		40D6BA5411AB6ADC00F4666E /* bleach.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3411AB6ADC00F4666E /* bleach.png */; };
 		40D6BA5511AB6ADC00F4666E /* caffeine.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3511AB6ADC00F4666E /* caffeine.png */; };
 		40D6BA5611AB6ADC00F4666E /* capsaicin.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3611AB6ADC00F4666E /* capsaicin.png */; };
 		40D6BA5711AB6ADC00F4666E /* carbon.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3711AB6ADC00F4666E /* carbon.png */; };
 		40D6BA5811AB6ADC00F4666E /* carbondioxide.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3811AB6ADC00F4666E /* carbondioxide.png */; };
 		40D6BA5911AB6ADC00F4666E /* carbonmonoxide.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3911AB6ADC00F4666E /* carbonmonoxide.png */; };
-		40D6BA5A11AB6ADC00F4666E /* chlorine.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3A11AB6ADC00F4666E /* chlorine.png */; };
-		40D6BA5B11AB6ADC00F4666E /* chloroform.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3B11AB6ADC00F4666E /* chloroform.png */; };
 		40D6BA5C11AB6ADC00F4666E /* cyanide.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3C11AB6ADC00F4666E /* cyanide.png */; };
 		40D6BA5D11AB6ADC00F4666E /* ethanol.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3D11AB6ADC00F4666E /* ethanol.png */; };
-		40D6BA5E11AB6ADC00F4666E /* hydrochloricacid.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3E11AB6ADC00F4666E /* hydrochloricacid.png */; };
 		40D6BA5F11AB6ADC00F4666E /* hydrogen.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3F11AB6ADC00F4666E /* hydrogen.png */; };
 		40D6BA6011AB6ADC00F4666E /* methane.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4011AB6ADC00F4666E /* methane.png */; };
 		40D6BA6111AB6ADC00F4666E /* nitricacid.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4111AB6ADC00F4666E /* nitricacid.png */; };
@@ -131,12 +126,9 @@
 		40D6BA6511AB6ADC00F4666E /* oxygen.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4511AB6ADC00F4666E /* oxygen.png */; };
 		40D6BA6611AB6ADC00F4666E /* rdx.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4611AB6ADC00F4666E /* rdx.png */; };
 		40D6BA6711AB6ADC00F4666E /* rubber.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4711AB6ADC00F4666E /* rubber.png */; };
-		40D6BA6811AB6ADC00F4666E /* salt.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4811AB6ADC00F4666E /* salt.png */; };
-		40D6BA6911AB6ADC00F4666E /* sodium.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4911AB6ADC00F4666E /* sodium.png */; };
 		40D6BA6A11AB6ADC00F4666E /* tetrodotoxin.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4A11AB6ADC00F4666E /* tetrodotoxin.png */; };
 		40D6BA6B11AB6ADC00F4666E /* tnt.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4B11AB6ADC00F4666E /* tnt.png */; };
 		40D6BA6C11AB6ADC00F4666E /* tylenol.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4C11AB6ADC00F4666E /* tylenol.png */; };
-		40D6BA6D11AB6ADC00F4666E /* valium.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4D11AB6ADC00F4666E /* valium.png */; };
 		40D6BA6E11AB6ADC00F4666E /* vitaminc.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4E11AB6ADC00F4666E /* vitaminc.png */; };
 		40D6BA6F11AB6ADC00F4666E /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA4F11AB6ADC00F4666E /* water.png */; };
 		40DB62FD11BDB609004B361A /* greensmoke.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40DB62FC11BDB609004B361A /* greensmoke.plist */; };
@@ -555,18 +547,13 @@
 		40C0B4D6119CE13500FA31D4 /* ElementMixer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ElementMixer.png; sourceTree = "<group>"; };
 		40D6BA3011AB6ADC00F4666E /* acetylene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = acetylene.png; path = Towers/acetylene.png; sourceTree = "<group>"; };
 		40D6BA3211AB6ADC00F4666E /* aspirin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aspirin.png; path = Towers/aspirin.png; sourceTree = "<group>"; };
-		40D6BA3311AB6ADC00F4666E /* bakingsoda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bakingsoda.png; path = Towers/bakingsoda.png; sourceTree = "<group>"; };
-		40D6BA3411AB6ADC00F4666E /* bleach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bleach.png; path = Towers/bleach.png; sourceTree = "<group>"; };
 		40D6BA3511AB6ADC00F4666E /* caffeine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = caffeine.png; path = Towers/caffeine.png; sourceTree = "<group>"; };
 		40D6BA3611AB6ADC00F4666E /* capsaicin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = capsaicin.png; path = Towers/capsaicin.png; sourceTree = "<group>"; };
 		40D6BA3711AB6ADC00F4666E /* carbon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carbon.png; path = Towers/carbon.png; sourceTree = "<group>"; };
 		40D6BA3811AB6ADC00F4666E /* carbondioxide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carbondioxide.png; path = Towers/carbondioxide.png; sourceTree = "<group>"; };
 		40D6BA3911AB6ADC00F4666E /* carbonmonoxide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carbonmonoxide.png; path = Towers/carbonmonoxide.png; sourceTree = "<group>"; };
-		40D6BA3A11AB6ADC00F4666E /* chlorine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chlorine.png; path = Towers/chlorine.png; sourceTree = "<group>"; };
-		40D6BA3B11AB6ADC00F4666E /* chloroform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chloroform.png; path = Towers/chloroform.png; sourceTree = "<group>"; };
 		40D6BA3C11AB6ADC00F4666E /* cyanide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cyanide.png; path = Towers/cyanide.png; sourceTree = "<group>"; };
 		40D6BA3D11AB6ADC00F4666E /* ethanol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ethanol.png; path = Towers/ethanol.png; sourceTree = "<group>"; };
-		40D6BA3E11AB6ADC00F4666E /* hydrochloricacid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hydrochloricacid.png; path = Towers/hydrochloricacid.png; sourceTree = "<group>"; };
 		40D6BA3F11AB6ADC00F4666E /* hydrogen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hydrogen.png; path = Towers/hydrogen.png; sourceTree = "<group>"; };
 		40D6BA4011AB6ADC00F4666E /* methane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = methane.png; path = Towers/methane.png; sourceTree = "<group>"; };
 		40D6BA4111AB6ADC00F4666E /* nitricacid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nitricacid.png; path = Towers/nitricacid.png; sourceTree = "<group>"; };
@@ -576,12 +563,9 @@
 		40D6BA4511AB6ADC00F4666E /* oxygen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oxygen.png; path = Towers/oxygen.png; sourceTree = "<group>"; };
 		40D6BA4611AB6ADC00F4666E /* rdx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rdx.png; path = Towers/rdx.png; sourceTree = "<group>"; };
 		40D6BA4711AB6ADC00F4666E /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rubber.png; path = Towers/rubber.png; sourceTree = "<group>"; };
-		40D6BA4811AB6ADC00F4666E /* salt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = salt.png; path = Towers/salt.png; sourceTree = "<group>"; };
-		40D6BA4911AB6ADC00F4666E /* sodium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sodium.png; path = Towers/sodium.png; sourceTree = "<group>"; };
 		40D6BA4A11AB6ADC00F4666E /* tetrodotoxin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tetrodotoxin.png; path = Towers/tetrodotoxin.png; sourceTree = "<group>"; };
 		40D6BA4B11AB6ADC00F4666E /* tnt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tnt.png; path = Towers/tnt.png; sourceTree = "<group>"; };
 		40D6BA4C11AB6ADC00F4666E /* tylenol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tylenol.png; path = Towers/tylenol.png; sourceTree = "<group>"; };
-		40D6BA4D11AB6ADC00F4666E /* valium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = valium.png; path = Towers/valium.png; sourceTree = "<group>"; };
 		40D6BA4E11AB6ADC00F4666E /* vitaminc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vitaminc.png; path = Towers/vitaminc.png; sourceTree = "<group>"; };
 		40D6BA4F11AB6ADC00F4666E /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = water.png; path = Towers/water.png; sourceTree = "<group>"; };
 		40DB62FC11BDB609004B361A /* greensmoke.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = greensmoke.plist; sourceTree = "<group>"; };
@@ -1034,18 +1018,13 @@
 				40718C7711B59AAF00EA3AA3 /* ammonia.png */,
 				40D6BA3011AB6ADC00F4666E /* acetylene.png */,
 				40D6BA3211AB6ADC00F4666E /* aspirin.png */,
-				40D6BA3311AB6ADC00F4666E /* bakingsoda.png */,
-				40D6BA3411AB6ADC00F4666E /* bleach.png */,
 				40D6BA3511AB6ADC00F4666E /* caffeine.png */,
 				40D6BA3611AB6ADC00F4666E /* capsaicin.png */,
 				40D6BA3711AB6ADC00F4666E /* carbon.png */,
 				40D6BA3811AB6ADC00F4666E /* carbondioxide.png */,
 				40D6BA3911AB6ADC00F4666E /* carbonmonoxide.png */,
-				40D6BA3A11AB6ADC00F4666E /* chlorine.png */,
-				40D6BA3B11AB6ADC00F4666E /* chloroform.png */,
 				40D6BA3C11AB6ADC00F4666E /* cyanide.png */,
 				40D6BA3D11AB6ADC00F4666E /* ethanol.png */,
-				40D6BA3E11AB6ADC00F4666E /* hydrochloricacid.png */,
 				40D6BA3F11AB6ADC00F4666E /* hydrogen.png */,
 				40D6BA4011AB6ADC00F4666E /* methane.png */,
 				40D6BA4111AB6ADC00F4666E /* nitricacid.png */,
@@ -1055,12 +1034,9 @@
 				40D6BA4511AB6ADC00F4666E /* oxygen.png */,
 				40D6BA4611AB6ADC00F4666E /* rdx.png */,
 				40D6BA4711AB6ADC00F4666E /* rubber.png */,
-				40D6BA4811AB6ADC00F4666E /* salt.png */,
-				40D6BA4911AB6ADC00F4666E /* sodium.png */,
 				40D6BA4A11AB6ADC00F4666E /* tetrodotoxin.png */,
 				40D6BA4B11AB6ADC00F4666E /* tnt.png */,
 				40D6BA4C11AB6ADC00F4666E /* tylenol.png */,
-				40D6BA4D11AB6ADC00F4666E /* valium.png */,
 				40D6BA4E11AB6ADC00F4666E /* vitaminc.png */,
 				40D6BA4F11AB6ADC00F4666E /* water.png */,
 			);
@@ -1817,18 +1793,13 @@
 				4059935D11A9E78000FC6F9C /* background1_upperright.png in Resources */,
 				40D6BA5011AB6ADC00F4666E /* acetylene.png in Resources */,
 				40D6BA5211AB6ADC00F4666E /* aspirin.png in Resources */,
-				40D6BA5311AB6ADC00F4666E /* bakingsoda.png in Resources */,
-				40D6BA5411AB6ADC00F4666E /* bleach.png in Resources */,
 				40D6BA5511AB6ADC00F4666E /* caffeine.png in Resources */,
 				40D6BA5611AB6ADC00F4666E /* capsaicin.png in Resources */,
 				40D6BA5711AB6ADC00F4666E /* carbon.png in Resources */,
 				40D6BA5811AB6ADC00F4666E /* carbondioxide.png in Resources */,
 				40D6BA5911AB6ADC00F4666E /* carbonmonoxide.png in Resources */,
-				40D6BA5A11AB6ADC00F4666E /* chlorine.png in Resources */,
-				40D6BA5B11AB6ADC00F4666E /* chloroform.png in Resources */,
 				40D6BA5C11AB6ADC00F4666E /* cyanide.png in Resources */,
 				40D6BA5D11AB6ADC00F4666E /* ethanol.png in Resources */,
-				40D6BA5E11AB6ADC00F4666E /* hydrochloricacid.png in Resources */,
 				40D6BA5F11AB6ADC00F4666E /* hydrogen.png in Resources */,
 				40D6BA6011AB6ADC00F4666E /* methane.png in Resources */,
 				40D6BA6111AB6ADC00F4666E /* nitricacid.png in Resources */,
@@ -1838,12 +1809,9 @@
 				40D6BA6511AB6ADC00F4666E /* oxygen.png in Resources */,
 				40D6BA6611AB6ADC00F4666E /* rdx.png in Resources */,
 				40D6BA6711AB6ADC00F4666E /* rubber.png in Resources */,
-				40D6BA6811AB6ADC00F4666E /* salt.png in Resources */,
-				40D6BA6911AB6ADC00F4666E /* sodium.png in Resources */,
 				40D6BA6A11AB6ADC00F4666E /* tetrodotoxin.png in Resources */,
 				40D6BA6B11AB6ADC00F4666E /* tnt.png in Resources */,
 				40D6BA6C11AB6ADC00F4666E /* tylenol.png in Resources */,
-				40D6BA6D11AB6ADC00F4666E /* valium.png in Resources */,
 				40D6BA6E11AB6ADC00F4666E /* vitaminc.png in Resources */,
 				40D6BA6F11AB6ADC00F4666E /* water.png in Resources */,
 				40CF2DDC11AF4B51008789D0 /* levels_easy.dat in Resources */,

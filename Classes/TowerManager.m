@@ -92,7 +92,7 @@
 {
     if (newTower)
     {
-        printf("choosing\n");
+        //printf("choosing\n");
         while([towerManagerSprite getChildByTag:TowerSprite_Tag])
         {    
             [self clearChosenTower];

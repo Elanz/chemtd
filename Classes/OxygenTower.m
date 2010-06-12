@@ -24,8 +24,8 @@
         towerEffects = String_TowerEffect_Oxygen;
         formula = String_TowerFormula_Oxygen;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetOxygenShot;
-        hitParticleFileName = Effect_SingleTargetOxygenHit;
+        shotParticleKey = iEffect_SingleTargetOxygenShot;
+        hitParticleKey = iEffect_SingleTargetOxygenHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;
@@ -41,7 +41,7 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 150;
+        baseRange = TowerBaseRange*3;
         baseMinDamage = 8;
         baseMaxDamage = 12;
         baseInterval = 1.0;

@@ -24,11 +24,11 @@
         towerEffects = String_TowerEffect_Ethanol;
         formula = String_TowerFormula_Ethanol;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_NitrousShot;
-        targetType = TowerTargetType_Single;
+        shotParticleKey = iEffect_NitrousShot;
+        targetType = TowerTargetType_Multi;
         effectType = TowerEffectType_Ethanol;
         towerPower = 1;
-        towerClass = 3;
+        towerClass = 4;
         maxTargets = 2;
         switchTargetsAfterHit = YES;
         
@@ -43,10 +43,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 220;
-        baseMinDamage = 10;
-        baseMaxDamage = 12;
-        baseInterval = 1.5;
+        baseRange = TowerBaseRange*6;
+        baseMinDamage = 30;
+        baseMaxDamage = 40;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

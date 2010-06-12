@@ -23,7 +23,7 @@
 - (void) startEffect
 {
     tower.shotRange += (float)tower.shotRange * 0.15;
-    printf("new range = %d\n", tower.shotRange);
+    //printf("new range = %d\n", tower.shotRange);
 }
 
 - (void) finishEffect

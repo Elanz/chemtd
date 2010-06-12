@@ -24,9 +24,9 @@
         towerEffects = String_TowerEffect_CarbonMonoxide;
         formula = String_TowerFormula_CarbonMonoxide;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_None;
-        hitParticleFileName = Effect_SingleTargetBlackSmoke;
-        maxTargets = 2;
+        shotParticleKey = iEffect_None;
+        hitParticleKey = iEffect_SingleTargetBlackSmoke;
+        maxTargets = 1;
         towerPower = 1;
         towerClass = 2;
         
@@ -41,9 +41,9 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 160;
-        baseMinDamage = 15;
-        baseMaxDamage = 20;
+        baseRange = TowerBaseRange*4;
+        baseMinDamage = 25;
+        baseMaxDamage = 29;
         baseInterval = 1.0;
         
         shotRange = baseRange;

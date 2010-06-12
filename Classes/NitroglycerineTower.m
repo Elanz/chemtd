@@ -24,9 +24,9 @@
         towerEffects = String_TowerEffect_Nitroglycerine;
         formula = String_TowerFormula_Nitroglycerine;
         targetType = TowerTargetType_Single;
-        effectType = TowerEffectType_SplashHuge;
+        effectType = TowerEffectType_SplashBig;
         towerPower = 1;
-        towerClass = 5;
+        towerClass = 4;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 3;
@@ -39,10 +39,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 300;
-        baseMinDamage = 60;
-        baseMaxDamage = 75;
-        baseInterval = 2.0;
+        baseRange = TowerBaseRange*6;
+        baseMinDamage = 50;
+        baseMaxDamage = 70;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

@@ -24,8 +24,8 @@
         towerEffects = String_TowerEffect_Hydrogen;
         formula = String_TowerFormula_Hydrogen;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetHydrogenShot;
-        hitParticleFileName = Effect_SingleTargetHydrogenHit;
+        shotParticleKey = iEffect_SingleTargetHydrogenShot;
+        hitParticleKey = iEffect_SingleTargetHydrogenHit;
         towerPower = 1;
         maxPower = 30;
         towerClass = 1;

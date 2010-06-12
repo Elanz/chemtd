@@ -23,7 +23,7 @@
         chemicalDescription = String_ChemDescription_Rubber;
         towerEffects = String_TowerEffect_Rubber;
         formula = String_TowerFormula_Rubber;
-        shotParticleFileName = Effect_SingleTargetCarbonShot;
+        shotParticleKey = iEffect_SingleTargetCarbonShot;
         targetType = TowerTargetType_Single;
         effectType = TowerEffectType_Rubber;
         towerPower = 1;
@@ -41,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 220;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
-        baseInterval = 0.75;
+        baseRange = TowerBaseRange*6;
+        baseMinDamage = 70;
+        baseMaxDamage = 80;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

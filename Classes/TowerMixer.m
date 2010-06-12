@@ -217,7 +217,7 @@
         [resultSprite setTexture:[temp getTexture]];
         [resultSprite setPower:[temp getPower]];
         btnMixerAccept.isEnabled = YES;
-        printf("auto pick\n");
+        //printf("auto pick\n");
         [gameField.towerManager chooseTower:temp];
         pickedOne = YES;
     }

@@ -24,10 +24,10 @@
         towerEffects = String_TowerEffect_Water;
         formula = String_TowerFormula_Water;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetOxygenShot;
+        shotParticleKey = iEffect_SingleTargetOxygenShot;
         effectType = TowerEffectType_WaterSplash;
         towerPower = 1;
-        towerClass = 2;
+        towerClass = 3;
         
         formulaComponent1 = TOWERTEXTURE_HYDROGEN;
         formulaQuantity1 = 2;
@@ -40,10 +40,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 220;
-        baseMinDamage = 40;
-        baseMaxDamage = 45;
-        baseInterval = 0.75;
+        baseRange = TowerBaseRange*5;
+        baseMinDamage = 15;
+        baseMaxDamage = 25;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

@@ -26,8 +26,10 @@
         towerEffects = String_TowerEffect_Caffeine;
         formula = String_TowerFormula_Caffeine;
         targetType = TowerTargetType_Single;
+        shotParticleKey = iEffect_SingleTargetOrangeSmoke;
+        hitParticleKey = iEffect_SingleTargetOrangeSmoke;
         towerPower = 1;
-        towerClass = 5;
+        towerClass = 6;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 8;
@@ -40,10 +42,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 200;
+        baseRange = TowerBaseRange*8;
         baseMinDamage = 100;
-        baseMaxDamage = 150;
-        baseInterval = 1.5;
+        baseMaxDamage = 200;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;
@@ -73,7 +75,7 @@
             float rangeToTower = [gameField distanceBetweenPointsA:t.towerSprite.position B:towerSprite.position];
             if (rangeToTower < effectRange && ![targetTowers containsObject:t])
             {
-                printf("applying effect to tower\n");
+                //printf("applying effect to tower\n");
                 BaseEffect * effect = [[RangeBoostEffect alloc] initWithTargetTower:t];
                 [t addEffect:effect];
                 [targetTowers addObject:t];

@@ -23,12 +23,12 @@
         chemicalDescription = String_ChemDescription_CarbonDioxide;
         towerEffects = String_TowerEffect_CarbonDioxide;
         formula = String_TowerFormula_CarbonDioxide;
-        targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_None;
-        hitParticleFileName = Effect_SingleTargetBlackSmoke;
-        maxTargets = 3;
+        targetType = TowerTargetType_Multi;
+        shotParticleKey = iEffect_None;
+        hitParticleKey = iEffect_SingleTargetBlackSmoke;
+        maxTargets = 2;
         towerPower = 1;
-        towerClass = 3;
+        towerClass = 2;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -41,9 +41,9 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 200;
-        baseMinDamage = 20;
-        baseMaxDamage = 25;
+        baseRange = TowerBaseRange*4;
+        baseMinDamage = 11;
+        baseMaxDamage = 15;
         baseInterval = 1.0;
         
         shotRange = baseRange;

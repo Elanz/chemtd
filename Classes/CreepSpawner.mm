@@ -67,13 +67,16 @@
     
     [gameField removeCreep:creep];
     [gameField removeChild:creep.hpbar cleanup:NO];
-    [creeps removeObjectAtIndex:[creeps indexOfObject:creep]];
-    //[creep release];
-    creepCount --;
-    gameField.killedThisRound ++;
-    //creep = nil;
-    [gameField awardPoints:creep.maxHealth/10];
-    [self CheckForRoundOver];
+    if ([creeps containsObject:creep])
+    {
+        [creeps removeObject:creep];
+        //[creep release];
+        creepCount --;
+        gameField.killedThisRound ++;
+        //creep = nil;
+        [gameField awardPoints:creep.maxHealth/10];
+        [self CheckForRoundOver];
+    }
 }
 
 - (void) Goal:(Creep*)creep
@@ -81,13 +84,16 @@
     
     [gameField removeCreep:creep];
     [gameField removeChild:creep.hpbar cleanup:NO];
-    [creeps removeObjectAtIndex:[creeps indexOfObject:creep]];
-    //[creep release];
-    creepCount --;
-    //creep = nil;
-    [gameField decrementLives];
-    [self CheckForRoundOver];
-    
+    if ([creeps containsObject:creep])
+    {
+        [creeps removeObject:creep];
+
+        //[creep release];
+        creepCount --;
+        //creep = nil;
+        [gameField decrementLives];
+        [self CheckForRoundOver];
+    }
 }
 
 - (void) spawnCreep

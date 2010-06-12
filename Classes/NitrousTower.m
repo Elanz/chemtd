@@ -23,7 +23,7 @@
         chemicalDescription = String_ChemDescription_Nitrous;
         towerEffects = String_TowerEffect_Nitrous;
         formula = String_TowerFormula_Nitrous;
-        shotParticleFileName = Effect_NitrousShot;
+        shotParticleKey = iEffect_NitrousShot;
         targetType = TowerTargetType_Single;
         effectType = TowerEffectType_Nitrous;
         towerPower = 1;
@@ -41,9 +41,9 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 160;
-        baseMinDamage = 10;
-        baseMaxDamage = 12;
+        baseRange = TowerBaseRange*4;
+        baseMinDamage = 17;
+        baseMaxDamage = 23;
         baseInterval = 1.0;
         
         shotRange = baseRange;

@@ -31,8 +31,8 @@
 @synthesize dotMax;
 @synthesize baseDotMin;
 @synthesize baseDotMax;
-@synthesize shotParticleFileName;
-@synthesize hitParticleFileName;
+@synthesize shotParticleKey;
+@synthesize hitParticleKey;
 @synthesize trapTextureKey;
 @synthesize baseRange;
 @synthesize baseMinDamage;
@@ -59,8 +59,8 @@
         targetType = TowerTargetType_None;
         effectType = TowerEffectType_ExplodeOnImpact;
         trapTextureKey = 0;
-        shotParticleFileName = Effect_SingleTargetFireball;
-        hitParticleFileName = Effect_SingleTargetExplosion;
+        shotParticleKey = iEffect_SingleTargetFireball;
+        hitParticleKey = iEffect_SingleTargetExplosion;
         towerPower = 0;
         maxPower = 1;
         towerClass = 0;
@@ -139,6 +139,7 @@
         case 3: [output setString:String_TowerClass3Label]; break;
         case 4: [output setString:String_TowerClass4Label]; break;
         case 5: [output setString:String_TowerClass5Label]; break;
+        case 6: [output setString:String_TowerClass6Label]; break;
         default:
             break;
     }
@@ -291,7 +292,7 @@
     minDamage = (float)baseMinDamage + ((float)baseMinDamage * towerPower * 0.10);
     maxDamage = (float)baseMaxDamage + ((float)baseMaxDamage * towerPower * 0.10);
     shotRange = (float)baseRange + ((float)baseRange * (towerPower-1) * 0.10);
-    printf("range from power = %d\n", shotRange);
+    //printf("range from power = %d\n", shotRange);
     shotInterval = baseInterval - (baseInterval * towerPower * 0.05);
     if (shotInterval < 0.1)
     {
@@ -386,17 +387,17 @@
             if (target && [gameField distanceBetweenPointsA:target.creepSprite.position B:towerSprite.position] < shotRange)
             {
                 [gameField.combatManager shootWithTower:self creep:target];
-                printf("shooting target\n");
+                //printf("shooting target\n");
                 if (switchTargetsAfterHit)
                 {
                     [toRemove addObject:target];
-                    printf("switching target 1\n");
+                    //printf("switching target 1\n");
                 }
             }
             else 
             {
                 [toRemove addObject:target];
-                printf("switching target 2\n");
+                //printf("switching target 2\n");
             }
         }
         for (Creep * target in toRemove)
@@ -420,7 +421,7 @@
                 {
                     bestdistance = thisdistance;
                     target = creep;
-                    printf("new target\n");
+                    //printf("new target\n");
                 }
             }
             if (target)

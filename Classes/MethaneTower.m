@@ -24,11 +24,11 @@
         towerEffects = String_TowerEffect_Methane;
         formula = String_TowerFormula_Methane;        
         targetType = TowerTargetType_Multi;
-        shotParticleFileName = Effect_None;
-        hitParticleFileName = Effect_SingleTargetGreenSmoke;
+        shotParticleKey = iEffect_None;
+        hitParticleKey = iEffect_SingleTargetGreenSmoke;
         towerPower = 1;
-        towerClass = 2;
-        maxTargets = 20;
+        towerClass = 3;
+        maxTargets = 3;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 1;
@@ -41,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 200;
-        baseMinDamage = 4;
-        baseMaxDamage = 6;
-        baseInterval = 0.75;
+        baseRange = TowerBaseRange*5;
+        baseMinDamage = 10;
+        baseMaxDamage = 16;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

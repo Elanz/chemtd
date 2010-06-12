@@ -24,13 +24,13 @@
         towerEffects = String_TowerEffect_NitricAcid;
         formula = String_TowerFormula_NitricAcid;
         targetType = TowerTargetType_Single;
-        shotParticleFileName = Effect_SingleTargetChlorineShot;
-        hitParticleFileName = Effect_SingleTargetChlorineHit;
+        shotParticleKey = iEffect_SingleTargetChlorineShot;
+        hitParticleKey = iEffect_SingleTargetChlorineHit;
         targetType = TowerTargetType_Multi;
         effectType = TowerEffectType_Poison;
         towerPower = 1;
-        towerClass = 3;
-        maxTargets = 2;
+        towerClass = 4;
+        maxTargets = 3;
         switchTargetsAfterHit = YES;
         
         formulaComponent1 = TOWERTEXTURE_HYDROGEN;
@@ -44,7 +44,7 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 200;
+        baseRange = TowerBaseRange*6;
         baseMinDamage = 20;
         baseMaxDamage = 25;
         baseInterval = 1.0;

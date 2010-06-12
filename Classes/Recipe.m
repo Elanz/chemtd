@@ -180,7 +180,7 @@
     towerTypesAvailable = [[NSMutableArray alloc] init];
     for (BaseTower * tower in availableTowers)
     {
-        printf("considering %d\n", tower.towerType);
+        //printf("considering %d\n", tower.towerType);
         for (int i = 0; i < tower.towerPower; i++)
         {
             [towerTypesAvailable addObject:[[RecipeTower alloc] initWithTowerType:tower.towerType]];

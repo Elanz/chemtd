@@ -24,11 +24,11 @@
         towerEffects = String_TowerEffect_Capsaicin;
         formula = String_TowerFormula_Capsaicin;
         targetType = TowerTargetType_Multi;
-        shotParticleFileName = Effect_SingleTargetFireballPepper;
-        hitParticleFileName = Effect_SingleTargetExplosionPepper;
+        shotParticleKey = iEffect_SingleTargetFireballPepper;
+        hitParticleKey = iEffect_SingleTargetExplosionPepper;
         maxTargets = 20;
         towerPower = 1;
-        towerClass = 5;
+        towerClass = 6;
         
         formulaComponent1 = TOWERTEXTURE_CARBON;
         formulaQuantity1 = 18;
@@ -41,10 +41,10 @@
         formulaComponent5 = -1;
         formulaQuantity5 = 0;
         
-        baseRange = 300;
-        baseMinDamage = 35;
-        baseMaxDamage = 50;
-        baseInterval = 0.20;
+        baseRange = TowerBaseRange*8;
+        baseMinDamage = 10;
+        baseMaxDamage = 20;
+        baseInterval = 1.0;
         
         shotRange = baseRange;
         minDamage = baseMinDamage;

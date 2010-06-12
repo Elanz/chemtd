@@ -10,6 +10,7 @@
 #import "BaseTower.h"
 #import "Creep.h"
 #import "CreepSpawner.h"
+#import "CombatManager.h"
 
 @implementation AOESpriteTrapEffect
 
@@ -50,7 +51,7 @@
             {
                 int damage = source.dotMin + arc4random() % source.dotMax;
                 [foundCreep shoot:damage];
-                CCPointParticleSystem * bubbleSystem = [CCPointParticleSystem particleWithFile:source.hitParticleFileName];
+                CCPointParticleSystem * bubbleSystem = [field.combatManager getParticleSystemForKey:source.hitParticleKey];
                 bubbleSystem.position = ccp(creepSize/2, -(creepSize/2));
                 bubbleSystem.autoRemoveOnFinish = YES;
                 bubbleSystem.duration = dotTimer;
