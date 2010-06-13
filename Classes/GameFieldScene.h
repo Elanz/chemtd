@@ -35,8 +35,8 @@
 #define device_width 1024
 #define device_height 768
 
-#define max_zoom 1.0
-#define min_zoom 0.7
+#define max_zoom 1.5
+#define min_zoom 0.6666667
 
 @class PathFinding;
 @class BaseTower;
@@ -72,8 +72,10 @@
     
     float field_offsetX;
     float field_offsetY;
+    float actualWidth;
+    float actualHeight;
    
-    BOOL zoomed;
+    //BOOL zoomed;
     
     CCSprite *sprite_bottomright;
     CCSprite *sprite_bottomleft;
@@ -138,8 +140,12 @@
     LevelStat * timeStat;
     LevelStat * scoreStat;
     LevelStat * damageStat;
+    
+    int backgroundId;
+    NSArray * statArray;
 }
 
+@property (nonatomic) CGPoint startPosition;
 @property (nonatomic,retain) UserManager * userManager;
 @property (nonatomic) double lastStablegameTimer;
 @property (nonatomic) int lastStablecurrentRound;
@@ -158,7 +164,7 @@
 @property (nonatomic) int currentGamePhase;
 @property (nonatomic) float field_offsetX;
 @property (nonatomic) float field_offsetY;
-@property (nonatomic) BOOL zoomed;
+//@property (nonatomic) BOOL zoomed;
 @property (nonatomic, retain) NSMutableDictionary * goalpoints;
 @property (nonatomic, retain) PathFinding * pathFinder;
 @property (nonatomic, retain) CreepSpawner * mainSpawner;
@@ -183,6 +189,7 @@
 +(id) scene;
 +(id) sceneWithLoad;
 
+- (void)showMenu;
 - (void)addEffect:(BaseEffect*)effect;
 - (void)removeEffect:(BaseEffect*)effect;
 - (void)onContinue:(id)sender;

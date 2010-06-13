@@ -79,6 +79,9 @@
 
 -(NSMutableArray *)findPath:(int)startX :(int)startY :(int)endX :(int)endY
 {
+    if (!gameField)
+        gameField = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_GameField];
+    
     NSString * key = [NSString stringWithFormat:@"%d%d_%d%d", startX, startY, endX, endY];
     if ([pathCache objectForKey:key])
     {
@@ -264,7 +267,7 @@
             }
 		}		
 	}
-	//printf("**** NO PATH FOUND *****\n");
+	printf("**** NO PATH FOUND *****\n");
     return nil;
 }
 

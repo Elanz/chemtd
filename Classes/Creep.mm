@@ -27,6 +27,8 @@
 @synthesize health;
 @synthesize maxHealth;
 @synthesize baseSpeed;
+@synthesize varianceX;
+@synthesize varianceY;
 
 - (id)initWithPoint:(CGPoint)startPoint {
     if ((self = [super init])) {
@@ -57,6 +59,9 @@
         nextWaypointY *= cellSize;
         nextWaypointX += halfCellSize;
         nextWaypointY += halfCellSize;
+        
+        varianceX = 0;
+        varianceY = 0;
         
         speed = 2;
         baseSpeed = speed;

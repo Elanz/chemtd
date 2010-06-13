@@ -24,6 +24,8 @@
     int armorType;
     float speed;
     int textureId;
+    int variance;
+    float spawnTime;
 }
 
 @property (nonatomic, retain) NSString * levelName;
@@ -32,6 +34,8 @@
 @property (nonatomic) int armorType;
 @property (nonatomic) float speed;
 @property (nonatomic) int textureId;
+@property (nonatomic) int variance;
+@property (nonatomic) float spawnTime;
 
 @end
 

@@ -19,6 +19,9 @@
 @synthesize armorType;
 @synthesize speed;
 @synthesize textureId;
+@synthesize variance;
+@synthesize spawnTime;
+
 @end
 
 @implementation LevelManager
@@ -110,11 +113,18 @@
                     break;
                 case 5:
                     newLevel.textureId = [item intValue];
+                    index ++;
+                    break;
+                case 6:
+                    newLevel.variance = [item intValue];
+                    index ++;
+                    break;
+                case 7:
+                    newLevel.spawnTime = [item floatValue];
                     [levels setObject:newLevel forKey:[NSNumber numberWithInt:levelId]];
                     levelId ++;
                     levelCount ++;
                     index = 0;
-                    break;
                 default:
                     break;
             }

@@ -33,6 +33,8 @@
     int nextWaypointY;
     
     int status;
+    int varianceX;
+    int varianceY;
     
     float maxHealth;
     float health;
@@ -56,6 +58,8 @@
     CCSprite * hpbar;
 }
 
+@property (nonatomic) int varianceX;
+@property (nonatomic) int varianceY;
 @property (nonatomic, retain) CCSprite * creepSprite;
 @property (nonatomic, retain) CCSprite * hpbar;
 @property (nonatomic) int status;

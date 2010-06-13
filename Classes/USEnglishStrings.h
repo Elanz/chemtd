@@ -22,6 +22,8 @@
 #define String_DMGLabel @"DMG:"
 #define String_SPDLabel @"SPD:"
 
+#define String_DontBlock @"DON'T BLOCK!!!"
+
 #define String_PhaseLabelPlace @"Phase: Place"
 #define String_PhaseLabelPick @"Phase: Pick"
 #define String_PhaseLabelCreeps @"Phase: Creeps"

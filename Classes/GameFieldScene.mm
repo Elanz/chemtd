@@ -61,12 +61,13 @@
 @synthesize towers;
 @synthesize pendingTowers;
 @synthesize towerForThisRound;
-@synthesize zoomed;
+//@synthesize zoomed;
 @synthesize levelManager;
 @synthesize userManager;
 @synthesize killedThisRound;
 @synthesize lastStabledamage;
 @synthesize lastStablekills;
+@synthesize startPosition;
 
 +(id) scene
 {
@@ -112,7 +113,6 @@
         lastStablekills = 0;
         mainSpawner = nil;
         pathFinder = nil;
-        zoomed = NO;
         
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         
@@ -123,6 +123,7 @@
         combatManager = [[CombatManager alloc] initWithGameField:self];
         touchHandler = [[TouchHandler alloc] initWithGameField:self];
         levelManager = [[LevelManager alloc] initWithGameField:self];
+        pathFinder = [[PathFinding alloc] init];
         
         [self initField];
 
@@ -163,12 +164,12 @@
         [energyDisplay setString:[NSString stringWithFormat:@"%@ %d", String_EnergyLabel, energy]];
 
         DPSDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
-        DPSDisplay.position = ccp(device_width/2 - 150, device_height - 30);
+        DPSDisplay.position = ccp(device_width/2-25, 15);
         DPSDisplay.color = Color_Black;
         [DPSDisplay setString:[NSString stringWithFormat:@"%@: %d", String_DPSLabel, 0]];
         
         MultiplierDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
-        MultiplierDisplay.position = ccp(device_width/2 + 100, device_height -30);
+        MultiplierDisplay.position = ccp(device_width/2 + 200, 15);
         MultiplierDisplay.color = Color_Black;
         [MultiplierDisplay setString:[NSString stringWithFormat:@"%@ %d", String_MultiplierLabel, multiplier]];
         
@@ -177,9 +178,11 @@
         self.isTouchEnabled = YES;
         [self schedule:@selector(tick:)];
         self.scale = min_zoom;
-        self.position = ccp(0,0);
-        zoomed = NO;
+        self.position = ccp(-256,-192);
         [self updateScrollOffsetWithDeltaX:0 DeltaY:0];
+        actualWidth = 1024.0;
+        actualHeight = 768.0;
+        self.anchorPoint = ccp(0,0);
 	}
 	return self;
 }
@@ -217,7 +220,7 @@
     menuItemPause = [CCMenuItemSprite itemFromNormalSprite:pauseBtn selectedSprite:pauseBtn 
                                                        disabledSprite:pauseBtn target:self selector:@selector(onPause:)];
     pauseMenu = [CCMenu menuWithItems: menuItemPause, nil];
-    pauseMenu.position = ccp(75,743);
+    pauseMenu.position = ccp(device_width - 100, device_height - 347);
     [UILayer addChild:pauseMenu z:1];
     
     [[CCDirector sharedDirector].runningScene addChild: UILayer z:1]; 
@@ -288,6 +291,7 @@
     }
     
     [combatManager tick:elapsed];
+    [touchHandler ticker:elapsed];
     
     if (mainSpawner) [mainSpawner tick:elapsed];
     if (currentGamePhase == GamePhase_Creeps)
@@ -567,6 +571,8 @@
 
 - (void)midLevelUpdate:(int)backgroundid
 {
+    backgroundId =backgroundid;
+    
     if (minimenuLayer)
         [[CCDirector sharedDirector].runningScene removeChild: minimenuLayer cleanup:YES]; 
     if (highscoreLayer)
@@ -581,17 +587,15 @@
     miniMenuBackground.position = ccp(device_width/2, device_height/2);
     [minimenuLayer addChild:miniMenuBackground];
     
-    NSArray * statArray;
-    
-    if (backgroundid == UITEXTURE_LEVELCLEARBACKGROUND)
+    if (backgroundId == UITEXTURE_LEVELCLEARBACKGROUND)
     {
         statArray = [userManager submitLevelStats:levelManager.currentLevel completionTime:roundTimer*1000  damageDone:damageThisRound 
-                                                      score:scoreForLevel creepsKilled:killedThisRound];
+                                            score:scoreForLevel creepsKilled:killedThisRound];
     }
     else 
     {
         BOOL won = false;
-        if (backgroundid == UITEXTURE_YOUWINBACKGROUND)
+        if (backgroundId == UITEXTURE_YOUWINBACKGROUND)
             won = true;
         
         lastStablegameTimer += roundTimer;
@@ -623,15 +627,13 @@
         }
         
         towerstring = [towerstring substringToIndex:[towerstring length] - 1];
-
+        
         statArray = [userManager submitFinishedGame:won towers:towerstring];
     }
     
     timeStat = [statArray objectAtIndex:StatType_CompletionTime];
     scoreStat = [statArray objectAtIndex:StatType_Score];
     damageStat = [statArray objectAtIndex:StatType_DamageDone];
-    
-    [self showHighScoreForStatType:StatType_Score stat:scoreStat];
     
     int row1Y = device_height - 208;
     int row2Y = device_height - 274;
@@ -716,6 +718,19 @@
     [towerManager disableAll];
     [towerMixer disableAll];
     menuItemPause.isEnabled = NO;
+    
+    id action1 = [CCDelayTime actionWithDuration:1.0];
+    id action2 = [CCCallFunc actionWithTarget:self selector:@selector(showMenu)];
+    id action3 = [CCSequence actions:action1, action2, nil];
+    [self runAction:action3];
+}
+
+- (void)showMenu
+{
+
+    
+    [self showHighScoreForStatType:StatType_Score stat:scoreStat];
+    
     [[CCDirector sharedDirector].runningScene addChild: minimenuLayer z:2]; 
 }
 
@@ -799,10 +814,23 @@
 
 - (void)updateScaleAnimated:(float)duration newScale:(float)newScale
 {
-    id actionTo = [CCScaleTo actionWithDuration:duration scale:newScale];
+    if (newScale < 0.7)
+    {
+        newScale = 0.666666667;
+    }
+    
+    actualWidth = 1536 * newScale;
+    actualHeight = 1152 * newScale;
+
+    self.scale = newScale;
+    [self updateScrollOffsetWithDeltaX:0 DeltaY:0];
+    
+    //self.position = ccp((device_width/2)-newWidth, (device_height/2)-newHeight);
+    
+    //id actionTo = [CCScaleTo actionWithDuration:duration scale:newScale];
     //id action2 = [CCMoveTo actionWithDuration:duration position:ccp(0,0)];
     
-    [self runAction:actionTo];
+    //[self runAction:actionTo];
     //[self runAction:action2];
 }
 
@@ -811,27 +839,28 @@
     field_offsetX += DeltaX;
     field_offsetY += DeltaY;
     
-    int limitXlow, limitYlow, limitXhigh, limitYhigh;
+    if (field_offsetX < -(actualWidth-device_width))
+        field_offsetX = -(actualWidth-device_width);
+    if (field_offsetY < -(actualHeight-device_height))
+        field_offsetY = -(actualHeight-device_height);
+
+    if (field_offsetX > 0)
+        field_offsetX = 0;
+    if (field_offsetY > 0)
+        field_offsetY = 0;
     
-    if (!zoomed)
-    {
-        limitXhigh = 0;
-        limitYhigh = 0;
-        limitXlow = 0;
-        limitYlow = 0;
-    }
-    if (zoomed)
-    {
-        limitXhigh = 0;
-        limitYhigh = 0;
-        limitXlow = -510;
-        limitYlow = -380;
-    }  
+    self.position = ccp(0+field_offsetX, 0+field_offsetY);
     
-    field_offsetX = [self clampFloatInclusive:field_offsetX highValue:limitXhigh lowValue:limitXlow];
-    field_offsetY = [self clampFloatInclusive:field_offsetY highValue:limitYhigh lowValue:limitYlow];
+//    printf("position = %f, %f offset = %f, %f size = %f, %f \n", self.position.x, self.position.y
+//           , field_offsetX, field_offsetY, actualWidth, actualHeight);
     
-    self.position = ccp([self getScaledPosition].x + field_offsetX, [self getScaledPosition].y + field_offsetY);
+//    
+//    int limitXlow, limitYlow, limitXhigh, limitYhigh;
+//    
+//    field_offsetX = [self clampFloatInclusive:field_offsetX highValue:limitXhigh lowValue:limitXlow];
+//    field_offsetY = [self clampFloatInclusive:field_offsetY highValue:limitYhigh lowValue:limitYlow];
+//    
+//    self.position = ccp([self getScaledPosition].x + field_offsetX, [self getScaledPosition].y + field_offsetY);
 }
 
 - (void)initField

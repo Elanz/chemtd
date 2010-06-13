@@ -41,8 +41,8 @@
     
     moveTimer = 0.0;
     moveInterval = 0.0333;
-    spawnTimer = 1.5;
-    spawnInterval = 1.5;
+    spawnTimer = [gameField.levelManager GetCurrentLevel].spawnTime;
+    spawnInterval = [gameField.levelManager GetCurrentLevel].spawnTime;
     spawnCount = 0;
     numberToSpawn = [gameField.levelManager GetCurrentLevel].creepCount;
     creepCount = 0;
@@ -102,7 +102,12 @@
     creep.creepSprite = [CCSprite spriteWithTexture:[gameField.textureLibrary GetTextureWithKey:[gameField.levelManager GetCurrentLevel].textureId]];
     creep.creepSprite.position = ccp(location.x*cellSize+halfCellSize, location.y*cellSize+halfCellSize);
     creep.hpbar.position = ccp(location.x*cellSize+halfCellSize, (location.y*cellSize+halfCellSize) + (creepSize/2)+5);
-    creep.start = location;
+    int variance = [gameField.levelManager GetCurrentLevel].variance;
+    if (variance)
+    {
+        creep.varianceX = -variance + arc4random() % variance;
+        creep.varianceY = -variance + arc4random() % variance;
+    }
     creep.mySpawner = self;
     creep.speed = [gameField.levelManager GetCurrentLevel].speed;
     creep.baseSpeed = creep.speed;

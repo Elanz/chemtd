@@ -102,7 +102,7 @@
 		40AFA8B711BB1DCE00113877 /* BurnEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AFA8B611BB1DCE00113877 /* BurnEffect.m */; };
 		40AFA8BA11BB1E8000113877 /* BaseEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 40AFA8B911BB1E8000113877 /* BaseEffect.m */; };
 		40BC4EF911AEA67D00A8F497 /* TextureLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */; };
-		40BC4F6B11AEB2BF00A8F497 /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.m */; };
+		40BC4F6B11AEB2BF00A8F497 /* TouchHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */; };
 		40BC50D211AEE03900A8F497 /* LevelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 40BC50D111AEE03900A8F497 /* LevelManager.m */; };
 		40C0B424119CCCA800FA31D4 /* NitrogenTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C0B423119CCCA800FA31D4 /* NitrogenTower.m */; };
 		40C0B42E119CCDB900FA31D4 /* OxygenTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C0B42D119CCDB900FA31D4 /* OxygenTower.m */; };
@@ -535,7 +535,7 @@
 		40BC4EF711AEA67D00A8F497 /* TextureLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureLibrary.h; sourceTree = "<group>"; };
 		40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureLibrary.m; sourceTree = "<group>"; };
 		40BC4F6911AEB2BF00A8F497 /* TouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchHandler.h; sourceTree = "<group>"; };
-		40BC4F6A11AEB2BF00A8F497 /* TouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchHandler.m; sourceTree = "<group>"; };
+		40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchHandler.mm; sourceTree = "<group>"; };
 		40BC50CF11AEDD5200A8F497 /* levels_easy.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = levels_easy.dat; sourceTree = "<group>"; };
 		40BC50D011AEE03900A8F497 /* LevelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelManager.h; sourceTree = "<group>"; };
 		40BC50D111AEE03900A8F497 /* LevelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelManager.m; sourceTree = "<group>"; };
@@ -992,7 +992,7 @@
 				40BC4EF711AEA67D00A8F497 /* TextureLibrary.h */,
 				40BC4EF811AEA67D00A8F497 /* TextureLibrary.m */,
 				40BC4F6911AEB2BF00A8F497 /* TouchHandler.h */,
-				40BC4F6A11AEB2BF00A8F497 /* TouchHandler.m */,
+				40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1906,7 +1906,7 @@
 				40EDDB3811A4B45600F05608 /* CombatManager.mm in Sources */,
 				40EDDC0711A4C6C100F05608 /* WaterTower.m in Sources */,
 				40BC4EF911AEA67D00A8F497 /* TextureLibrary.m in Sources */,
-				40BC4F6B11AEB2BF00A8F497 /* TouchHandler.m in Sources */,
+				40BC4F6B11AEB2BF00A8F497 /* TouchHandler.mm in Sources */,
 				40BC50D211AEE03900A8F497 /* LevelManager.m in Sources */,
 				40FF395E11B16E85000993CB /* MainMenuScene.mm in Sources */,
 				4088BE0F11B197D400DCF16B /* UserManager.m in Sources */,

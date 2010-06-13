@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GameFieldScene.h"
 
-#define Swipe_Threshold 120.0
-#define Pinch_Threshold 100.0
+#define Swipe_Threshold 150.0
+#define Pinch_Threshold 2.0
 #define RadiusSelect_Threshold 100.0
 #define FieldZoom_Delay 0.3
 
@@ -19,6 +19,8 @@
     GameFieldScene * gameField;
     
     int touchCount;
+    
+    float zoomLevel;
     
     UITouch * firstTouch;
     CGPoint firstTouchLocation;
@@ -40,7 +42,10 @@
 @property (nonatomic) float scrollVelocity;
 @property (nonatomic) CGPoint scrollVector;
 
--(id) initWithGameField:(GameFieldScene *)theGameField;
+- (void) ticker:(ccTime)elapsed;
+
+- (BOOL)testForBlock:(int)cellX cellY:(int)cellY;
+- (id)initWithGameField:(GameFieldScene *)theGameField;
 
 - (void)HandleccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)HandleMultitouchBegin:(NSSet *)touches withEvent:(UIEvent *)event;
