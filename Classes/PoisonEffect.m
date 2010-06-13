@@ -32,7 +32,7 @@
     repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
     
     [creep.creepSprite runAction:repeat];
-    
+    field = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_GameField];
     poisonSystem = [field.combatManager getParticleSystemForKey:iEffect_GreenBubbles];
     poisonSystem.position = ccp(creepSize/2, -(creepSize/2));
     [creep.hpbar addChild:poisonSystem z:1];

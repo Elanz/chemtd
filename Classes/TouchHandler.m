@@ -107,13 +107,15 @@
     
     switch (gameField.currentGamePhase) {
         case GamePhase_Build:
-            gameField.currentTower = [gameField GenerateRandomTowerAtPosition:firstTouchLocation];
+            gameField.currentTower = [gameField GenerateRandomTowerAtPosition:ccp((cellX*cellSize+cellSize/2), ([self adjustTouchLocationWithY:cellY]*cellSize+cellSize/2))];
+            
+            [gameField.currentTower setPositionWithX:(cellX*cellSize+cellSize/2) Y:([self adjustTouchLocationWithY:cellY]*cellSize+cellSize/2)];
             
             towerAttachedToTouch = YES;
             
             [gameField showRangeIndicatorForTower:gameField.currentTower];
             
-            if ([gameField check1x1SpaceStatus:cellX :cellY :TILE_OPEN])
+            if ([gameField check1x1SpaceStatus:cellX :[self adjustTouchLocationWithY:cellY] :TILE_OPEN])
             {
                 [gameField.currentTower setColor:Color_White];
             } else {
@@ -265,7 +267,7 @@
     {
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         BaseTower * temp = [delegate constructTowerWithType:gameField.currentTower.towerType gameField:gameField addToField:YES];
-        [temp setTowerPower:gameField.currentTower.towerPower];
+        [temp setPower:gameField.currentTower.towerPower];
         [temp setPositionWithX:[found getTowerPosition].x Y:[found getTowerPosition].y];
         [found removeFromLayer];
         [gameField.pendingTowers removeObject:found];            

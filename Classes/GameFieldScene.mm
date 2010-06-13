@@ -287,6 +287,8 @@
         [effect updateEffect:elapsed];
     }
     
+    [combatManager tick:elapsed];
+    
     if (mainSpawner) [mainSpawner tick:elapsed];
     if (currentGamePhase == GamePhase_Creeps)
     {

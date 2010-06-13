@@ -22,7 +22,7 @@
         targetType = TowerTarget;
         tower = targetTower;
         creep = nil;
-        field = nil;
+        field = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_GameField];
     }
     return self;
 }
@@ -33,7 +33,7 @@
         source = sourceTower;
         targetType = CreepTarget;
         creep = targetCreep;
-        field = nil;
+        field = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_GameField];;
         tower = nil;
     }
     return self;

@@ -38,7 +38,7 @@
 	if( (self=[super init] )) 
     {
         gameField = theGameField;
-        [self populateParticleLibrary];
+        //[self populateParticleLibrary];
     }
     return self;
 }
@@ -95,60 +95,132 @@
                 break;
         }
         container.system.autoRemoveOnFinish = YES;
+        [container.system resetSystem];
+        [container.system stopSystem];
         container.inuse = NO;
         [output addObject:container];
     }
     return output;
 }
 
-static int checkedout;
+//static int checkedout;
 
 - (void) tick:(double)elapsed
 {
-    elapsedTime += elapsed;
+   // elapsedTime += elapsed;
+//    expirationCheckTimer += elapsed;
+//    if (expirationCheckTimer < 1.0)
+//    {
+//        for (int i = 1; i < 31; i++)
+//        {
+//            [particleLibraryLock lock];
+//            for (ParticleContainer * container in (NSMutableArray*)[particleLibrary objectForKey:[NSNumber numberWithInt:i]])
+//            {
+//                if (container.inuse)
+//                {
+//                    if (elapsedTime - container.checkoutTime > 2.0)
+//                    {
+//                        checkedout --;
+//                        printf("autorelease checkedout = %d\n", checkedout);
+//                        [container.system resetSystem];
+//                        [container.system stopSystem];
+//                        [container.system.parent removeChild:container.system cleanup:NO];
+//                        container.checkoutTime = elapsedTime;
+//                        container.inuse = NO;
+//                    }
+//                }
+//            }
+//            [particleLibraryLock unlock];
+//        }
+//        expirationCheckTimer = 0.0;
+//    }
 }
 
 -(CCPointParticleSystem*) getParticleSystemForKey:(int)key
 {
-    CCPointParticleSystem * output = nil;
-    printf("particle request: ");
-    [particleLibraryLock lock];
-    for (ParticleContainer * container in (NSMutableArray*)[particleLibrary objectForKey:[NSNumber numberWithInt:key]])
-    {
-        if (!container.inuse) {
-            container.inuse = YES;
-            output = container.system;
-            checkedout ++;
-            printf("ok checkedout = %d", checkedout);
+    CCPointParticleSystem * system = nil;
+    switch (key) {
+        case iEffect_WaterExplosion: system = [CCPointParticleSystem particleWithFile:@"waterexplosion.plist"]; break;
+        case iEffect_SingleTargetOxygenShot: system = [CCPointParticleSystem particleWithFile:@"oxygenshot.plist"]; break;
+        case iEffect_SingleTargetOxygenHit: system = [CCPointParticleSystem particleWithFile:@"oxygenhit.plist"]; break;
+        case iEffect_SingleTargetSodiumShot: system = [CCPointParticleSystem particleWithFile:@"sodiumshot.plist"]; break;
+        case iEffect_SingleTargetSodiumHit: system = [CCPointParticleSystem particleWithFile:@"sodiumhit.plist"]; break;
+        case iEffect_SingleTargetHydrogenShot:system = [CCPointParticleSystem particleWithFile:@"hydrogenshot.plist"]; break;
+        case iEffect_SingleTargetHydrogenHit: system = [CCPointParticleSystem particleWithFile:@"hydrogenhit.plist"]; break;
+        case iEffect_SingleTargetNitrogenShot: system = [CCPointParticleSystem particleWithFile:@"nitrogenshot.plist"]; break;
+        case iEffect_SingleTargetNitrogenHit: system = [CCPointParticleSystem particleWithFile:@"nitrogenhit.plist"]; break;
+        case iEffect_SingleTargetChlorineShot: system = [CCPointParticleSystem particleWithFile:@"chlorineshot.plist"]; break;
+        case iEffect_SingleTargetChlorineHit: system = [CCPointParticleSystem particleWithFile:@"chlorinehit.plist"]; break;
+        case iEffect_SingleTargetCarbonShot: system = [CCPointParticleSystem particleWithFile:@"carbonshot.plist"]; break;
+        case iEffect_SingleTargetCarbonHit: system = [CCPointParticleSystem particleWithFile:@"carbonhit.plist"]; break;
+        case iEffect_SingleTargetFireball: system = [CCPointParticleSystem particleWithFile:@"cometshot.plist"]; break;
+        case iEffect_SingleTargetExplosion: system = [CCPointParticleSystem particleWithFile:@"explosion.plist"]; break;
+        case iEffect_SingleTargetFireballGreen: system = [CCPointParticleSystem particleWithFile:@"cometshotgreen.plist"]; break;
+        case iEffect_SingleTargetExplosionGreen: system = [CCPointParticleSystem particleWithFile:@"explosiongreen.plist"]; break;
+        case iEffect_SingleTargetWhiteSmoke: system = [CCPointParticleSystem particleWithFile:@"whitesmoke.plist"]; break;
+        case iEffect_SingleTargetBlackSmoke: system = [CCPointParticleSystem particleWithFile:@"blacksmoke.plist"]; break;
+        case iEffect_GreenBubbles: system = [CCPointParticleSystem particleWithFile:@"greenbubbles.plist"]; break;
+        case iEffect_SingleTargetFireballPepper: system = [CCPointParticleSystem particleWithFile:@"peppershot.plist"]; break;
+        case iEffect_SingleTargetExplosionPepper: system = [CCPointParticleSystem particleWithFile:@"pepperexplosion.plist"]; break;
+        case iEffect_GrayCloud: system = [CCPointParticleSystem particleWithFile:@"graycloud.plist"]; break;
+        case iEffect_Sleep: system = [CCPointParticleSystem particleWithFile:@"sleep.plist"]; break;
+        case iEffect_NitrousShot: system = [CCPointParticleSystem particleWithFile:@"nitrousshot.plist"]; break;
+        case iEffect_NitrousHit: system = [CCPointParticleSystem particleWithFile:@"nitroushit.plist"]; break;
+        case iEffect_BigExplosionRing: system = [CCPointParticleSystem particleWithFile:@"bigexplosionring.plist"]; break;
+        case iEffect_BigExplosionDebris: system = [CCPointParticleSystem particleWithFile:@"bigexplosiondebris.plist"]; break;
+        case iEffect_SingleTargetGreenSmoke: system = [CCPointParticleSystem particleWithFile:@"greensmoke.plist"]; break;
+        case iEffect_SingleTargetOrangeSmoke: system = [CCPointParticleSystem particleWithFile:@"orangesmoke.plist"]; break;            
+        default:
             break;
-        }
     }
-    [particleLibraryLock unlock];
-    printf("\n");
-    return output;
+    
+    return system;
+//    CCPointParticleSystem * output = nil;
+//    [particleLibraryLock lock];
+//    for (ParticleContainer * container in (NSMutableArray*)[particleLibrary objectForKey:[NSNumber numberWithInt:key]])
+//    {
+//        if (!container.inuse) {
+//            container.inuse = YES;
+//            container.checkoutTime = elapsedTime; 
+//            output = container.system;
+//            container.system.visible = true;
+//            [container.system resetSystem];
+//            checkedout ++;
+//            if (output == nil)
+//                printf("particle request: bad checkedout = %d\n", checkedout);
+//            else
+//                printf("particle request: ok checkedout = %d\n", checkedout);
+//            break;
+//        }
+//    }
+//    [particleLibraryLock unlock];
+//    if (output == nil)
+//        printf("particle request: bad checkedout = %d\n", checkedout);
+//
+//    return output;
 }
 
 -(void) releaseParticleSystem:(CCParticleSystem*)system
 {
-    printf("particle release = ");
-    for (int i = 1; i < 31; i++)
-    {
-        [particleLibraryLock lock];
-        for (ParticleContainer * container in (NSMutableArray*)[particleLibrary objectForKey:[NSNumber numberWithInt:i]])
-        {
-            if (container.system == system)
-            {
-                checkedout --;
-                printf("checkedout = %d", checkedout);
-                [container.system resetSystem];
-                [container.system stopSystem];
-                container.inuse = NO;
-                break;
-            }
-        }
-        [particleLibraryLock unlock];
-    }
-    printf("\n");
+//    printf("particle release = ");
+//    for (int i = 1; i < 31; i++)
+//    {
+//        [particleLibraryLock lock];
+//        for (ParticleContainer * container in (NSMutableArray*)[particleLibrary objectForKey:[NSNumber numberWithInt:i]])
+//        {
+//            if (container.system == system)
+//            {
+//                checkedout --;
+//                printf("checkedout = %d", checkedout);
+//                [container.system resetSystem];
+//                [container.system stopSystem];
+//                container.inuse = NO;
+//                break;
+//            }
+//        }
+//        [particleLibraryLock unlock];
+//    }
+//    printf("\n");
 }
 
 -(void) shootWithTower:(BaseTower*)tower creep:(Creep*)creep
@@ -163,7 +235,11 @@ static int checkedout;
     }
     else 
     {
-        CCParticleSystem * emitter = [self getParticleSystemForKey:tower.shotParticleKey];
+        CCPointParticleSystem * emitter = [self getParticleSystemForKey:tower.shotParticleKey];
+        if (!emitter)
+        {
+            printf("zomg emitter is null\n");
+        }
         emitter.position = [tower getTowerPosition];
         ShotContainer * newContainer = [[ShotContainer alloc] init];
         newContainer.tower = tower;
@@ -189,7 +265,7 @@ static int checkedout;
     int damage = theContainer.tower.minDamage + arc4random() % theContainer.tower.maxDamage;
     [theContainer.creep shoot:damage];
     
-    CCParticleSystem * system;
+    CCPointParticleSystem * system;
     
     switch (theContainer.tower.effectType) {
         case TowerEffectType_SplashHuge:

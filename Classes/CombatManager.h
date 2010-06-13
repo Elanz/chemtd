@@ -111,6 +111,7 @@
     NSMutableDictionary * particleLibrary;
     
     double elapsedTime;
+    double expirationCheckTimer;
 }
 
 -(void) tick:(double)elapsed;

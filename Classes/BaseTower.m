@@ -98,7 +98,7 @@
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         library = delegate.textureLibrary;
         towerSprite = [CCSprite spriteWithTexture:[library GetTextureWithKey:COLORTEXTURE_GRAY]];
-        [towerSprite addChild:powerDisplay z:1];
+        [towerSprite addChild:powerDisplay z:2];
         [towerSprite setVisible:NO];
         if (addToField)
             [gameField addChild:towerSprite z:1];
@@ -285,7 +285,18 @@
 - (void) setPower:(int)newPower
 {
     if (towerPower == newPower)
+    {
+        if (towerPower == 0)
+        {
+            [powerDisplay setString:String_NULL];
+        }
+        else 
+        {
+            [powerDisplay setString:[NSString stringWithFormat:@"%d", towerPower]];   
+        }
+        powerDisplay.visible = YES;
         return;
+    }
     
     towerPower = newPower;
     
@@ -306,6 +317,7 @@
     {
         [powerDisplay setString:[NSString stringWithFormat:@"%d", towerPower]];   
     }
+    powerDisplay.visible = YES;
 }
 
 - (void) upgrade

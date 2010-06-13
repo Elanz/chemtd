@@ -537,10 +537,7 @@
 			
 			if( particleCount == 0 && autoRemoveOnFinish_ ) {
 				[self unscheduleUpdate];
-				[parent_ removeChild:self cleanup:NO];
-                GameFieldScene * field = nil;
-                field = (GameFieldScene*)[[CCDirector sharedDirector].runningScene getChildByTag:1];
-                [field.combatManager releaseParticleSystem:self];
+				[parent_ removeChild:self cleanup:YES];
 				return;
 			}
 		}
