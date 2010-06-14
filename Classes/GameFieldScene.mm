@@ -254,10 +254,10 @@
 }
 
 - (void)onRestoreFromExplore
-{
-    exploreOpen = NO;
+{    
     [miniMenuBackground runAction:[CCFadeOut actionWithDuration:0.3]];
     [[CCDirector sharedDirector] resume];
+    exploreOpen = NO;
 }
 
 - (void) onExplore:(id)sender

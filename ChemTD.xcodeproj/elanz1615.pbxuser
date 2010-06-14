@@ -2,9 +2,9 @@
 {
 	1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1069, 1586}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1170, 1352}}";
 			sepNavSelRange = "{1112, 0}";
-			sepNavVisRange = "{446, 3342}";
+			sepNavVisRange = "{445, 4935}";
 			sepNavWindowFrame = "{{19, 0}, {1304, 878}}";
 		};
 	};
@@ -75,17 +75,17 @@
 			40459ACA11BBF74600DA11EF /* AOESpriteTrapEffect.m:64 */,
 			4029AD3711BC1B5B00A91D20 /* AspirinTower.m:78 */,
 			4029AD5E11BC1D0200A91D20 /* TowerManager.m:115 */,
-			40DDABE511C3093600E165D3 /* TouchHandler.mm:146 */,
+			40DDABE511C3093600E165D3 /* TouchHandler.mm:152 */,
 			40DDABED11C30B7000E165D3 /* GameFieldScene.mm:1084 */,
 			40DDABFB11C30C1000E165D3 /* GameFieldScene.mm:1045 */,
-			40DDAC4A11C3120D00E165D3 /* TouchHandler.mm:130 */,
-			40DDAC5411C3125200E165D3 /* TouchHandler.mm:132 */,
-			40DDAC5611C3125200E165D3 /* TouchHandler.mm:129 */,
-			40DDAC5811C3125400E165D3 /* TouchHandler.mm:133 */,
-			40DDAC7911C313DD00E165D3 /* TouchHandler.mm:138 */,
-			40DDACAE11C3174D00E165D3 /* TouchHandler.mm:268 */,
-			40DDACC711C3193200E165D3 /* TouchHandler.mm:264 */,
-			40DDAD1411C3231C00E165D3 /* TouchHandler.mm:460 */,
+			40DDAC4A11C3120D00E165D3 /* TouchHandler.mm:136 */,
+			40DDAC5411C3125200E165D3 /* TouchHandler.mm:138 */,
+			40DDAC5611C3125200E165D3 /* TouchHandler.mm:135 */,
+			40DDAC5811C3125400E165D3 /* TouchHandler.mm:139 */,
+			40DDAC7911C313DD00E165D3 /* TouchHandler.mm:144 */,
+			40DDACAE11C3174D00E165D3 /* TouchHandler.mm:274 */,
+			40DDACC711C3193200E165D3 /* TouchHandler.mm:270 */,
+			40DDAD1411C3231C00E165D3 /* TouchHandler.mm:472 */,
 			40DDAD2B11C3258A00E165D3 /* ChemTDAppDelegate.m:57 */,
 			40DDADA311C332EF00E165D3 /* GameFieldScene.mm:837 */,
 			40DDADB711C3349900E165D3 /* GameFieldScene.mm:335 */,
@@ -108,17 +108,17 @@
 			40060AA311C469090062F945 /* CombatManager.mm:239 */,
 			40060AAA11C469380062F945 /* CombatManager.mm:228 */,
 			40060AC111C46A180062F945 /* CombatManager.mm:177 */,
-			40060B1E11C471E00062F945 /* TouchHandler.mm:346 */,
-			40060B2611C472100062F945 /* TouchHandler.mm:348 */,
-			40BC11A011C52DA300F259A1 /* TouchHandler.mm:182 */,
+			40060B1E11C471E00062F945 /* TouchHandler.mm:352 */,
+			40060B2611C472100062F945 /* TouchHandler.mm:354 */,
+			40BC11A011C52DA300F259A1 /* TouchHandler.mm:188 */,
 			40BC11AA11C52ECD00F259A1 /* GameFieldScene.mm:864 */,
-			40BC121D11C53D7100F259A1 /* TouchHandler.mm:105 */,
+			40BC121D11C53D7100F259A1 /* TouchHandler.mm:111 */,
 			40BC129D11C54EC200F259A1 /* GameFieldScene.mm:886 */,
 			40BC12AC11C5505000F259A1 /* GameFieldScene.mm:876 */,
-			40BC12EC11C5581400F259A1 /* TouchHandler.mm:450 */,
+			40BC12EC11C5581400F259A1 /* TouchHandler.mm:462 */,
 			40BC12EE11C5583600F259A1 /* TouchHandler.mm:35 */,
-			40D087A611C56BC600BE4281 /* TouchHandler.mm:253 */,
-			40D087AF11C56C2000BE4281 /* TouchHandler.mm:250 */,
+			40D087A611C56BC600BE4281 /* TouchHandler.mm:259 */,
+			40D087AF11C56C2000BE4281 /* TouchHandler.mm:256 */,
 			40D087C211C56CC600BE4281 /* PathFinding.m:95 */,
 			40D087CC11C56CE500BE4281 /* PathFinding.m:128 */,
 			40D087D711C56D5700BE4281 /* PathFinding.m:166 */,
@@ -128,7 +128,7 @@
 			40D087FA11C56EB500BE4281 /* PathFinding.m:221 */,
 			40D087FC11C56EB600BE4281 /* PathFinding.m:222 */,
 			40D087FE11C56EBB00BE4281 /* PathFinding.m:250 */,
-			40D0881C11C56FA900BE4281 /* TouchHandler.mm:251 */,
+			40D0881C11C56FA900BE4281 /* TouchHandler.mm:257 */,
 			40C7DB8D11C5B75200468211 /* GameFieldScene.mm:265 */,
 		);
 		codeSenseManager = 40A4572E11984EE80001025F /* Code sense */;
@@ -192,7 +192,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					890,
+					992,
 					20,
 					48,
 					43,
@@ -231,21 +231,21 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 298161829;
-			PBXWorkspaceStateSaveDate = 298161829;
+			PBXPerProjectTemplateStateSaveDate = 298237346;
+			PBXWorkspaceStateSaveDate = 298237346;
 		};
 		perUserProjectItems = {
-			40C7DB6011C5B2C900468211 /* PBXTextBookmark */ = 40C7DB6011C5B2C900468211 /* PBXTextBookmark */;
+			40022D0611C6BE1B00A6974A /* PBXTextBookmark */ = 40022D0611C6BE1B00A6974A /* PBXTextBookmark */;
+			40022D0711C6BE1B00A6974A /* PBXTextBookmark */ = 40022D0711C6BE1B00A6974A /* PBXTextBookmark */;
+			40022D0811C6BE1B00A6974A /* PBXTextBookmark */ = 40022D0811C6BE1B00A6974A /* PBXTextBookmark */;
+			40022D0911C6BE1B00A6974A /* PBXTextBookmark */ = 40022D0911C6BE1B00A6974A /* PBXTextBookmark */;
+			40022D1B11C6BE2B00A6974A /* PBXTextBookmark */ = 40022D1B11C6BE2B00A6974A /* PBXTextBookmark */;
 			40C7DB8311C5B71700468211 /* PBXTextBookmark */ = 40C7DB8311C5B71700468211 /* PBXTextBookmark */;
 			40C7DB8411C5B71700468211 /* PBXTextBookmark */ = 40C7DB8411C5B71700468211 /* PBXTextBookmark */;
 			40C7DB8611C5B71700468211 /* PBXTextBookmark */ = 40C7DB8611C5B71700468211 /* PBXTextBookmark */;
 			40C7DB8711C5B71700468211 /* PBXTextBookmark */ = 40C7DB8711C5B71700468211 /* PBXTextBookmark */;
 			40C7DB8811C5B71700468211 /* PBXTextBookmark */ = 40C7DB8811C5B71700468211 /* PBXTextBookmark */;
 			40C7DBA611C5B7E900468211 /* PBXTextBookmark */ = 40C7DBA611C5B7E900468211 /* PBXTextBookmark */;
-			40C7DBAB11C5B80800468211 /* PBXTextBookmark */ = 40C7DBAB11C5B80800468211 /* PBXTextBookmark */;
-			40C7DBBA11C5B9AB00468211 /* PBXTextBookmark */ = 40C7DBBA11C5B9AB00468211 /* PBXTextBookmark */;
-			40C7DBBB11C5B9AB00468211 /* PBXTextBookmark */ = 40C7DBBB11C5B9AB00468211 /* PBXTextBookmark */;
-			40C7DBBC11C5B9AB00468211 /* PBXTextBookmark */ = 40C7DBBC11C5B9AB00468211 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 40A4572D11984EE80001025F /* Source Control */;
 		userBuildSettings = {
@@ -290,6 +290,56 @@
 		state = 0;
 		symbolName = "_NSLockError()";
 	};
+	40022D0611C6BE1B00A6974A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
+		name = "ChemTDAppDelegate.m: 40";
+		rLen = 0;
+		rLoc = 1112;
+		rType = 0;
+		vrLen = 4935;
+		vrLoc = 445;
+	};
+	40022D0711C6BE1B00A6974A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40FF395D11B16E85000993CB /* MainMenuScene.mm */;
+		name = "MainMenuScene.mm: 636";
+		rLen = 0;
+		rLoc = 29685;
+		rType = 0;
+		vrLen = 2205;
+		vrLoc = 11605;
+	};
+	40022D0811C6BE1B00A6974A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
+		name = "TouchHandler.mm: 364";
+		rLen = 0;
+		rLoc = 13690;
+		rType = 0;
+		vrLen = 2153;
+		vrLoc = 12685;
+	};
+	40022D0911C6BE1B00A6974A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
+		name = "GameFieldScene.mm: 274";
+		rLen = 0;
+		rLoc = 9750;
+		rType = 0;
+		vrLen = 2166;
+		vrLoc = 8638;
+	};
+	40022D1B11C6BE2B00A6974A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
+		name = "GameFieldScene.mm: 257";
+		rLen = 0;
+		rLoc = 9118;
+		rType = 0;
+		vrLen = 1847;
+		vrLoc = 8535;
+	};
 	4002DA5611B2B9A30057117D /* GameFieldScene.mm:902 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -322,7 +372,7 @@
 		ignoreCount = 0;
 		lineNumber = 231;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055098;
+		modificationTime = 298170726.0550981;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -560,7 +610,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40060B1E11C471E00062F945 /* TouchHandler.mm:346 */ = {
+	40060B1E11C471E00062F945 /* TouchHandler.mm:352 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -572,13 +622,13 @@
 		functionName = "-HandleTouchEndPlace:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 346;
+		lineNumber = 352;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.056072;
+		modificationTime = 298170726.0560719;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40060B2611C472100062F945 /* TouchHandler.mm:348 */ = {
+	40060B2611C472100062F945 /* TouchHandler.mm:354 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -590,7 +640,7 @@
 		functionName = "-HandleTouchEndPlace:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 348;
+		lineNumber = 354;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.056081;
 		originalNumberOfMultipleMatches = 1;
@@ -624,7 +674,7 @@
 		ignoreCount = 0;
 		lineNumber = 170;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.05535;
+		modificationTime = 298170726.0553499;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -772,7 +822,7 @@
 		ignoreCount = 0;
 		lineNumber = 115;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055582;
+		modificationTime = 298170726.0555819;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1022,7 +1072,7 @@
 		ignoreCount = 0;
 		lineNumber = 540;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055914;
+		modificationTime = 298170726.0559139;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1131,7 +1181,7 @@
 		ignoreCount = 0;
 		lineNumber = 59;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055965;
+		modificationTime = 298170726.0559649;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1537,7 +1587,7 @@
 		ignoreCount = 0;
 		lineNumber = 671;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055358;
+		modificationTime = 298170726.0553581;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1645,7 +1695,7 @@
 		ignoreCount = 0;
 		lineNumber = 409;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055434;
+		modificationTime = 298170726.0554339;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1738,7 +1788,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40BC11A011C52DA300F259A1 /* TouchHandler.mm:182 */ = {
+	40BC11A011C52DA300F259A1 /* TouchHandler.mm:188 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -1750,7 +1800,7 @@
 		functionName = "-HandleMultitouchMove:withEvent:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 182;
+		lineNumber = 188;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.056091;
 		originalNumberOfMultipleMatches = 1;
@@ -1774,7 +1824,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40BC121D11C53D7100F259A1 /* TouchHandler.mm:105 */ = {
+	40BC121D11C53D7100F259A1 /* TouchHandler.mm:111 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -1786,7 +1836,7 @@
 		functionName = "-HandleMultitouchBegin:withEvent:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 105;
+		lineNumber = 111;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.056111;
 		originalNumberOfMultipleMatches = 1;
@@ -1828,7 +1878,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40BC12EC11C5581400F259A1 /* TouchHandler.mm:450 */ = {
+	40BC12EC11C5581400F259A1 /* TouchHandler.mm:462 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -1840,7 +1890,7 @@
 		functionName = "-HandleccTouchesEnded:withEvent:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 450;
+		lineNumber = 462;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.056137;
 		originalNumberOfMultipleMatches = 1;
@@ -1887,9 +1937,9 @@
 	};
 	40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1068, 6799}}";
-			sepNavSelRange = "{1166, 0}";
-			sepNavVisRange = "{988, 1511}";
+			sepNavIntBoundsRect = "{{0, 0}, {1170, 6461}}";
+			sepNavSelRange = "{13690, 0}";
+			sepNavVisRange = "{12685, 2153}";
 		};
 	};
 	40BC50CF11AEDD5200A8F497 /* levels_easy.dat */ = {
@@ -1950,16 +2000,6 @@
 			sepNavVisRange = "{0, 295}";
 			sepNavWindowFrame = "{{19, 0}, {957, 878}}";
 		};
-	};
-	40C7DB6011C5B2C900468211 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
-		name = "ChemTDAppDelegate.m: 40";
-		rLen = 0;
-		rLoc = 1112;
-		rType = 0;
-		vrLen = 3211;
-		vrLoc = 445;
 	};
 	40C7DB8311C5B71700468211 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -2039,46 +2079,6 @@
 		vrLen = 1514;
 		vrLoc = 397;
 	};
-	40C7DBAB11C5B80800468211 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
-		name = "TouchHandler.mm: 50";
-		rLen = 0;
-		rLoc = 1166;
-		rType = 0;
-		vrLen = 1511;
-		vrLoc = 988;
-	};
-	40C7DBBA11C5B9AB00468211 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 40FF395D11B16E85000993CB /* MainMenuScene.mm */;
-		name = "MainMenuScene.mm: 636";
-		rLen = 0;
-		rLoc = 29685;
-		rType = 0;
-		vrLen = 2961;
-		vrLoc = 13607;
-	};
-	40C7DBBB11C5B9AB00468211 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 40F1796611988B8400C6A7DF /* GameFieldScene.mm */;
-		name = "GameFieldScene.mm: 274";
-		rLen = 0;
-		rLoc = 9746;
-		rType = 0;
-		vrLen = 1681;
-		vrLoc = 9022;
-	};
-	40C7DBBC11C5B9AB00468211 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 1F3B9A2B0EF2145700286867 /* ChemTDAppDelegate.m */;
-		name = "ChemTDAppDelegate.m: 40";
-		rLen = 0;
-		rLoc = 1112;
-		rType = 0;
-		vrLen = 3342;
-		vrLoc = 446;
-	};
 	40CF2D2511AF3E22008789D0 /* GameFieldScene.mm:894 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -2093,7 +2093,7 @@
 		ignoreCount = 0;
 		lineNumber = 894;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.054923;
+		modificationTime = 298170726.0549229;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2151,7 +2151,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40D087A611C56BC600BE4281 /* TouchHandler.mm:253 */ = {
+	40D087A611C56BC600BE4281 /* TouchHandler.mm:259 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2163,13 +2163,13 @@
 		functionName = "-testForBlock:cellY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 253;
+		lineNumber = 259;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.056162;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40D087AF11C56C2000BE4281 /* TouchHandler.mm:250 */ = {
+	40D087AF11C56C2000BE4281 /* TouchHandler.mm:256 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2181,7 +2181,7 @@
 		functionName = "-testForBlock:cellY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 250;
+		lineNumber = 256;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.05617;
 		originalNumberOfMultipleMatches = 1;
@@ -2219,7 +2219,7 @@
 		ignoreCount = 0;
 		lineNumber = 128;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.056202;
+		modificationTime = 298170726.0562021;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2345,11 +2345,11 @@
 		ignoreCount = 0;
 		lineNumber = 250;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.056283;
+		modificationTime = 298170726.0562831;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40D0881C11C56FA900BE4281 /* TouchHandler.mm:251 */ = {
+	40D0881C11C56FA900BE4281 /* TouchHandler.mm:257 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2361,7 +2361,7 @@
 		functionName = "-testForBlock:cellY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 251;
+		lineNumber = 257;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.056291;
 		originalNumberOfMultipleMatches = 1;
@@ -2668,7 +2668,7 @@
 			sepNavVisRange = "{0, 857}";
 		};
 	};
-	40DDABE511C3093600E165D3 /* TouchHandler.mm:146 */ = {
+	40DDABE511C3093600E165D3 /* TouchHandler.mm:152 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2680,7 +2680,7 @@
 		functionName = "-HandleSingletouchBegin:withEvent:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 146;
+		lineNumber = 152;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.0556;
 		originalNumberOfMultipleMatches = 1;
@@ -2722,7 +2722,7 @@
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40DDAC4A11C3120D00E165D3 /* TouchHandler.mm:130 */ = {
+	40DDAC4A11C3120D00E165D3 /* TouchHandler.mm:136 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2734,64 +2734,13 @@
 		functionName = "-HandleSingletouchBegin:withEvent:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 130;
+		lineNumber = 136;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.055643;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40DDAC5411C3125200E165D3 /* TouchHandler.mm:132 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
-		functionName = "-HandleSingletouchBegin:withEvent:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 132;
-		modificationTime = 298170726.055651;
-		originalNumberOfMultipleMatches = 0;
-		state = 2;
-	};
-	40DDAC5611C3125200E165D3 /* TouchHandler.mm:129 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
-		functionName = "-HandleSingletouchBegin:withEvent:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 129;
-		modificationTime = 298170726.055672;
-		originalNumberOfMultipleMatches = 0;
-		state = 2;
-	};
-	40DDAC5811C3125400E165D3 /* TouchHandler.mm:133 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
-		functionName = "-HandleSingletouchBegin:withEvent:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 133;
-		modificationTime = 298170726.055688;
-		originalNumberOfMultipleMatches = 0;
-		state = 2;
-	};
-	40DDAC7911C313DD00E165D3 /* TouchHandler.mm:138 */ = {
+	40DDAC5411C3125200E165D3 /* TouchHandler.mm:138 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2804,12 +2753,63 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 138;
+		modificationTime = 298170726.055651;
+		originalNumberOfMultipleMatches = 0;
+		state = 2;
+	};
+	40DDAC5611C3125200E165D3 /* TouchHandler.mm:135 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
+		functionName = "-HandleSingletouchBegin:withEvent:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 135;
+		modificationTime = 298170726.055672;
+		originalNumberOfMultipleMatches = 0;
+		state = 2;
+	};
+	40DDAC5811C3125400E165D3 /* TouchHandler.mm:139 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
+		functionName = "-HandleSingletouchBegin:withEvent:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 139;
+		modificationTime = 298170726.055688;
+		originalNumberOfMultipleMatches = 0;
+		state = 2;
+	};
+	40DDAC7911C313DD00E165D3 /* TouchHandler.mm:144 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 40BC4F6A11AEB2BF00A8F497 /* TouchHandler.mm */;
+		functionName = "-HandleSingletouchBegin:withEvent:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 144;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.055703;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40DDACAE11C3174D00E165D3 /* TouchHandler.mm:268 */ = {
+	40DDACAE11C3174D00E165D3 /* TouchHandler.mm:274 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2821,13 +2821,13 @@
 		functionName = "-HandleTouchEndBuild:cellY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 268;
+		lineNumber = 274;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.055715;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40DDACC711C3193200E165D3 /* TouchHandler.mm:264 */ = {
+	40DDACC711C3193200E165D3 /* TouchHandler.mm:270 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2839,13 +2839,13 @@
 		functionName = "-HandleTouchEndBuild:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 264;
+		lineNumber = 270;
 		location = "ChemTD-iPad";
 		modificationTime = 298170726.055727;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
-	40DDAD1411C3231C00E165D3 /* TouchHandler.mm:460 */ = {
+	40DDAD1411C3231C00E165D3 /* TouchHandler.mm:472 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -2857,8 +2857,8 @@
 		functionName = "-adjustTouchLocationWithY:";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 460;
-		modificationTime = 298170726.055744;
+		lineNumber = 472;
+		modificationTime = 298170726.0557441;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -2986,7 +2986,7 @@
 		ignoreCount = 0;
 		lineNumber = 333;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055253;
+		modificationTime = 298170726.0552531;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3022,7 +3022,7 @@
 		ignoreCount = 0;
 		lineNumber = 434;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055275;
+		modificationTime = 298170726.0552751;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3108,7 +3108,7 @@
 		ignoreCount = 0;
 		lineNumber = 390;
 		location = "ChemTD-iPad";
-		modificationTime = 298170726.055337;
+		modificationTime = 298170726.0553371;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3200,9 +3200,9 @@
 	};
 	40F1796611988B8400C6A7DF /* GameFieldScene.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1068, 15561}}";
-			sepNavSelRange = "{9746, 0}";
-			sepNavVisRange = "{9022, 1681}";
+			sepNavIntBoundsRect = "{{0, 0}, {1170, 15106}}";
+			sepNavSelRange = "{9118, 0}";
+			sepNavVisRange = "{8535, 1847}";
 			sepNavWindowFrame = "{{19, 0}, {957, 878}}";
 		};
 	};
@@ -3215,9 +3215,9 @@
 	};
 	40FF395D11B16E85000993CB /* MainMenuScene.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1167, 10062}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1170, 9399}}";
 			sepNavSelRange = "{29685, 0}";
-			sepNavVisRange = "{13607, 2961}";
+			sepNavVisRange = "{11605, 2205}";
 			sepNavWindowFrame = "{{19, 0}, {1304, 878}}";
 		};
 	};

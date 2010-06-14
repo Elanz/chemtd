@@ -80,6 +80,12 @@
 
 - (void)HandleccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (gameField.exploreOpen)
+    {
+        [gameField onRestoreFromExplore];
+        return;
+    }
+    
     firstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch locationInView:nil]];
     previousFirstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch previousLocationInView:nil]];
     if (secondTouch)
@@ -359,6 +365,12 @@
 
 - (void)HandleccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (gameField.exploreOpen)
+    {
+        [gameField onRestoreFromExplore];
+        return;
+    }
+    
     firstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch locationInView:nil]];
     previousFirstTouchLocation = [[CCDirector sharedDirector] convertToGL:[firstTouch previousLocationInView:nil]];
     if (secondTouch)
