@@ -92,34 +92,34 @@
                                                   swallowsTouches:YES];
         
         [self schedule:@selector(doLoginCheck:)];
-        [self schedule:@selector(tick:)];
+//        [self schedule:@selector(tick:)];
     }
     return self;
 }
 
 - (void) tick:(ccTime)elapsed
 {
-    if (scrollVelocity >.5)
-    {
-        float percentToDecay = scrollVelocity * 0.05;
-        scrollVelocity -= percentToDecay;
-        float percentToMove = scrollVelocity / originalVelocity;
-        if (towerScrollLayer)
-        {
-            [self updateScrollOffsetWithDeltaX:(scrollVector.x*percentToMove)];
-        }
-    }
+//    if (scrollVelocity >.5)
+//    {
+//        float percentToDecay = scrollVelocity * 0.05;
+//        scrollVelocity -= percentToDecay;
+//        float percentToMove = scrollVelocity / originalVelocity;
+//        if (towerScrollLayer)
+//        {
+//            [self updateScrollOffsetWithDeltaX:(scrollVector.x*percentToMove)];
+//        }
+//    }
 }
 
 - (void)updateScrollOffsetWithDeltaX:(float)DeltaX
 {
-    float newvalue = towerScrollLayer.position.x+DeltaX;
-    if (newvalue > 180)
-        newvalue = 180;
-    if (newvalue < -10533)
-        newvalue = -10533;
-    
-    towerScrollLayer.position = ccp(newvalue, towerScrollLayer.position.y);
+//    float newvalue = towerScrollLayer.position.x+DeltaX;
+//    if (newvalue > 180)
+//        newvalue = 180;
+//    if (newvalue < -10533)
+//        newvalue = -10533;
+//    
+//    towerScrollLayer.position = ccp(newvalue, towerScrollLayer.position.y);
 }
 
 - (void)startMOTDcrawl
@@ -310,116 +310,160 @@
     minimenuLayer.position = ccp(0,0);
     
     miniMenuBackground = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_EXPLORERBACKGROUND]];
-    [minimenuLayer addChild:miniMenuBackground];
+
     
-    CCSprite * mainMenuBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MAINMENUBTN]];
-    CCMenuItemSprite * menuItemMainMenu = [CCMenuItemSprite itemFromNormalSprite:mainMenuBtn selectedSprite:mainMenuBtn 
-                                                                  disabledSprite:mainMenuBtn target:self selector:@selector(onMainMenu:)];
-    
-    menuItemMainMenu.scale = .75;
-    
-    mainMenu = [CCMenu menuWithItems: menuItemMainMenu, nil];
-    mainMenu.position = ccp(device_width/2,device_height-704);
-    [minimenuLayer addChild:mainMenu z:4];
+//    CCSprite * mainMenuBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MAINMENUBTN]];
+//    CCMenuItemSprite * menuItemMainMenu = [CCMenuItemSprite itemFromNormalSprite:mainMenuBtn selectedSprite:mainMenuBtn 
+//                                                                  disabledSprite:mainMenuBtn target:self selector:@selector(onMainMenu:)];
+//    
+//    menuItemMainMenu.scale = .75;
+//    
+//    mainMenu = [CCMenu menuWithItems: menuItemMainMenu, nil];
+//    mainMenu.position = ccp(device_width/2,device_height-704);
+//    mainMenu z:4];
     
     miniMenuBackground.position = ccp(device_width/2, device_height/2);
     
-    towerScrollLayer = [[CCLayer alloc] init];
-    towerScrollLayer.position = ccp(180, -35);
-    for (int i = 1;i <= NumberOfTowerTypes;i++)
-    {
-        [towerScrollLayer addChild:[self createTowerCardForType:i x:((i-1)*(342+25)) y:474] z:5];
-    }
+//    towerScrollLayer = [[CCLayer alloc] init];
+//    towerScrollLayer.position = ccp(180, -35);
+//    for (int i = 1;i <= NumberOfTowerTypes;i++)
+//    {
+//        [towerScrollLayer addChild:[self createTowerCardForType:i x:((i-1)*(342+25)) y:474] z:5];
+//    }
+//    [[CCDirector sharedDirector].runningScene addChild: towerScrollLayer z:3]; 
     
-    [[CCDirector sharedDirector].runningScene addChild: towerScrollLayer z:3]; 
+//    int row1 = -10;
+//    int row2 = row1 + CardHeight;
+//    int row3 = row2 + CardHeight;
+//    int row4 = row3 + CardHeight;
+//    int col1 = 0;
+//    int col2 = col1 + CardWidth;
+//    int col3 = col2 + CardWidth;
+//    int col4 = col3 + CardWidth;
+//    int col5 = col4 + CardWidth;
+//    int col6 = col5 + CardWidth;
+//    
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Carbon x:row1 y:col1];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Hydrogen x:row2 y:col1];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Nitrogen x:row3 y:col1];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Oxygen x:row4 y:col1];
+//    
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_CarbonMonoxide x:row1 y:col2];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Cyanide x:row2 y:col2];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Nitrous x:row3 y:col2];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_CarbonDioxide x:row4 y:col2];
+//    
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Acetylene x:row1 y:col3];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Ammonia x:row2 y:col3];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_NitricAcid x:row3 y:col3];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Water x:row4 y:col3];
+//    
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Rubber x:row1 y:col4];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Methane x:row2 y:col4];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Nitroglycerine x:row3 y:col4];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Ethanol x:row4 y:col4];
+//    
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Aspirin x:row1 y:col5];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Tylenol x:row2 y:col5];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_TNT x:row3 y:col5];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_VitaminC x:row4 y:col5];
+//    
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Capsaicin x:row1 y:col6];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Caffeine x:row2 y:col6];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_RDX x:row3 y:col6];
+//    [self createTowerCardForType:miniMenuBackground towerType:TowerType_Tetrodotoxin x:row4 y:col6];
     
     //menuItemChallenges.isEnabled = NO;
     menuItemExplore.isEnabled = NO;
     menuItemPlay.isEnabled = NO;
     menuItemRanking.isEnabled = NO;
     menuItemChangeUser.isEnabled = NO;
+    
+    [miniMenuBackground runAction:[CCFadeIn actionWithDuration:0.3]];
+    [minimenuLayer addChild:miniMenuBackground];
     [[CCDirector sharedDirector].runningScene addChild: minimenuLayer z:2]; 
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    scrollVelocity = 0.0;
-    if (towerScrollLayer)
-    {
-        CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView:nil]];
-        if (location.y < device_height - 578)
-        {
-            //rangelow = -10900;
-            //rangehigh = 180;
-            //range = 10720;
-            float percentX = location.x / device_width;
-            int newvalue;
-            if (percentX < .05)
-            {
-                newvalue = 180;
-            }
-            else if (percentX > .95)
-            {
-                newvalue = -10533;
-            }
-            else
-            {
-                newvalue = 180 - (10713 * percentX);
-            }
-            float diff = abs(towerScrollLayer.position.x - newvalue);
-            if (newvalue > 180)
-                newvalue = 180;
-            if (newvalue < -10533)
-                newvalue = -10533;
-            float duration = 0.0;
-            if (diff < 1000)
-                duration = 0.2;
-            if (diff >= 1000 && diff < 5000)
-                duration = 0.5;
-            if (diff >= 5000 && diff < 8000)
-                duration = 0.7;
-            if (diff > 8000)
-                duration = 1.0;
-            
-            //printf("%f, %d\n", diff, newvalue);
-            
-            [towerScrollLayer runAction:[CCMoveTo actionWithDuration:duration position:ccp(newvalue,towerScrollLayer.position.y)]];
-            return NO;
-        }
-        else {
-            return YES;
-        }
-    }
+    [self onMainMenu:nil];
+//    scrollVelocity = 0.0;
+//    if (towerScrollLayer)
+//    {
+//        CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView:nil]];
+//        if (location.y < device_height - 578)
+//        {
+//            //rangelow = -10900;
+//            //rangehigh = 180;
+//            //range = 10720;
+//            float percentX = location.x / device_width;
+//            int newvalue;
+//            if (percentX < .05)
+//            {
+//                newvalue = 180;
+//            }
+//            else if (percentX > .95)
+//            {
+//                newvalue = -10533;
+//            }
+//            else
+//            {
+//                newvalue = 180 - (10713 * percentX);
+//            }
+//            float diff = abs(towerScrollLayer.position.x - newvalue);
+//            if (newvalue > 180)
+//                newvalue = 180;
+//            if (newvalue < -10533)
+//                newvalue = -10533;
+//            float duration = 0.0;
+//            if (diff < 1000)
+//                duration = 0.2;
+//            if (diff >= 1000 && diff < 5000)
+//                duration = 0.5;
+//            if (diff >= 5000 && diff < 8000)
+//                duration = 0.7;
+//            if (diff > 8000)
+//                duration = 1.0;
+//            
+//            //printf("%f, %d\n", diff, newvalue);
+//            
+//            [towerScrollLayer runAction:[CCMoveTo actionWithDuration:duration position:ccp(newvalue,towerScrollLayer.position.y)]];
+//            return NO;
+//        }
+//        else {
+//            return YES;
+//        }
+//    }
     return NO;
 }
 
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    if (towerScrollLayer)
-    {
-        CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView:nil]];
-        CGPoint previouslocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView:nil]];
-        int newvalue;
-        float diff = location.x - previouslocation.x;
-        newvalue = towerScrollLayer.position.x+diff;
-        if (newvalue > 180)
-            newvalue = 180;
-        if (newvalue < -10533)
-            newvalue = -10533;
-        
-        towerScrollLayer.position = ccp(newvalue,towerScrollLayer.position.y);
-
-    }
+//    if (towerScrollLayer)
+//    {
+//        CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView:nil]];
+//        CGPoint previouslocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView:nil]];
+//        int newvalue;
+//        float diff = location.x - previouslocation.x;
+//        newvalue = towerScrollLayer.position.x+diff;
+//        if (newvalue > 180)
+//            newvalue = 180;
+//        if (newvalue < -10533)
+//            newvalue = -10533;
+//        
+//        towerScrollLayer.position = ccp(newvalue,towerScrollLayer.position.y);
+//
+//    }
 }
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    CGPoint firstTouchLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView:nil]];
-    CGPoint previousFirstTouchLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView:nil]];
-    
-    scrollVelocity = [self distanceBetweenPointsA:firstTouchLocation B:previousFirstTouchLocation];
-    originalVelocity = scrollVelocity;
-    scrollVector = ccp(firstTouchLocation.x - previousFirstTouchLocation.x, firstTouchLocation.y - previousFirstTouchLocation.y);
-    
-    //printf("velocity = %f, x = %f, d = %f\n", scrollVelocity, scrollVector.x, scrollVector.y);
+//    CGPoint firstTouchLocation = [[CCDirector sharedDirector] convertToGL:[touch locationInView:nil]];
+//    CGPoint previousFirstTouchLocation = [[CCDirector sharedDirector] convertToGL:[touch previousLocationInView:nil]];
+//    
+//    scrollVelocity = [self distanceBetweenPointsA:firstTouchLocation B:previousFirstTouchLocation];
+//    originalVelocity = scrollVelocity;
+//    scrollVector = ccp(firstTouchLocation.x - previousFirstTouchLocation.x, firstTouchLocation.y - previousFirstTouchLocation.y);
+//    
+//    //printf("velocity = %f, x = %f, d = %f\n", scrollVelocity, scrollVector.x, scrollVector.y);
 }
 
 - (float)distanceBetweenPointsA:(CGPoint)a B:(CGPoint)b
@@ -429,14 +473,11 @@
     return sqrt((firstDifference*firstDifference)+(secondDifference*secondDifference));
 }
 
--(CCSprite*) createTowerCardForType:(int)towerType x:(int)x y:(int)y
+-(void) createTowerCardForType:(CCSprite*)backgroundSprite towerType:(int)towerType x:(int)x y:(int)y
 {
-    CCSprite * card = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_TOWERCARDBACKGROUND]];
-    card.position = ccp(x,y);
     ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
     BaseTower * tower = [delegate constructTowerWithType:towerType gameField:nil addToField:NO];
-    [tower prepareCard:(CCSprite*)card];
-    return card;
+    [tower prepareCard:backgroundSprite baseX:y baseY:x];
 }
 
 -(void) onExplore: (id) sender
@@ -572,7 +613,7 @@
     [layer addChild:label z:4];
 }
 
--(void) onMainMenu:(id) sender
+-(void) restoreMenu
 {
     //self.isTouchEnabled = YES;
     //menuItemChallenges.isEnabled = NO;
@@ -586,7 +627,17 @@
     {
         [[CCDirector sharedDirector].runningScene removeChild:towerScrollLayer cleanup:YES];
         towerScrollLayer = nil;
-    }
+    }  
+}
+
+-(void) onMainMenu:(id) sender
+{
+    [miniMenuBackground runAction:[CCFadeOut actionWithDuration:0.3]];
+    
+    id action1 = [CCDelayTime actionWithDuration:0.3];
+    id action2 = [CCCallFunc actionWithTarget:self selector:@selector(restoreMenu)];
+    id action3 = [CCSequence actions:action1, action2, nil];
+    [self runAction:action3];
 }
 
 -(void) showRankingLayer

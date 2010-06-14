@@ -143,8 +143,11 @@
     
     int backgroundId;
     NSArray * statArray;
+    
+    BOOL exploreOpen;
 }
 
+@property (nonatomic) BOOL exploreOpen;
 @property (nonatomic) CGPoint startPosition;
 @property (nonatomic,retain) UserManager * userManager;
 @property (nonatomic) double lastStablegameTimer;
@@ -189,6 +192,8 @@
 +(id) scene;
 +(id) sceneWithLoad;
 
+- (void)onRestoreFromExplore;
+- (void)onExplore:(id)sender;
 - (void)showMenu;
 - (void)addEffect:(BaseEffect*)effect;
 - (void)removeEffect:(BaseEffect*)effect;

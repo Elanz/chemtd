@@ -12,6 +12,9 @@
 #import "GameFieldScene.h"
 #import "TextureLibrary.h"
 
+#define CardHeight 184
+#define CardWidth 170
+
 #define TowerBaseRange 50
 
 #define TowerType_Base 0
@@ -162,13 +165,13 @@
 - (void)towerPicked;
 - (void)addEffect:(BaseEffect*)effect;
 - (void)makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string towerCard:(CCSprite*)towerCard;
-- (void)prepareCard:(CCSprite*)towerCard;
-- (void)addIcon:(CCSprite*)towerCard;
-- (void)addName:(CCSprite*)towerCard;
-- (void)addClass:(CCSprite*)towerCard;
-- (void)addStats:(CCSprite*)towerCard;
-- (void)addDescription:(CCSprite*)towerCard;
-- (void)addFormula:(CCSprite*)towerCard;
+- (void)prepareCard:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
+- (void)addIcon:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
+- (void)addName:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
+- (void)addClass:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
+- (void)addStats:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
+- (void)addDescription:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
+- (void)addFormula:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY;
 
 - (id)initWithGameField:(GameFieldScene*)theGameField addToField:(BOOL)addToField;
 

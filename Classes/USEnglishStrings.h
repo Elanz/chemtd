@@ -21,6 +21,7 @@
 #define String_RNGLabel @"RNG:"
 #define String_DMGLabel @"DMG:"
 #define String_SPDLabel @"SPD:"
+#define String_TGTLabel @"TGT:"
 
 #define String_DontBlock @"DON'T BLOCK!!!"
 

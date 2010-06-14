@@ -73,13 +73,14 @@
 
 +(id) scene;
 
+- (void) restoreMenu;
 - (void) onEasy: (id) sender;
 - (void) onMedium: (id) sender;
 - (void) onHard: (id) sender;
 - (void)refreshDifficultyDisplay;
 - (void)updateScrollOffsetWithDeltaX:(float)DeltaX;
 - (float)distanceBetweenPointsA:(CGPoint)a B:(CGPoint)b;
-- (CCSprite*) createTowerCardForType:(int)towerType x:(int)x y:(int)y;
+- (void) createTowerCardForType:(CCSprite*)backgroundSprite towerType:(int)towerType x:(int)x y:(int)y;
 - (void) showExplorerLayer;
 - (void) showRankingLayer;
 - (void) createRankingLabel:(int)x y:(int)y layer:(CCLayer*)layer string:(NSString*)string;

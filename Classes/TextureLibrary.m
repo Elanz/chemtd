@@ -137,6 +137,7 @@
         case UITEXTURE_EASYBTN: return [self LoadTextureWithName:@"easybtn.png" textureKey:textureKey isPVR:NO]; break;
         case UITEXTURE_MEDIUMBTN: return [self LoadTextureWithName:@"mediumbtn.png" textureKey:textureKey isPVR:NO]; break;
         case UITEXTURE_HARDBTN: return [self LoadTextureWithName:@"hardbtn.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_EXPLOREMINIBTN: return [self LoadTextureWithName:@"ExploreBtnMini.png" textureKey:textureKey isPVR:NO]; break;
         default:
             break;
     }

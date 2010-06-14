@@ -107,6 +107,7 @@
 		40C0B424119CCCA800FA31D4 /* NitrogenTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C0B423119CCCA800FA31D4 /* NitrogenTower.m */; };
 		40C0B42E119CCDB900FA31D4 /* OxygenTower.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C0B42D119CCDB900FA31D4 /* OxygenTower.m */; };
 		40C0B4D7119CE13500FA31D4 /* ElementMixer.png in Resources */ = {isa = PBXBuildFile; fileRef = 40C0B4D6119CE13500FA31D4 /* ElementMixer.png */; };
+		40C7DB6611C5B3EB00468211 /* ExploreBtnMini.png in Resources */ = {isa = PBXBuildFile; fileRef = 40C7DB6511C5B3EB00468211 /* ExploreBtnMini.png */; };
 		40CF2DDC11AF4B51008789D0 /* levels_easy.dat in Resources */ = {isa = PBXBuildFile; fileRef = 40BC50CF11AEDD5200A8F497 /* levels_easy.dat */; };
 		40D6BA5011AB6ADC00F4666E /* acetylene.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3011AB6ADC00F4666E /* acetylene.png */; };
 		40D6BA5211AB6ADC00F4666E /* aspirin.png in Resources */ = {isa = PBXBuildFile; fileRef = 40D6BA3211AB6ADC00F4666E /* aspirin.png */; };
@@ -545,6 +546,7 @@
 		40C0B42D119CCDB900FA31D4 /* OxygenTower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OxygenTower.m; sourceTree = "<group>"; };
 		40C0B463119CD34800FA31D4 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
 		40C0B4D6119CE13500FA31D4 /* ElementMixer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ElementMixer.png; sourceTree = "<group>"; };
+		40C7DB6511C5B3EB00468211 /* ExploreBtnMini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ExploreBtnMini.png; sourceTree = "<group>"; };
 		40D6BA3011AB6ADC00F4666E /* acetylene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = acetylene.png; path = Towers/acetylene.png; sourceTree = "<group>"; };
 		40D6BA3211AB6ADC00F4666E /* aspirin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aspirin.png; path = Towers/aspirin.png; sourceTree = "<group>"; };
 		40D6BA3511AB6ADC00F4666E /* caffeine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = caffeine.png; path = Towers/caffeine.png; sourceTree = "<group>"; };
@@ -1066,6 +1068,7 @@
 		4088BCE711B1892D00DCF16B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				40C7DB6511C5B3EB00468211 /* ExploreBtnMini.png */,
 				4010FB6A11BADD4A00E85749 /* easybtn.png */,
 				4010FB6B11BADD4A00E85749 /* hardbtn.png */,
 				4010FB6C11BADD4A00E85749 /* mediumbtn.png */,
@@ -1877,6 +1880,7 @@
 				40DB647011BDD68D004B361A /* waterexplosion.plist in Resources */,
 				40DDADFB11C33A5900E165D3 /* levels_hard.dat in Resources */,
 				40DDADFC11C33A5900E165D3 /* levels_medium.dat in Resources */,
+				40C7DB6611C5B3EB00468211 /* ExploreBtnMini.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

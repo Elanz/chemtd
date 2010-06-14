@@ -68,6 +68,7 @@
 @synthesize lastStabledamage;
 @synthesize lastStablekills;
 @synthesize startPosition;
+@synthesize exploreOpen;
 
 +(id) scene
 {
@@ -113,6 +114,7 @@
         lastStablekills = 0;
         mainSpawner = nil;
         pathFinder = nil;
+        exploreOpen = NO;
         
         ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
         
@@ -219,8 +221,12 @@
     pauseBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_PAUSEBTN]];
     menuItemPause = [CCMenuItemSprite itemFromNormalSprite:pauseBtn selectedSprite:pauseBtn 
                                                        disabledSprite:pauseBtn target:self selector:@selector(onPause:)];
-    pauseMenu = [CCMenu menuWithItems: menuItemPause, nil];
-    pauseMenu.position = ccp(device_width - 100, device_height - 347);
+    CCSprite * exploreMiniBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_EXPLOREMINIBTN]];
+    CCMenuItemSprite * menuItemExploreMini = [CCMenuItemSprite itemFromNormalSprite:exploreMiniBtn selectedSprite:exploreMiniBtn 
+                                            disabledSprite:exploreMiniBtn target:self selector:@selector(onExplore:)];
+    pauseMenu = [CCMenu menuWithItems: menuItemPause, menuItemExploreMini, nil];
+    pauseMenu.position = ccp(device_width - 100, device_height - 400);
+    [pauseMenu alignItemsVerticallyWithPadding:20];
     [UILayer addChild:pauseMenu z:1];
     
     [[CCDirector sharedDirector].runningScene addChild: UILayer z:1]; 
@@ -245,6 +251,34 @@
     [towerManager enableAll];
     [towerMixer enableAll];
     menuItemPause.isEnabled = YES;
+}
+
+- (void)onRestoreFromExplore
+{
+    exploreOpen = NO;
+    [miniMenuBackground runAction:[CCFadeOut actionWithDuration:0.3]];
+    [[CCDirector sharedDirector] resume];
+}
+
+- (void) onExplore:(id)sender
+{
+    minimenuLayer = [[CCLayer alloc] init];
+    minimenuLayer.tag = CCNodeTag_Minimenu;
+    [minimenuLayer setContentSize:CGSizeMake(1024, 768)];
+    minimenuLayer.position = ccp(0,0);
+    
+    miniMenuBackground = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_EXPLORERBACKGROUND]];
+    
+    miniMenuBackground.position = ccp(device_width/2, device_height/2);
+    
+    [miniMenuBackground runAction:[CCFadeIn actionWithDuration:0.3]];
+    [minimenuLayer addChild:miniMenuBackground];
+    
+    exploreOpen = YES;
+    
+    [UILayer addChild:minimenuLayer z:5];
+    
+    [[CCDirector sharedDirector] pause];
 }
 
 - (void) onPause:(id)sender

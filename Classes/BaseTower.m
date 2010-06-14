@@ -117,17 +117,17 @@
     [effect startEffect];
 }
 
-- (void)prepareCard:(CCSprite*)towerCard
+- (void)prepareCard:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
-    [self addName:towerCard];
-    [self addClass:towerCard];
-    [self addStats:towerCard];
-    [self addDescription:towerCard];
-    [self addFormula:towerCard];
-    [self addIcon:towerCard];
+    [self addName:towerCard baseX:(int)baseX baseY:(int)baseY];
+//    [self addClass:towerCard baseX:(int)baseX baseY:(int)baseY];
+    [self addStats:towerCard baseX:(int)baseX baseY:(int)baseY];
+//    [self addDescription:towerCard baseX:(int)baseX baseY:(int)baseY];
+    [self addFormula:towerCard baseX:(int)baseX baseY:(int)baseY];
+    [self addIcon:towerCard baseX:(int)baseX baseY:(int)baseY];
 }
 
-- (void)addClass:(CCSprite*)towerCard
+- (void)addClass:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
     CCBitmapFontAtlas * output = [CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UISmall];
     output.position = ccp(206,474-54);
@@ -146,26 +146,34 @@
     [towerCard addChild:output z:6];
 }
 
-- (void)addStats:(CCSprite*)towerCard
+- (void)addStats:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
-    int x = 273;
-    int y1 = 474-87;
-    int y2 = 474-112;
-    int y3 = 474-139;
-    int y4 = 474-166;
+    int x1 = baseX+83;
+    int x2 = baseX+132;
+    int y1 = baseY+CardHeight-35;
+    int y2 = baseY+CardHeight-50;
+    int y3 = baseY+CardHeight-65;
+    int y4 = baseY+CardHeight-80;
+    float scale = 0.8;
 
-    [self makeLabelWithPosition:ccp(x,y1) scale:1.1 string:[NSString stringWithFormat:@"%d - %d", minDamage, maxDamage] towerCard:towerCard];
-    [self makeLabelWithPosition:ccp(x,y2) scale:1.1 string:[NSString stringWithFormat:@"%d", shotRange] towerCard:towerCard];
-    [self makeLabelWithPosition:ccp(x,y3) scale:1.1 string:[NSString stringWithFormat:@"%1.2f", shotInterval] towerCard:towerCard];
-    switch (targetType)
-    {
-        case TowerTargetType_None: [self makeLabelWithPosition:ccp(x,y4) scale:1.1 string:String_TargetTypeNone towerCard:towerCard]; break;
-        case TowerTargetType_Single: [self makeLabelWithPosition:ccp(x,y4) scale:1.1 string:String_TargetTypeSingle towerCard:towerCard]; break; 
-        case TowerTargetType_Multi: [self makeLabelWithPosition:ccp(x,y4) scale:1.1 string:String_TargetTypeMulti towerCard:towerCard]; break;
-        case TowerTargetType_Splash: [self makeLabelWithPosition:ccp(x,y4) scale:1.1 string:String_TargetTypeSplash towerCard:towerCard]; break;
-        case TowerTargetType_Trap: [self makeLabelWithPosition:ccp(x,y4) scale:1.1 string:String_TargetTypeTrap towerCard:towerCard]; break;
-        case TowerTargetType_Cloud: [self makeLabelWithPosition:ccp(x,y4) scale:1.1 string:String_TargetTypeCloud towerCard:towerCard]; break;
-    }
+    [self makeLabelWithPosition:ccp(x1,y1) scale:scale string:String_DMGLabel towerCard:towerCard];
+    [self makeLabelWithPosition:ccp(x1,y2) scale:scale string:String_RNGLabel towerCard:towerCard];
+    [self makeLabelWithPosition:ccp(x1,y3) scale:scale string:String_SPDLabel towerCard:towerCard];
+    [self makeLabelWithPosition:ccp(x1,y4) scale:scale string:String_TGTLabel towerCard:towerCard];
+    
+    [self makeLabelWithPosition:ccp(x2,y1) scale:scale string:[NSString stringWithFormat:@"%d - %d", minDamage, maxDamage] towerCard:towerCard];
+    [self makeLabelWithPosition:ccp(x2,y2) scale:scale string:[NSString stringWithFormat:@"%d", shotRange] towerCard:towerCard];
+    [self makeLabelWithPosition:ccp(x2,y3) scale:scale string:[NSString stringWithFormat:@"%1.2f", shotInterval] towerCard:towerCard];
+    [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:[NSString stringWithFormat:@"%d", maxTargets] towerCard:towerCard];
+//    switch (targetType)
+//    {
+//        case TowerTargetType_None: [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:String_TargetTypeNone towerCard:towerCard]; break;
+//        case TowerTargetType_Single: [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:String_TargetTypeSingle towerCard:towerCard]; break; 
+//        case TowerTargetType_Multi: [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:String_TargetTypeMulti towerCard:towerCard]; break;
+//        case TowerTargetType_Splash: [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:String_TargetTypeSplash towerCard:towerCard]; break;
+//        case TowerTargetType_Trap: [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:String_TargetTypeTrap towerCard:towerCard]; break;
+//        case TowerTargetType_Cloud: [self makeLabelWithPosition:ccp(x2,y4) scale:scale string:String_TargetTypeCloud towerCard:towerCard]; break;
+//    }
 }
 
 - (void) makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string towerCard:(CCSprite*)towerCard
@@ -177,7 +185,7 @@
     [towerCard addChild:output z:6];
 }
 
-- (void)addDescription:(CCSprite*)towerCard
+- (void)addDescription:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
     CCLabel *lbl01 = [CCLabel labelWithString:chemicalDescription dimensions:CGSizeMake(307, 76) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:18];
     [lbl01 setPosition: ccp(171,474-238)];
@@ -190,22 +198,21 @@
     [towerCard addChild: lbl02 z:6];
 }
 
-- (void)addFormula:(CCSprite*)towerCard
+- (void)addFormula:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
-    [self makeLabelWithPosition:ccp(212,474-372) scale:1.0 string:formula towerCard:towerCard];
+//    [self makeLabelWithPosition:ccp(212,474-372) scale:1.0 string:formula towerCard:towerCard];
     
-    int y1 = 474-410;
-    int y2 = 474-450;
-    int x1 = 57;
-    int x2 = x1 + 57;
-    int x3 = x2 + 57;
-    int x4 = x3 + 57;
-    int x5 = x4 + 57;
+    int y1 = baseY+CardHeight-120;
+    int y2 = baseY+CardHeight-158;
+    int x1 = baseX+23;
+    int x2 = x1 + 42;
+    int x3 = x2 + 42;
+    int x4 = x3 + 42;
     
     if (formulaComponent1 >= 0)
     {
         CCSprite * icon = [CCSprite spriteWithTexture:[library GetTextureWithKey:formulaComponent1]];
-        icon.scale = 1.0;
+        icon.scale = .791;
         icon.position = ccp(x1,y1);
         [towerCard addChild:icon z:6];
         
@@ -214,7 +221,7 @@
     if (formulaComponent2 >= 0)
     {
         CCSprite * icon = [CCSprite spriteWithTexture:[library GetTextureWithKey:formulaComponent2]];
-        icon.scale = 1.0;
+        icon.scale = .791;
         icon.position = ccp(x2,y1);
         [towerCard addChild:icon z:6];
         
@@ -223,7 +230,7 @@
     if (formulaComponent3 >= 0)
     {
         CCSprite * icon = [CCSprite spriteWithTexture:[library GetTextureWithKey:formulaComponent3]];
-        icon.scale = 1.0;
+        icon.scale = .791;
         icon.position = ccp(x3,y1);
         [towerCard addChild:icon z:6];
         
@@ -232,38 +239,29 @@
     if (formulaComponent4 >= 0)
     {
         CCSprite * icon = [CCSprite spriteWithTexture:[library GetTextureWithKey:formulaComponent4]];
-        icon.scale = 1.0;
+        icon.scale = .791;
         icon.position = ccp(x4,y1);
         [towerCard addChild:icon z:6];
         
         [self makeLabelWithPosition:ccp(x4,y2) scale:1.0 string:[NSString stringWithFormat:@"%d", formulaQuantity4] towerCard:towerCard];
     }
-    if (formulaComponent5 >= 0)
-    {
-        CCSprite * icon = [CCSprite spriteWithTexture:[library GetTextureWithKey:formulaComponent5]];
-        icon.scale = 1.0;
-        icon.position = ccp(x5,y1);
-        [towerCard addChild:icon z:6];
-        
-        [self makeLabelWithPosition:ccp(x5,y2) scale:1.0 string:[NSString stringWithFormat:@"%d", formulaQuantity5] towerCard:towerCard];
-    }
 }
 
-- (void)addName:(CCSprite*)towerCard
+- (void)addName:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
     CCBitmapFontAtlas * output = [CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UISmall];
-    output.position = ccp(171,474-20);
+    output.position = ccp(baseX+84,baseY+CardHeight-10);
     output.color = ccBLACK;
-    output.scale = 2.0;
+    output.scale = 1.2;
     [output setString:towerName];
     [towerCard addChild:output z:6];
 }
 
-- (void)addIcon:(CCSprite*)towerCard
+- (void)addIcon:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
     CCSprite * icon = [CCSprite spriteWithTexture:towerSprite.texture];
-    icon.scale = 2.0;
-    icon.position = ccp(63,474-127);
+    icon.scale = 1.0;
+    icon.position = ccp(baseX+32,baseY+CardHeight-57);
     [towerCard addChild:icon z:6];
 }
 

@@ -44,6 +44,12 @@
 
 - (void)HandleccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (gameField.exploreOpen)
+    {
+        [gameField onRestoreFromExplore];
+        return;
+    }
+    
     [gameField.DPSDisplay setString:[NSString stringWithFormat:@"%@ %d", String_DPSLabel, 0]];
     
     touchCount += [touches count];
