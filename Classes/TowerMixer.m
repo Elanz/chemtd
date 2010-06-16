@@ -236,10 +236,12 @@
         [selectedTowers addObject:tower];
         [tower setColor:Color_Yellow];
         currentSlot ++;
+        [tower startBounceAction];
     } else {
         [selectedTowers removeObject:tower];
         [tower setColor:Color_White];
         currentSlot --;
+        [tower stopBounceAction];
     }
     return [self updateTowerSlots];
 }
@@ -248,10 +250,18 @@
 {
     for (BaseTower * tower in selectedTowers)
     {
+        [tower setColor:Color_White];
         tower.usedByMixer = YES;
+        [tower stopBounceAction];
     }
     [gameField StartPlacePhase:[self getMixerResult]];
-    [self onClear:nil];
+    for (BaseTower * tower in gameField.pendingTowers)
+    {
+        [tower startBounceAction];
+    }
+    [selectedTowers removeAllObjects];
+    currentSlot = 0;
+    [self updateTowerSlots];
 }
 
 -(void) onClear: (id) sender
@@ -259,6 +269,7 @@
     for (BaseTower * theTower in selectedTowers)
     {
         [theTower setColor:Color_White];
+        [theTower stopBounceAction];
     }
     [selectedTowers removeAllObjects];
     currentSlot = 0;

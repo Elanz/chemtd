@@ -51,6 +51,7 @@
 @class UserManager;
 @class LevelStat;
 @class BaseEffect;
+@class TutorialManager;
 
 @interface GameFieldScene : CCLayer {
 
@@ -63,6 +64,7 @@
     TouchHandler * touchHandler;
     LevelManager * levelManager;
     UserManager * userManager;
+    TutorialManager * tutorialManager;
     
     CGPoint startPosition;
     NSMutableDictionary * goalpoints;

@@ -24,22 +24,15 @@
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	
-	[window setUserInteractionEnabled:YES];	
-	[window setMultipleTouchEnabled:YES];
-	
+		
     textureLibrary = [[TextureLibrary alloc] init];
     userManager = [[UserManager alloc] init];
     
-	if( ! [CCDirector setDirectorType:CCDirectorTypeDisplayLink] )
-		[CCDirector setDirectorType:CCDirectorTypeDefault];
-	
-	[[CCDirector sharedDirector] setPixelFormat:kPixelFormatRGBA8888];
-	[[CCDirector sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
-	[[CCDirector sharedDirector] setAnimationInterval:1.0/60];
-	[[CCDirector sharedDirector] setDisplayFPS:YES];
-	[[CCDirector sharedDirector] attachInView:window];	
+    CC_DIRECTOR_INIT();
 	[window makeKeyAndVisible];		
+   
+    [window setUserInteractionEnabled:YES];	
+	[window setMultipleTouchEnabled:YES];
     
     [CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
 		

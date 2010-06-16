@@ -230,9 +230,96 @@
         receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
         NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     }
-    NSArray * levelStats = [[NSArray alloc] initWithObjects:[self createFakeStat:StatType_CompletionTime]
-                            ,[self createFakeStat:StatType_Score],[self createFakeStat:StatType_DamageDone],nil];
-    return levelStats;
+    
+    NSString * stats = @"";
+    if (online)
+    {
+        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+        NSString * URLforGet = [NSString stringWithFormat:
+                                @"http://200monkeys.com/chemtd/getlevelstats.php?username=%@&deviceid=%@&levelid=%d&mydamage=%d&mytime=%d&myscore=%d"
+                                , [self getUserName], Uid, levelId, damageDone, completionTime, score];
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+        [request setURL:[NSURL URLWithString:URLforGet]];  
+        [request setHTTPMethod:@"GET"]; 
+        [request setTimeoutInterval:5.0];
+        NSURLResponse *response;
+        NSError *urlerror;
+        NSData* receivedData = [[NSMutableData data] retain];
+        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+        stats = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+    }
+    
+    NSArray *statsections = [stats componentsSeparatedByString:@"\n\n"];
+    
+    NSMutableArray * levelStats = nil;
+    if ([statsections count] == 4)
+    {
+        //damage -> time -> score
+        NSArray * damage = [(NSString*)[statsections objectAtIndex:0] componentsSeparatedByString:@"\n"];
+        NSArray * time = [(NSString*)[statsections objectAtIndex:1] componentsSeparatedByString:@"\n"];
+        NSArray * score = [(NSString*)[statsections objectAtIndex:2] componentsSeparatedByString:@"\n"];
+        NSArray * player = [(NSString*)[statsections objectAtIndex:3] componentsSeparatedByString:@"\n"];
+        
+        LevelStat * damagestat = [[LevelStat alloc] init];
+        damagestat.statType = StatType_DamageDone;
+        LevelStat * timestat = [[LevelStat alloc] init];
+        timestat.statType = StatType_CompletionTime;
+        LevelStat * scorestat = [[LevelStat alloc] init];
+        scorestat.statType = StatType_Score;
+        NSString * row;
+        if ([damage count] > 0) {row = [damage objectAtIndex:0];damagestat.name1 = [self splitbar1:row]; damagestat.statValue1 = [self splitbar2:row];}
+        if ([damage count] > 1) {row = [damage objectAtIndex:1];damagestat.name2 = [self splitbar1:row]; damagestat.statValue2 = [self splitbar2:row];}
+        if ([damage count] > 2) {row = [damage objectAtIndex:2];damagestat.name3 = [self splitbar1:row]; damagestat.statValue3 = [self splitbar2:row];}
+        if ([damage count] > 3) {row = [damage objectAtIndex:3];damagestat.name4 = [self splitbar1:row]; damagestat.statValue4 = [self splitbar2:row];}
+        if ([damage count] > 4) {row = [damage objectAtIndex:4];damagestat.name5 = [self splitbar1:row]; damagestat.statValue5 = [self splitbar2:row];}
+        if ([damage count] > 5) {row = [damage objectAtIndex:5];damagestat.name6 = [self splitbar1:row]; damagestat.statValue6 = [self splitbar2:row];}
+        if ([damage count] > 6) {row = [damage objectAtIndex:6];damagestat.name7 = [self splitbar1:row]; damagestat.statValue7 = [self splitbar2:row];}
+        if ([damage count] > 7) {row = [damage objectAtIndex:7];damagestat.name8 = [self splitbar1:row]; damagestat.statValue8 = [self splitbar2:row];}
+        if ([damage count] > 8) {row = [damage objectAtIndex:8];damagestat.name9 = [self splitbar1:row]; damagestat.statValue9 = [self splitbar2:row];}
+        if ([damage count] > 9) {row = [damage objectAtIndex:9];damagestat.name10 = [self splitbar1:row]; damagestat.statValue10 = [self splitbar2:row];}
+        damagestat.playerRank = [(NSString*)[player objectAtIndex:0] intValue];
+        if ([time count] > 0) {row = [time objectAtIndex:0];timestat.name1 = [self splitbar1:row]; timestat.statValue1 = [self splitbar2:row];}
+        if ([time count] > 1) {row = [time objectAtIndex:1];timestat.name2 = [self splitbar1:row]; timestat.statValue2 = [self splitbar2:row];}
+        if ([time count] > 2) {row = [time objectAtIndex:2];timestat.name3 = [self splitbar1:row]; timestat.statValue3 = [self splitbar2:row];}
+        if ([time count] > 3) {row = [time objectAtIndex:3];timestat.name4 = [self splitbar1:row]; timestat.statValue4 = [self splitbar2:row];}
+        if ([time count] > 4) {row = [time objectAtIndex:4];timestat.name5 = [self splitbar1:row]; timestat.statValue5 = [self splitbar2:row];}
+        if ([time count] > 5) {row = [time objectAtIndex:5];timestat.name6 = [self splitbar1:row]; timestat.statValue6 = [self splitbar2:row];}
+        if ([time count] > 6) {row = [time objectAtIndex:6];timestat.name7 = [self splitbar1:row]; timestat.statValue7 = [self splitbar2:row];}
+        if ([time count] > 7) {row = [time objectAtIndex:7];timestat.name8 = [self splitbar1:row]; timestat.statValue8 = [self splitbar2:row];}
+        if ([time count] > 8) {row = [time objectAtIndex:8];timestat.name9 = [self splitbar1:row]; timestat.statValue9 = [self splitbar2:row];}
+        if ([time count] > 9) {row = [time objectAtIndex:9];timestat.name10 = [self splitbar1:row]; timestat.statValue10 = [self splitbar2:row];}
+        timestat.playerRank = [(NSString*)[player objectAtIndex:1] intValue];
+        if ([score count] > 0) {row = [score objectAtIndex:0];scorestat.name1 = [self splitbar1:row]; scorestat.statValue1 = [self splitbar2:row];}
+        if ([score count] > 1) {row = [score objectAtIndex:1];scorestat.name2 = [self splitbar1:row]; scorestat.statValue2 = [self splitbar2:row];}
+        if ([score count] > 2) {row = [score objectAtIndex:2];scorestat.name3 = [self splitbar1:row]; scorestat.statValue3 = [self splitbar2:row];}
+        if ([score count] > 3) {row = [score objectAtIndex:3];scorestat.name4 = [self splitbar1:row]; scorestat.statValue4 = [self splitbar2:row];}
+        if ([score count] > 4) {row = [score objectAtIndex:4];scorestat.name5 = [self splitbar1:row]; scorestat.statValue5 = [self splitbar2:row];}
+        if ([score count] > 5) {row = [score objectAtIndex:5];scorestat.name6 = [self splitbar1:row]; scorestat.statValue6 = [self splitbar2:row];}
+        if ([score count] > 6) {row = [score objectAtIndex:6];scorestat.name7 = [self splitbar1:row]; scorestat.statValue7 = [self splitbar2:row];}
+        if ([score count] > 7) {row = [score objectAtIndex:7];scorestat.name8 = [self splitbar1:row]; scorestat.statValue8 = [self splitbar2:row];}
+        if ([score count] > 8) {row = [score objectAtIndex:8];scorestat.name9 = [self splitbar1:row]; scorestat.statValue9 = [self splitbar2:row];}
+        if ([score count] > 9) {row = [score objectAtIndex:9];scorestat.name10 = [self splitbar1:row]; scorestat.statValue10 = [self splitbar2:row];}
+        scorestat.playerRank = [(NSString*)[player objectAtIndex:1] intValue];
+        levelStats = [[NSMutableArray alloc] initWithObjects:timestat,scorestat,damagestat,nil];
+    }
+    else {
+        levelStats = [[NSMutableArray alloc] initWithObjects:[self createFakeStat:StatType_CompletionTime]
+                                ,[self createFakeStat:StatType_Score],[self createFakeStat:StatType_DamageDone],nil];
+    }
+
+    
+    
+    return levelStats; 
+}
+
+- (int) splitbar2:(NSString*)input
+{
+    return [(NSString*)[[input componentsSeparatedByString:@"|"] objectAtIndex:1] intValue];
+}
+
+- (NSString*) splitbar1:(NSString*)input
+{
+    return [[input componentsSeparatedByString:@"|"] objectAtIndex:0];
 }
 
 - (NSString*) getUserName

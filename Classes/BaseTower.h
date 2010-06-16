@@ -135,6 +135,9 @@
     int formulaQuantity4;
     int formulaComponent5;
     int formulaQuantity5;
+    
+    CCAction * glowAction;
+    CCAction * bounceAction;
 }
 
 @property (nonatomic) int trapTextureKey;
@@ -162,6 +165,10 @@
 @property (nonatomic) BOOL usedByMixer;
 @property (nonatomic, retain) CCSprite * towerSprite;
 
+- (void)startGlowAction;
+- (void)startBounceAction;
+- (void)stopGlowAction;
+- (void)stopBounceAction;
 - (void)towerPicked;
 - (void)addEffect:(BaseEffect*)effect;
 - (void)makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string towerCard:(CCSprite*)towerCard;

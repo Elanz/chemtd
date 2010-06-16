@@ -451,6 +451,11 @@
     
     touchCount -= [touches count];
     
+    if (touchCount < 0)
+    {
+        touchCount = 0;
+    }
+    
     if (touchCount == 0)
     {
         firstTouch = nil;   

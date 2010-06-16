@@ -15,7 +15,7 @@
 
 @interface NitrousEffect : BaseEffect {
     float dotElapsed;
-    CCPointParticleSystem * NitrousSystem;
+    CCQuadParticleSystem * NitrousSystem;
     CCRepeatForever * repeat;
 }
 

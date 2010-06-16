@@ -48,8 +48,8 @@
 -(id) init
 {
 	if( (self=[super init]) ) {	
-		originalTarget = nil;
-		tag = kActionTagInvalid;
+		originalTarget = target = nil;
+		tag = kCCActionTagInvalid;
 	}
 	return self;
 }
@@ -79,7 +79,7 @@
 
 -(void) stop
 {
-	
+	target = nil;
 }
 
 -(BOOL) isDone
@@ -343,7 +343,7 @@
 
 -(void) stop
 {
-	
+	target = nil;
 	[super stop];
 }
 

@@ -24,6 +24,7 @@
 #import "MainMenuScene.h"
 #import "UserManager.h"
 #import "BaseEffect.h"
+#import "TutorialManager.h"
 
 @implementation GameFieldScene
 
@@ -230,6 +231,9 @@
     [UILayer addChild:pauseMenu z:1];
     
     [[CCDirector sharedDirector].runningScene addChild: UILayer z:1]; 
+    
+    tutorialManager = [[TutorialManager alloc] initWithField:self];
+    [tutorialManager showIntroTutorial];
 }
 
 - (void)onMainMenu:(id)sender
@@ -277,6 +281,7 @@
     exploreOpen = YES;
     
     [UILayer addChild:minimenuLayer z:5];
+    menuItemPause.isEnabled = NO;
     
     [[CCDirector sharedDirector] pause];
 }
@@ -417,6 +422,7 @@
 
 - (void)StartPlacePhase:(BaseTower*)tower
 {
+    [tutorialManager showPlaceTutorial];
     [phaseDisplay setString:String_PhaseLabelPlace];
     //[mixer hide];
     currentGamePhase = GamePhase_Place;
@@ -425,21 +431,25 @@
 
 - (void)StartPickPhase
 {
+    [tutorialManager showMixTutorial];
+    
     [phaseDisplay setString:String_PhaseLabelPick];
     //[mixer show];
     currentGamePhase = GamePhase_Pick;
     for (BaseTower * tower in pendingTowers)
     {
-        id action2 = [CCTintBy actionWithDuration:1 red:0 green:-255 blue:0];
-        id action2Back = [action2 reverse];
-        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
-        
-        [tower.towerSprite runAction:repeat];
+        [tower startGlowAction];
     }
 }
 
 - (void)StartCreepsPhase
 {
+    static BOOL creepTutorialViewed = NO;
+    if (!creepTutorialViewed)
+    {
+        [tutorialManager showCreepsTutorial];
+        creepTutorialViewed = YES;
+    }
     
     [phaseDisplay setString:String_PhaseLabelCreeps];
     //[mixer hide];
@@ -787,6 +797,7 @@
 
 - (void)StartBuildPhase
 {
+    
     [phaseDisplay setString:String_PhaseLabelBuild];
     [levelDisplay setString:[levelManager GetCurrentLevel].levelName];
     //[mixer hide];

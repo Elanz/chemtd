@@ -18,7 +18,7 @@
     float dotTimer;
     float dotElapsed;
     CCRepeatForever *repeat;
-    CCPointParticleSystem * poisonSystem;
+    CCQuadParticleSystem * poisonSystem;
 }
 
 - (id) initWithSource:(BaseTower*)sourceTower target:(Creep*)targetCreep;

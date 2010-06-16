@@ -295,6 +295,8 @@
             creepSprite.position = ccp(creepSprite.position.x, creepSprite.position.y + speed);
     }
     
+
+    
 }
 
 - (void)dealloc {

@@ -74,13 +74,13 @@
 #define iEffect_SingleTargetOrangeSmoke 30
 
 @interface ParticleContainer: NSObject {
-    CCPointParticleSystem * system;
+    CCQuadParticleSystem * system;
     BOOL inuse;
     double checkoutTime;
 }
 
 @property (nonatomic) double checkoutTime;
-@property (nonatomic, retain) CCPointParticleSystem * system;
+@property (nonatomic, retain) CCQuadParticleSystem * system;
 @property (nonatomic) BOOL inuse;
 
 @end
@@ -117,7 +117,7 @@
 -(void) tick:(double)elapsed;
 -(void) populateParticleLibrary;
 -(NSMutableArray*) getParticleArrayForKey:(int)key;
--(CCPointParticleSystem*) getParticleSystemForKey:(int)key;
+-(CCQuadParticleSystem*) getParticleSystemForKey:(int)key;
 -(void) releaseParticleSystem:(CCParticleSystem*)system;
 
 -(id) initWithGameField:(GameFieldScene *)theGameField;

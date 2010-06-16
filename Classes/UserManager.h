@@ -86,6 +86,8 @@
 
 - (void) reachabilityChanged: (NSNotification* )note;
 
+- (NSString*) splitbar1:(NSString*)input;
+- (int) splitbar2:(NSString*)input;
 - (NSArray*) getOveralRanking;
 
 - (NSArray*) submitFinishedGame:(BOOL)won towers:(NSString*)towers;

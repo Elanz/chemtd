@@ -138,6 +138,11 @@
         case UITEXTURE_MEDIUMBTN: return [self LoadTextureWithName:@"mediumbtn.png" textureKey:textureKey isPVR:NO]; break;
         case UITEXTURE_HARDBTN: return [self LoadTextureWithName:@"hardbtn.png" textureKey:textureKey isPVR:NO]; break;
         case UITEXTURE_EXPLOREMINIBTN: return [self LoadTextureWithName:@"ExploreBtnMini.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_TUTORIALBUILD: return [self LoadTextureWithName:@"tutorialbuild.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_TUTORIALCREEPS: return [self LoadTextureWithName:@"tutorialcreeps.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_TUTORIALINTRO: return [self LoadTextureWithName:@"tutorialintro.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_TUTORIALMIX: return [self LoadTextureWithName:@"tutorialmix.png" textureKey:textureKey isPVR:NO]; break;
+        case UITEXTURE_TUTORIALPLACE: return [self LoadTextureWithName:@"tutorialplace.png" textureKey:textureKey isPVR:NO]; break;
         default:
             break;
     }

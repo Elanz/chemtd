@@ -106,6 +106,34 @@
     return self;
 }
 
+- (void)startGlowAction
+{
+    id action2 = [CCTintBy actionWithDuration:1 red:0 green:-255 blue:0];
+    id action2Back = [action2 reverse];
+    glowAction = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
+    [towerSprite runAction:glowAction];
+}
+
+- (void)stopGlowAction
+{
+    [towerSprite stopAction:glowAction];
+    [towerSprite setColor:ccWHITE];
+}
+
+- (void)startBounceAction
+{
+    id action2 = [CCScaleBy actionWithDuration:0.2 scale:1.2];
+    id action2Back = [action2 reverse];
+    bounceAction = [CCRepeatForever actionWithAction:[CCSequence actions: action2, action2Back, nil]];
+    [towerSprite runAction:bounceAction];
+}
+
+- (void)stopBounceAction
+{
+    [towerSprite stopAction:bounceAction];
+    towerSprite.scale = 1.0;
+}
+
 - (void)towerPicked
 {
     

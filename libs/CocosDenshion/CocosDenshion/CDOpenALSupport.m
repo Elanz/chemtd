@@ -39,19 +39,12 @@
  POSSIBILITY OF SUCH DAMAGE.
  
  Copyright (C) 2009 Apple Inc. All Rights Reserved.
-
  
+ $Id: CDOpenALSupport.h 16 2010-03-11 06:22:10Z steveoldmeadow $
  */
 
-/*
- This file contains code from version 1.1 and 1.4 of MyOpenALSupport.h taken from Apple's oalTouch version.
- The 1.4 version code is used for loading IMA4 files, however, this code causes very noticeable clicking
- when used to load wave files that are looped so the 1.1 version code is used specifically for loading
- wav files.
- */
-
-#import <OpenAL/al.h>
-#import <OpenAL/alc.h>
+#import "CDOpenALSupport.h"
+#import "CocosDenshion.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AudioToolbox/ExtendedAudioFile.h>
 
@@ -135,7 +128,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	void*							theData = NULL;
 	AudioStreamBasicDescription		theOutputFormat;
 	UInt32							dataSize = 0;
-
+	
 	// Open a file with ExtAudioFileOpen()
 	status = ExtAudioFileOpenURL(inFileURL, &extRef);
 	if (status != noErr)
@@ -145,7 +138,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	}
 	if (abort)
 		goto Exit;
-
+	
 	// Get the audio data format
 	status = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileDataFormat, &thePropertySize, &theFileFormat);
 	if (status != noErr)
@@ -155,7 +148,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	}
 	if (abort)
 		goto Exit;
-
+	
 	if (theFileFormat.mChannelsPerFrame > 2)
 	{
 		CDLOG(@"MyGetOpenALAudioData - Unsupported Format, channel count is greater than stereo\n");
@@ -163,19 +156,19 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	}
 	if (abort)
 		goto Exit;
-
+	
 	// Set the client format to 16 bit signed integer (native-endian) data
 	// Maintain the channel count and sample rate of the original source format
 	theOutputFormat.mSampleRate = theFileFormat.mSampleRate;
 	theOutputFormat.mChannelsPerFrame = theFileFormat.mChannelsPerFrame;
-
+	
 	theOutputFormat.mFormatID = kAudioFormatLinearPCM;
 	theOutputFormat.mBytesPerPacket = 2 * theOutputFormat.mChannelsPerFrame;
 	theOutputFormat.mFramesPerPacket = 1;
 	theOutputFormat.mBytesPerFrame = 2 * theOutputFormat.mChannelsPerFrame;
 	theOutputFormat.mBitsPerChannel = 16;
 	theOutputFormat.mFormatFlags = kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsSignedInteger;
-
+	
 	// Set the desired client (output) data format
 	status = ExtAudioFileSetProperty(extRef, kExtAudioFileProperty_ClientDataFormat, sizeof(theOutputFormat), &theOutputFormat);
 	if (status != noErr)
@@ -185,7 +178,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	}
 	if (abort)
 		goto Exit;
-
+	
 	// Get the total frame count
 	thePropertySize = sizeof(theFileLengthInFrames);
 	status = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileLengthFrames, &thePropertySize, &theFileLengthInFrames);
@@ -196,7 +189,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	}
 	if (abort)
 		goto Exit;
-
+	
 	// Read all the data into memory
 	dataSize = (UInt32) theFileLengthInFrames * theOutputFormat.mBytesPerFrame;
 	theData = malloc(dataSize);
@@ -207,7 +200,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 		theDataBuffer.mBuffers[0].mDataByteSize = dataSize;
 		theDataBuffer.mBuffers[0].mNumberChannels = theOutputFormat.mChannelsPerFrame;
 		theDataBuffer.mBuffers[0].mData = theData;
-
+		
 		// Read the data into an AudioBufferList
 		status = ExtAudioFileRead(extRef, (UInt32*)&theFileLengthInFrames, &theDataBuffer);
 		if(status == noErr)
@@ -228,7 +221,7 @@ void* CDloadCafAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDa
 	}
 	if (abort)
 		goto Exit;
-
+	
 Exit:
 	// Dispose the ExtAudioFileRef, it is no longer needed
 	if (extRef) ExtAudioFileDispose(extRef);
@@ -236,7 +229,7 @@ Exit:
 }
 
 void* CDGetOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDataFormat, ALsizei*	outSampleRate) {
-
+	
 	CFStringRef extension = CFURLCopyPathExtension(inFileURL);
 	CFComparisonResult isWavFile = 0;
 	if (extension != NULL) {
@@ -250,37 +243,4 @@ void* CDGetOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *out
 		return CDloadCafAudioData(inFileURL, outDataSize, outDataFormat, outSampleRate);		
 	}
 }
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-typedef ALvoid	AL_APIENTRY	(*alBufferDataStaticProcPtr) (const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq);
-ALvoid  alBufferDataStaticProc(const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq)
-{
-	static	alBufferDataStaticProcPtr	proc = NULL;
-    
-    if (proc == NULL) {
-        proc = (alBufferDataStaticProcPtr) alcGetProcAddress(NULL, (const ALCchar*) "alBufferDataStatic");
-    }
-    
-    if (proc)
-        proc(bid, format, data, size, freq);
-	
-    return;
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-typedef ALvoid	AL_APIENTRY	(*alcMacOSXMixerOutputRateProcPtr) (const ALdouble value);
-ALvoid  alcMacOSXMixerOutputRateProc(const ALdouble value)
-{
-	static	alcMacOSXMixerOutputRateProcPtr	proc = NULL;
-    
-    if (proc == NULL) {
-        proc = (alcMacOSXMixerOutputRateProcPtr) alcGetProcAddress(NULL, (const ALCchar*) "alcMacOSXMixerOutputRate");
-    }
-    
-    if (proc)
-        proc(value);
-	
-    return;
-}
-
 
