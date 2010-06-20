@@ -28,6 +28,8 @@
 
 @implementation GameFieldScene
 
+@synthesize tutorialManager;
+
 @synthesize lastStablegameTimer;
 @synthesize lastStablecurrentRound;
 @synthesize lastStablelives;
@@ -920,11 +922,25 @@
     sprite_bottomleft.position = ccp(1024/2, 1152 - (1024 + (128/2)));
     sprite_bottomright.position = ccp(1024 + 512/2, 1152 - (1024 + (128/2)));
     
+    CCSprite * sprite_bottomrightfg = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:FIELDTEXTURE_FOREGROUND1LR]];
+    CCSprite * sprite_bottomleftfg = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:FIELDTEXTURE_FOREGROUND1LL]];
+    CCSprite * sprite_topleftfg = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:FIELDTEXTURE_FOREGROUND1UL]];
+    CCSprite * sprite_toprightfg = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:FIELDTEXTURE_FOREGROUND1UR]];
+    
+    sprite_topleftfg.position = ccp(1024/2, 1152 - (1024/2));
+    sprite_toprightfg.position = ccp(1024 + 512/2, 1152 - (1024/2));
+    sprite_bottomleftfg.position = ccp(1024/2, 1152 - (1024 + (128/2)));
+    sprite_bottomrightfg.position = ccp(1024 + 512/2, 1152 - (1024 + (128/2)));
+    
     [self updateScrollOffsetWithDeltaX:0 DeltaY:0];
     [self addChild:sprite_bottomright];
     [self addChild:sprite_bottomleft];
     [self addChild:sprite_topright];
     [self addChild:sprite_topleft];
+    [self addChild:sprite_bottomrightfg z:9];
+    [self addChild:sprite_bottomleftfg z:9];
+    [self addChild:sprite_toprightfg z:9];
+    [self addChild:sprite_topleftfg z:9];
 }
 
 - (CGPoint)getScaledPosition
@@ -1135,7 +1151,7 @@
                 
                 ChemTDAppDelegate *delegate = (ChemTDAppDelegate*)[[UIApplication sharedApplication] delegate];
                 BaseTower * tower = [delegate constructTowerWithType:towerType gameField:self addToField:YES];
-                [tower setPositionWithX:((x))*cellSize Y:((y))*cellSize];
+                [tower setPositionWithX:(((x)*cellSize)+cellSize/2) Y:(((y)*cellSize)+cellSize/2)];
                 [tower show];
                 [tower setPower:levelValue];
                 [tower setColor:Color_White];

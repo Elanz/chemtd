@@ -23,9 +23,17 @@
     CCSprite * mixTutorial;
     CCSprite * placeTutorial;
     CCSprite * buildTutorial;
+    
+    BOOL introOpen;
+    BOOL creepsOpen;
+    BOOL mixOpen;
+    BOOL placeOpen;
+    BOOL buildOpen;
 }
 
 - (id) initWithField:(GameFieldScene*)field;
+
+- (void) closeAll;
 
 - (void) showIntroTutorial;
 - (void) showCreepsTutorial;

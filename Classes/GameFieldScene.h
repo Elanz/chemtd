@@ -190,6 +190,7 @@
 @property (nonatomic, retain) NSMutableArray * towers;
 @property (nonatomic, retain) NSMutableArray * pendingTowers;
 @property (nonatomic, retain) LevelManager * levelManager;
+@property (nonatomic, retain) TutorialManager * tutorialManager;
 
 +(id) scene;
 +(id) sceneWithLoad;

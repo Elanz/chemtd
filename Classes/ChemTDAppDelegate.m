@@ -28,13 +28,25 @@
     textureLibrary = [[TextureLibrary alloc] init];
     userManager = [[UserManager alloc] init];
     
-    CC_DIRECTOR_INIT();
-	[window makeKeyAndVisible];		
+    window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];					
+	if( ! [CCDirector setDirectorType:kCCDirectorTypeDisplayLink] )								
+		[CCDirector setDirectorType:kCCDirectorTypeNSTimer];									
+	CCDirector *__director = [CCDirector sharedDirector];										
+	[__director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];						
+	[__director setDisplayFPS:YES];																
+	[__director setAnimationInterval:1.0/60];													
+	EAGLView *__glView = [EAGLView viewWithFrame:[window bounds]								
+                                     pixelFormat:kEAGLColorFormatRGBA8				
+                                     depthFormat:0 /* GL_DEPTH_COMPONENT24_OES */				
+                              preserveBackbuffer:NO];											
+	[__director setOpenGLView:__glView];														
+	[window addSubview:__glView];																
+	[window makeKeyAndVisible];	
    
-    [window setUserInteractionEnabled:YES];	
-	[window setMultipleTouchEnabled:YES];
+    [__glView setUserInteractionEnabled:YES];	
+	[__glView setMultipleTouchEnabled:YES];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
+    //[CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA4444];
 		
     [[CCDirector sharedDirector] runWithScene:[MainMenuScene scene]];
 }

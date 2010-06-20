@@ -12,6 +12,7 @@
 #import "Colors.h"
 #import "TowerMixer.h"
 #import "TowerManager.h"
+#import "TutorialManager.h"
 
 @implementation TouchHandler
 
@@ -47,14 +48,17 @@
     if (gameField.exploreOpen)
     {
         [gameField onRestoreFromExplore];
+        printf("omg2");
         return;
     }
+    
+    [gameField.tutorialManager closeAll];
     
     [gameField.DPSDisplay setString:[NSString stringWithFormat:@"%@ %d", String_DPSLabel, 0]];
     
     touchCount += [touches count];
     scrollVelocity = 0.0;
-    //printf("touchCount = %d\n", touchCount);
+    printf("touchCount = %d\n", touchCount);
     
     if (touchCount == 0 || firstTouch == nil)
     {
@@ -83,6 +87,7 @@
     if (gameField.exploreOpen)
     {
         [gameField onRestoreFromExplore];
+        printf("omg1");
         return;
     }
     
@@ -368,6 +373,7 @@
     if (gameField.exploreOpen)
     {
         [gameField onRestoreFromExplore];
+        printf("omg");
         return;
     }
     
@@ -470,6 +476,7 @@
         currentDistanceBetweenTouches = 0.0;
         distanceBetweenTouchesChangeOverTime = 0.0;
     }
+    printf("touchcount = %d\n", touchCount);
 }
 
 - (int)adjustTouchLocationWithY:(int)originalY

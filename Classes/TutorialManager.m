@@ -32,6 +32,7 @@
     id action1 = [CCDelayTime actionWithDuration:10.0];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(startHidingTutorialIntro)];
     id action3 = [CCSequence actions:action1, action2, nil];
+    introOpen = YES;
     [introTutorial runAction:action3];
 }
 
@@ -45,6 +46,7 @@
     id action1 = [CCDelayTime actionWithDuration:5.0];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(startHidingTutorialCreeps)];
     id action3 = [CCSequence actions:action1, action2, nil];
+    creepsOpen = YES;
     [creepsTutorial runAction:action3];
 }
 
@@ -58,6 +60,7 @@
     id action1 = [CCDelayTime actionWithDuration:4.0];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(startHidingTutorialMix)];
     id action3 = [CCSequence actions:action1, action2, nil];
+    mixOpen = YES;
     [mixTutorial runAction:action3];
 }
 
@@ -70,6 +73,7 @@
     id action1 = [CCDelayTime actionWithDuration:3.0];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(startHidingTutorialPlace)];
     id action3 = [CCSequence actions:action1, action2, nil];
+    placeOpen = YES;
     [placeTutorial runAction:action3];
     [UILayer addChild:placeTutorial z:5];
 }
@@ -84,11 +88,22 @@
     id action1 = [CCDelayTime actionWithDuration:5.0];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(startHidingTutorialBuild)];
     id action3 = [CCSequence actions:action1, action2, nil];
+    buildOpen = YES;
     [buildTutorial runAction:action3];
+}
+
+- (void) closeAll
+{
+    if (introOpen) [self startHidingTutorialIntro];
+    if (creepsOpen) [self startHidingTutorialCreeps];
+    if (mixOpen) [self startHidingTutorialMix];
+    if (placeOpen) [self startHidingTutorialPlace];
+    if (buildOpen) [self startHidingTutorialBuild];
 }
 
 - (void) startHidingTutorialIntro
 {
+    introOpen = NO;
     [introTutorial runAction:[CCFadeOut actionWithDuration:0.3]];
     id action1 = [CCDelayTime actionWithDuration:0.4];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(removeTutorialIntro)];
@@ -98,6 +113,7 @@
 
 - (void) startHidingTutorialCreeps
 {
+    creepsOpen = NO;
     [creepsTutorial runAction:[CCFadeOut actionWithDuration:0.3]];
     id action1 = [CCDelayTime actionWithDuration:0.4];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(removeTutorialCreeps)];
@@ -107,6 +123,7 @@
 
 - (void) startHidingTutorialMix
 {
+    mixOpen = NO;
     [mixTutorial runAction:[CCFadeOut actionWithDuration:0.3]];
     id action1 = [CCDelayTime actionWithDuration:0.4];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(removeTutorialMix)];
@@ -116,6 +133,7 @@
 
 - (void) startHidingTutorialPlace
 {
+    placeOpen = NO;
     [placeTutorial runAction:[CCFadeOut actionWithDuration:0.3]];
     id action1 = [CCDelayTime actionWithDuration:0.4];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(removeTutorialPlace)];
@@ -125,6 +143,7 @@
 
 - (void) startHidingTutorialBuild
 {
+    buildOpen = NO;
     [buildTutorial runAction:[CCFadeOut actionWithDuration:0.3]];
     id action1 = [CCDelayTime actionWithDuration:0.4];
     id action2 = [CCCallFunc actionWithTarget:self selector:@selector(removeTutorialBuild)];

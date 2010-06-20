@@ -153,10 +153,14 @@
 {
     CCTexture2D * output = nil;
     switch (textureKey) {
-        case FIELDTEXTURE_BACKGROUND1LR: return [self LoadTextureWithName:@"background1_lowerright.png" textureKey:textureKey isPVR:NO]; break;
-        case FIELDTEXTURE_BACKGROUND1LL: return [self LoadTextureWithName:@"background1_lowerleft.png" textureKey:textureKey isPVR:NO]; break;
-        case FIELDTEXTURE_BACKGROUND1UL: return [self LoadTextureWithName:@"background1_upperleft.png" textureKey:textureKey isPVR:NO]; break;
-        case FIELDTEXTURE_BACKGROUND1UR: return [self LoadTextureWithName:@"background1_upperright.png" textureKey:textureKey isPVR:NO]; break;   
+        case FIELDTEXTURE_BACKGROUND1LR: return [self LoadTextureWithName:@"lowerright_bg.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_BACKGROUND1LL: return [self LoadTextureWithName:@"lowerleft_bg.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_BACKGROUND1UL: return [self LoadTextureWithName:@"upperleft_bg.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_BACKGROUND1UR: return [self LoadTextureWithName:@"upperright_bg.png" textureKey:textureKey isPVR:NO]; break;   
+        case FIELDTEXTURE_FOREGROUND1LR: return [self LoadTextureWithName:@"lowerright_fg.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_FOREGROUND1LL: return [self LoadTextureWithName:@"lowerleft_fg.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_FOREGROUND1UL: return [self LoadTextureWithName:@"upperleft_fg.png" textureKey:textureKey isPVR:NO]; break;
+        case FIELDTEXTURE_FOREGROUND1UR: return [self LoadTextureWithName:@"upperright_fg.png" textureKey:textureKey isPVR:NO]; break; 
         case FIELDTEXTURE_RANGEINDICATOR: return [self LoadTextureWithName:@"RangeIndicator.png" textureKey:textureKey isPVR:NO]; break;
         case FIELDTEXTURE_BLEACHTRAP: return [self LoadTextureWithName:@"bleachtrap.png" textureKey:textureKey isPVR:NO]; break;
         default:
