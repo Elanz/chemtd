@@ -128,13 +128,13 @@
     CCMenuItemSprite * menuItemResume;
     CCMenu * miniMenu;
     
-    CCBitmapFontAtlas * phaseDisplay;
-    CCBitmapFontAtlas * levelDisplay;
-    CCBitmapFontAtlas * livesDisplay;
-    CCBitmapFontAtlas * scoreDisplay;
-    CCBitmapFontAtlas * energyDisplay;
-    CCBitmapFontAtlas * DPSDisplay;
-    CCBitmapFontAtlas * MultiplierDisplay;
+    CCLabelBMFont * phaseDisplay;
+    CCLabelBMFont * levelDisplay;
+    CCLabelBMFont * livesDisplay;
+    CCLabelBMFont * scoreDisplay;
+    CCLabelBMFont * energyDisplay;
+    CCLabelBMFont * DPSDisplay;
+    CCLabelBMFont * MultiplierDisplay;
 
     unsigned char levels[mapWidth][mapHeight];
     unsigned char tileMap[mapWidth][mapHeight];
@@ -178,13 +178,13 @@
 @property (nonatomic, retain) TowerManager * towerManager;
 @property (nonatomic, retain) TextureLibrary * textureLibrary;
 @property (nonatomic, retain) CCSprite * rangeIndicatorSprite;
-@property (nonatomic, retain) CCBitmapFontAtlas * phaseDisplay;
-@property (nonatomic, retain) CCBitmapFontAtlas * levelDisplay;
-@property (nonatomic, retain) CCBitmapFontAtlas * livesDisplay;
-@property (nonatomic, retain) CCBitmapFontAtlas * scoreDisplay;
-@property (nonatomic, retain) CCBitmapFontAtlas * DPSDisplay;
-@property (nonatomic, retain) CCBitmapFontAtlas * energyDisplay;
-@property (nonatomic, retain) CCBitmapFontAtlas * MultiplierDisplay;
+@property (nonatomic, retain) CCLabelBMFont * phaseDisplay;
+@property (nonatomic, retain) CCLabelBMFont * levelDisplay;
+@property (nonatomic, retain) CCLabelBMFont * livesDisplay;
+@property (nonatomic, retain) CCLabelBMFont * scoreDisplay;
+@property (nonatomic, retain) CCLabelBMFont * DPSDisplay;
+@property (nonatomic, retain) CCLabelBMFont * energyDisplay;
+@property (nonatomic, retain) CCLabelBMFont * MultiplierDisplay;
 @property (nonatomic, retain) TouchHandler * touchHandler;
 @property (nonatomic, retain) BaseTower * currentTower;
 @property (nonatomic, retain) NSMutableArray * towers;

@@ -44,7 +44,7 @@
     if ((self = [self init])) {
         gameField = theGameField;
 
-        powerDisplay = [CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_TowerPower];
+        powerDisplay = [CCLabelBMFont labelWithString:String_NULL fntFile:Font_TowerPower];
         powerDisplay.position = ccp(43,10);
         powerDisplay.scale = 1.5;
         powerDisplay.color = ccBLACK;
@@ -157,7 +157,7 @@
 
 - (void)addClass:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
-    CCBitmapFontAtlas * output = [CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UISmall];
+    CCLabelBMFont * output = [CCLabelBMFont labelWithString:String_NULL fntFile:Font_UISmall];
     output.position = ccp(206,474-54);
     output.color = ccBLACK;
     output.scale = 1.3;
@@ -206,7 +206,7 @@
 
 - (void) makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string towerCard:(CCSprite*)towerCard
 {
-    CCBitmapFontAtlas * output = [CCBitmapFontAtlas bitmapFontAtlasWithString:string fntFile:Font_UISmall];
+    CCLabelBMFont * output = [CCLabelBMFont labelWithString:string fntFile:Font_UISmall];
     output.position = position;
     output.color = ccBLACK;
     output.scale = scale;
@@ -215,12 +215,12 @@
 
 - (void)addDescription:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
-    CCLabel *lbl01 = [CCLabel labelWithString:chemicalDescription dimensions:CGSizeMake(307, 76) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:18];
+    CCLabelTTF *lbl01 = [CCLabelTTF labelWithString:chemicalDescription dimensions:CGSizeMake(307, 76) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:18];
     [lbl01 setPosition: ccp(171,474-238)];
     lbl01.color = ccBLACK;
     [towerCard addChild: lbl01 z:6];
         
-    CCLabel *lbl02 = [CCLabel labelWithString:towerEffects dimensions:CGSizeMake(307, 76) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:18];
+    CCLabelTTF *lbl02 = [CCLabelTTF labelWithString:towerEffects dimensions:CGSizeMake(307, 76) alignment:UITextAlignmentLeft fontName:@"Helvetica" fontSize:18];
     [lbl02 setPosition: ccp(171,474-330)];
     lbl02.color = ccBLACK;
     [towerCard addChild: lbl02 z:6];
@@ -277,7 +277,7 @@
 
 - (void)addName:(CCSprite*)towerCard baseX:(int)baseX baseY:(int)baseY
 {
-    CCBitmapFontAtlas * output = [CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UISmall];
+    CCLabelBMFont * output = [CCLabelBMFont labelWithString:String_NULL fntFile:Font_UISmall];
     output.position = ccp(baseX+84,baseY+CardHeight-10);
     output.color = ccBLACK;
     output.scale = 1.2;

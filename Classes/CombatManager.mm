@@ -61,36 +61,36 @@
     {
         ParticleContainer * container = [[ParticleContainer alloc] init];
         switch (key) {
-            case iEffect_WaterExplosion: container.system = [CCQuadParticleSystem particleWithFile:@"waterexplosion.plist"]; break;
-            case iEffect_SingleTargetOxygenShot: container.system = [CCQuadParticleSystem particleWithFile:@"oxygenshot.plist"]; break;
-            case iEffect_SingleTargetOxygenHit: container.system = [CCQuadParticleSystem particleWithFile:@"oxygenhit.plist"]; break;
-            case iEffect_SingleTargetSodiumShot: container.system = [CCQuadParticleSystem particleWithFile:@"sodiumshot.plist"]; break;
-            case iEffect_SingleTargetSodiumHit: container.system = [CCQuadParticleSystem particleWithFile:@"sodiumhit.plist"]; break;
-            case iEffect_SingleTargetHydrogenShot: container.system = [CCQuadParticleSystem particleWithFile:@"hydrogenshot.plist"]; break;
-            case iEffect_SingleTargetHydrogenHit: container.system = [CCQuadParticleSystem particleWithFile:@"hydrogenhit.plist"]; break;
-            case iEffect_SingleTargetNitrogenShot: container.system = [CCQuadParticleSystem particleWithFile:@"nitrogenshot.plist"]; break;
-            case iEffect_SingleTargetNitrogenHit: container.system = [CCQuadParticleSystem particleWithFile:@"nitrogenhit.plist"]; break;
-            case iEffect_SingleTargetChlorineShot: container.system = [CCQuadParticleSystem particleWithFile:@"chlorineshot.plist"]; break;
-            case iEffect_SingleTargetChlorineHit: container.system = [CCQuadParticleSystem particleWithFile:@"chlorinehit.plist"]; break;
-            case iEffect_SingleTargetCarbonShot: container.system = [CCQuadParticleSystem particleWithFile:@"carbonshot.plist"]; break;
-            case iEffect_SingleTargetCarbonHit: container.system = [CCQuadParticleSystem particleWithFile:@"carbonhit.plist"]; break;
-            case iEffect_SingleTargetFireball: container.system = [CCQuadParticleSystem particleWithFile:@"cometshot.plist"]; break;
-            case iEffect_SingleTargetExplosion: container.system = [CCQuadParticleSystem particleWithFile:@"explosion.plist"]; break;
-            case iEffect_SingleTargetFireballGreen: container.system = [CCQuadParticleSystem particleWithFile:@"cometshotgreen.plist"]; break;
-            case iEffect_SingleTargetExplosionGreen: container.system = [CCQuadParticleSystem particleWithFile:@"explosiongreen.plist"]; break;
-            case iEffect_SingleTargetWhiteSmoke: container.system = [CCQuadParticleSystem particleWithFile:@"whitesmoke.plist"]; break;
-            case iEffect_SingleTargetBlackSmoke: container.system = [CCQuadParticleSystem particleWithFile:@"blacksmoke.plist"]; break;
-            case iEffect_GreenBubbles: container.system = [CCQuadParticleSystem particleWithFile:@"greenbubbles.plist"]; break;
-            case iEffect_SingleTargetFireballPepper: container.system = [CCQuadParticleSystem particleWithFile:@"peppershot.plist"]; break;
-            case iEffect_SingleTargetExplosionPepper: container.system = [CCQuadParticleSystem particleWithFile:@"pepperexplosion.plist"]; break;
-            case iEffect_GrayCloud: container.system = [CCQuadParticleSystem particleWithFile:@"graycloud.plist"]; break;
-            case iEffect_Sleep: container.system = [CCQuadParticleSystem particleWithFile:@"sleep.plist"]; break;
-            case iEffect_NitrousShot: container.system = [CCQuadParticleSystem particleWithFile:@"nitrousshot.plist"]; break;
-            case iEffect_NitrousHit: container.system = [CCQuadParticleSystem particleWithFile:@"nitroushit.plist"]; break;
-            case iEffect_BigExplosionRing: container.system = [CCQuadParticleSystem particleWithFile:@"bigexplosionring.plist"]; break;
-            case iEffect_BigExplosionDebris: container.system = [CCQuadParticleSystem particleWithFile:@"bigexplosiondebris.plist"]; break;
-            case iEffect_SingleTargetGreenSmoke: container.system = [CCQuadParticleSystem particleWithFile:@"greensmoke.plist"]; break;
-            case iEffect_SingleTargetOrangeSmoke: container.system = [CCQuadParticleSystem particleWithFile:@"orangesmoke.plist"]; break;            
+            case iEffect_WaterExplosion: container.system = [CCParticleSystemQuad particleWithFile:@"waterexplosion.plist"]; break;
+            case iEffect_SingleTargetOxygenShot: container.system = [CCParticleSystemQuad particleWithFile:@"oxygenshot.plist"]; break;
+            case iEffect_SingleTargetOxygenHit: container.system = [CCParticleSystemQuad particleWithFile:@"oxygenhit.plist"]; break;
+            case iEffect_SingleTargetSodiumShot: container.system = [CCParticleSystemQuad particleWithFile:@"sodiumshot.plist"]; break;
+            case iEffect_SingleTargetSodiumHit: container.system = [CCParticleSystemQuad particleWithFile:@"sodiumhit.plist"]; break;
+            case iEffect_SingleTargetHydrogenShot: container.system = [CCParticleSystemQuad particleWithFile:@"hydrogenshot.plist"]; break;
+            case iEffect_SingleTargetHydrogenHit: container.system = [CCParticleSystemQuad particleWithFile:@"hydrogenhit.plist"]; break;
+            case iEffect_SingleTargetNitrogenShot: container.system = [CCParticleSystemQuad particleWithFile:@"nitrogenshot.plist"]; break;
+            case iEffect_SingleTargetNitrogenHit: container.system = [CCParticleSystemQuad particleWithFile:@"nitrogenhit.plist"]; break;
+            case iEffect_SingleTargetChlorineShot: container.system = [CCParticleSystemQuad particleWithFile:@"chlorineshot.plist"]; break;
+            case iEffect_SingleTargetChlorineHit: container.system = [CCParticleSystemQuad particleWithFile:@"chlorinehit.plist"]; break;
+            case iEffect_SingleTargetCarbonShot: container.system = [CCParticleSystemQuad particleWithFile:@"carbonshot.plist"]; break;
+            case iEffect_SingleTargetCarbonHit: container.system = [CCParticleSystemQuad particleWithFile:@"carbonhit.plist"]; break;
+            case iEffect_SingleTargetFireball: container.system = [CCParticleSystemQuad particleWithFile:@"cometshot.plist"]; break;
+            case iEffect_SingleTargetExplosion: container.system = [CCParticleSystemQuad particleWithFile:@"explosion.plist"]; break;
+            case iEffect_SingleTargetFireballGreen: container.system = [CCParticleSystemQuad particleWithFile:@"cometshotgreen.plist"]; break;
+            case iEffect_SingleTargetExplosionGreen: container.system = [CCParticleSystemQuad particleWithFile:@"explosiongreen.plist"]; break;
+            case iEffect_SingleTargetWhiteSmoke: container.system = [CCParticleSystemQuad particleWithFile:@"whitesmoke.plist"]; break;
+            case iEffect_SingleTargetBlackSmoke: container.system = [CCParticleSystemQuad particleWithFile:@"blacksmoke.plist"]; break;
+            case iEffect_GreenBubbles: container.system = [CCParticleSystemQuad particleWithFile:@"greenbubbles.plist"]; break;
+            case iEffect_SingleTargetFireballPepper: container.system = [CCParticleSystemQuad particleWithFile:@"peppershot.plist"]; break;
+            case iEffect_SingleTargetExplosionPepper: container.system = [CCParticleSystemQuad particleWithFile:@"pepperexplosion.plist"]; break;
+            case iEffect_GrayCloud: container.system = [CCParticleSystemQuad particleWithFile:@"graycloud.plist"]; break;
+            case iEffect_Sleep: container.system = [CCParticleSystemQuad particleWithFile:@"sleep.plist"]; break;
+            case iEffect_NitrousShot: container.system = [CCParticleSystemQuad particleWithFile:@"nitrousshot.plist"]; break;
+            case iEffect_NitrousHit: container.system = [CCParticleSystemQuad particleWithFile:@"nitroushit.plist"]; break;
+            case iEffect_BigExplosionRing: container.system = [CCParticleSystemQuad particleWithFile:@"bigexplosionring.plist"]; break;
+            case iEffect_BigExplosionDebris: container.system = [CCParticleSystemQuad particleWithFile:@"bigexplosiondebris.plist"]; break;
+            case iEffect_SingleTargetGreenSmoke: container.system = [CCParticleSystemQuad particleWithFile:@"greensmoke.plist"]; break;
+            case iEffect_SingleTargetOrangeSmoke: container.system = [CCParticleSystemQuad particleWithFile:@"orangesmoke.plist"]; break;            
             default:
                 break;
         }
@@ -136,46 +136,46 @@
 //    }
 }
 
--(CCQuadParticleSystem*) getParticleSystemForKey:(int)key
+-(CCParticleSystemQuad*) getParticleSystemForKey:(int)key
 {
-    CCQuadParticleSystem * system = nil;
+    CCParticleSystemQuad * system = nil;
     switch (key) {
-        case iEffect_WaterExplosion: system = [CCQuadParticleSystem particleWithFile:@"waterexplosion.plist"]; break;
-        case iEffect_SingleTargetOxygenShot: system = [CCQuadParticleSystem particleWithFile:@"oxygenshot.plist"]; break;
-        case iEffect_SingleTargetOxygenHit: system = [CCQuadParticleSystem particleWithFile:@"oxygenhit.plist"]; break;
-        case iEffect_SingleTargetSodiumShot: system = [CCQuadParticleSystem particleWithFile:@"sodiumshot.plist"]; break;
-        case iEffect_SingleTargetSodiumHit: system = [CCQuadParticleSystem particleWithFile:@"sodiumhit.plist"]; break;
-        case iEffect_SingleTargetHydrogenShot:system = [CCQuadParticleSystem particleWithFile:@"hydrogenshot.plist"]; break;
-        case iEffect_SingleTargetHydrogenHit: system = [CCQuadParticleSystem particleWithFile:@"hydrogenhit.plist"]; break;
-        case iEffect_SingleTargetNitrogenShot: system = [CCQuadParticleSystem particleWithFile:@"nitrogenshot.plist"]; break;
-        case iEffect_SingleTargetNitrogenHit: system = [CCQuadParticleSystem particleWithFile:@"nitrogenhit.plist"]; break;
-        case iEffect_SingleTargetChlorineShot: system = [CCQuadParticleSystem particleWithFile:@"chlorineshot.plist"]; break;
-        case iEffect_SingleTargetChlorineHit: system = [CCQuadParticleSystem particleWithFile:@"chlorinehit.plist"]; break;
-        case iEffect_SingleTargetCarbonShot: system = [CCQuadParticleSystem particleWithFile:@"carbonshot.plist"]; break;
-        case iEffect_SingleTargetCarbonHit: system = [CCQuadParticleSystem particleWithFile:@"carbonhit.plist"]; break;
-        case iEffect_SingleTargetFireball: system = [CCQuadParticleSystem particleWithFile:@"cometshot.plist"]; break;
-        case iEffect_SingleTargetExplosion: system = [CCQuadParticleSystem particleWithFile:@"explosion.plist"]; break;
-        case iEffect_SingleTargetFireballGreen: system = [CCQuadParticleSystem particleWithFile:@"cometshotgreen.plist"]; break;
-        case iEffect_SingleTargetExplosionGreen: system = [CCQuadParticleSystem particleWithFile:@"explosiongreen.plist"]; break;
-        case iEffect_SingleTargetWhiteSmoke: system = [CCQuadParticleSystem particleWithFile:@"whitesmoke.plist"]; break;
-        case iEffect_SingleTargetBlackSmoke: system = [CCQuadParticleSystem particleWithFile:@"blacksmoke.plist"]; break;
-        case iEffect_GreenBubbles: system = [CCQuadParticleSystem particleWithFile:@"greenbubbles.plist"]; break;
-        case iEffect_SingleTargetFireballPepper: system = [CCQuadParticleSystem particleWithFile:@"peppershot.plist"]; break;
-        case iEffect_SingleTargetExplosionPepper: system = [CCQuadParticleSystem particleWithFile:@"pepperexplosion.plist"]; break;
-        case iEffect_GrayCloud: system = [CCQuadParticleSystem particleWithFile:@"graycloud.plist"]; break;
-        case iEffect_Sleep: system = [CCQuadParticleSystem particleWithFile:@"sleep.plist"]; break;
-        case iEffect_NitrousShot: system = [CCQuadParticleSystem particleWithFile:@"nitrousshot.plist"]; break;
-        case iEffect_NitrousHit: system = [CCQuadParticleSystem particleWithFile:@"nitroushit.plist"]; break;
-        case iEffect_BigExplosionRing: system = [CCQuadParticleSystem particleWithFile:@"bigexplosionring.plist"]; break;
-        case iEffect_BigExplosionDebris: system = [CCQuadParticleSystem particleWithFile:@"bigexplosiondebris.plist"]; break;
-        case iEffect_SingleTargetGreenSmoke: system = [CCQuadParticleSystem particleWithFile:@"greensmoke.plist"]; break;
-        case iEffect_SingleTargetOrangeSmoke: system = [CCQuadParticleSystem particleWithFile:@"orangesmoke.plist"]; break;            
+        case iEffect_WaterExplosion: system = [CCParticleSystemQuad particleWithFile:@"waterexplosion.plist"]; break;
+        case iEffect_SingleTargetOxygenShot: system = [CCParticleSystemQuad particleWithFile:@"oxygenshot.plist"]; break;
+        case iEffect_SingleTargetOxygenHit: system = [CCParticleSystemQuad particleWithFile:@"oxygenhit.plist"]; break;
+        case iEffect_SingleTargetSodiumShot: system = [CCParticleSystemQuad particleWithFile:@"sodiumshot.plist"]; break;
+        case iEffect_SingleTargetSodiumHit: system = [CCParticleSystemQuad particleWithFile:@"sodiumhit.plist"]; break;
+        case iEffect_SingleTargetHydrogenShot:system = [CCParticleSystemQuad particleWithFile:@"hydrogenshot.plist"]; break;
+        case iEffect_SingleTargetHydrogenHit: system = [CCParticleSystemQuad particleWithFile:@"hydrogenhit.plist"]; break;
+        case iEffect_SingleTargetNitrogenShot: system = [CCParticleSystemQuad particleWithFile:@"nitrogenshot.plist"]; break;
+        case iEffect_SingleTargetNitrogenHit: system = [CCParticleSystemQuad particleWithFile:@"nitrogenhit.plist"]; break;
+        case iEffect_SingleTargetChlorineShot: system = [CCParticleSystemQuad particleWithFile:@"chlorineshot.plist"]; break;
+        case iEffect_SingleTargetChlorineHit: system = [CCParticleSystemQuad particleWithFile:@"chlorinehit.plist"]; break;
+        case iEffect_SingleTargetCarbonShot: system = [CCParticleSystemQuad particleWithFile:@"carbonshot.plist"]; break;
+        case iEffect_SingleTargetCarbonHit: system = [CCParticleSystemQuad particleWithFile:@"carbonhit.plist"]; break;
+        case iEffect_SingleTargetFireball: system = [CCParticleSystemQuad particleWithFile:@"cometshot.plist"]; break;
+        case iEffect_SingleTargetExplosion: system = [CCParticleSystemQuad particleWithFile:@"explosion.plist"]; break;
+        case iEffect_SingleTargetFireballGreen: system = [CCParticleSystemQuad particleWithFile:@"cometshotgreen.plist"]; break;
+        case iEffect_SingleTargetExplosionGreen: system = [CCParticleSystemQuad particleWithFile:@"explosiongreen.plist"]; break;
+        case iEffect_SingleTargetWhiteSmoke: system = [CCParticleSystemQuad particleWithFile:@"whitesmoke.plist"]; break;
+        case iEffect_SingleTargetBlackSmoke: system = [CCParticleSystemQuad particleWithFile:@"blacksmoke.plist"]; break;
+        case iEffect_GreenBubbles: system = [CCParticleSystemQuad particleWithFile:@"greenbubbles.plist"]; break;
+        case iEffect_SingleTargetFireballPepper: system = [CCParticleSystemQuad particleWithFile:@"peppershot.plist"]; break;
+        case iEffect_SingleTargetExplosionPepper: system = [CCParticleSystemQuad particleWithFile:@"pepperexplosion.plist"]; break;
+        case iEffect_GrayCloud: system = [CCParticleSystemQuad particleWithFile:@"graycloud.plist"]; break;
+        case iEffect_Sleep: system = [CCParticleSystemQuad particleWithFile:@"sleep.plist"]; break;
+        case iEffect_NitrousShot: system = [CCParticleSystemQuad particleWithFile:@"nitrousshot.plist"]; break;
+        case iEffect_NitrousHit: system = [CCParticleSystemQuad particleWithFile:@"nitroushit.plist"]; break;
+        case iEffect_BigExplosionRing: system = [CCParticleSystemQuad particleWithFile:@"bigexplosionring.plist"]; break;
+        case iEffect_BigExplosionDebris: system = [CCParticleSystemQuad particleWithFile:@"bigexplosiondebris.plist"]; break;
+        case iEffect_SingleTargetGreenSmoke: system = [CCParticleSystemQuad particleWithFile:@"greensmoke.plist"]; break;
+        case iEffect_SingleTargetOrangeSmoke: system = [CCParticleSystemQuad particleWithFile:@"orangesmoke.plist"]; break;            
         default:
             break;
     }
     
     return system;
-//    CCQuadParticleSystem * output = nil;
+//    CCParticleSystemQuad * output = nil;
 //    [particleLibraryLock lock];
 //    for (ParticleContainer * container in (NSMutableArray*)[particleLibrary objectForKey:[NSNumber numberWithInt:key]])
 //    {
@@ -235,7 +235,7 @@
     }
     else 
     {
-        CCQuadParticleSystem * emitter = [self getParticleSystemForKey:tower.shotParticleKey];
+        CCParticleSystemQuad * emitter = [self getParticleSystemForKey:tower.shotParticleKey];
         if (!emitter)
         {
             printf("zomg emitter is null\n");
@@ -265,7 +265,7 @@
     int damage = theContainer.tower.minDamage + arc4random() % theContainer.tower.maxDamage;
     [theContainer.creep shoot:damage];
     
-    CCQuadParticleSystem * system;
+    CCParticleSystemQuad * system;
     
     switch (theContainer.tower.effectType) {
         case TowerEffectType_SplashHuge:
@@ -316,7 +316,7 @@
 
 - (void) handleWaterExplosion:(ShotContainer*)container
 {
-    CCQuadParticleSystem * system = [self getParticleSystemForKey:iEffect_WaterExplosion];
+    CCParticleSystemQuad * system = [self getParticleSystemForKey:iEffect_WaterExplosion];
     system.position = container.creep.creepSprite.position;
     system.autoRemoveOnFinish = YES;
     [gameField addChild:system z:5];
@@ -326,7 +326,7 @@
         float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
         if (thisdistance < 100.0)
         {
-            CCQuadParticleSystem * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetOxygenHit];
+            CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetOxygenHit];
             explodeSystem.position = foundCreep.creepSprite.position;
             explodeSystem.autoRemoveOnFinish = YES;
             [gameField addChild:explodeSystem z:5];
@@ -338,7 +338,7 @@
 
 - (void) handleBigExplosion:(ShotContainer*)container
 {
-    CCQuadParticleSystem * system = [self getParticleSystemForKey:iEffect_BigExplosionRing];
+    CCParticleSystemQuad * system = [self getParticleSystemForKey:iEffect_BigExplosionRing];
     system.position = container.creep.creepSprite.position;
     system.autoRemoveOnFinish = YES;
     [gameField addChild:system z:5];
@@ -348,7 +348,7 @@
         float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
         if (thisdistance < 150.0)
         {
-            CCQuadParticleSystem * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosion];
+            CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosion];
             explodeSystem.position = foundCreep.creepSprite.position;
             explodeSystem.autoRemoveOnFinish = YES;
             [gameField addChild:explodeSystem z:5];
@@ -360,7 +360,7 @@
 
 - (void) handleHugeExplosion:(ShotContainer*)container
 {
-    CCQuadParticleSystem * system = [self getParticleSystemForKey:iEffect_BigExplosionRing];
+    CCParticleSystemQuad * system = [self getParticleSystemForKey:iEffect_BigExplosionRing];
     system.position = container.creep.creepSprite.position;
     system.autoRemoveOnFinish = YES;
     [gameField addChild:system z:5];
@@ -375,7 +375,7 @@
         float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
         if (thisdistance < 200.0)
         {
-            CCQuadParticleSystem * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosionPepper];
+            CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosionPepper];
             explodeSystem.position = foundCreep.creepSprite.position;
             explodeSystem.autoRemoveOnFinish = YES;
             [gameField addChild:explodeSystem z:5];

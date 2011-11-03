@@ -286,7 +286,7 @@
         NSError *urlerror;
         NSData* receivedData = [[NSMutableData data] retain];
         receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+        //NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     }
 
     return [self getOveralRanking];
@@ -310,7 +310,7 @@
         NSError *urlerror;
         NSData* receivedData = [[NSMutableData data] retain];
         receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+        //NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
     }
     
     NSString * stats = @"";

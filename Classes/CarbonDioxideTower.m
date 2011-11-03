@@ -62,7 +62,7 @@
 
 - (void)towerPicked
 {
-//    CCQuadParticleSystem * smokeSystem = [CCQuadParticleSystem particleWithFile:Effect_GrayCloud];
+//    CCLabelBMFont * smokeSystem = [CCLabelBMFont particleWithFile:Effect_GrayCloud];
 //    smokeSystem.position = ccp(towerSize/2, towerSize/2);
 //    [towerSprite addChild:smokeSystem z:2];
 }

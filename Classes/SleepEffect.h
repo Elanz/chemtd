@@ -15,7 +15,7 @@
 
 @interface SleepEffect : BaseEffect {
     float dotElapsed;
-    CCQuadParticleSystem * sleepSystem;
+    CCParticleSystemQuad * sleepSystem;
 }
 
 - (id) initWithSource:(BaseTower*)sourceTower target:(Creep*)targetCreep;

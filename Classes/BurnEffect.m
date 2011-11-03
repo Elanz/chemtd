@@ -32,7 +32,7 @@
     
     [creep.creepSprite runAction:repeat];
     
-    burnSystem = [CCQuadParticleSystem particleWithFile:@"burn.plist"];
+    burnSystem = [CCParticleSystemQuad particleWithFile:@"burn.plist"];
     burnSystem.position = ccp(creepSize/2, -(creepSize/2));
     [creep.hpbar addChild:burnSystem];
 }

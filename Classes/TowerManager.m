@@ -66,9 +66,9 @@
     btnTowerManagerDowngrade.isEnabled = towerManagerDowngradeOldState;
 }
 
-- (CCBitmapFontAtlas*) makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string
+- (CCLabelBMFont*) makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string
 {
-    CCBitmapFontAtlas * output = [CCBitmapFontAtlas bitmapFontAtlasWithString:string fntFile:Font_UISmall];
+    CCLabelBMFont * output = [CCLabelBMFont labelWithString:string fntFile:Font_UISmall];
     output.position = position;
     output.color = ccBLACK;
     output.scale = scale;

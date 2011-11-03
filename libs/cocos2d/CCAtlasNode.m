@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +28,8 @@
 #import "ccMacros.h"
 
 
-@interface CCAtlasNode (Private)
+@interface CCAtlasNode ()
 -(void) calculateMaxItems;
--(void) calculateTexCoordsSteps;
 -(void) updateBlendFunc;
 -(void) updateOpacityModifyRGB;
 @end
@@ -38,20 +38,20 @@
 
 @synthesize textureAtlas = textureAtlas_;
 @synthesize blendFunc = blendFunc_;
+@synthesize quadsToDraw = quadsToDraw_;
 
 #pragma mark CCAtlasNode - Creation & Init
-+(id) atlasWithTileFile:(NSString*)tile tileWidth:(int)w tileHeight:(int)h itemsToRender: (int) c
++(id) atlasWithTileFile:(NSString*)tile tileWidth:(NSUInteger)w tileHeight:(NSUInteger)h itemsToRender: (NSUInteger) c
 {
 	return [[[self alloc] initWithTileFile:tile tileWidth:w tileHeight:h itemsToRender:c] autorelease];
 }
 
-
--(id) initWithTileFile:(NSString*)tile tileWidth:(int)w tileHeight:(int)h itemsToRender: (int) c
+-(id) initWithTileFile:(NSString*)tile tileWidth:(NSUInteger)w tileHeight:(NSUInteger)h itemsToRender: (NSUInteger) c
 {
 	if( (self=[super init]) ) {
 	
-		itemWidth = w;
-		itemHeight = h;
+		itemWidth_ = w * CC_CONTENT_SCALE_FACTOR();
+		itemHeight_ = h * CC_CONTENT_SCALE_FACTOR();
 
 		opacity_ = 255;
 		color_ = colorUnmodified_ = ccWHITE;
@@ -65,13 +65,20 @@
 		self.textureAtlas = [[CCTextureAtlas alloc] initWithFile:tile capacity:c];
 		[textureAtlas_ release];
 		
+		if( ! textureAtlas_ ) {
+			CCLOG(@"cocos2d: Could not initialize CCAtlasNode. Invalid Texture");
+			[self release];
+			return nil;
+		}
+		
 		[self updateBlendFunc];
 		[self updateOpacityModifyRGB];
-			
+		
 		[self calculateMaxItems];
-		[self calculateTexCoordsSteps];
+		
+		self.quadsToDraw = c;
+		
 	}
-	
 	return self;
 }
 
@@ -86,16 +93,9 @@
 
 -(void) calculateMaxItems
 {
-	CGSize s = [[textureAtlas_ texture] contentSize];
-	itemsPerColumn = s.height / itemHeight;
-	itemsPerRow = s.width / itemWidth;
-}
-
--(void) calculateTexCoordsSteps
-{
-	CCTexture2D *tex = [textureAtlas_ texture];
-	texStepX = itemWidth / (float) [tex pixelsWide];
-	texStepY = itemHeight / (float) [tex pixelsHigh]; 	
+	CGSize s = [[textureAtlas_ texture] contentSizeInPixels];
+	itemsPerColumn_ = s.height / itemHeight_;
+	itemsPerRow_ = s.width / itemWidth_;
 }
 
 -(void) updateAtlasValues
@@ -106,6 +106,8 @@
 #pragma mark CCAtlasNode - draw
 - (void) draw
 {
+	[super draw];
+
 	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 	// Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
 	// Unneeded states: GL_COLOR_ARRAY
@@ -113,13 +115,11 @@
 
 	glColor4ub( color_.r, color_.g, color_.b, opacity_);
 
-	BOOL newBlend = NO;
-	if( blendFunc_.src != CC_BLEND_SRC || blendFunc_.dst != CC_BLEND_DST ) {
-		newBlend = YES;
+	BOOL newBlend = blendFunc_.src != CC_BLEND_SRC || blendFunc_.dst != CC_BLEND_DST;
+	if( newBlend )
 		glBlendFunc( blendFunc_.src, blendFunc_.dst );
-	}
 		
-	[textureAtlas_ drawQuads];
+	[textureAtlas_ drawNumberOfQuads:quadsToDraw_ fromIndex:0];
 		
 	if( newBlend )
 		glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
@@ -138,9 +138,9 @@
 
 - (ccColor3B) color
 {
-	if(opacityModifyRGB_){
+	if(opacityModifyRGB_)
 		return colorUnmodified_;
-	}
+	
 	return color_;
 }
 
@@ -166,7 +166,7 @@
 	
 	// special opacity for premultiplied textures
 	if( opacityModifyRGB_ )
-		[self setColor: (opacityModifyRGB_ ? colorUnmodified_ : color_ )];	
+		[self setColor: colorUnmodified_];	
 }
 
 -(void) setOpacityModifyRGB:(BOOL)modify

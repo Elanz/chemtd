@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +43,7 @@
 //
 
 // opengl
-#import <OpenGLES/ES1/gl.h>
+#import "Platforms/CCGL.h"
 
 // cocos2d
 #import "ccConfig.h"
@@ -50,7 +51,9 @@
 #import "Support/CCProfiling.h"
 #endif
 #import "CCParticleSystem.h"
+#import "CCParticleBatchNode.h"
 #import "CCTextureCache.h"
+#import "CCTextureAtlas.h"
 #import "ccMacros.h"
 
 // support
@@ -62,7 +65,7 @@
 
 @implementation CCParticleSystem
 @synthesize active, duration;
-@synthesize centerOfGravity, posVar;
+@synthesize sourcePosition, posVar;
 @synthesize particleCount;
 @synthesize life, lifeVar;
 @synthesize angle, angleVar;
@@ -76,6 +79,8 @@
 @synthesize positionType = positionType_;
 @synthesize autoRemoveOnFinish = autoRemoveOnFinish_;
 @synthesize emitterMode = emitterMode_;
+@synthesize atlasIndex = atlasIndex_;
+@synthesize useBatchNode = useBatchNode_;
 
 
 +(id) particleWithFile:(NSString*) plistFile
@@ -84,11 +89,9 @@
 }
 
 -(id) init {
-	NSException* myException = [NSException
-								exceptionWithName:@"Particle.init"
-								reason:@"Particle.init shall not be called. Use initWithTotalParticles instead."
-								userInfo:nil];
-	@throw myException;	
+	NSAssert(NO, @"CCParticleSystem: Init not supported.");
+	[self release];
+	return nil;	
 }
 
 -(id) initWithFile:(NSString *)plistFile
@@ -102,10 +105,11 @@
 
 -(id) initWithDictionary:(NSDictionary *)dictionary
 {
-	int maxParticles = [[dictionary valueForKey:@"maxParticles"] intValue];
+	NSUInteger maxParticles = [[dictionary valueForKey:@"maxParticles"] intValue];
 	// self, not super
-	if ((self=[self initWithTotalParticles:maxParticles] ) ) {
-		
+	
+	if ((self=[self initWithTotalParticles:maxParticles] ) )
+	{	
 		// angle
 		angle = [[dictionary valueForKey:@"angle"] floatValue];
 		angleVar = [[dictionary valueForKey:@"angleVariance"] floatValue];
@@ -150,14 +154,18 @@
 		endSize = [[dictionary valueForKey:@"finishParticleSize"] floatValue];
 		endSizeVar = [[dictionary valueForKey:@"finishParticleSizeVariance"] floatValue];
 		
-		
 		// position
 		float x = [[dictionary valueForKey:@"sourcePositionx"] floatValue];
 		float y = [[dictionary valueForKey:@"sourcePositiony"] floatValue];
-		position_ = ccp(x,y);
+		self.position = ccp(x,y);
 		posVar.x = [[dictionary valueForKey:@"sourcePositionVariancex"] floatValue];
 		posVar.y = [[dictionary valueForKey:@"sourcePositionVariancey"] floatValue];
 				
+		// Spinning
+		startSpin = [[dictionary valueForKey:@"rotationStart"] floatValue];
+		startSpinVar = [[dictionary valueForKey:@"rotationStartVariance"] floatValue];
+		endSpin = [[dictionary valueForKey:@"rotationEnd"] floatValue];
+		endSpinVar = [[dictionary valueForKey:@"rotationEndVariance"] floatValue];
 		
 		emitterMode_ = [[dictionary valueForKey:@"emitterType"] intValue];
 
@@ -172,15 +180,20 @@
 			mode.A.speed = [[dictionary valueForKey:@"speed"] floatValue];
 			mode.A.speedVar = [[dictionary valueForKey:@"speedVariance"] floatValue];
 			
-			// radial acceleration
-			mode.A.radialAccel = [[dictionary valueForKey:@"radialAcceleration"] floatValue];
-			mode.A.radialAccelVar = [[dictionary valueForKey:@"radialAccelVariance"] floatValue];
+			// radial acceleration			
+			NSString *tmp = [dictionary valueForKey:@"radialAcceleration"];
+			mode.A.radialAccel = tmp ? [tmp floatValue] : 0;
 			
+			tmp = [dictionary valueForKey:@"radialAccelVariance"];
+			mode.A.radialAccelVar = tmp ? [tmp floatValue] : 0;
+						
 			// tangential acceleration
-			mode.A.tangentialAccel = [[dictionary valueForKey:@"tangentialAcceleration"] floatValue];
-			mode.A.tangentialAccelVar = [[dictionary valueForKey:@"tangentialAccelVariance"] floatValue];
+			tmp = [dictionary valueForKey:@"tangentialAcceleration"];
+			mode.A.tangentialAccel = tmp ? [tmp floatValue] : 0;
+			
+			tmp = [dictionary valueForKey:@"tangentialAccelVariance"];
+			mode.A.tangentialAccelVar = tmp ? [tmp floatValue] : 0;
 		}
-		
 		
 		// or Mode B: radius movement
 		else if( emitterMode_ == kCCParticleModeRadius ) {
@@ -206,41 +219,55 @@
 		// emission Rate
 		emissionRate = totalParticles/life;
 
+		//don't get the internal texture if a batchNode is used
+		if (!batchNode_) 
+		{
 		// texture		
 		// Try to get the texture from the cache
-		NSString *textureName = [dictionary valueForKey:@"textureFileName"];
-		NSString *textureData = [dictionary valueForKey:@"textureImageData"];
-
-		self.texture = [[CCTextureCache sharedTextureCache] addImage:textureName];
-
-		if ( ! texture_ && textureData) {
+			NSString *textureName = [dictionary valueForKey:@"textureFileName"];
 			
-			// if it fails, try to get it from the base64-gzipped data			
-			unsigned char *buffer = NULL;
-			int len = base64Decode((unsigned char*)[textureData UTF8String], [textureData length], &buffer);
-			NSAssert( buffer != NULL, @"CCParticleSystem: error decoding textureImageData");
-				
-			unsigned char *deflated = NULL;
-			int deflatedLen = inflateMemory(buffer, len, &deflated);
-			free( buffer );
-				
-			NSAssert( deflated != NULL, @"CCParticleSystem: error ungzipping textureImageData");
-			NSData *data = [[NSData alloc] initWithBytes:deflated length:deflatedLen];
-			UIImage *image = [[UIImage alloc] initWithData:data];
+			CCTexture2D *tex = [[CCTextureCache sharedTextureCache] addImage:textureName];
 			
-			self.texture = [[CCTextureCache sharedTextureCache] addCGImage:[image CGImage] forKey:textureName];
-			[data release];
-			[image release];
+			if( tex )
+				[self setTexture:tex];
+			else {
+				
+				NSString *textureData = [dictionary valueForKey:@"textureImageData"];
+				NSAssert( textureData, @"CCParticleSystem: Couldn't load texture");
+				
+				// if it fails, try to get it from the base64-gzipped data			
+				unsigned char *buffer = NULL;
+				int len = base64Decode((unsigned char*)[textureData UTF8String], (unsigned int)[textureData length], &buffer);
+				NSAssert( buffer != NULL, @"CCParticleSystem: error decoding textureImageData");
+				
+				unsigned char *deflated = NULL;
+				NSUInteger deflatedLen = ccInflateMemory(buffer, len, &deflated);
+				free( buffer );
+				
+				NSAssert( deflated != NULL, @"CCParticleSystem: error ungzipping textureImageData");
+				NSData *data = [[NSData alloc] initWithBytes:deflated length:deflatedLen];
+				
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+				UIImage *image = [[UIImage alloc] initWithData:data];
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+				NSBitmapImageRep *image = [[NSBitmapImageRep alloc] initWithData:data];
+#endif
+				
+				free(deflated); deflated = NULL;
+				
+				[self setTexture:  [ [CCTextureCache sharedTextureCache] addCGImage:[image CGImage] forKey:textureName]];
+				[data release];
+				[image release];				
+			}
+			
+			NSAssert( [self texture] != NULL, @"CCParticleSystem: error loading the texture");
 		}
+	}	
 		
-		NSAssert( [self texture] != NULL, @"CCParticleSystem: error loading the texture");
-		
-	}
-	
 	return self;
 }
 
--(id) initWithTotalParticles:(int) numberOfParticles
+-(id) initWithTotalParticles:(NSUInteger) numberOfParticles
 {
 	if( (self=[super init]) ) {
 
@@ -254,6 +281,14 @@
 			return nil;
 		}
 		
+		if (batchNode_)
+		{
+			for (int i = 0; i < totalParticles; i++)
+			{
+				particles[i].atlasIndex=i;	
+			}
+		}
+		
 		// default, active
 		active = YES;
 		
@@ -265,11 +300,7 @@
 		
 		// by default be in mode A:
 		emitterMode_ = kCCParticleModeGravity;
-				
-		// default: modulate
-		// XXX: not used
-	//	colorModulate = YES;
-		
+						
 		autoRemoveOnFinish_ = NO;
 
 		// profiling
@@ -280,12 +311,13 @@
 		// Optimization: compile udpateParticle method
 		updateParticleSel = @selector(updateQuadWithParticle:newPosition:);
 		updateParticleImp = (CC_UPDATE_PARTICLE_IMP) [self methodForSelector:updateParticleSel];
+		
+		//for batchNode
+		transformSystemDirty_ = NO;
 
 		// udpate after action in run!
 		[self scheduleUpdateWithPriority:1];
-		
 	}
-
 	return self;
 }
 
@@ -317,27 +349,32 @@
 
 -(void) initParticle: (tCCParticle*) particle
 {
-
+	//CGPoint currentPosition = position_;
 	// timeToLive
 	// no negative life. prevent division by 0
-	particle->timeToLive = MAX(0, life + lifeVar * CCRANDOM_MINUS1_1() );
+	particle->timeToLive = life + lifeVar * CCRANDOM_MINUS1_1();
+	particle->timeToLive = MAX(0, particle->timeToLive);
 
 	// position
-	particle->pos.x = centerOfGravity.x + posVar.x * CCRANDOM_MINUS1_1();
-	particle->pos.y = centerOfGravity.y + posVar.y * CCRANDOM_MINUS1_1();
+	particle->pos.x = sourcePosition.x + posVar.x * CCRANDOM_MINUS1_1();
+	particle->pos.y = sourcePosition.y + posVar.y * CCRANDOM_MINUS1_1();
+	
+	//CCLOG(@"particle pos %f %f n pos %f %f",particle->pos.x,particle->pos.y, position_.x,position_.y);
+	particle->pos.x *= CC_CONTENT_SCALE_FACTOR();
+	particle->pos.y *= CC_CONTENT_SCALE_FACTOR();
 	
 	// Color
 	ccColor4F start;
-	start.r = MIN(1, MAX(0, startColor.r + startColorVar.r * CCRANDOM_MINUS1_1() ) );
-	start.g = MIN(1, MAX(0, startColor.g + startColorVar.g * CCRANDOM_MINUS1_1() ) );
-	start.b = MIN(1, MAX(0, startColor.b + startColorVar.b * CCRANDOM_MINUS1_1() ) );
-	start.a = MIN(1, MAX(0, startColor.a + startColorVar.a * CCRANDOM_MINUS1_1() ) );
+	start.r = clampf( startColor.r + startColorVar.r * CCRANDOM_MINUS1_1(), 0, 1);
+	start.g = clampf( startColor.g + startColorVar.g * CCRANDOM_MINUS1_1(), 0, 1);
+	start.b = clampf( startColor.b + startColorVar.b * CCRANDOM_MINUS1_1(), 0, 1);
+	start.a = clampf( startColor.a + startColorVar.a * CCRANDOM_MINUS1_1(), 0, 1);
 	
 	ccColor4F end;
-	end.r = MIN(1, MAX(0, endColor.r + endColorVar.r * CCRANDOM_MINUS1_1() ) );
-	end.g = MIN(1, MAX(0, endColor.g + endColorVar.g * CCRANDOM_MINUS1_1() ) );
-	end.b = MIN(1, MAX(0, endColor.b + endColorVar.b * CCRANDOM_MINUS1_1() ) );
-	end.a = MIN(1, MAX(0, endColor.a + endColorVar.a * CCRANDOM_MINUS1_1() ) );
+	end.r = clampf( endColor.r + endColorVar.r * CCRANDOM_MINUS1_1(), 0, 1);
+	end.g = clampf( endColor.g + endColorVar.g * CCRANDOM_MINUS1_1(), 0, 1);
+	end.b = clampf( endColor.b + endColorVar.b * CCRANDOM_MINUS1_1(), 0, 1);
+	end.a = clampf( endColor.a + endColorVar.a * CCRANDOM_MINUS1_1(), 0, 1);
 	
 	particle->color = start;
 	particle->deltaColor.r = (end.r - start.r) / particle->timeToLive;
@@ -346,14 +383,17 @@
 	particle->deltaColor.a = (end.a - start.a) / particle->timeToLive;
 	
 	// size
-	float startS = MAX(0, startSize + startSizeVar * CCRANDOM_MINUS1_1() ); // no negative size
+	float startS = startSize + startSizeVar * CCRANDOM_MINUS1_1();
+	startS = MAX(0, startS); // No negative value
+	startS *= CC_CONTENT_SCALE_FACTOR();
 	
 	particle->size = startS;
 	if( endSize == kCCParticleStartSizeEqualToEndSize )
 		particle->deltaSize = 0;
 	else {
 		float endS = endSize + endSizeVar * CCRANDOM_MINUS1_1();
-		endS = MAX(0, endS);
+		endS = MAX(0, endS);	// No negative values
+		endS *= CC_CONTENT_SCALE_FACTOR();
 		particle->deltaSize = (endS - startS) / particle->timeToLive;
 	}
 	
@@ -364,8 +404,13 @@
 	particle->deltaRotation = (endA - startA) / particle->timeToLive;
 	
 	// position
-	if( positionType_ == kCCPositionTypeFree )
-		particle->startPos = [self convertToWorldSpace:CGPointZero];
+	if( positionType_ == kCCPositionTypeFree ) {
+		CGPoint p = [self convertToWorldSpace:CGPointZero];
+		particle->startPos = ccpMult( p, CC_CONTENT_SCALE_FACTOR() );
+	}
+	else if( positionType_ == kCCPositionTypeRelative ) {
+		particle->startPos = ccpMult( position_, CC_CONTENT_SCALE_FACTOR() );
+	}
 	
 	// direction
 	float a = CC_DEGREES_TO_RADIANS( angle + angleVar * CCRANDOM_MINUS1_1() );	
@@ -373,20 +418,21 @@
 	// Mode Gravity: A
 	if( emitterMode_ == kCCParticleModeGravity ) {
 
-		
-		CGPoint v;
-		v.y = sinf( a );
-		v.x = cosf( a );
+		CGPoint v = {cosf( a ), sinf( a )};
 		float s = mode.A.speed + mode.A.speedVar * CCRANDOM_MINUS1_1();
+		s *= CC_CONTENT_SCALE_FACTOR();
 		
 		// direction
 		particle->mode.A.dir = ccpMult( v, s );
 		
 		// radial accel
 		particle->mode.A.radialAccel = mode.A.radialAccel + mode.A.radialAccelVar * CCRANDOM_MINUS1_1();
+		particle->mode.A.radialAccel *= CC_CONTENT_SCALE_FACTOR();
 		
 		// tangential accel
 		particle->mode.A.tangentialAccel = mode.A.tangentialAccel + mode.A.tangentialAccelVar * CCRANDOM_MINUS1_1();
+		particle->mode.A.tangentialAccel *= CC_CONTENT_SCALE_FACTOR();
+
 	}
 	
 	// Mode Radius: B
@@ -395,6 +441,9 @@
 		float startRadius = mode.B.startRadius + mode.B.startRadiusVar * CCRANDOM_MINUS1_1();
 		float endRadius = mode.B.endRadius + mode.B.endRadiusVar * CCRANDOM_MINUS1_1();
 
+		startRadius *= CC_CONTENT_SCALE_FACTOR();
+		endRadius *= CC_CONTENT_SCALE_FACTOR();
+		
 		particle->mode.B.radius = startRadius;
 
 		if( mode.B.endRadius == kCCParticleStartRadiusEqualToEndRadius )
@@ -404,8 +453,9 @@
 	
 		particle->mode.B.angle = a;
 		particle->mode.B.degreesPerSecond = CC_DEGREES_TO_RADIANS(mode.B.rotatePerSecond + mode.B.rotatePerSecondVar * CCRANDOM_MINUS1_1());
-		
 	}	
+	
+	particle->z=vertexZ_; 
 }
 
 -(void) stopSystem
@@ -423,6 +473,7 @@
 		tCCParticle *p = &particles[particleIdx];
 		p->timeToLive = 0;
 	}
+
 }
 
 -(BOOL) isFull
@@ -448,111 +499,155 @@
 	
 	particleIdx = 0;
 	
-	
 #if CC_ENABLE_PROFILERS
 	CCProfilingBeginTimingBlock(_profilingTimer);
 #endif
-	
-	
-	CGPoint currentPosition = CGPointZero;
-	if( positionType_ == kCCPositionTypeFree )
-		currentPosition = [self convertToWorldSpace:CGPointZero];
-	
-	while( particleIdx < particleCount )
-	{
-		tCCParticle *p = &particles[particleIdx];
 		
-		// life
-		p->timeToLive -= dt;
+	CGPoint currentPosition;
+	//if (useBatchNode_) currentPosition = [self.parent convertToWorldSpace:self.position];
+	//else 
+	currentPosition = CGPointZero;
+	
+	if( positionType_ == kCCPositionTypeFree ) {
+		currentPosition = [self convertToWorldSpace:CGPointZero];
+		currentPosition.x *= CC_CONTENT_SCALE_FACTOR();
+		currentPosition.y *= CC_CONTENT_SCALE_FACTOR();
+	}
+	else if( positionType_ == kCCPositionTypeRelative ) {
+	//currentPosition = [self convertToWorldSpace:CGPointZero];
+		currentPosition = position_;
+		currentPosition.x *= CC_CONTENT_SCALE_FACTOR();
+		currentPosition.y *= CC_CONTENT_SCALE_FACTOR();
+	}
+	
+	if (visible_) 
+	{
+		while( particleIdx < particleCount )
+		{
+			tCCParticle *p = &particles[particleIdx];
+			
+			// life
+			p->timeToLive -= dt;
 
-		if( p->timeToLive > 0 ) {
-			
-			// Mode A: gravity, direction, tangential accel & radial accel
-			if( emitterMode_ == kCCParticleModeGravity ) {
-				CGPoint tmp, radial, tangential;
+			if( p->timeToLive > 0 ) {
 				
-				radial = CGPointZero;
-				// radial acceleration
-				if(p->pos.x || p->pos.y)
-					radial = ccpNormalize(p->pos);
-				tangential = radial;
-				radial = ccpMult(radial, p->mode.A.radialAccel);
+				// Mode A: gravity, direction, tangential accel & radial accel
+				if( emitterMode_ == kCCParticleModeGravity ) {
+					CGPoint tmp, radial, tangential;
+					
+					radial = CGPointZero;
+					// radial acceleration
+					if(p->pos.x || p->pos.y)
+						radial = ccpNormalize(p->pos);
+					
+					tangential = radial;
+					radial = ccpMult(radial, p->mode.A.radialAccel);
+					
+					// tangential acceleration
+					float newy = tangential.x;
+					tangential.x = -tangential.y;
+					tangential.y = newy;
+					tangential = ccpMult(tangential, p->mode.A.tangentialAccel);
+					
+					// (gravity + radial + tangential) * dt
+					tmp = ccpAdd( ccpAdd( radial, tangential), mode.A.gravity);
+					tmp = ccpMult( tmp, dt);
+					p->mode.A.dir = ccpAdd( p->mode.A.dir, tmp);
+					tmp = ccpMult(p->mode.A.dir, dt);
+					p->pos = ccpAdd( p->pos, tmp );
+				}
 				
-				// tangential acceleration
-				float newy = tangential.x;
-				tangential.x = -tangential.y;
-				tangential.y = newy;
-				tangential = ccpMult(tangential, p->mode.A.tangentialAccel);
+				// Mode B: radius movement
+				else {				
+					// Update the angle and radius of the particle.
+					p->mode.B.angle += p->mode.B.degreesPerSecond * dt;
+					p->mode.B.radius += p->mode.B.deltaRadius * dt;
+					
+					p->pos.x = - cosf(p->mode.B.angle) * p->mode.B.radius;
+					p->pos.y = - sinf(p->mode.B.angle) * p->mode.B.radius;					
+				}
 				
-				// (gravity + radial + tangential) * dt
-				tmp = ccpAdd( ccpAdd( radial, tangential), mode.A.gravity);
-				tmp = ccpMult( tmp, dt);
-				p->mode.A.dir = ccpAdd( p->mode.A.dir, tmp);
-				tmp = ccpMult(p->mode.A.dir, dt);
-				p->pos = ccpAdd( p->pos, tmp );
-			}
-			
-			// Mode B: radius movement
-			else {				
-				// Update the angle and radius of the particle.
-				p->mode.B.angle += p->mode.B.degreesPerSecond * dt;
-				p->mode.B.radius += p->mode.B.deltaRadius * dt;
+				// color
+				p->color.r += (p->deltaColor.r * dt);
+				p->color.g += (p->deltaColor.g * dt);
+				p->color.b += (p->deltaColor.b * dt);
+				p->color.a += (p->deltaColor.a * dt);
 				
-				p->pos.x = - cosf(p->mode.B.angle) * p->mode.B.radius;
-				p->pos.y = - sinf(p->mode.B.angle) * p->mode.B.radius;
-			}
-			
-			// color
-			p->color.r += (p->deltaColor.r * dt);
-			p->color.g += (p->deltaColor.g * dt);
-			p->color.b += (p->deltaColor.b * dt);
-			p->color.a += (p->deltaColor.a * dt);
-			
-			// size
-			p->size += (p->deltaSize * dt);
-			p->size = MAX( 0, p->size );
-			
-			// angle
-			p->rotation += (p->deltaRotation * dt);
-						
-			//
-			// update values in quad
-			//
-			
-			CGPoint	newPos;
-			
-			if( positionType_ == kCCPositionTypeFree ) {
-				CGPoint diff = ccpSub( currentPosition, p->startPos );
-				newPos = ccpSub(p->pos, diff);
+				// size
+				p->size += (p->deltaSize * dt);
+				p->size = MAX( 0, p->size );
 				
-			} else
-				newPos = p->pos;
+				// angle
+				p->rotation += (p->deltaRotation * dt);
+							
+				//
+				// update values in quad
+				//
+				
+				CGPoint	newPos;
+				
+				if( positionType_ == kCCPositionTypeFree || positionType_ == kCCPositionTypeRelative ) 
+				{
+					CGPoint diff = ccpSub( currentPosition, p->startPos );
+					newPos = ccpSub(p->pos, diff);	
+				} else
+					newPos = p->pos;
+				
+				//translate newPos to correct position, since matrix transform isn't performed in batchnode
+				//don't update the particle with the new position information, it will interfere with the radius and tangential calculations
+				if (useBatchNode_)
+				{
+						newPos.x += positionInPixels_.x; 
+						newPos.y += positionInPixels_.y;
+				}
+				
+				p->z = vertexZ_;
+				
+				updateParticleImp(self, updateParticleSel, p, newPos);
+				
+				// update particle counter
+				particleIdx++;
 
-			
-			updateParticleImp(self, updateParticleSel, p, newPos);
-			
-			// update particle counter
-			particleIdx++;
-			
-		} else {
-			// life < 0
-			if( particleIdx != particleCount-1 )
-				particles[particleIdx] = particles[particleCount-1];
-			particleCount--;
-			
-			if( particleCount == 0 && autoRemoveOnFinish_ ) {
-				[self unscheduleUpdate];
-				[parent_ removeChild:self cleanup:YES];
-				return;
+			} else {
+				// life < 0
+				NSUInteger currentIndex = p->atlasIndex;
+				
+				if( particleIdx != particleCount-1 )
+					particles[particleIdx] = particles[particleCount-1];
+								
+				if (useBatchNode_) 
+				{
+					//disable the switched particle 
+					[batchNode_ disableParticle:(atlasIndex_+currentIndex)];
+					
+					//switch indexes
+					particles[particleCount-1].atlasIndex = currentIndex; 
+				}
+				 
+				particleCount--;
+								
+				if( particleCount == 0 && autoRemoveOnFinish_ ) {
+					[self unscheduleUpdate];
+					[parent_ removeChild:self cleanup:YES];
+					return;
+				}
 			}
-		}
+		}//while
+		transformSystemDirty_ = NO;
 	}
 	
 #if CC_ENABLE_PROFILERS
 	CCProfilingEndTimingBlock(_profilingTimer);
 #endif
 	
-	[self postStep];
+#ifdef CC_USES_VBO
+	if (!useBatchNode_) [self postStep];
+#endif
+}
+
+-(void) updateWithNoTime
+{
+	[self update:0.0f];	
 }
 
 -(void) updateQuadWithParticle:(tCCParticle*)particle newPosition:(CGPoint)pos;
@@ -569,7 +664,6 @@
 
 -(void) setTexture:(CCTexture2D*) texture
 {
-	[texture_ release];
 	texture_ = [texture retain];
 
 	// If the new texture has No premultiplied alpha, AND the blendFunc hasn't been changed, then update it
@@ -755,6 +849,54 @@
 	NSAssert( emitterMode_ == kCCParticleModeRadius, @"Particle Mode should be Radius");
 	return mode.B.rotatePerSecondVar;
 }
+
+#pragma mark ParticleSystem - methods for batchNode rendering
+
+-(void) useSelfRender
+{
+	useBatchNode_ = NO;
+}
+
+-(void) useBatchNode:(CCParticleBatchNode*) batchNode
+{
+	batchNode_ = batchNode; 
+	useBatchNode_ = YES;
+	
+	//each particle needs a unique index
+	for (NSUInteger i = 0; i < totalParticles; i++)
+	{
+		particles[i].atlasIndex=i;	
+	}
+}
+
+-(void) batchNodeInitialization
+{//override this
+}
+
+//don't use a transform matrix, this is faster
+-(void) setScale:(float) s
+{
+	transformSystemDirty_ = YES;
+	[super setScale:s];
+}
+
+-(void) setRotation: (float)newRotation
+{
+	transformSystemDirty_ = YES;
+	[super setRotation:newRotation];
+}
+
+-(void) setScaleX: (float)newScaleX
+{
+	transformSystemDirty_ = YES;
+	[super setScaleX:newScaleX];
+}
+
+-(void) setScaleY: (float)newScaleY
+{
+	transformSystemDirty_ = YES;
+	[super setScaleY:newScaleY];
+}
+
+
 @end
-
-

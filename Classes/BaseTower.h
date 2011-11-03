@@ -82,7 +82,7 @@
     CreepSpawner * currentSpawner;
     
     CCSprite * towerSprite;
-    CCBitmapFontAtlas * powerDisplay;
+    CCLabelBMFont * powerDisplay;
     
     GameFieldScene * gameField;
     TextureLibrary * library;

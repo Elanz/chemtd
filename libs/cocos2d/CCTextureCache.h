@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +24,13 @@
  *
  */
 
-#import <Foundation/Foundation.h>
+#import <Availability.h>
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 #import <CoreGraphics/CGImage.h>
+#endif
+
+#import <Foundation/Foundation.h>
 
 @class CCTexture2D;
 
@@ -34,9 +40,9 @@
  */
 @interface CCTextureCache : NSObject
 {
-	NSMutableDictionary *textures;
-	NSLock				*dictLock;
-	NSLock				*contextLock;
+	NSMutableDictionary *textures_;
+	NSLock				*dictLock_;
+	NSLock				*contextLock_;
 }
 
 /** Retruns ths shared instance of the cache */
@@ -65,22 +71,6 @@
  */
 -(void) addImageAsync:(NSString*) filename target:(id)target selector:(SEL)selector;
 
-/** Returns a Texture2D object given an PVRTC RAW filename
- * If the file image was not previously loaded, it will create a new CCTexture2D
- *  object and it will return it. Otherwise it will return a reference of a previosly loaded image
- *
- * It can only load square images: width == height, and it must be a power of 2 (128,256,512...)
- * bpp can only be 2 or 4. 2 means more compression but lower quality.
- * hasAlpha: whether or not the image contains alpha channel
- */
--(CCTexture2D*) addPVRTCImage: (NSString*) fileimage bpp:(int)bpp hasAlpha:(BOOL)alpha width:(int)w;
-
-/** Returns a Texture2D object given an PVRTC filename
- * If the file image was not previously loaded, it will create a new CCTexture2D
- *  object and it will return it. Otherwise it will return a reference of a previosly loaded image
- */
--(CCTexture2D*) addPVRTCImage: (NSString*) filename;
-
 /** Returns a Texture2D object given an CGImageRef image
  * If the image was not previously loaded, it will create a new CCTexture2D object and it will return it.
  * Otherwise it will return a reference of a previously loaded image
@@ -89,6 +79,11 @@
  * @since v0.8
  */
 -(CCTexture2D*) addCGImage: (CGImageRef) image forKey: (NSString *)key;
+
+/** Returns an already created texture. Returns nil if the texture doesn't exist.
+ @since v0.99.5
+ */
+-(CCTexture2D *) textureForKey:(NSString *)key;
 
 /** Purges the dictionary of loaded textures.
  * Call this method if you receive the "Memory Warning"
@@ -113,5 +108,44 @@
  @since v0.99.4
  */
 -(void) removeTextureForKey: (NSString*) textureKeyName;
+
+@end
+
+
+@interface CCTextureCache (PVRSupport)
+
+/** Returns a Texture2D object given an PVRTC RAW filename
+ * If the file image was not previously loaded, it will create a new CCTexture2D
+ *  object and it will return it. Otherwise it will return a reference of a previosly loaded image
+ *
+ * It can only load square images: width == height, and it must be a power of 2 (128,256,512...)
+ * bpp can only be 2 or 4. 2 means more compression but lower quality.
+ * hasAlpha: whether or not the image contains alpha channel
+ *
+ * IMPORTANT: This method is only defined on iOS. It is not supported on the Mac version.
+ *
+ * @deprecated Will be removed in 2.0. Use addPVRImage instead.
+ */
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+-(CCTexture2D*) addPVRTCImage:(NSString*)fileimage bpp:(int)bpp hasAlpha:(BOOL)alpha width:(int)w;
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED
+
+/** Returns a Texture2D object given an PVR filename.
+ * If the file image was not previously loaded, it will create a new CCTexture2D
+ *  object and it will return it. Otherwise it will return a reference of a previosly loaded image
+ *
+ */
+-(CCTexture2D*) addPVRImage:(NSString*) filename;
+
+@end
+
+
+@interface CCTextureCache (Debug)
+/** Output to CCLOG the current contents of this CCTextureCache
+ * This will attempt to calculate the size of each texture, and the total texture memory in use
+ *
+ * @since v1.0
+ */
+-(void) dumpCachedTextureInfo;
 
 @end

@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2009-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,10 +37,14 @@
  */
  
 
+#import <Availability.h>
+#import <Foundation/Foundation.h>
+
 enum {
 	TMXLayerAttribNone = 1 << 0,
 	TMXLayerAttribBase64 = 1 << 1,
 	TMXLayerAttribGzip = 1 << 2,
+	TMXLayerAttribZlib = 1 << 3,
 };
 
 enum {
@@ -50,6 +55,11 @@ enum {
 	TMXPropertyObject,
 	TMXPropertyTile
 };
+
+// Bits on the far end of the 32-bit global tile ID (GID's) are used for tile flags
+#define kFlippedHorizontallyFlag	0x80000000
+#define kFlippedVerticallyFlag		0x40000000
+#define kFlippedMask				~(kFlippedHorizontallyFlag|kFlippedVerticallyFlag)
 
 /* CCTMXLayerInfo contains the information about the layers like:
  - Layer name
@@ -133,10 +143,15 @@ enum {
  This information is obtained from the TMX file.
  
  */
-#ifdef __IPHONE_4_0
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+#if defined(__IPHONE_4_0)
 @interface CCTMXMapInfo : NSObject <NSXMLParserDelegate>
 #else
 @interface CCTMXMapInfo : NSObject
+#endif
+
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+@interface CCTMXMapInfo : NSObject <NSXMLParserDelegate>
 #endif
 {	
 	NSMutableString	*currentString;

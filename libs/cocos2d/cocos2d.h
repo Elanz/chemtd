@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,71 +39,80 @@
  */
 
 // 0x00 HI ME LO
-// 00   00 99 04
-#define COCOS2D_VERSION 0x00009904
+// 00   01 01 00
+#define COCOS2D_VERSION 0x00010100
+
+#import <Availability.h>
 
 //
 // all cocos2d include files
 //
 #import "ccConfig.h"	// should be included first
 
-#import "CCBlockSupport.h"
+#import "CCActionManager.h"
 #import "CCAction.h"
-#import "CCCamera.h"
-#import "CCCameraAction.h"
-#import "CCProtocols.h"
-#import "CCNode.h"
-#import "CCDirector.h"
-#import "CCTouchDispatcher.h"
-#import "CCTouchDelegateProtocol.h"
-#import "CCInstantAction.h"
-#import "CCIntervalAction.h"
-#import "CCEaseAction.h"
-#import "CCLabel.h"
-#import "CCLayer.h"
-#import "CCMenu.h"
-#import "CCMenuItem.h"
-#import "CCParticleSystem.h"
-#import "CCPointParticleSystem.h"
-#import "CCQuadParticleSystem.h"
-#import "CCParticleExamples.h"
-#import "CCDrawingPrimitives.h"
-#import "CCScene.h"
-#import "CCScheduler.h"
+#import "CCActionInstant.h"
+#import "CCActionInterval.h"
+#import "CCActionEase.h"
+#import "CCActionCamera.h"
+#import "CCActionTween.h"
+#import "CCActionEase.h"
+#import "CCActionTiledGrid.h"
+#import "CCActionGrid3D.h"
+#import "CCActionGrid.h"
+#import "CCActionProgressTimer.h"
+#import "CCActionPageTurn3D.h"
+
+#import "CCAnimation.h"
+#import "CCAnimationCache.h"
 #import "CCSprite.h"
 #import "CCSpriteFrame.h"
-#import "CCSpriteSheet.h"
+#import "CCSpriteBatchNode.h"
 #import "CCSpriteFrameCache.h"
-#import "CCTextureCache.h"
-#import "CCTransition.h"
-#import "CCTextureAtlas.h"
+
+#import "CCLabelTTF.h"
+#import "CCLabelBMFont.h"
 #import "CCLabelAtlas.h"
-#import "CCAtlasNode.h"
-#import "CCEaseAction.h"
-#import "CCTiledGridAction.h"
-#import "CCGrabber.h"
-#import "CCGrid.h"
-#import "CCGrid3DAction.h"
-#import "CCGridAction.h"
-#import "CCBitmapFontAtlas.h"
-#import "CCParallaxNode.h"
-#import "CCActionManager.h"
+
+#import "CCParticleSystem.h"
+#import "CCParticleSystemPoint.h"
+#import "CCParticleSystemQuad.h"
+#import "CCParticleExamples.h"
+#import "CCParticleBatchNode.h"
+
+#import "CCTexture2D.h"
+#import "CCTexturePVR.h"
+#import "CCTextureCache.h"
+#import "CCTextureAtlas.h"
+
+#import "CCTransition.h"
+#import "CCTransitionPageTurn.h"
+#import "CCTransitionRadial.h"
+
 #import "CCTMXTiledMap.h"
 #import "CCTMXLayer.h"
 #import "CCTMXObjectGroup.h"
 #import "CCTMXXMLParser.h"
 #import "CCTileMapAtlas.h"
+
+#import "CCLayer.h"
+#import "CCMenu.h"
+#import "CCMenuItem.h"
+#import "CCDrawingPrimitives.h"
+#import "CCScene.h"
+#import "CCScheduler.h"
+#import "CCBlockSupport.h"
+#import "CCCamera.h"
+#import "CCProtocols.h"
+#import "CCNode.h"
+#import "CCDirector.h"
+#import "CCAtlasNode.h"
+#import "CCGrabber.h"
+#import "CCGrid.h"
+#import "CCParallaxNode.h"
 #import "CCRenderTexture.h"
 #import "CCMotionStreak.h"
-#import "CCPageTurn3DAction.h"
-#import "CCPageTurnTransition.h"
-#import "CCTexture2D.h"
-#import "CCPVRTexture.h"
-#import "CCTouchHandler.h"
 #import "CCConfiguration.h"
-#import "CCRadialTransition.h"
-#import "CCProgressTimerActions.h"
-#import "CCPropertyAction.h"
 
 //
 // cocos2d macros
@@ -110,24 +120,43 @@
 #import "ccTypes.h"
 #import "ccMacros.h"
 
+
+// Platform common
+#import "Platforms/CCGL.h"
+#import "Platforms/CCNS.h"
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+#import "Platforms/iOS/CCTouchDispatcher.h"
+#import "Platforms/iOS/CCTouchDelegateProtocol.h"
+#import "Platforms/iOS/CCTouchHandler.h"
+#import "Platforms/iOS/EAGLView.h"
+#import "Platforms/iOS/CCDirectorIOS.h"
+
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+#import "Platforms/Mac/MacGLView.h"
+#import "Platforms/Mac/CCDirectorMac.h"
+#endif
+
 //
 // cocos2d helper files
 //
 #import "Support/OpenGL_Internal.h"
-#import "Support/EAGLView.h"
 #import "Support/CCFileUtils.h"
 #import "Support/CGPointExtension.h"
 #import "Support/ccCArray.h"
 #import "Support/CCArray.h"
+#import "Support/ccUtils.h"
 
 #if CC_ENABLE_PROFILERS
 #import "Support/CCProfiling.h"
 #endif // CC_ENABLE_PROFILERS
 
 
-// compatibility with v0.8
-#import "CCCompatibility.h"
-
-
 // free functions
 NSString * cocos2dVersion(void);
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+#ifndef __IPHONE_4_0
+#error "If you are targeting iPad, you should set BASE SDK = 4.0 (or 4.1, or 4.2), and set the 'iOS deploy target' = 3.2"
+#endif
+#endif

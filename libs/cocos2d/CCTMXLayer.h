@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2009-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +30,7 @@
 
 
 #import "CCAtlasNode.h"
-#import "CCSpriteSheet.h"
-#import "Support/ccArray.h"
+#import "CCSpriteBatchNode.h"
 
 
 @class CCTMXMapInfo;
@@ -39,8 +39,8 @@
 
 /** CCTMXLayer represents the TMX layer.
  
- It is a subclass of CCSpriteSheet. By default the tiles are rendered using a CCTextureAtlas.
- If you mofify a tile on runtime, then, that tile will become a CCSprite.
+ It is a subclass of CCSpriteBatchNode. By default the tiles are rendered using a CCTextureAtlas.
+ If you mofify a tile on runtime, then, that tile will become a CCSprite, otherwise no CCSprite objects are created.
  The benefits of using CCSprite objects as tiles are:
  - tiles (CCSprite) can be rotated/scaled/moved with a nice API
  
@@ -48,7 +48,7 @@
  then all the tiles belonging to the layer will use that value as their OpenGL vertex Z for depth.
 
  On the other hand, if the "cc_vertexz" property has the "automatic" value, then the tiles will use an automatic vertex Z value.
- Also before drawing the tiles, GL_ALPHA_TEST will be enabled, and disabled after drawin them. The used alpha func will be:
+ Also before drawing the tiles, GL_ALPHA_TEST will be enabled, and disabled after drawing them. The used alpha func will be:
 
     glAlphaFunc( GL_GREATER, value )
  
@@ -62,31 +62,29 @@
  
  @since v0.8.1
  */
-@interface CCTMXLayer : CCSpriteSheet
+@interface CCTMXLayer : CCSpriteBatchNode
 {
 	CCTMXTilesetInfo	*tileset_;
 	NSString			*layerName_;
 	CGSize				layerSize_;
 	CGSize				mapTileSize_;
-	unsigned int		*tiles_;
-	int					layerOrientation_;
+	uint32_t			*tiles_;			// GID are 32 bit
+	NSUInteger			layerOrientation_;
 	NSMutableArray		*properties_;
 	
 	unsigned char		opacity_; // TMX Layer supports opacity
 	
-	unsigned int		minGID_;
-	unsigned int		maxGID_;
+	NSUInteger			minGID_;
+	NSUInteger			maxGID_;
 	
 	// Only used when vertexZ is used
-	int					vertexZvalue_;
+	NSInteger			vertexZvalue_;
 	BOOL				useAutomaticVertexZ_;
 	float				alphaFuncValue_;
 	
 	// used for optimization
 	CCSprite		*reusedTile_;
 	ccCArray		*atlasIndexArray_;
-	
-	
 }
 /** name of the layer */
 @property (nonatomic,readwrite,retain) NSString *layerName;
@@ -95,11 +93,11 @@
 /** size of the map's tile (could be differnt from the tile's size) */
 @property (nonatomic,readwrite) CGSize mapTileSize;
 /** pointer to the map of tiles */
-@property (nonatomic,readwrite) unsigned int *tiles;
+@property (nonatomic,readwrite) uint32_t *tiles;
 /** Tilset information for the layer */
 @property (nonatomic,readwrite,retain) CCTMXTilesetInfo *tileset;
 /** Layer orientation, which is the same as the map orientation */
-@property (nonatomic,readwrite) int layerOrientation;
+@property (nonatomic,readwrite) NSUInteger layerOrientation;
 /** properties from the layer. They can be added using Tiled */
 @property (nonatomic,readwrite,retain) NSMutableArray *properties;
 
@@ -127,13 +125,13 @@
  if it returns 0, it means that the tile is empty.
  This method requires the the tile map has not been previously released (eg. don't call [layer releaseMap])
  */
--(unsigned int) tileGIDAt:(CGPoint)tileCoordinate;
+-(uint32_t) tileGIDAt:(CGPoint)tileCoordinate;
 
 /** sets the tile gid (gid = tile global id) at a given tile coordinate.
  The Tile GID can be obtained by using the method "tileGIDAt" or by using the TMX editor -> Tileset Mgr +1.
  If a tile is already placed at that position, then it will be removed.
  */
--(void) setTileGID:(unsigned int)gid at:(CGPoint)tileCoordinate;
+-(void) setTileGID:(uint32_t)gid at:(CGPoint)tileCoordinate;
 
 /** removes a tile at given tile coordinate */
 -(void) removeTileAt:(CGPoint)tileCoordinate;
@@ -150,5 +148,5 @@
 /** CCTMXLayer doesn't support adding a CCSprite manually.
  @warning addchild:z:tag: is not supported on CCTMXLayer. Instead of setTileGID:at:/tileAt:
  */
--(id) addChild: (CCNode*)node z:(int)z tag:(int)tag;
+-(void) addChild: (CCNode*)node z:(NSInteger)z tag:(NSInteger)tag;
 @end

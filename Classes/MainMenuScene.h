@@ -50,8 +50,8 @@
     CCLayer * highscoreLayer;
     CCLayer * towerScrollLayer;
     
-    CCBitmapFontAtlas * usernameDisplay;
-    CCBitmapFontAtlas * difficultyDisplay;
+    CCLabelBMFont * usernameDisplay;
+    CCLabelBMFont * difficultyDisplay;
     
     NSMutableArray * motd;
     NSMutableArray * motdLabels;

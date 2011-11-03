@@ -76,7 +76,7 @@
         userMenu.position = ccp(870, 710);
         [self addChild:userMenu z:1];
         
-        usernameDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        usernameDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         usernameDisplay.position = ccp(200, device_height-50);
         usernameDisplay.color = Color_Black;
         [usernameDisplay setString:String_NULL];
@@ -126,7 +126,7 @@
 {
     for (NSString * string in motd)
     {
-        CCBitmapFontAtlas * motdLabel = [[CCBitmapFontAtlas bitmapFontAtlasWithString:string fntFile:Font_UIPrimary] retain];
+        CCLabelBMFont * motdLabel = [[CCLabelBMFont labelWithString:string fntFile:Font_UIPrimary] retain];
         motdX += (motdLabel.contentSize.width/2);
         motdLabel.position = ccp(motdX, 27);
         motdLabel.color = Color_White;
@@ -142,7 +142,7 @@
     int maxX = 0;
     int maxW = 0;
     
-    for (CCBitmapFontAtlas * motdLabel in motdLabels)
+    for (CCLabelBMFont * motdLabel in motdLabels)
     {
         if (motdLabel.position.x > maxX)
         {
@@ -151,7 +151,7 @@
         }
     }
     
-    for (CCBitmapFontAtlas * motdLabel in motdLabels)
+    for (CCLabelBMFont * motdLabel in motdLabels)
     {
         motdLabel.position = ccp(motdLabel.position.x-2, 27);
         if (motdLabel.position.x < -motdLabel.contentSize.width)
@@ -256,7 +256,7 @@
     
     userManager.difficultyid = DIFFICULTY_EASY;
     
-    difficultyDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+    difficultyDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
     difficultyDisplay.position = ccp(device_width/2, device_height-165);
     difficultyDisplay.color = Color_Black;
     [self refreshDifficultyDisplay];
@@ -607,7 +607,7 @@
 
 - (void)createRankingLabel:(int)x y:(int)y layer:(CCLayer*)layer string:(NSString*)string
 {
-    CCBitmapFontAtlas * label = [[CCBitmapFontAtlas bitmapFontAtlasWithString:string fntFile:Font_UIPrimary] retain];
+    CCLabelBMFont * label = [[CCLabelBMFont labelWithString:string fntFile:Font_UIPrimary] retain];
     label.position = ccp(x, y);
     label.color = Color_Black;
     [layer addChild:label z:4];

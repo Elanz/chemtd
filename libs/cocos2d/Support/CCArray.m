@@ -1,7 +1,7 @@
 /*
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
- * Copyright (c) 2010 Abstraction Works. http://www.abstractionworks.com
+ * Copyright (c) 2010 ForzeField Studios S.L. http://forzefield.com
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@
  */
 
 #import "CCArray.h"
+#import "../ccMacros.h"
 
 
 @implementation CCArray
@@ -80,19 +81,14 @@
 	return self;
 }
 
-
-
 - (id) initWithCoder:(NSCoder*)coder
 {
 	self = [self initWithNSArray:[coder decodeObjectForKey:@"nsarray"]];
 	return self;
 }
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-	[coder encodeObject:[self getNSArray] forKey:@"nsarray"];
-}
 
 
+#pragma mark Querying an Array
 
 - (NSUInteger) count
 {
@@ -111,11 +107,14 @@
 
 - (id) objectAtIndex:(NSUInteger)index
 {
-	if( index > data->num )
-		[NSException raise:NSRangeException
-					format: @"index out of range in objectAtIndex(%d)", data->num ];
+	NSAssert2( index < data->num, @"index out of range in objectAtIndex(%d), index %i", data->num, index );
 	
 	return data->arr[index];
+}
+
+- (BOOL) containsObject:(id)object
+{
+	return ccArrayContainsObject(data, object);
 }
 
 - (id) lastObject
@@ -125,10 +124,17 @@
 	return nil;
 }
 
-- (BOOL) containsObject:(id)object
+- (id) randomObject
 {
-	return ccArrayContainsObject(data, object);
+	if(data->num==0) return nil;
+	return data->arr[(int)(data->num*CCRANDOM_0_1())];
 }
+
+- (NSArray*) getNSArray
+{
+	return [NSArray arrayWithObjects:data->arr count:data->num];
+}
+
 
 #pragma mark Adding Objects
 
@@ -154,13 +160,8 @@
 	ccArrayInsertObjectAtIndex(data, object, index);
 }
 
+
 #pragma mark Removing Objects
-
-
-- (void) removeLastObject
-{
-	ccArrayRemoveObjectAtIndex(data, data->num);
-}
 
 - (void) removeObject:(id)object
 {
@@ -172,9 +173,26 @@
 	ccArrayRemoveObjectAtIndex(data, index);
 }
 
+- (void) fastRemoveObject:(id)object
+{
+	ccArrayFastRemoveObject(data, object);
+}
+
+- (void) fastRemoveObjectAtIndex:(NSUInteger)index
+{
+	ccArrayFastRemoveObjectAtIndex(data, index);
+}
+
 - (void) removeObjectsInArray:(CCArray*)otherArray
 {
 	ccArrayRemoveArray(data, otherArray->data);
+}
+
+- (void) removeLastObject
+{
+	NSAssert( data->num > 0, @"no objects added" );
+    
+	ccArrayRemoveObjectAtIndex(data, data->num-1);
 }
 
 - (void) removeAllObjects
@@ -182,15 +200,46 @@
 	ccArrayRemoveAllObjects(data);
 }
 
-- (void) fastRemoveObjectAtIndex:(NSUInteger)index
+
+#pragma mark Rearranging Content
+
+- (void) exchangeObject:(id)object1 withObject:(id)object2
 {
-	ccArrayFastRemoveObjectAtIndex(data, 0);
+    NSUInteger index1 = ccArrayGetIndexOfObject(data, object1);
+    if(index1 == NSNotFound) return;
+    NSUInteger index2 = ccArrayGetIndexOfObject(data, object2);
+    if(index2 == NSNotFound) return;
+    
+    ccArraySwapObjectsAtIndexes(data, index1, index2);
 }
 
-- (void) fastRemoveObject:(id)object
+- (void) exchangeObjectAtIndex:(NSUInteger)index1 withObjectAtIndex:(NSUInteger)index2
 {
-	ccArrayFastRemoveObject(data, object);
+	ccArraySwapObjectsAtIndexes(data, index1, index2);
 }
+
+- (void) reverseObjects
+{
+	if (data->num > 1)
+	{
+		//floor it since in case of a oneven number the number of swaps stays the same
+		int count = (int) floorf(data->num/2.f); 
+		NSUInteger maxIndex = data->num - 1;
+		
+		for (int i = 0; i < count ; i++)
+		{
+			ccArraySwapObjectsAtIndexes(data, i, maxIndex);
+			maxIndex--;
+		}
+	}
+}
+
+- (void) reduceMemoryFootprint
+{
+	ccArrayShrink(data);
+}
+
+#pragma mark Sending Messages to Elements
 
 - (void) makeObjectsPerformSelector:(SEL)aSelector
 {
@@ -202,14 +251,8 @@
 	ccArrayMakeObjectsPerformSelectorWithObject(data, aSelector, object);
 }
 
-- (NSArray*) getNSArray{
-	NSMutableArray *nsarray = [NSMutableArray arrayWithCapacity:data->num];
-	int nu = data->num;
-	for(int i = 0; i<nu; i++)
-		[nsarray addObject:data->arr[i]];
-	
-	return nsarray;
-}
+
+#pragma mark CCArray - NSFastEnumeration protocol
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len
 {
@@ -221,11 +264,41 @@
 	return data->num;
 }
 
+
+#pragma mark CCArray - NSCopying protocol
+
+- (id)copyWithZone:(NSZone *)zone
+{
+	return [(CCArray*)[[self class] allocWithZone:zone] initWithArray:self];
+}
+
+- (void) encodeWithCoder:(NSCoder *)coder
+{
+	[coder encodeObject:[self getNSArray] forKey:@"nsarray"];
+}
+
+#pragma mark
+
 - (void) dealloc
 {
+	CCLOGINFO(@"cocos2d: deallocing %@", self);
+
 	ccArrayFree(data);
 	[super dealloc];
 }
 
+#pragma mark
+
+- (NSString*) description
+{
+	NSMutableString *ret = [NSMutableString stringWithFormat:@"<%@ = %08X> = ( ", [self class], self];
+
+	for( id obj in self)
+		[ret appendFormat:@"%@, ",obj];
+	
+	[ret appendString:@")"];
+	
+	return ret;
+}
 
 @end

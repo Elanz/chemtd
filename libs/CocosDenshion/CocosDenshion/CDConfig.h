@@ -21,14 +21,14 @@
  
  $Id$
  */
-#define COCOSDENSHION_VERSION "Aphex.1"
+#define COCOSDENSHION_VERSION "Aphex.rc"
 
 
 /**
  If enabled code useful for debugging such as parameter check assertions will be performed.
  If you experience any problems you should enable this and test your code with a debug build.
  */
-#define CD_DEBUG 1
+//#define CD_DEBUG 1
 
 /**
  The total number of sounds/buffers that can be loaded assuming memory is sufficient

@@ -1,8 +1,10 @@
 /*
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
- * Copyright (c) 2008-2010 Ricardo Quesada
  * Copyright (c) 2009 Valentin Milea
+ *
+ * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +25,9 @@
  * THE SOFTWARE.
  */
 
+#import <Availability.h>
 
-#import <OpenGLES/ES1/gl.h>
-
+#import "Platforms/CCGL.h"
 #import "CCAction.h"
 #import "ccTypes.h"
 #import "CCTexture2D.h"
@@ -94,8 +96,8 @@ enum {
  Camera:
  - Each node has a camera. By default it points to the center of the CCNode.
  */ 
-@interface CCNode : NSObject {
-	
+@interface CCNode : NSObject
+{	
 	// rotation angle
 	float rotation_;	
 	
@@ -104,6 +106,10 @@ enum {
 	
 	// position of the node
 	CGPoint position_;
+	CGPoint	positionInPixels_;
+	
+	// skew angles
+	float skewX_, skewY_;
 
 	// is visible
 	BOOL visible_;
@@ -119,6 +125,7 @@ enum {
 	
 	// untransformed size of the node
 	CGSize	contentSize_;
+	CGSize	contentSizeInPixels_;
 	
 	// transform
 	CGAffineTransform transform_, inverse_;
@@ -136,7 +143,7 @@ enum {
 	CCGridBase *grid_;
 	
 	// z-order value
-	int zOrder_;
+	NSInteger zOrder_;
 	
 	// array of children
 	CCArray *children_;
@@ -145,24 +152,28 @@ enum {
 	CCNode *parent_;
 	
 	// a tag. any number you want to assign to the node
-	int tag_;
+	NSInteger tag_;
     
 	// user data field
-	void *userData;
+	void *userData_;
 
 	// Is running
 	BOOL isRunning_;
+	
+	//used to preserve sequence while sorting children with the same zOrder
+	NSUInteger orderOfArrival_;
 
 	// To reduce memory, place BOOLs that are not properties here:
 	BOOL isTransformDirty_:1;
 	BOOL isInverseDirty_:1;
+	BOOL isReorderChildDirty_:1;
 #if	CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
 	BOOL isTransformGLDirty_:1;
 #endif
 }
 
 /** The z order of the node relative to it's "brothers": children of the same parent */
-@property(nonatomic,readonly) int zOrder;
+@property(nonatomic,readonly) NSInteger zOrder;
 /** The real openGL Z vertex.
  Differences between openGL Z vertex and cocos2d Z order:
    - OpenGL Z modifies the Z vertex, and not the Z order in the relation between parent-children
@@ -172,6 +183,20 @@ enum {
  @since v0.8
  */
 @property (nonatomic,readwrite) float vertexZ;
+
+/** The X skew angle of the node in degrees.
+ This angle describes the shear distortion in the X direction.
+ Thus, it is the angle between the Y axis and the left edge of the shape
+ The default skewX angle is 0. Positive values distort the node in a CW direction.
+ */
+@property(nonatomic,readwrite,assign) float skewX;
+
+/** The Y skew angle of the node in degrees.
+ This angle describes the shear distortion in the Y direction.
+ Thus, it is the angle between the X axis and the bottom edge of the shape
+ The default skewY angle is 0. Positive values distort the node in a CCW direction.
+ */
+@property(nonatomic,readwrite,assign) float skewY;
 /** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node CW. */
 @property(nonatomic,readwrite,assign) float rotation;
 /** The scale factor of the node. 1.0 is the default scale factor. It modifies the X and Y scale at the same time. */
@@ -180,14 +205,15 @@ enum {
 @property(nonatomic,readwrite,assign) float scaleX;
 /** The scale factor of the node. 1.0 is the default scale factor. It only modifies the Y scale factor. */
 @property(nonatomic,readwrite,assign) float scaleY;
-/** Position (x,y) of the node in OpenGL coordinates. (0,0) is the left-bottom corner. */
+/** Position (x,y) of the node in points. (0,0) is the left-bottom corner. */
 @property(nonatomic,readwrite,assign) CGPoint position;
+/** Position (x,y) of the node in points. (0,0) is the left-bottom corner. */
+@property(nonatomic,readwrite,assign) CGPoint positionInPixels;
 /** A CCCamera object that lets you move the node using a gluLookAt
 */
-
+@property(nonatomic,readonly) CCCamera* camera;
+/** Array of children */
 @property(nonatomic,readonly) CCArray *children;
-
- @property(nonatomic,readonly) CCCamera* camera;
 /** A CCGrid object that is used when applying effects */
 @property(nonatomic,readwrite,retain) CCGridBase* grid;
 /** Whether of not the node is visible. Default is YES */
@@ -196,7 +222,7 @@ enum {
  It's like a pin in the node where it is "attached" to its parent.
  The anchorPoint is normalized, like a percentage. (0,0) means the bottom-left corner and (1,1) means the top-right corner.
  But you can use values higher than (1,1) and lower than (0,0) too.
- The default anchorPoint is (0.5,0.5), so it starts in the center of the node.
+ The default anchorPoint is (0,0). It starts in the bottom-left corner. CCSprite and other subclasses have a different default anchorPoint.
  @since v0.8
  */
 @property(nonatomic,readwrite) CGPoint anchorPoint;
@@ -205,12 +231,20 @@ enum {
  */
 @property(nonatomic,readonly) CGPoint anchorPointInPixels;
 
-/** The untransformed size of the node.
+/** The untransformed size of the node in Points
  The contentSize remains the same no matter the node is scaled or rotated.
  All nodes has a size. Layer and Scene has the same size of the screen.
  @since v0.8
  */
 @property (nonatomic,readwrite) CGSize contentSize;
+
+/** The untransformed size of the node in Pixels
+ The contentSize remains the same no matter the node is scaled or rotated.
+ All nodes has a size. Layer and Scene has the same size of the screen.
+ @since v0.8
+ */
+@property (nonatomic,readwrite) CGSize contentSizeInPixels;
+
 /** whether or not the node is running */
 @property(nonatomic,readonly) BOOL isRunning;
 /** A weak reference to the parent */
@@ -221,9 +255,12 @@ enum {
  */
 @property(nonatomic,readwrite,assign) BOOL isRelativeAnchorPoint;
 /** A tag used to identify the node easily */
-@property(nonatomic,readwrite,assign) int tag;
+@property(nonatomic,readwrite,assign) NSInteger tag;
 /** A custom user data pointer */
 @property(nonatomic,readwrite,assign) void *userData;
+
+/** used internally for zOrder sorting, don't change this manually */
+@property(nonatomic,readwrite) NSUInteger orderOfArrival;
 
 // initializators
 /** allocates and initializes a node.
@@ -248,7 +285,7 @@ enum {
 -(void) onEnterTransitionDidFinish;
 /** callback that is called every time the CCNode leaves the 'stage'.
  If the CCNode leaves the 'stage' with a transition, this callback is called when the transition finishes.
- During onExit you can't a "sister/brother" node.
+ During onExit you can't access a sibling node.
  */
 -(void) onExit;
 
@@ -256,22 +293,22 @@ enum {
 // composition: ADD
 
 /** Adds a child to the container with z-order as 0.
- It returns self, so you can chain several addChilds.
+ If the child is added to a 'running' node, then 'onEnter' and 'onEnterTransitionDidFinish' will be called immediately.
  @since v0.7.1
  */
--(id) addChild: (CCNode*)node;
+-(void) addChild: (CCNode*)node;
 
-/** Adds a child to the container with a z-order
- It returns self, so you can chain several addChilds.
+/** Adds a child to the container with a z-order.
+ If the child is added to a 'running' node, then 'onEnter' and 'onEnterTransitionDidFinish' will be called immediately.
  @since v0.7.1
  */
--(id) addChild: (CCNode*)node z:(int)z;
+-(void) addChild: (CCNode*)node z:(NSInteger)z;
 
-/** Adds a child to the container with z order and tag
- It returns self, so you can chain several addChilds.
+/** Adds a child to the container with z order and tag.
+ If the child is added to a 'running' node, then 'onEnter' and 'onEnterTransitionDidFinish' will be called immediately.
  @since v0.7.1
  */
--(id) addChild: (CCNode*)node z:(int)z tag:(int)tag;
+-(void) addChild: (CCNode*)node z:(NSInteger)z tag:(NSInteger)tag;
 
 // composition: REMOVE
 
@@ -289,7 +326,7 @@ enum {
 /** Removes a child from the container by tag value. It will also cleanup all running actions depending on the cleanup parameter
  @since v0.7.1
  */
--(void) removeChildByTag:(int) tag cleanup:(BOOL)cleanup;
+-(void) removeChildByTag:(NSInteger) tag cleanup:(BOOL)cleanup;
 
 /** Removes all children from the container and do a cleanup all running actions depending on the cleanup parameter.
  @since v0.7.1
@@ -301,12 +338,16 @@ enum {
  @return returns a CCNode object
  @since v0.7.1
  */
--(CCNode*) getChildByTag:(int) tag;
+-(CCNode*) getChildByTag:(NSInteger) tag;
 
 /** Reorders a child according to a new z value.
  * The child MUST be already added.
  */
--(void) reorderChild:(CCNode*)child z:(int)zOrder;
+-(void) reorderChild:(CCNode*)child z:(NSInteger)zOrder;
+
+/** performance improvement, Sort the children array once before drawing, instead of every time when a child is added or reordered
+ don't call this manually unless a child added needs to be removed in the same frame */
+- (void) sortAllChildren;
 
 /** Stops all running actions and schedulers
  @since v0.8
@@ -342,12 +383,21 @@ enum {
  */
 -(void) transformAncestors;
 
-/** returns a "local" axis aligned bounding box of the node.
+/** returns a "local" axis aligned bounding box of the node in points.
  The returned box is relative only to its parent.
+ The returned box is in Points.
  
  @since v0.8.2
  */
 - (CGRect) boundingBox;
+
+/** returns a "local" axis aligned bounding box of the node in pixels.
+ The returned box is relative only to its parent.
+ The returned box is in Points.
+ 
+ @since v0.99.5
+ */
+- (CGRect) boundingBoxInPixels;
 
 
 // actions
@@ -366,18 +416,18 @@ enum {
 /** Removes an action from the running action list given its tag
  @since v0.7.1
 */
--(void) stopActionByTag:(int) tag;
+-(void) stopActionByTag:(NSInteger) tag;
 /** Gets an action from the running action list given its tag
  @since v0.7.1
  @return the Action the with the given tag
  */
--(CCAction*) getActionByTag:(int) tag;
+-(CCAction*) getActionByTag:(NSInteger) tag;
 /** Returns the numbers of actions that are running plus the ones that are schedule to run (actions in actionsToAdd and actions arrays). 
  * Composable actions are counted as 1 action. Example:
  *    If you are running 1 Sequence of 7 actions, it will return 1.
  *    If you are running 7 Sequences of 2 actions, it will return 7.
  */
--(int) numberOfRunningActions;
+-(NSUInteger) numberOfRunningActions;
 
 // timers
 
@@ -398,7 +448,7 @@ enum {
 
  @since v0.99.3
  */
--(void) scheduleUpdateWithPriority:(int)priority;
+-(void) scheduleUpdateWithPriority:(NSInteger)priority;
 
 /* unschedules the "update" method.
  
@@ -413,9 +463,22 @@ enum {
 -(void) schedule: (SEL) s;
 /** schedules a custom selector with an interval time in seconds.
  If time is 0 it will be ticked every frame.
- If tiem is 0, it is recommended to use 'scheduleUpdate' instead.
+ If time is 0, it is recommended to use 'scheduleUpdate' instead.
+ 
+ If the selector is already scheduled, then the interval parameter will be updated without scheduling it again.
  */
 -(void) schedule: (SEL) s interval:(ccTime)seconds;
+/**
+ repeat will execute the action repeat + 1 times, for a continues action use kCCRepeatForever
+ delay is the amount of time the action will wait before execution
+ */
+-(void) schedule:(SEL)selector interval:(ccTime)interval repeat: (uint) repeat delay:(ccTime) delay;
+
+/**
+ Schedules a selector that runs only once, with a delay of 0 or larger 
+*/
+- (void) scheduleOnce:(SEL) selector delay:(ccTime) delay;
+
 /** unschedules a custom selector.*/
 -(void) unschedule: (SEL) s;
 
@@ -434,48 +497,55 @@ enum {
  */
 -(void) pauseSchedulerAndActions;
 
+
 // transformation methods
 
-/** Returns the local affine transform matrix
+/** Returns the matrix that transform the node's (local) space coordinates into the parent's space coordinates.
+ The matrix is in Pixels.
  @since v0.7.1
  */
 - (CGAffineTransform)nodeToParentTransform;
-/** Returns the inverse local affine transform matrix
+/** Returns the matrix that transform parent's space coordinates to the node's (local) space coordinates.
+ The matrix is in Pixels.
  @since v0.7.1
  */
 - (CGAffineTransform)parentToNodeTransform;
-/** Retrusn the world affine transform matrix
+/** Retrusn the world affine transform matrix. The matrix is in Pixels.
  @since v0.7.1
  */
 - (CGAffineTransform)nodeToWorldTransform;
-/** Returns the inverse world affine transform matrix
+/** Returns the inverse world affine transform matrix. The matrix is in Pixels.
  @since v0.7.1
  */
 - (CGAffineTransform)worldToNodeTransform;
-/** converts a world coordinate to local coordinate
+/** Converts a Point to node (local) space coordinates. The result is in Points.
  @since v0.7.1
  */
 - (CGPoint)convertToNodeSpace:(CGPoint)worldPoint;
-/** converts local coordinate to world space
+/** Converts a Point to world space coordinates. The result is in Points.
  @since v0.7.1
  */
 - (CGPoint)convertToWorldSpace:(CGPoint)nodePoint;
-/** converts a world coordinate to local coordinate
- treating the returned/received node point as anchor relative
+/** Converts a Point to node (local) space coordinates. The result is in Points.
+ treating the returned/received node point as anchor relative.
  @since v0.7.1
  */
 - (CGPoint)convertToNodeSpaceAR:(CGPoint)worldPoint;
-/** converts local coordinate to world space
- treating the returned/received node point as anchor relative
+/** Converts a local Point to world space coordinates.The result is in Points.
+ treating the returned/received node point as anchor relative.
  @since v0.7.1
  */
 - (CGPoint)convertToWorldSpaceAR:(CGPoint)nodePoint;
-/** convenience methods which take a UITouch instead of CGPoint
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+/** Converts a UITouch to node (local) space coordinates. The result is in Points.
  @since v0.7.1
  */
 - (CGPoint)convertTouchToNodeSpace:(UITouch *)touch;
-/** converts a UITouch (world coordinates) into a local coordiante. This method is AR (Anchor Relative).
+/** Converts a UITouch to node (local) space coordinates. The result is in Points.
+ This method is AR (Anchor Relative)..
  @since v0.7.1
  */
 - (CGPoint)convertTouchToNodeSpaceAR:(UITouch *)touch;
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED
 @end

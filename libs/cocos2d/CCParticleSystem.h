@@ -2,6 +2,7 @@
  * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
  * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +30,10 @@
 #import "ccTypes.h"
 #import "ccConfig.h"
 
+@class CCParticleBatchNode;
 #if CC_ENABLE_PROFILERS
 @class CCProfilingTimer;
+
 #endif
 
 //* @enum
@@ -63,9 +66,15 @@ enum {
  possible types of particle positions
  */
 typedef enum {
-	/** If the emitter is repositioned, the living particles won't be repositioned */
+	/** Living particles are attached to the world and are unaffected by emitter repositioning. */
 	kCCPositionTypeFree,
-	/** If the emitter is repositioned, the living particles will be repositioned too */
+
+	/** Living particles are attached to the world but will follow the emitter repositioning.
+	 Use case: Attach an emitter to an sprite, and you want that the emitter follows the sprite.
+	 */
+	kCCPositionTypeRelative,
+	
+	/** Living particles are attached to the emitter and are translated along with it. */
 	kCCPositionTypeGrouped,
 }tCCPositionType;
 
@@ -79,8 +88,9 @@ enum {
  Structure that contains the values of each particle
  */
 typedef struct sCCParticle {
-	CGPoint				pos;
-	CGPoint				startPos;
+	CGPoint		pos;
+	float		z;
+	CGPoint		startPos;
 
 	ccColor4F	color;
 	ccColor4F	deltaColor;
@@ -92,6 +102,8 @@ typedef struct sCCParticle {
 	float		deltaRotation;
 
 	ccTime		timeToLive;
+	
+	NSUInteger	atlasIndex;
 
 	union {
 		// Mode A: gravity, direction, radial accel, tangential accel
@@ -146,7 +158,7 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
  cocos2d uses a another approach, but the results are almost identical. 
  
  cocos2d supports all the variables used by Particle Designer plus a bit more:
-	- spinning particles (supported when using CCQuadParticleSystem)
+	- spinning particles (supported when using CCParticleSystemQuad)
 	- tangential acceleration (Gravity mode)
 	- radial acceleration (Gravity mode)
 	- radius direction (Radius mode) (Particle Designer supports outwards to inwards direction only)
@@ -169,8 +181,7 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 	float elapsed;
 	
 	// position is from "superclass" CocosNode
-	// Emitter centerOfGravity position
-	CGPoint centerOfGravity;
+	CGPoint sourcePosition;
 	// Position variance
 	CGPoint posVar;
 	
@@ -181,7 +192,7 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 	
 	// Different modes
 	
-	int emitterMode_;
+	NSInteger emitterMode_;
 	union {
 		// Mode A:Gravity + Tangential Accel + Radial Accel
 		struct {
@@ -254,17 +265,13 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 	// end angle ariance
 	float endSpinVar;
 	
-	
 	// Array of particles
 	tCCParticle *particles;
 	// Maximum particles
-	int totalParticles;
+	NSUInteger totalParticles;
 	// Count of active particles
-	int particleCount;
-	
-	// color modulate
-//	BOOL colorModulate;
-	
+	NSUInteger particleCount;
+		
 	// How many particles can be emitted per second
 	float emissionRate;
 	float emitCounter;
@@ -281,11 +288,19 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 	BOOL	autoRemoveOnFinish_;
 
 	//  particle idx
-	int particleIdx;
+	NSUInteger particleIdx;
 	
 	// Optimization
 	CC_UPDATE_PARTICLE_IMP	updateParticleImp;
 	SEL						updateParticleSel;
+	
+	//for batching
+	CCParticleBatchNode *batchNode_; 
+	BOOL useBatchNode_; 
+	//index of system in batch node array
+	NSUInteger atlasIndex_; 
+	//YES if scaled or rotated
+	BOOL transformSystemDirty_;
 	
 // profiling
 #if CC_ENABLE_PROFILERS
@@ -296,11 +311,11 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 /** Is the emitter active */
 @property (nonatomic,readonly) BOOL active;
 /** Quantity of particles that are being simulated at the moment */
-@property (nonatomic,readonly) int	particleCount;
+@property (nonatomic,readonly) NSUInteger	particleCount;
 /** How many seconds the emitter wil run. -1 means 'forever' */
 @property (nonatomic,readwrite,assign) float duration;
-/** centerOfGravity of the emitter */
-@property (nonatomic,readwrite,assign) CGPoint centerOfGravity;
+/** sourcePosition of the emitter */
+@property (nonatomic,readwrite,assign) CGPoint sourcePosition;
 /** Position variance of the emitter */
 @property (nonatomic,readwrite,assign) CGPoint posVar;
 /** life, and life variation of each particle */
@@ -367,7 +382,7 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 /** emission rate of the particles */
 @property (nonatomic,readwrite,assign) float emissionRate;
 /** maximum particles of the system */
-@property (nonatomic,readwrite,assign) int totalParticles;
+@property (nonatomic,readwrite,assign) NSUInteger totalParticles;
 /** conforms to CocosNodeTexture protocol */
 @property (nonatomic,readwrite, retain) CCTexture2D * texture;
 /** conforms to CocosNodeTexture protocol */
@@ -393,7 +408,11 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
    - kCCParticleModeGravity: uses gravity, speed, radial and tangential acceleration
    - kCCParticleModeRadius: uses radius movement + rotation
  */
-@property (nonatomic,readwrite) int emitterMode;
+@property (nonatomic,readwrite) NSInteger emitterMode;
+
+@property (nonatomic,readwrite) NSUInteger atlasIndex;
+
+@property (nonatomic,readonly) BOOL useBatchNode; 
 
 /** creates an initializes a CCParticleSystem from a plist file.
  This plist files can be creted manually or with Particle Designer:
@@ -409,13 +428,13 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
  */
 -(id) initWithFile:(NSString*) plistFile;
 
-/** initializes a CCQuadParticleSystem from a NSDictionary.
+/** initializes a CCLabelBMFont from a NSDictionary.
  @since v0.99.3
  */
 -(id) initWithDictionary:(NSDictionary*)dictionary;
 
-//! Initializes a system with a fixed number of particles
--(id) initWithTotalParticles:(int) numberOfParticles;
+//! Initializes a system with a fixed number of particles and whether a batchnode is used for rendering
+-(id) initWithTotalParticles:(NSUInteger) numberOfParticles;
 //! Add a particle to the emitter
 -(BOOL) addParticle;
 //! Initializes a particle
@@ -432,5 +451,16 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 //! should be overriden by subclasses
 -(void) postStep;
 
-@end
+//! called in every loop.
+-(void) update: (ccTime) dt;
 
+-(void) updateWithNoTime;
+
+//switch to self rendering
+-(void) useSelfRender;
+//switch to batch node rendering
+-(void) useBatchNode:(CCParticleBatchNode*) batchNode;
+
+//used internally by CCParticleBathNode 
+-(void) batchNodeInitialization;
+@end

@@ -51,7 +51,7 @@
             {
                 int damage = source.dotMin + arc4random() % source.dotMax;
                 [foundCreep shoot:damage];
-                CCQuadParticleSystem * bubbleSystem = [field.combatManager getParticleSystemForKey:source.hitParticleKey];
+                CCParticleSystemQuad * bubbleSystem = [field.combatManager getParticleSystemForKey:source.hitParticleKey];
                 bubbleSystem.position = ccp(creepSize/2, -(creepSize/2));
                 bubbleSystem.autoRemoveOnFinish = YES;
                 bubbleSystem.duration = dotTimer;

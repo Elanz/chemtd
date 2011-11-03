@@ -31,13 +31,13 @@
     
     GameFieldScene *gameField;
     
-    CCBitmapFontAtlas * towerName;
-    CCBitmapFontAtlas * currentRange;
-    CCBitmapFontAtlas * currentDamage;
-    CCBitmapFontAtlas * currentSpeed;
-    CCBitmapFontAtlas * rangeLabel;
-    CCBitmapFontAtlas * damageLabel;
-    CCBitmapFontAtlas * speedLabel;
+    CCLabelBMFont * towerName;
+    CCLabelBMFont * currentRange;
+    CCLabelBMFont * currentDamage;
+    CCLabelBMFont * currentSpeed;
+    CCLabelBMFont * rangeLabel;
+    CCLabelBMFont * damageLabel;
+    CCLabelBMFont * speedLabel;
     
     BOOL towerManagerUpgradeOldState;
     BOOL towerManagerDowngradeOldState;
@@ -47,7 +47,7 @@
 
 - (void) disableAll;
 - (void) enableAll;
-- (CCBitmapFontAtlas*) makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string;
+- (CCLabelBMFont*) makeLabelWithPosition:(CGPoint)position scale:(float)scale string:(NSString*)string;
 - (void) clearChosenTower;
 - (id) initWithGameField:(GameFieldScene *)theGameField;
 - (void) chooseTower:(BaseTower*)newTower;

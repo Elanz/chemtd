@@ -24,6 +24,10 @@
 
 #import "CocosDenshion.h"
 
+ALvoid  alBufferDataStaticProc(const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq);
+ALvoid  alcMacOSXMixerOutputRateProc(const ALdouble value);
+
+
 typedef ALvoid	AL_APIENTRY	(*alBufferDataStaticProcPtr) (const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq);
 ALvoid  alBufferDataStaticProc(const ALint bid, ALenum format, ALvoid* data, ALsizei size, ALsizei freq)
 {
@@ -54,16 +58,15 @@ ALvoid  alcMacOSXMixerOutputRateProc(const ALdouble value)
     return;
 }
 
-//Audio session interruption callback - used if sound engine is 
-//handling audio session interruption automatically
-extern void interruptionListenerCallback (void *inUserData, UInt32 interruptionState ) { 
-	CDSoundEngine *controller = (CDSoundEngine *) inUserData; 
-    if (interruptionState == kAudioSessionBeginInterruption) { 
-        [controller audioSessionInterrupted]; 
-    } else if (interruptionState == kAudioSessionEndInterruption) { 
-        [controller audioSessionResumed]; 
-    } 
-} 
+NSString * const kCDN_BadAlContext = @"kCDN_BadAlContext";
+NSString * const kCDN_AsynchLoadComplete = @"kCDN_AsynchLoadComplete";
+float const kCD_PitchDefault = 1.0f;
+float const kCD_PitchLowerOneOctave = 0.5f;
+float const kCD_PitchHigherOneOctave = 2.0f;
+float const kCD_PanDefault = 0.0f;
+float const kCD_PanFullLeft = -1.0f;
+float const kCD_PanFullRight = 1.0f;
+float const kCD_GainDefault = 1.0f;
 
 @interface CDSoundEngine (PrivateMethods)
 -(BOOL) _initOpenAL;
@@ -71,8 +74,11 @@ extern void interruptionListenerCallback (void *inUserData, UInt32 interruptionS
 -(void) _dumpSourceGroupsInfo;
 -(void) _getSourceIndexForSourceGroup;
 -(void) _freeSourceGroups;
--(BOOL) _setUpSourceGroups:(int[]) definitions total:(int) total; 
+-(BOOL) _setUpSourceGroups:(int[]) definitions total:(NSUInteger) total; 
 @end
+
+#pragma mark -
+#pragma mark CDUtilities
 
 @implementation CDUtilities
 
@@ -99,6 +105,8 @@ extern void interruptionListenerCallback (void *inUserData, UInt32 interruptionS
 
 @end
 
+#pragma mark -
+#pragma mark CDSoundEngine
 
 @implementation CDSoundEngine
 
@@ -124,7 +132,6 @@ static BOOL _mixerRateSet = NO;
 	ALfloat gainVal;
 	alGetSourcef(testSourceId, AL_GAIN, &gainVal);
 	getGainWorks_ = (gainVal == testValue);
-	CDLOG(@"Denshion::CDSoundEngine - testing get gain for source %i",getGainWorks_);
 }
 
 //Generate sources one at a time until we fail
@@ -135,7 +142,6 @@ static BOOL _mixerRateSet = NO;
 	sourceTotal_ = 0;
 	alGetError();//Clear error
 	while (!hasFailed && sourceTotal_ < CD_SOURCE_LIMIT) {
-		CDLOG(@"Denshion::CDSoundEngine - try to generate source %i",sourceTotal_);
 		alGenSources(1, &(_sources[sourceTotal_].sourceId));
 		if (alGetError() == AL_NO_ERROR) {
 			//Now try attaching source to null buffer
@@ -155,11 +161,9 @@ static BOOL _mixerRateSet = NO;
 	for (int i=sourceTotal_; i < CD_SOURCE_LIMIT; i++) {
 		_sources[i].usable = false;
 	}	
-	CDLOG(@"Denshion::CDSoundEngine - total sources %i",sourceTotal_);
 }	
 
 -(void) _generateBuffers:(int) startIndex endIndex:(int) endIndex {
-	CDLOG(@"Denshion::CDSoundEngine - generate buffers %i to %i",startIndex,endIndex);
 	if (_buffers) {
 		alGetError();
 		for (int i=startIndex; i <= endIndex; i++) {
@@ -167,7 +171,6 @@ static BOOL _mixerRateSet = NO;
 			_buffers[i].bufferData = NULL;
 			if (alGetError() == AL_NO_ERROR) {
 				_buffers[i].bufferState = CD_BS_EMPTY;
-				CDLOG(@"Denshion::CDSoundEngine - buffer created %i",_buffers[i].bufferId);
 			} else {
 				_buffers[i].bufferState = CD_BS_FAILED;
 				CDLOG(@"Denshion::CDSoundEngine - buffer creation failed %i",i);
@@ -190,7 +193,7 @@ static BOOL _mixerRateSet = NO;
 		_mixerSampleRate = CD_SAMPLE_RATE_DEFAULT;
 	}
 	alcMacOSXMixerOutputRateProc(_mixerSampleRate);
-	CDLOG(@"Denshion::CDSoundEngine - mixer output rate set to %0.2f",_mixerSampleRate);
+	CDLOGINFO(@"Denshion::CDSoundEngine - mixer output rate set to %0.2f",_mixerSampleRate);
 	
 	// Create a new OpenAL Device
 	// Pass NULL to specify the system's default output device
@@ -204,9 +207,6 @@ static BOOL _mixerRateSet = NO;
 		{
 			// Make the new context the Current OpenAL Context
 			alcMakeContextCurrent(context);
-			
-			//Don't want a distance model
-			alDistanceModel(AL_NONE);
 			
 			// Create some OpenAL Buffer Objects
 			[self _generateBuffers:0 endIndex:bufferTotal-1];
@@ -229,11 +229,11 @@ static BOOL _mixerRateSet = NO;
 	
 	[self stopAllSounds];
 
-	CDLOG(@"Denshion::CDSoundEngine - Deallocing sound engine.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - Deallocing sound engine.");
 	[self _freeSourceGroups];
 	
 	// Delete the Sources
-	CDLOG(@"Denshion::CDSoundEngine - deleting sources.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - deleting sources.");
 	for (int i=0; i < sourceTotal_; i++) {
 		alSourcei(_sources[i].sourceId, AL_BUFFER, 0);//Detach from current buffer
 	    alDeleteSources(1, &(_sources[i].sourceId));
@@ -243,7 +243,7 @@ static BOOL _mixerRateSet = NO;
 	}	
 
 	// Delete the Buffers
-	CDLOG(@"Denshion::CDSoundEngine - deleting buffers.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - deleting buffers.");
 	for (int i=0; i < bufferTotal; i++) {
 		alDeleteBuffers(1, &_buffers[i].bufferId);
 #ifdef CD_USE_STATIC_BUFFERS
@@ -252,42 +252,45 @@ static BOOL _mixerRateSet = NO;
 		}	
 #endif		
 	}	
-	CDLOG(@"Denshion::CDSoundEngine - free buffers.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - free buffers.");
 	free(_buffers);
     currentContext = alcGetCurrentContext();
     //Get device for active context
     device = alcGetContextsDevice(currentContext);
     //Release context
-	CDLOG(@"Denshion::CDSoundEngine - destroy context.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - destroy context.");
     alcDestroyContext(currentContext);
     //Close device
-	CDLOG(@"Denshion::CDSoundEngine - close device.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - close device.");
     alcCloseDevice(device);
-	CDLOG(@"Denshion::CDSoundEngine - free sources.");
+	CDLOGINFO(@"Denshion::CDSoundEngine - free sources.");
 	free(_sources);
+	
+	//Release mutexes
+	[_mutexBufferLoad release];
 	
 	[super dealloc];
 }	
 
--(int) sourceGroupTotal {
+-(NSUInteger) sourceGroupTotal {
 	return _sourceGroupTotal;
 }	
 
 -(void) _freeSourceGroups 
 {
-	CDLOG(@"Denshion::CDSoundEngine freeing source groups");
+	CDLOGINFO(@"Denshion::CDSoundEngine freeing source groups");
 	if(_sourceGroups) {
 		for (int i=0; i < _sourceGroupTotal; i++) {
 			if (_sourceGroups[i].sourceStatuses) {
 				free(_sourceGroups[i].sourceStatuses);
-				CDLOG(@"Denshion::CDSoundEngine freed source statuses %i",i);
+				CDLOGINFO(@"Denshion::CDSoundEngine freed source statuses %i",i);
 			}	
 		}
 		free(_sourceGroups);
 	}	
 }	
 
--(BOOL) _redefineSourceGroups:(int[]) definitions total:(int) total
+-(BOOL) _redefineSourceGroups:(int[]) definitions total:(NSUInteger) total
 {
 	if (_sourceGroups) {
 		//Stop all sounds
@@ -298,7 +301,7 @@ static BOOL _mixerRateSet = NO;
 	return [self _setUpSourceGroups:definitions total:total];
 }	
 
--(BOOL) _setUpSourceGroups:(int[]) definitions total:(int) total 
+-(BOOL) _setUpSourceGroups:(int[]) definitions total:(NSUInteger) total 
 {
 	_sourceGroups = (sourceGroup *)malloc( sizeof(_sourceGroups[0]) * total);
 	if(!_sourceGroups) {
@@ -323,25 +326,23 @@ static BOOL _mixerRateSet = NO;
 			}	
 		}	
 		sourceCount += definitions[i];
-		CDLOG(@"Denshion::CDSoundEngine - source def %i %i %i",i,_sourceGroups[i].startIndex,  _sourceGroups[i].currentIndex);
 	}
-	[self _dumpSourceGroupsInfo];
 	return YES;
 }
 
--(void) defineSourceGroups:(int[]) sourceGroupDefinitions total:(int) total {
+-(void) defineSourceGroups:(int[]) sourceGroupDefinitions total:(NSUInteger) total {
 	[self _redefineSourceGroups:sourceGroupDefinitions total:total];
 }
 
 -(void) defineSourceGroups:(NSArray*) sourceGroupDefinitions {
-	CDLOG(@"Denshion::CDSoundEngine - source groups defined by NSArray.");
-	int totalDefs = [sourceGroupDefinitions count];
+	CDLOGINFO(@"Denshion::CDSoundEngine - source groups defined by NSArray.");
+	NSUInteger totalDefs = [sourceGroupDefinitions count];
 	int* defs = (int *)malloc( sizeof(int) * totalDefs);
 	int currentIndex = 0;
 	for (id currentDef in sourceGroupDefinitions) {
 		if ([currentDef isKindOfClass:[NSNumber class]]) {
-			defs[currentIndex] = [(NSNumber*)currentDef integerValue];
-			CDLOG(@"Denshion::CDSoundEngine - found definition %i.",defs[currentIndex]);
+			defs[currentIndex] = (int)[(NSNumber*)currentDef integerValue];
+			CDLOGINFO(@"Denshion::CDSoundEngine - found definition %i.",defs[currentIndex]);
 		} else {
 			CDLOG(@"Denshion::CDSoundEngine - warning, did not understand source definition.");
 			defs[currentIndex] = 0;
@@ -352,33 +353,14 @@ static BOOL _mixerRateSet = NO;
 	free(defs);
 }	
 
-/**
- * Call this initialiser if you want the sound engine to automatically handle audio session interruption.
- * If you are using the sound engine in conjunction with another audio api such as AVAudioPlayer or
- * AudioQueue then you probably do not want the sound engine to handle audio session interruption
- * for you.
- *
- * The audioSessionCategory should be one of the audio session category enumeration values such as
- * kAudioSessionCategory_AmbientSound. Your choice is dependent on how you want your audio to interact
- * with other audio on the device.
- *
- * Please note that audio session interruption is different to application interruption.  Known triggers are
- * alarm notification from clock, incoming phone call that is rejected and video playback ending.
- */
-- (id)init:(UInt32) audioSessionCategory 
+- (id)init
 {	
 	if ((self = [super init])) {
 		
+		//Create mutexes
+		_mutexBufferLoad = [[NSObject alloc] init];
+		
 		asynchLoadProgress_ = 0.0f;
-		_audioSessionCategory = audioSessionCategory;
-		_handleAudioSession = (_audioSessionCategory != CD_IGNORE_AUDIO_SESSION);
-		if (_handleAudioSession) {
-			CDLOG(@"Denshion::CDSoundEngine - Sound engine will handle audio session interruption");
-			//Set up audio session
-			OSStatus result = AudioSessionInitialize(NULL, NULL,interruptionListenerCallback, self); 
-			result = AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(_audioSessionCategory), &_audioSessionCategory); 
-			#pragma unused(result)
-		}	
 		
 		bufferTotal = CD_BUFFERS_START;
 		_buffers = (bufferInfo *)malloc( sizeof(_buffers[0]) * bufferTotal);
@@ -405,13 +387,6 @@ static BOOL _mixerRateSet = NO;
 	
 	return self;
 }
-
-/**
- * If you call this initialiser the sound engine won't handle audio session interruption and resumption.
- */
-- (id)init {
-	return [self init:CD_IGNORE_AUDIO_SESSION];
-}	
 
 /**
  * Delete the buffer identified by soundId
@@ -475,7 +450,7 @@ static BOOL _mixerRateSet = NO;
 #ifdef CD_USE_STATIC_BUFFERS
 		//Free previous data, if alDeleteBuffer has returned without error then no 
 		if (_buffers[soundId].bufferData) {
-			CDLOG(@"Denshion::CDSoundEngine - freeing static data for soundId %i @ %i",soundId,_buffers[soundId].bufferData);
+			CDLOGINFO(@"Denshion::CDSoundEngine - freeing static data for soundId %i @ %i",soundId,_buffers[soundId].bufferData);
 			free(_buffers[soundId].bufferData);//Free the old data
 			_buffers[soundId].bufferData = NULL;
 		}
@@ -490,7 +465,7 @@ static BOOL _mixerRateSet = NO;
 	} else {
 		//We now have an empty buffer
 		_buffers[soundId].bufferState = CD_BS_EMPTY;
-		CDLOG(@"Denshion::CDSoundEngine - buffer %i successfully unloaded\n",soundId);
+		CDLOGINFO(@"Denshion::CDSoundEngine - buffer %i successfully unloaded\n",soundId);
 		return TRUE;
 	}	
 }	
@@ -506,14 +481,14 @@ static BOOL _mixerRateSet = NO;
 	@synchronized(self) {
 		asynchLoadProgress_ = 0.0f;
 		CDAsynchBufferLoader *loaderOp = [[[CDAsynchBufferLoader alloc] init:loadRequests soundEngine:self] autorelease];
-		NSOperationQueue *opQ = [[[NSOperationQueue alloc] init] autorelease]; //This is going to leak?
+		NSOperationQueue *opQ = [[[NSOperationQueue alloc] init] autorelease];
 		[opQ addOperation:loaderOp];
 	}
 }	
 
 -(BOOL) _resizeBuffers:(int) increment {
 	
-	void * tmpBufferInfos = realloc( _buffers, sizeof(_buffers[0]) * bufferTotal + increment );
+	void * tmpBufferInfos = realloc( _buffers, sizeof(_buffers[0]) * (bufferTotal + increment) );
 	
 	if(!tmpBufferInfos) {
 		free(tmpBufferInfos);
@@ -528,72 +503,75 @@ static BOOL _mixerRateSet = NO;
 }	
 
 -(BOOL) loadBufferFromData:(int) soundId soundData:(ALvoid*) soundData format:(ALenum) format size:(ALsizei) size freq:(ALsizei) freq {
-	
-	CDLOG(@"Denshion::CDSoundEngine - Loading buffer %i ", soundId);
-	
-	if (!functioning_) {
-		//OpenAL initialisation has previously failed
-		CDLOG(@"Denshion::CDSoundEngine - Loading buffer failed because sound engine state != functioning");
-		return FALSE;
-	}
-	
-	//Ensure soundId is within array bounds otherwise memory corruption will occur
-	if (soundId < 0) {
-		CDLOG(@"Denshion::CDSoundEngine - soundId is negative");
-		return FALSE;
-	}
-	
-	if (soundId >= bufferTotal) {
-		//Need to resize the buffers
-		int requiredIncrement = CD_BUFFERS_INCREMENT;
-		while (bufferTotal + requiredIncrement < soundId) {
-			requiredIncrement += CD_BUFFERS_INCREMENT;
-		}
-		CDLOG(@"Denshion::CDSoundEngine - attempting to resize buffers by %i for sound %i",requiredIncrement,soundId);
-		if (![self _resizeBuffers:requiredIncrement]) {
-			CDLOG(@"Denshion::CDSoundEngine - buffer resize failed");
+
+	@synchronized(_mutexBufferLoad) {
+		
+		if (!functioning_) {
+			//OpenAL initialisation has previously failed
+			CDLOG(@"Denshion::CDSoundEngine - Loading buffer failed because sound engine state != functioning");
 			return FALSE;
-		}	
-	}	
-	
-	if (soundData)
-	{
-		if (_buffers[soundId].bufferState != CD_BS_EMPTY) {
-			CDLOG(@"Denshion::CDSoundEngine - non empty buffer, regenerating");
-			if (![self unloadBuffer:soundId]) {
-				//Deletion of buffer failed, delete buffer routine has set buffer state and lastErrorCode
-				return NO;
+		}
+		
+		//Ensure soundId is within array bounds otherwise memory corruption will occur
+		if (soundId < 0) {
+			CDLOG(@"Denshion::CDSoundEngine - soundId is negative");
+			return FALSE;
+		}
+		
+		if (soundId >= bufferTotal) {
+			//Need to resize the buffers
+			int requiredIncrement = CD_BUFFERS_INCREMENT;
+			while (bufferTotal + requiredIncrement < soundId) {
+				requiredIncrement += CD_BUFFERS_INCREMENT;
+			}
+			CDLOGINFO(@"Denshion::CDSoundEngine - attempting to resize buffers by %i for sound %i",requiredIncrement,soundId);
+			if (![self _resizeBuffers:requiredIncrement]) {
+				CDLOG(@"Denshion::CDSoundEngine - buffer resize failed");
+				return FALSE;
 			}	
 		}	
 		
+		if (soundData)
+		{
+			if (_buffers[soundId].bufferState != CD_BS_EMPTY) {
+				CDLOGINFO(@"Denshion::CDSoundEngine - non empty buffer, regenerating");
+				if (![self unloadBuffer:soundId]) {
+					//Deletion of buffer failed, delete buffer routine has set buffer state and lastErrorCode
+					return NO;
+				}	
+			}	
+			
 #ifdef CD_DEBUG
-		//Check that sample rate matches mixer rate and warn if they do not
-		if (freq != (int)_mixerSampleRate) {
-			CDLOG(@"Denshion::CDSoundEngine - WARNING sample rate does not match mixer sample rate performance will not be optimal.");
-		}	
+			//Check that sample rate matches mixer rate and warn if they do not
+			if (freq != (int)_mixerSampleRate) {
+				CDLOGINFO(@"Denshion::CDSoundEngine - WARNING sample rate does not match mixer sample rate performance may not be optimal.");
+			}	
 #endif		
-		
+			
 #ifdef CD_USE_STATIC_BUFFERS
-		alBufferDataStaticProc(_buffers[soundId].bufferId, format, soundData, size, freq);
-		_buffers[soundId].bufferData = data;//Save the pointer to the new data
+			alBufferDataStaticProc(_buffers[soundId].bufferId, format, soundData, size, freq);
+			_buffers[soundId].bufferData = data;//Save the pointer to the new data
 #else		
-		alBufferData(_buffers[soundId].bufferId, format, soundData, size, freq);
+			alBufferData(_buffers[soundId].bufferId, format, soundData, size, freq);
 #endif
-		if((lastErrorCode_ = alGetError()) != AL_NO_ERROR) {
-			CDLOG(@"Denshion::CDSoundEngine -  error attaching audio to buffer: %x", lastErrorCode_);
+			if((lastErrorCode_ = alGetError()) != AL_NO_ERROR) {
+				CDLOG(@"Denshion::CDSoundEngine -  error attaching audio to buffer: %x", lastErrorCode_);
+				_buffers[soundId].bufferState = CD_BS_FAILED;
+				return FALSE;
+			} 
+		} else {
+			CDLOG(@"Denshion::CDSoundEngine Buffer data is null!");
 			_buffers[soundId].bufferState = CD_BS_FAILED;
 			return FALSE;
-		} 
-	} else {
-		CDLOG(@"Denshion::CDSoundEngine Buffer data is null!");
-		_buffers[soundId].bufferState = CD_BS_FAILED;
-		return FALSE;
-	}	
-	
-	_buffers[soundId].bufferState = CD_BS_LOADED;
-	CDLOG(@"Denshion::CDSoundEngine -  =============== Buffer Loaded ===============");
-	return TRUE;
-
+		}	
+		
+		_buffers[soundId].format = format;
+		_buffers[soundId].sizeInBytes = size;
+		_buffers[soundId].frequencyInHertz = freq;
+		_buffers[soundId].bufferState = CD_BS_LOADED;
+		CDLOGINFO(@"Denshion::CDSoundEngine Buffer %i loaded format:%i freq:%i size:%i",soundId,format,freq,size);
+		return TRUE;
+	}//end mutex
 }	
 
 /**
@@ -608,7 +586,7 @@ static BOOL _mixerRateSet = NO;
 	ALsizei size;
 	ALsizei freq;
 	
-	CDLOG(@"Denshion::CDSoundEngine - Loading openAL buffer %i %@", soundId, filePath);
+	CDLOGINFO(@"Denshion::CDSoundEngine - Loading openAL buffer %i %@", soundId, filePath);
 	
 	CFURLRef fileURL = nil;
 	NSString *path = [CDUtilities fullPathFromRelativePath:filePath];
@@ -632,99 +610,56 @@ static BOOL _mixerRateSet = NO;
 	}	
 }
 
-/*
-- (BOOL) loadBuffer:(int) soundId filePath:(NSString*) filePath
-{
-	
-	ALenum  format;
-	ALvoid* data;
-	ALsizei size;
-	ALsizei freq;
-	
-	CDLOG(@"Denshion::CDSoundEngine - Loading openAL buffer %i %@", soundId, filePath);
-	
-	if (!functioning_) {
-		//OpenAL initialisation has previously failed
-		CDLOG(@"Denshion::CDSoundEngine - Loading buffer failed because sound engine state != functioning");
-		return FALSE;
-	}
-	
-	//Ensure soundId is within array bounds otherwise memory corruption will occur
-	if (soundId < 0) {
-		CDLOG(@"Denshion::CDSoundEngine - soundId is negative");
-		return FALSE;
-	}
-	
-	if (soundId >= bufferTotal) {
-		//Need to resize the buffers
-		int requiredIncrement = CD_BUFFERS_INCREMENT;
-		while (bufferTotal + requiredIncrement < soundId) {
-			requiredIncrement += CD_BUFFERS_INCREMENT;
-		}
-		CDLOG(@"Denshion::CDSoundEngine - attempting to resize buffers by %i for sound %i",requiredIncrement,soundId);
-		if (![self _resizeBuffers:requiredIncrement]) {
-			CDLOG(@"Denshion::CDSoundEngine - buffer resize failed");
-			return FALSE;
-		}	
-	}	
-	
-	CFURLRef fileURL = nil;
-	NSString *path = [CDUtilities fullPathFromRelativePath:filePath];
-	if (path) {
-		fileURL = (CFURLRef)[[NSURL fileURLWithPath:path] retain];
-	}
-	
-	if (fileURL)
-	{
-		if (_buffers[soundId].bufferState != CD_BS_EMPTY) {
-			CDLOG(@"Denshion::CDSoundEngine - non empty buffer, regenerating");
-			if (![self unloadBuffer:soundId]) {
-				//Deletion of buffer failed, delete buffer routine has set buffer state and lastErrorCode
-				CFRelease(fileURL);//Thanks clang ;)
-				return FALSE;
-			}	
-		}	
-		
-		data = CDGetOpenALAudioData(fileURL, &size, &format, &freq);
-		CDLOG(@"Denshion::CDSoundEngine - size %i frequency %i format %i %i", size, freq, format, data);
-#ifdef CD_DEBUG
-		//Check that sample rate matches mixer rate and warn if they do not
-		if (freq != (int)_mixerSampleRate) {
-			CDLOG(@"Denshion::CDSoundEngine - WARNING sample rate does not match mixer sample rate performance will not be optimal.");
-		}	
-#endif		
-		CFRelease(fileURL);
-		
-		if(data == NULL) {
-			CDLOG(@"Denshion::CDSoundEngine - error loading sound data is null");
-			_buffers[soundId].bufferState = CD_BS_FAILED;
-			return FALSE;
-		}
-		
-#ifdef CD_USE_STATIC_BUFFERS
-		alBufferDataStaticProc(_buffers[soundId].bufferId, format, data, size, freq);
-		_buffers[soundId].bufferData = data;//Save the pointer to the new data
-#else		
-		alBufferData(_buffers[soundId].bufferId, format, data, size, freq);
-		free(data);//Data can be freed here because alBufferData performs a memcpy		
-#endif
-		if((lastErrorCode_ = alGetError()) != AL_NO_ERROR) {
-			CDLOG(@"Denshion::CDSoundEngine -  error attaching audio to buffer: %x\n", lastErrorCode_);
-			_buffers[soundId].bufferState = CD_BS_FAILED;
-			return FALSE;
-		} 
+-(BOOL) validateBufferId:(int) soundId {
+	if (soundId < 0 || soundId >= bufferTotal) {
+		CDLOGINFO(@"Denshion::CDSoundEngine - validateBufferId buffer outside range %i",soundId);
+		return NO;
+	} else if (_buffers[soundId].bufferState != CD_BS_LOADED) {
+		CDLOGINFO(@"Denshion::CDSoundEngine - validateBufferId invalide buffer state %i",soundId);
+		return NO;
 	} else {
-		CDLOG(@"Denshion: Could not find file!\n");
-		//Don't change buffer state here as it will be the same as before method was called	
-		return FALSE;
+		return YES;
 	}	
-	
-	_buffers[soundId].bufferState = CD_BS_LOADED;
-	CDLOG(@"Denshion::CDSoundEngine -  =============== Buffer Loaded ===============");
-	return TRUE;
-}
- */
+}	
 
+-(float) bufferDurationInSeconds:(int) soundId {
+	if ([self validateBufferId:soundId]) {
+		float factor = 0.0f;
+		switch (_buffers[soundId].format) {
+			case AL_FORMAT_MONO8:
+				factor = 1.0f;
+				break;
+			case AL_FORMAT_MONO16:
+				factor = 0.5f;
+				break;
+			case AL_FORMAT_STEREO8:
+				factor = 0.5f;
+				break;
+			case AL_FORMAT_STEREO16:
+				factor = 0.25f;
+				break;
+		}	
+		return (float)_buffers[soundId].sizeInBytes/(float)_buffers[soundId].frequencyInHertz * factor;
+	} else {
+		return -1.0f;
+	}	
+}	
+
+-(ALsizei) bufferSizeInBytes:(int) soundId {
+	if ([self validateBufferId:soundId]) {
+		return _buffers[soundId].sizeInBytes;
+	} else {
+		return -1.0f;
+	}	
+}	
+
+-(ALsizei) bufferFrequencyInHertz:(int) soundId {
+	if ([self validateBufferId:soundId]) {
+		return _buffers[soundId].frequencyInHertz;
+	} else {
+		return -1.0f;
+	}	
+}	
 
 - (ALfloat) masterGain {
 	if (mute_) {
@@ -812,6 +747,12 @@ static BOOL _mixerRateSet = NO;
 
 -(int) _getSourceIndexForSourceGroup:(int)sourceGroupId 
 {
+	//Ensure source group id is valid to prevent memory corruption
+	if (sourceGroupId < 0 || sourceGroupId >= _sourceGroupTotal) {
+		CDLOG(@"Denshion::CDSoundEngine invalid source group id %i",sourceGroupId);
+		return CD_NO_SOURCE;
+	}	
+
 	int sourceIndex = -1;//Using -1 to indicate no source found
 	BOOL complete = NO;
 	ALint sourceState = 0;
@@ -892,15 +833,15 @@ static BOOL _mixerRateSet = NO;
 	if (!enabled_ || !functioning_ || _buffers[soundId].bufferState != CD_BS_LOADED || _sourceGroups[sourceGroupId].enabled) {
 #ifdef CD_DEBUG
 		if (!functioning_) {
-			CDLOG(@"Denshion::CDSoundEngine - sound playback aborted because sound engine is not functioning");
+			CDLOGINFO(@"Denshion::CDSoundEngine - sound playback aborted because sound engine is not functioning");
 		} else if (_buffers[soundId].bufferState != CD_BS_LOADED) {
-			CDLOG(@"Denshion::CDSoundEngine - sound playback aborted because buffer %i is not loaded", soundId);
+			CDLOGINFO(@"Denshion::CDSoundEngine - sound playback aborted because buffer %i is not loaded", soundId);
 		}	
 #endif		
 		return CD_MUTE;
 	}	
-	
-	int sourceIndex = [self _getSourceIndexForSourceGroup:sourceGroupId];
+
+	int sourceIndex = [self _getSourceIndexForSourceGroup:sourceGroupId];//This method ensures sourceIndex is valid
 	
 	if (sourceIndex != CD_NO_SOURCE) {
 		ALint state;
@@ -924,7 +865,10 @@ static BOOL _mixerRateSet = NO;
 			_sources[sourceIndex].attachedBufferId = buffer;
 			return source;
 		} else {
-			//Something went wrong - set error code and return failure code
+			if (alcGetCurrentContext() == NULL) {
+				CDLOGINFO(@"Denshion::CDSoundEngine - posting bad OpenAL context message");
+				[[NSNotificationCenter defaultCenter] postNotificationName:kCDN_BadAlContext object:nil];
+			}				
 			return CD_NO_SOURCE;
 		}	
 	} else {	
@@ -986,7 +930,7 @@ static BOOL _mixerRateSet = NO;
 }	
 
 -(void) _soundSourcePreRelease:(CDSoundSource *) soundSource {
-	CDLOG(@"Denshion::CDSoundEngine _soundSourcePreRelease %i",soundSource->_sourceIndex);
+	CDLOGINFO(@"Denshion::CDSoundEngine _soundSourcePreRelease %i",soundSource->_sourceIndex);
 	//Unlock the sound source's source
 	[self _lockSource:soundSource->_sourceIndex lock:NO];
 }	
@@ -996,7 +940,7 @@ static BOOL _mixerRateSet = NO;
  */
 - (void) stopSourceGroup:(int) sourceGroupId {
 	
-	if (!functioning_ || sourceGroupId >= _sourceGroupTotal) {
+	if (!functioning_ || sourceGroupId >= _sourceGroupTotal || sourceGroupId < 0) {
 		return;
 	}	
 	int sourceCount = _sourceGroups[sourceGroupId].totalSources;
@@ -1032,6 +976,12 @@ static BOOL _mixerRateSet = NO;
  * no free sources available then the play request will be ignored and CD_NO_SOURCE will be returned.
  */
 - (void) setSourceGroupNonInterruptible:(int) sourceGroupId isNonInterruptible:(BOOL) isNonInterruptible {
+	//Ensure source group id is valid to prevent memory corruption
+	if (sourceGroupId < 0 || sourceGroupId >= _sourceGroupTotal) {
+		CDLOG(@"Denshion::CDSoundEngine setSourceGroupNonInterruptible invalid source group id %i",sourceGroupId);
+		return;
+	}	
+	
 	if (isNonInterruptible) {
 		_sourceGroups[sourceGroupId].nonInterruptible = true;
 	} else {
@@ -1047,6 +997,12 @@ static BOOL _mixerRateSet = NO;
  * no matter what the source group mute setting is.
  */
 - (void) setSourceGroupEnabled:(int) sourceGroupId enabled:(BOOL) enabled {
+	//Ensure source group id is valid to prevent memory corruption
+	if (sourceGroupId < 0 || sourceGroupId >= _sourceGroupTotal) {
+		CDLOG(@"Denshion::CDSoundEngine setSourceGroupEnabled invalid source group id %i",sourceGroupId);
+		return;
+	}	
+	
 	if (enabled) {
 		_sourceGroups[sourceGroupId].enabled = true;
 		[self stopSourceGroup:sourceGroupId];
@@ -1066,60 +1022,15 @@ static BOOL _mixerRateSet = NO;
 	return context;
 }	
 
-//Code to handle audio session interruption.  Thanks to Andy Fitter and Ben Britten.
--(void)audioSessionInterrupted 
-{ 
-    CDLOG(@"Denshion::CDSoundEngine - Audio session interrupted"); 
-	ALenum  error = AL_NO_ERROR;
-    // Deactivate the current audio session 
-    AudioSessionSetActive(NO); 
-    // set the current context to NULL will 'shutdown' openAL 
-    alcMakeContextCurrent(NULL); 
-	if((error = alGetError()) != AL_NO_ERROR) {
-		CDLOG(@"Denshion::CDSoundEngine - Error making context current %x\n", error);
-	} 
-    // now suspend your context to 'pause' your sound world 
-    alcSuspendContext(context); 
-	if((error = alGetError()) != AL_NO_ERROR) {
-		CDLOG(@"Denshion::CDSoundEngine - Error suspending context %x\n", error);
-	} 
-	#pragma unused(error)
-} 
-
-//Code to handle audio session resumption.  Thanks to Andy Fitter and Ben Britten.
--(void)audioSessionResumed 
-{ 
-    ALenum  error = AL_NO_ERROR;
-	CDLOG(@"Denshion::CDSoundEngine - Audio session resumed"); 
-    // Reset audio session 
-    OSStatus result = AudioSessionSetProperty ( kAudioSessionProperty_AudioCategory, sizeof(_audioSessionCategory), &_audioSessionCategory ); 
-	
-	// Reactivate the current audio session 
-    result = AudioSessionSetActive(YES); 
-	#pragma unused(result)
-	
-    // Restore open al context 
-    alcMakeContextCurrent(context); 
-	if((error = alGetError()) != AL_NO_ERROR) {
-		CDLOG(@"Denshion::CDSoundEngine - Error making context current%x\n", error);
-	} 
-    // 'unpause' my context 
-    alcProcessContext(context); 
-	if((error = alGetError()) != AL_NO_ERROR) {
-		CDLOG(@"Denshion::CDSoundEngine - Error processing context%x\n", error);
-	} 
-	#pragma unused(error)
-} 
-
 - (void) _dumpSourceGroupsInfo {
 #ifdef CD_DEBUG	
-	CDLOG(@"-------------- source Group Info --------------");
+	CDLOGINFO(@"-------------- source Group Info --------------");
 	for (int i=0; i < _sourceGroupTotal; i++) {
-		CDLOG(@"Group: %i start:%i total:%i",i,_sourceGroups[i].startIndex, _sourceGroups[i].totalSources);
-		CDLOG(@"----- mute:%i nonInterruptible:%i",_sourceGroups[i].enabled, _sourceGroups[i].nonInterruptible);
-		CDLOG(@"----- Source statuses ----");
+		CDLOGINFO(@"Group: %i start:%i total:%i",i,_sourceGroups[i].startIndex, _sourceGroups[i].totalSources);
+		CDLOGINFO(@"----- mute:%i nonInterruptible:%i",_sourceGroups[i].enabled, _sourceGroups[i].nonInterruptible);
+		CDLOGINFO(@"----- Source statuses ----");
 		for (int j=0; j < _sourceGroups[i].totalSources; j++) {
-			CDLOG(@"Source status:%i index=%i locked=%i",j,_sourceGroups[i].sourceStatuses[j] >> 1, _sourceGroups[i].sourceStatuses[j] & 1);
+			CDLOGINFO(@"Source status:%i index=%i locked=%i",j,_sourceGroups[i].sourceStatuses[j] >> 1, _sourceGroups[i].sourceStatuses[j] & 1);
 		}	
 	}	
 #endif	
@@ -1133,7 +1044,8 @@ static BOOL _mixerRateSet = NO;
 @synthesize lastError;
 
 //Macro for handling the al error code
-#define CDSOUNDSOURCE_ERROR_HANDLER ((lastError = alGetError()) == AL_NO_ERROR)
+#define CDSOUNDSOURCE_UPDATE_LAST_ERROR (lastError = alGetError())
+#define CDSOUNDSOURCE_ERROR_HANDLER ( CDSOUNDSOURCE_UPDATE_LAST_ERROR == AL_NO_ERROR)
 
 -(id)init:(ALuint) theSourceId sourceIndex:(int) index soundEngine:(CDSoundEngine*) engine {
 	if ((self = [super init])) {
@@ -1149,7 +1061,7 @@ static BOOL _mixerRateSet = NO;
 
 -(void) dealloc
 {
-	CDLOG(@"Denshion::CDSoundSource deallocated %i",self->_sourceIndex);
+	CDLOGINFO(@"Denshion::CDSoundSource deallocated %i",self->_sourceIndex);
 
 	//Notify sound engine we are about to release
 	[_engine _soundSourcePreRelease:self];
@@ -1158,7 +1070,7 @@ static BOOL _mixerRateSet = NO;
 
 - (void) setPitch:(float) newPitchValue {
 	alSourcef(_sourceId, AL_PITCH, newPitchValue);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 }	
 
 - (void) setGain:(float) newGainValue {
@@ -1167,40 +1079,40 @@ static BOOL _mixerRateSet = NO;
 	} else {
 		_preMuteGain = newGainValue;
 	}	
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 }
 
 - (void) setPan:(float) newPanValue {
 	float sourcePosAL[] = {newPanValue, 0.0f, 0.0f};//Set position - just using left and right panning
 	alSourcefv(_sourceId, AL_POSITION, sourcePosAL);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 
 }
 
 - (void) setLooping:(BOOL) newLoopingValue {
 	alSourcei(_sourceId, AL_LOOPING, newLoopingValue);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 
 }
 
 - (BOOL) isPlaying {
 	ALint state;
 	alGetSourcei(_sourceId, AL_SOURCE_STATE, &state);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 	return (state == AL_PLAYING);
 }	
 
 - (float) pitch {
 	ALfloat pitchVal;
 	alGetSourcef(_sourceId, AL_PITCH, &pitchVal);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 	return pitchVal;
 }
 
 - (float) pan {
 	ALfloat sourcePosAL[] = {0.0f,0.0f,0.0f};
 	alGetSourcefv(_sourceId, AL_POSITION, sourcePosAL);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 	return sourcePosAL[0];
 }
 
@@ -1208,7 +1120,7 @@ static BOOL _mixerRateSet = NO;
 	if (!mute_) {
 		ALfloat val;
 		alGetSourcef(_sourceId, AL_GAIN, &val);
-		CDSOUNDSOURCE_ERROR_HANDLER;
+		CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 		return val;
 	} else {
 		return _preMuteGain;
@@ -1218,7 +1130,7 @@ static BOOL _mixerRateSet = NO;
 - (BOOL) looping {
 	ALfloat val;
 	alGetSourcef(_sourceId, AL_LOOPING, &val);
-	CDSOUNDSOURCE_ERROR_HANDLER;
+	CDSOUNDSOURCE_UPDATE_LAST_ERROR;
 	return val;
 }
 
@@ -1230,7 +1142,16 @@ static BOOL _mixerRateSet = NO;
 -(BOOL) play {
 	if (enabled_) {
 		alSourcePlay(_sourceId);
-		return CDSOUNDSOURCE_ERROR_HANDLER;
+		CDSOUNDSOURCE_UPDATE_LAST_ERROR;
+		if (lastError != AL_NO_ERROR) {
+			if (alcGetCurrentContext() == NULL) {
+				CDLOGINFO(@"Denshion::CDSoundSource - posting bad OpenAL context message");
+				[[NSNotificationCenter defaultCenter] postNotificationName:kCDN_BadAlContext object:nil];
+			}	
+			return NO;
+		} else {
+			return YES;
+		}	
 	} else {
 		return NO;
 	}
@@ -1252,6 +1173,10 @@ static BOOL _mixerRateSet = NO;
 
 -(int) soundId {
 	return _soundId;
+}	
+
+-(float) durationInSeconds {
+	return [_engine bufferDurationInSeconds:_soundId];
 }	
 
 #pragma mark CDSoundSource AudioInterrupt protocol
@@ -1296,7 +1221,11 @@ static BOOL _mixerRateSet = NO;
 }	
 
 @end
+
 ////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDAudioInterruptTargetGroup
+
 @implementation CDAudioInterruptTargetGroup
 
 -(id) init {
@@ -1358,6 +1287,9 @@ static BOOL _mixerRateSet = NO;
 
 ////////////////////////////////////////////////////////////////////////////
 
+#pragma mark -
+#pragma mark CDAsynchBufferLoader
+
 @implementation CDAsynchBufferLoader
 
 -(id) init:(NSArray *)loadRequests soundEngine:(CDSoundEngine *) theSoundEngine {
@@ -1371,7 +1303,7 @@ static BOOL _mixerRateSet = NO;
 }	
 
 -(void) main {
-	CDLOG(@"Denshion::CDAsynchBufferLoader - loading buffers");
+	CDLOGINFO(@"Denshion::CDAsynchBufferLoader - loading buffers");
 	[super main];
 	_soundEngine.asynchLoadProgress = 0.0f;
 
@@ -1386,6 +1318,7 @@ static BOOL _mixerRateSet = NO;
 	
 	//Completed
 	_soundEngine.asynchLoadProgress = 1.0f;
+	[[NSNotificationCenter defaultCenter] postNotificationName:kCDN_AsynchLoadComplete object:nil];
 	
 }	
 
@@ -1399,14 +1332,17 @@ static BOOL _mixerRateSet = NO;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDBufferLoadRequest
+
 @implementation CDBufferLoadRequest
 
 @synthesize filePath, soundId;
 
--(id) init:(int) theSoundId filePath:(NSString *) theFilePath {
+-(id) init:(int) theSoundId filePath:(const NSString *) theFilePath {
 	if ((self = [super init])) {
 		soundId = theSoundId;
-		filePath = theFilePath;
+		filePath = [theFilePath copy];//TODO: is retain necessary or does copy set retain count
 		[filePath retain];
 	} 
 	return self;
@@ -1420,6 +1356,9 @@ static BOOL _mixerRateSet = NO;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDFloatInterpolator
+
 @implementation CDFloatInterpolator
 @synthesize start,end,interpolationType;
 
@@ -1466,6 +1405,9 @@ static BOOL _mixerRateSet = NO;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDPropertyModifier
+
 @implementation CDPropertyModifier
 
 @synthesize stopTargetWhenComplete;
@@ -1498,7 +1440,7 @@ static BOOL _mixerRateSet = NO;
 }	
 
 -(void) dealloc {
-	CDLOG(@"Denshion::CDPropertyModifier deallocated %@",self);
+	CDLOGINFO(@"Denshion::CDPropertyModifier deallocated %@",self);
 	[target release];
 	[interpolator release];
 	[super dealloc];
@@ -1562,6 +1504,9 @@ static BOOL _mixerRateSet = NO;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDSoundSourceFader
+
 @implementation CDSoundSourceFader
 
 -(void) _setTargetProperty:(float) newVal {
@@ -1573,7 +1518,7 @@ static BOOL _mixerRateSet = NO;
 }
 
 -(void) _stopTarget {
-	((CDSoundSource*)target).stop;
+	[((CDSoundSource*)target) stop];
 }
 
 -(Class) _allowableType {
@@ -1583,6 +1528,9 @@ static BOOL _mixerRateSet = NO;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDSoundSourcePanner
+
 @implementation CDSoundSourcePanner
 
 -(void) _setTargetProperty:(float) newVal {
@@ -1594,7 +1542,7 @@ static BOOL _mixerRateSet = NO;
 }
 
 -(void) _stopTarget {
-	((CDSoundSource*)target).stop;
+	[((CDSoundSource*)target) stop];
 }
 
 -(Class) _allowableType {
@@ -1604,6 +1552,9 @@ static BOOL _mixerRateSet = NO;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDSoundSourcePitchBender
+
 @implementation CDSoundSourcePitchBender
 
 -(void) _setTargetProperty:(float) newVal {
@@ -1615,7 +1566,7 @@ static BOOL _mixerRateSet = NO;
 }
 
 -(void) _stopTarget {
-	((CDSoundSource*)target).stop;
+	[((CDSoundSource*)target) stop];
 }
 
 -(Class) _allowableType {
@@ -1625,6 +1576,9 @@ static BOOL _mixerRateSet = NO;
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark CDSoundEngineFader
+
 @implementation CDSoundEngineFader
 
 -(void) _setTargetProperty:(float) newVal {
@@ -1636,7 +1590,7 @@ static BOOL _mixerRateSet = NO;
 }
 
 -(void) _stopTarget {
-	((CDSoundEngine*)target).stopAllSounds;
+	[((CDSoundEngine*)target) stopAllSounds];
 }
 
 -(Class) _allowableType {

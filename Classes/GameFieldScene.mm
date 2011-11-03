@@ -143,37 +143,37 @@
         [self addChild:rangeIndicatorSprite z:3];
         rangeIndicatorSprite.visible = NO;
               
-        phaseDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        phaseDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         phaseDisplay.position = ccp(device_width - 100, device_height - 177);
         phaseDisplay.color = Color_Black;
         [phaseDisplay setString:String_PhaseLabelBuild];
         
-        levelDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        levelDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         levelDisplay.position = ccp(device_width - 100, device_height - 207);
         levelDisplay.color = Color_Black;
         [levelDisplay setString:[levelManager GetCurrentLevel].levelName];
         
-        livesDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        livesDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         livesDisplay.position = ccp(device_width - 100, device_height - 237);
         livesDisplay.color = Color_Black;
         [livesDisplay setString:[NSString stringWithFormat:@"%@ %d", String_LivesLabel, lives]];
         
-        scoreDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        scoreDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         scoreDisplay.position = ccp(device_width - 100, device_height - 267);
         scoreDisplay.color = Color_Black;
         [scoreDisplay setString:[NSString stringWithFormat:@"%@ %d", String_ScoreLabel, score]];
     
-        energyDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        energyDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         energyDisplay.position = ccp(device_width - 100, device_height - 297);
         energyDisplay.color = Color_Black;
         [energyDisplay setString:[NSString stringWithFormat:@"%@ %d", String_EnergyLabel, energy]];
 
-        DPSDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        DPSDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         DPSDisplay.position = ccp(device_width/2-25, 15);
         DPSDisplay.color = Color_Black;
         [DPSDisplay setString:[NSString stringWithFormat:@"%@: %d", String_DPSLabel, 0]];
         
-        MultiplierDisplay = [[CCBitmapFontAtlas bitmapFontAtlasWithString:String_NULL fntFile:Font_UIPrimary] retain];
+        MultiplierDisplay = [[CCLabelBMFont labelWithString:String_NULL fntFile:Font_UIPrimary] retain];
         MultiplierDisplay.position = ccp(device_width/2 + 200, 15);
         MultiplierDisplay.color = Color_Black;
         [MultiplierDisplay setString:[NSString stringWithFormat:@"%@ %d", String_MultiplierLabel, multiplier]];
@@ -510,7 +510,7 @@
 
 - (void)createLevelUpdateLabel:(int)x y:(int)y layer:(CCLayer*)layer string:(NSString*)string
 {
-    CCBitmapFontAtlas * label = [[CCBitmapFontAtlas bitmapFontAtlasWithString:string fntFile:Font_UIPrimary] retain];
+    CCLabelBMFont * label = [[CCLabelBMFont labelWithString:string fntFile:Font_UIPrimary] retain];
     label.position = ccp(x, y);
     label.color = Color_Black;
     [layer addChild:label z:4];
