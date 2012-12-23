@@ -5,9 +5,12 @@ Drop 5, Pick 1 style tower defense game for iPad
 
 This is a nearly complete iPad tower defense game built with cocos2d.  The concept of the game is explained here:
 
-
+http://www.200monkeys.com/index.php/2012/12/23/chemtd-an-almost-finished-tower-defense-game/
 
 Without an artist to help me I'll probably never finish this so feel free to take whatever you want from it or finish it yourself.
+
+
+
 
 This repository contains a copy of Cocos2d to ensure that you can build it, Cocos2d is covered by its own license, found here: http://www.cocos2d-iphone.org/wiki/doku.php/license
 
