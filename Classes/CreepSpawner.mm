@@ -133,7 +133,8 @@
     }
     if (moveTimer > moveInterval)
     {
-        for (Creep * creep in creeps)
+        NSMutableArray * creepCopy = [NSMutableArray arrayWithArray:creeps];
+        for (Creep * creep in creepCopy)
         {
             [creep Update:elapsed];
         }
