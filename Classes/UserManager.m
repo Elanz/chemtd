@@ -50,13 +50,13 @@
     if( (self=[super init] )) 
     {
         online = false;
-        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
-        
-        Reachability* hostReach = [[Reachability reachabilityWithHostName: @"www.200Monkeys.com"] retain];
-        [hostReach startNotifer];
-        
-        Reachability* internetReach = [[Reachability reachabilityForInternetConnection] retain];
-        [internetReach startNotifer];
+//        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+//        
+//        Reachability* hostReach = [[Reachability reachabilityWithHostName: @"www.200Monkeys.com"] retain];
+//        [hostReach startNotifer];
+//        
+//        Reachability* internetReach = [[Reachability reachabilityForInternetConnection] retain];
+//        [internetReach startNotifer];
     }
     return self;
 }
@@ -153,52 +153,52 @@
 
 - (void) submitStartGame
 {
-    if (online)
-    {
-        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
-        NSString * URLforGet = [NSString stringWithFormat:@"http://www.200monkeys.com/chemtd/startgame.php?username=%@&deviceid=%@&difficultyid=%d", [self getUserName], Uid, difficultyid];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-        [request setURL:[NSURL URLWithString:URLforGet]];  
-        [request setHTTPMethod:@"GET"]; 
-        [request setTimeoutInterval:5.0];
-        NSURLResponse *response;
-        NSError *urlerror;
-        NSData* receivedData = [[NSMutableData data] retain];
-        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-        
-        gameid = [output intValue];
-        if (gameid == 0)
-        {
-            gameid = 1;
-            online = NO;
-        }
-    }
-    else
-    {
+//    if (online)
+//    {
+//        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+//        NSString * URLforGet = [NSString stringWithFormat:@"http://www.200monkeys.com/chemtd/startgame.php?username=%@&deviceid=%@&difficultyid=%d", [self getUserName], Uid, difficultyid];
+//        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+//        [request setURL:[NSURL URLWithString:URLforGet]];  
+//        [request setHTTPMethod:@"GET"]; 
+//        [request setTimeoutInterval:5.0];
+//        NSURLResponse *response;
+//        NSError *urlerror;
+//        NSData* receivedData = [[NSMutableData data] retain];
+//        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+//        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+//        
+//        gameid = [output intValue];
+//        if (gameid == 0)
+//        {
+//            gameid = 1;
+//            online = NO;
+//        }
+//    }
+//    else
+//    {
         gameid = 1;
-    }
+//    }
 }
 
 - (NSArray*) getOveralRanking
 {
     NSString * stats = @"";
-    if (online)
-    {
-        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
-        NSString * URLforGet = [NSString stringWithFormat:
-                                @"http://200monkeys.com/chemtd/getgamestats.php?username=%@&deviceid=%@"
-                                , [self getUserName], Uid];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-        [request setURL:[NSURL URLWithString:URLforGet]];  
-        [request setHTTPMethod:@"GET"]; 
-        [request setTimeoutInterval:5.0];
-        NSURLResponse *response;
-        NSError *urlerror;
-        NSData* receivedData = [[NSMutableData data] retain];
-        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        stats = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    }
+//    if (online)
+//    {
+//        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+//        NSString * URLforGet = [NSString stringWithFormat:
+//                                @"http://200monkeys.com/chemtd/getgamestats.php?username=%@&deviceid=%@"
+//                                , [self getUserName], Uid];
+//        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+//        [request setURL:[NSURL URLWithString:URLforGet]];  
+//        [request setHTTPMethod:@"GET"]; 
+//        [request setTimeoutInterval:5.0];
+//        NSURLResponse *response;
+//        NSError *urlerror;
+//        NSData* receivedData = [[NSMutableData data] retain];
+//        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+//        stats = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+//    }
     
     NSArray *statsections = [stats componentsSeparatedByString:@"\n\n"];
     
@@ -273,21 +273,21 @@
 - (NSArray*) submitFinishedGame:(BOOL)won towers:(NSString*)towers
 {
     //http://www.200monkeys.com/chemtd/finishgame.php?gameid=3&won=1&towers=1B2A5B20A6B3
-    if (online)
-    {
-        NSString * URLforGet = [NSString stringWithFormat:
-                                @"http://www.200monkeys.com/chemtd/finishgame.php?gameid=%d&won=%d&towers=%@"
-                                , gameid, won, towers];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-        [request setURL:[NSURL URLWithString:URLforGet]];  
-        [request setHTTPMethod:@"GET"]; 
-        [request setTimeoutInterval:5.0];
-        NSURLResponse *response;
-        NSError *urlerror;
-        NSData* receivedData = [[NSMutableData data] retain];
-        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        //NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    }
+//    if (online)
+//    {
+//        NSString * URLforGet = [NSString stringWithFormat:
+//                                @"http://www.200monkeys.com/chemtd/finishgame.php?gameid=%d&won=%d&towers=%@"
+//                                , gameid, won, towers];
+//        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+//        [request setURL:[NSURL URLWithString:URLforGet]];  
+//        [request setHTTPMethod:@"GET"]; 
+//        [request setTimeoutInterval:5.0];
+//        NSURLResponse *response;
+//        NSError *urlerror;
+//        NSData* receivedData = [[NSMutableData data] retain];
+//        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+//        //NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+//    }
 
     return [self getOveralRanking];
 }
@@ -296,40 +296,40 @@
                  creepsKilled:(int)creepsKilled
 {
     //http://www.200monkeys.com/chemtd/levelstats.php?username=test&deviceid=test&gameid=1&levelid=2&time=1234&damage=546&score=439&killed=34211
-    if (online)
-    {
-        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
-        NSString * URLforGet = [NSString stringWithFormat:
-                                @"http://www.200monkeys.com/chemtd/levelstats.php?username=%@&deviceid=%@&gameid=%d&levelid=%d&time=%d&damage=%d&score=%d&killed=%d"
-                                , [self getUserName], Uid, gameid, levelId, completionTime, damageDone, score, creepsKilled];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-        [request setURL:[NSURL URLWithString:URLforGet]];  
-        [request setHTTPMethod:@"GET"]; 
-        [request setTimeoutInterval:5.0];
-        NSURLResponse *response;
-        NSError *urlerror;
-        NSData* receivedData = [[NSMutableData data] retain];
-        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        //NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    }
-    
+//    if (online)
+//    {
+//        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+//        NSString * URLforGet = [NSString stringWithFormat:
+//                                @"http://www.200monkeys.com/chemtd/levelstats.php?username=%@&deviceid=%@&gameid=%d&levelid=%d&time=%d&damage=%d&score=%d&killed=%d"
+//                                , [self getUserName], Uid, gameid, levelId, completionTime, damageDone, score, creepsKilled];
+//        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+//        [request setURL:[NSURL URLWithString:URLforGet]];  
+//        [request setHTTPMethod:@"GET"]; 
+//        [request setTimeoutInterval:5.0];
+//        NSURLResponse *response;
+//        NSError *urlerror;
+//        NSData* receivedData = [[NSMutableData data] retain];
+//        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+//        //NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+//    }
+//    
     NSString * stats = @"";
-    if (online)
-    {
-        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
-        NSString * URLforGet = [NSString stringWithFormat:
-                                @"http://200monkeys.com/chemtd/getlevelstats.php?username=%@&deviceid=%@&levelid=%d&mydamage=%d&mytime=%d&myscore=%d"
-                                , [self getUserName], Uid, levelId, damageDone, completionTime, score];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-        [request setURL:[NSURL URLWithString:URLforGet]];  
-        [request setHTTPMethod:@"GET"]; 
-        [request setTimeoutInterval:5.0];
-        NSURLResponse *response;
-        NSError *urlerror;
-        NSData* receivedData = [[NSMutableData data] retain];
-        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        stats = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    }
+//    if (online)
+//    {
+//        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+//        NSString * URLforGet = [NSString stringWithFormat:
+//                                @"http://200monkeys.com/chemtd/getlevelstats.php?username=%@&deviceid=%@&levelid=%d&mydamage=%d&mytime=%d&myscore=%d"
+//                                , [self getUserName], Uid, levelId, damageDone, completionTime, score];
+//        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+//        [request setURL:[NSURL URLWithString:URLforGet]];  
+//        [request setHTTPMethod:@"GET"]; 
+//        [request setTimeoutInterval:5.0];
+//        NSURLResponse *response;
+//        NSError *urlerror;
+//        NSData* receivedData = [[NSMutableData data] retain];
+//        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+//        stats = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+//    }
     
     NSArray *statsections = [stats componentsSeparatedByString:@"\n\n"];
     
@@ -417,44 +417,44 @@
     [prefs setObject:userName forKey:@"username"];        
     [prefs synchronize];
     
-    if (online)
-    {
-        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
-        NSString * URLforGet = [NSString stringWithFormat:@"http://www.200monkeys.com/chemtd/login.php?username=%@&deviceid=%@", userName, Uid];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
-        [request setURL:[NSURL URLWithString:URLforGet]];  
-        [request setHTTPMethod:@"GET"]; 
-        [request setTimeoutInterval:5.0];
-        NSURLResponse *response;
-        NSError *urlerror;
-        NSData* receivedData = [[NSMutableData data] retain];
-        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
-        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-        
-        NSArray *loginStrings = [output componentsSeparatedByString:@"\n"];
-        
-        if ([(NSString *)[loginStrings objectAtIndex:0] isEqualToString:@"yes"])
-        {
-            MainMenuScene * mainMenu = (MainMenuScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_MainMenu];
-            for (NSString * string in loginStrings)
-            {
-                if (![string isEqualToString:@"yes"])
-                {
-                    [mainMenu.motd addObject:string];
-                }
-            }
-            [mainMenu startMOTDcrawl];
-            return YES;
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:output delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
-            [alert show];
-            [alert release];
-            online = NO;
-            return YES;
-        }        
-    }
+//    if (online)
+//    {
+//        NSString * Uid = [[[UIDevice currentDevice] uniqueIdentifier] lowercaseString];
+//        NSString * URLforGet = [NSString stringWithFormat:@"http://www.200monkeys.com/chemtd/login.php?username=%@&deviceid=%@", userName, Uid];
+//        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];  
+//        [request setURL:[NSURL URLWithString:URLforGet]];  
+//        [request setHTTPMethod:@"GET"]; 
+//        [request setTimeoutInterval:5.0];
+//        NSURLResponse *response;
+//        NSError *urlerror;
+//        NSData* receivedData = [[NSMutableData data] retain];
+//        receivedData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&urlerror];
+//        NSString *output = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
+//        
+//        NSArray *loginStrings = [output componentsSeparatedByString:@"\n"];
+//        
+//        if ([(NSString *)[loginStrings objectAtIndex:0] isEqualToString:@"yes"])
+//        {
+//            MainMenuScene * mainMenu = (MainMenuScene*)[[CCDirector sharedDirector].runningScene getChildByTag:CCNodeTag_MainMenu];
+//            for (NSString * string in loginStrings)
+//            {
+//                if (![string isEqualToString:@"yes"])
+//                {
+//                    [mainMenu.motd addObject:string];
+//                }
+//            }
+//            [mainMenu startMOTDcrawl];
+//            return YES;
+//        }
+//        else
+//        {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:output delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];        
+//            [alert show];
+//            [alert release];
+//            online = NO;
+//            return YES;
+//        }        
+//    }
     
     return YES;    
 }

@@ -420,11 +420,12 @@
     if (shotTimer > shotInterval)
     {
         NSMutableArray * toRemove = [[NSMutableArray alloc] init];
+        NSMutableArray * toShoot = [[NSMutableArray alloc] init];
         for (Creep * target in targets)
         {
             if (target && [gameField distanceBetweenPointsA:target.creepSprite.position B:towerSprite.position] < shotRange)
             {
-                [gameField.combatManager shootWithTower:self creep:target];
+                [toShoot addObject:target];
                 //printf("shooting target\n");
                 if (switchTargetsAfterHit)
                 {
@@ -437,6 +438,10 @@
                 [toRemove addObject:target];
                 //printf("switching target 2\n");
             }
+        }
+        for (Creep * target in toShoot)
+        {
+            [gameField.combatManager shootWithTower:self creep:target];
         }
         for (Creep * target in toRemove)
         {

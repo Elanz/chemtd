@@ -78,8 +78,8 @@
         btnMixerAcceptDown = [CCSprite spriteWithFile:@"btn_MixerAccept_Down.png"];
         btnMixerClearUp = [CCSprite spriteWithFile:@"btn_MixerClear_Up.png"];
         btnMixerClearDown = [CCSprite spriteWithFile:@"btn_MixerClear_Down.png"];
-        btnMixerClear = [CCMenuItemSprite itemFromNormalSprite:btnMixerClearUp selectedSprite:btnMixerClearDown disabledSprite:btnMixerClearDown target:self selector:@selector(onClear:)];
-        btnMixerAccept = [CCMenuItemSprite itemFromNormalSprite:btnMixerAcceptUp selectedSprite:btnMixerAcceptDown disabledSprite:btnMixerAcceptDown target:self selector:@selector(onAccept:)];
+        btnMixerClear = [CCMenuItemSprite itemFromNormalSprite:btnMixerClearUp selectedSprite:btnMixerClearDown disabledSprite:nil target:self selector:@selector(onClear:)];
+        btnMixerAccept = [CCMenuItemSprite itemFromNormalSprite:btnMixerAcceptUp selectedSprite:btnMixerAcceptDown disabledSprite:nil target:self selector:@selector(onAccept:)];
         MixerMenu = [CCMenu menuWithItems: btnMixerClear, btnMixerAccept, nil];
         [MixerMenu alignItemsHorizontallyWithPadding:80];
         MixerMenu.position = ccp(elementMixerSprite.position.x, elementMixerSprite.position.y - 35);

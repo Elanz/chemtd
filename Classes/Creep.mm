@@ -214,7 +214,7 @@
     
     if (X == nextWaypointX && Y == nextWaypointY)
     {
-        if (nextWaypointId >= 0)
+        if (nextWaypointId > 0)
         {
             nextWaypointId -= 1;
             nextWaypointX = static_cast<PathFindNode*>([waypoints objectAtIndex:nextWaypointId])->nodeX;

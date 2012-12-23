@@ -60,13 +60,13 @@
         //menuItemChallenges = [CCMenuItemSprite itemFromNormalSprite:challengesBtnUp selectedSprite:challengesBtnDown 
         //                                             disabledSprite:challengesBtnDown target:self selector:@selector(onChallenges:)];
         menuItemExplore = [CCMenuItemSprite itemFromNormalSprite:ExploreBtnUp selectedSprite:ExploreBtnDown 
-                                                  disabledSprite:ExploreBtnDown target:self selector:@selector(onExplore:)];
+                                                  disabledSprite:nil target:self selector:@selector(onExplore:)];
         menuItemPlay = [CCMenuItemSprite itemFromNormalSprite:PlayBtnUp selectedSprite:PlayBtnDown 
-                                               disabledSprite:PlayBtnDown target:self selector:@selector(onPlay:)];
+                                               disabledSprite:nil target:self selector:@selector(onPlay:)];
         menuItemRanking = [CCMenuItemSprite itemFromNormalSprite:RankingBtnUp selectedSprite:RankingBtnDown 
-                                                  disabledSprite:RankingBtnDown target:self selector:@selector(onRanking:)];
-        menuItemChangeUser = [CCMenuItemSprite itemFromNormalSprite:changeUserBtn selectedSprite:changeUserBtn 
-                                                     disabledSprite:changeUserBtn target:self selector:@selector(onChangeUser:)];
+                                                  disabledSprite:nil target:self selector:@selector(onRanking:)];
+        menuItemChangeUser = [CCMenuItemSprite itemFromNormalSprite:changeUserBtn selectedSprite:nil 
+                                                     disabledSprite:nil target:self selector:@selector(onChangeUser:)];
         
         mainMenu = [CCMenu menuWithItems: menuItemPlay, menuItemExplore, menuItemRanking, nil];//menuItemChallenges, nil];
         [mainMenu alignItemsVerticallyWithPadding:15];
@@ -238,11 +238,11 @@
     [minimenuLayer addChild:miniMenuBackground];
     
     newGameBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_NEWGAMEBTN]];
-    menuItemNewGame = [CCMenuItemSprite itemFromNormalSprite:newGameBtn selectedSprite:newGameBtn 
-                                               disabledSprite:newGameBtn target:self selector:@selector(onNewGame:)];
+    menuItemNewGame = [CCMenuItemSprite itemFromNormalSprite:newGameBtn selectedSprite:nil 
+                                               disabledSprite:nil target:self selector:@selector(onNewGame:)];
     resumeBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_RESUMEBTN]];
-    menuItemResume = [CCMenuItemSprite itemFromNormalSprite:resumeBtn selectedSprite:resumeBtn 
-                                             disabledSprite:resumeBtn target:self selector:@selector(onResume:)];
+    menuItemResume = [CCMenuItemSprite itemFromNormalSprite:resumeBtn selectedSprite:nil 
+                                             disabledSprite:nil target:self selector:@selector(onResume:)];
     miniMenu = [CCMenu menuWithItems: menuItemResume, menuItemNewGame, nil];
     miniMenu.position = ccp(device_width/2-10, device_height/2);
     [miniMenu alignItemsVerticallyWithPadding:20];
@@ -266,12 +266,12 @@
     CCSprite * mediumBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MEDIUMBTN]];
     CCSprite * hardBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_HARDBTN]];
     
-    CCMenuItemSprite * menuItemEasy = [CCMenuItemSprite itemFromNormalSprite:easyBtn selectedSprite:easyBtn 
-                                                               disabledSprite:easyBtn target:self selector:@selector(onEasy:)];
-    CCMenuItemSprite * menuItemMedium = [CCMenuItemSprite itemFromNormalSprite:mediumBtn selectedSprite:mediumBtn 
-                                                              disabledSprite:mediumBtn target:self selector:@selector(onMedium:)];
-    CCMenuItemSprite * menuItemHard = [CCMenuItemSprite itemFromNormalSprite:hardBtn selectedSprite:hardBtn 
-                                                                disabledSprite:hardBtn target:self selector:@selector(onHard:)];
+    CCMenuItemSprite * menuItemEasy = [CCMenuItemSprite itemFromNormalSprite:easyBtn selectedSprite:nil 
+                                                               disabledSprite:nil target:self selector:@selector(onEasy:)];
+    CCMenuItemSprite * menuItemMedium = [CCMenuItemSprite itemFromNormalSprite:mediumBtn selectedSprite:nil 
+                                                              disabledSprite:nil target:self selector:@selector(onMedium:)];
+    CCMenuItemSprite * menuItemHard = [CCMenuItemSprite itemFromNormalSprite:hardBtn selectedSprite:nil 
+                                                                disabledSprite:nil target:self selector:@selector(onHard:)];
     
     CCMenu * difficultyMenu = [CCMenu menuWithItems: menuItemEasy, menuItemMedium, menuItemHard, nil];
     [difficultyMenu alignItemsHorizontallyWithPadding:20];
@@ -651,8 +651,8 @@
     [minimenuLayer addChild:miniMenuBackground];
     
     CCSprite * mainMenuBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MAINMENUBTN]];
-    CCMenuItemSprite * menuItemMainMenu = [CCMenuItemSprite itemFromNormalSprite:mainMenuBtn selectedSprite:mainMenuBtn 
-                                               disabledSprite:mainMenuBtn target:self selector:@selector(onMainMenu:)];
+    CCMenuItemSprite * menuItemMainMenu = [CCMenuItemSprite itemFromNormalSprite:mainMenuBtn selectedSprite:nil 
+                                               disabledSprite:nil target:self selector:@selector(onMainMenu:)];
 
     menuItemMainMenu.scale = .75;
     
@@ -666,12 +666,12 @@
     CCSprite * timeBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_TIMEBTN]];
     CCSprite * damageBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_DAMAGEBTN]];
     
-    CCMenuItemSprite * menuItemScore = [CCMenuItemSprite itemFromNormalSprite:scoreBtn selectedSprite:scoreBtn 
-                                                               disabledSprite:scoreBtn target:self selector:@selector(onScore:)];
-    CCMenuItemSprite * menuItemTime = [CCMenuItemSprite itemFromNormalSprite:timeBtn selectedSprite:timeBtn 
-                                                              disabledSprite:timeBtn target:self selector:@selector(onTime:)];
-    CCMenuItemSprite * menuItemDamage = [CCMenuItemSprite itemFromNormalSprite:damageBtn selectedSprite:damageBtn 
-                                                                disabledSprite:damageBtn target:self selector:@selector(onDamage:)];
+    CCMenuItemSprite * menuItemScore = [CCMenuItemSprite itemFromNormalSprite:scoreBtn selectedSprite:nil 
+                                                               disabledSprite:nil target:self selector:@selector(onScore:)];
+    CCMenuItemSprite * menuItemTime = [CCMenuItemSprite itemFromNormalSprite:timeBtn selectedSprite:nil 
+                                                              disabledSprite:nil target:self selector:@selector(onTime:)];
+    CCMenuItemSprite * menuItemDamage = [CCMenuItemSprite itemFromNormalSprite:damageBtn selectedSprite:nil 
+                                                                disabledSprite:nil target:self selector:@selector(onDamage:)];
     
     CCMenu * statTypeMenu = [CCMenu menuWithItems: menuItemScore, menuItemTime, menuItemDamage, nil];
     [statTypeMenu alignItemsHorizontallyWithPadding:30];

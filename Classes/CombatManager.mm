@@ -321,18 +321,23 @@
     system.autoRemoveOnFinish = YES;
     [gameField addChild:system z:5];
     
+    NSMutableArray * toShoot = [NSMutableArray array];
     for (Creep * foundCreep in gameField.mainSpawner.creeps)
     {
         float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
         if (thisdistance < 100.0)
         {
-            CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetOxygenHit];
-            explodeSystem.position = foundCreep.creepSprite.position;
-            explodeSystem.autoRemoveOnFinish = YES;
-            [gameField addChild:explodeSystem z:5];
-            int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
-            [foundCreep shoot:damage];
+            [toShoot addObject:foundCreep];
         }
+    }
+    for (Creep * foundCreep in toShoot)
+    {
+        CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetOxygenHit];
+        explodeSystem.position = foundCreep.creepSprite.position;
+        explodeSystem.autoRemoveOnFinish = YES;
+        [gameField addChild:explodeSystem z:5];
+        int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
+        [foundCreep shoot:damage];
     }
 }
 
@@ -343,18 +348,23 @@
     system.autoRemoveOnFinish = YES;
     [gameField addChild:system z:5];
     
+    NSMutableArray * toShoot = [NSMutableArray array];
     for (Creep * foundCreep in gameField.mainSpawner.creeps)
     {
         float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
         if (thisdistance < 150.0)
         {
-            CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosion];
-            explodeSystem.position = foundCreep.creepSprite.position;
-            explodeSystem.autoRemoveOnFinish = YES;
-            [gameField addChild:explodeSystem z:5];
-            int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
-            [foundCreep shoot:damage];
+            [toShoot addObject:foundCreep];
         }
+    }
+    for (Creep * foundCreep in toShoot)
+    {
+        CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosion];
+        explodeSystem.position = foundCreep.creepSprite.position;
+        explodeSystem.autoRemoveOnFinish = YES;
+        [gameField addChild:explodeSystem z:5];
+        int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
+        [foundCreep shoot:damage];
     }
 }
 
@@ -370,18 +380,23 @@
     system.autoRemoveOnFinish = YES;
     [gameField addChild:system z:5];
     
+    NSMutableArray * toShoot = [NSMutableArray array];
     for (Creep * foundCreep in gameField.mainSpawner.creeps)
     {
         float thisdistance = [gameField distanceBetweenPointsA:container.creep.creepSprite.position B:foundCreep.creepSprite.position];
         if (thisdistance < 200.0)
         {
-            CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosionPepper];
-            explodeSystem.position = foundCreep.creepSprite.position;
-            explodeSystem.autoRemoveOnFinish = YES;
-            [gameField addChild:explodeSystem z:5];
-            int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
-            [foundCreep shoot:damage];
+            [toShoot addObject:foundCreep];
         }
+    }
+    for (Creep * foundCreep in toShoot)
+    {
+        CCParticleSystemQuad * explodeSystem = [self getParticleSystemForKey:iEffect_SingleTargetExplosionPepper];
+        explodeSystem.position = foundCreep.creepSprite.position;
+        explodeSystem.autoRemoveOnFinish = YES;
+        [gameField addChild:explodeSystem z:5];
+        int damage = container.tower.minDamage + arc4random() % container.tower.maxDamage;
+        [foundCreep shoot:damage];
     }
 }
 

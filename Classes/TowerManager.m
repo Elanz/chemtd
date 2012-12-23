@@ -29,9 +29,9 @@
         btnTowerManagerDowngradeUp = [CCSprite spriteWithTexture:[gameField.textureLibrary GetTextureWithKey:UITEXTURE_TOWERMANAGERDOWNGRADEUP]];
         btnTowerManagerDowngradeDown = [CCSprite spriteWithTexture:[gameField.textureLibrary GetTextureWithKey:UITEXTURE_TOWERMANAGERDOWNGRADEDOWN]];
         btnTowerManagerUpgrade = [CCMenuItemSprite itemFromNormalSprite:btnTowerManagerUpgradeUp selectedSprite:btnTowerManagerUpgradeDown 
-                                                         disabledSprite:btnTowerManagerUpgradeDown target:self selector:@selector(onUpgrade:)];
+                                                         disabledSprite:nil target:self selector:@selector(onUpgrade:)];
         btnTowerManagerDowngrade = [CCMenuItemSprite itemFromNormalSprite:btnTowerManagerDowngradeUp selectedSprite:btnTowerManagerDowngradeDown 
-                                                           disabledSprite:btnTowerManagerDowngradeDown target:self selector:@selector(onDowngrade:)];
+                                                           disabledSprite:nil target:self selector:@selector(onDowngrade:)];
 
         btnTowerManagerUpgrade.scaleY = 5.5;
         btnTowerManagerDowngrade.scaleY = 5.5;

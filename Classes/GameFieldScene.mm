@@ -222,11 +222,11 @@
     [UILayer addChild:towerManager.towerManagerSprite];
     
     pauseBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_PAUSEBTN]];
-    menuItemPause = [CCMenuItemSprite itemFromNormalSprite:pauseBtn selectedSprite:pauseBtn 
-                                                       disabledSprite:pauseBtn target:self selector:@selector(onPause:)];
+    menuItemPause = [CCMenuItemSprite itemFromNormalSprite:pauseBtn selectedSprite:nil 
+                                                       disabledSprite:nil target:self selector:@selector(onPause:)];
     CCSprite * exploreMiniBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_EXPLOREMINIBTN]];
-    CCMenuItemSprite * menuItemExploreMini = [CCMenuItemSprite itemFromNormalSprite:exploreMiniBtn selectedSprite:exploreMiniBtn 
-                                            disabledSprite:exploreMiniBtn target:self selector:@selector(onExplore:)];
+    CCMenuItemSprite * menuItemExploreMini = [CCMenuItemSprite itemFromNormalSprite:exploreMiniBtn selectedSprite:nil 
+                                            disabledSprite:nil target:self selector:@selector(onExplore:)];
     pauseMenu = [CCMenu menuWithItems: menuItemPause, menuItemExploreMini, nil];
     pauseMenu.position = ccp(device_width - 100, device_height - 400);
     [pauseMenu alignItemsVerticallyWithPadding:20];
@@ -300,11 +300,11 @@
     [minimenuLayer addChild:miniMenuBackground];
     
     mainMenuBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MAINMENUBTN]];
-    menuItemMainMenu = [CCMenuItemSprite itemFromNormalSprite:mainMenuBtn selectedSprite:mainMenuBtn 
-                                             disabledSprite:mainMenuBtn target:self selector:@selector(onMainMenu:)];
+    menuItemMainMenu = [CCMenuItemSprite itemFromNormalSprite:mainMenuBtn selectedSprite:nil 
+                                             disabledSprite:nil target:self selector:@selector(onMainMenu:)];
     resumeBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_RESUMEBTN]];
-    menuItemResume = [CCMenuItemSprite itemFromNormalSprite:resumeBtn selectedSprite:resumeBtn 
-                                             disabledSprite:resumeBtn target:self selector:@selector(onResume:)];
+    menuItemResume = [CCMenuItemSprite itemFromNormalSprite:resumeBtn selectedSprite:nil 
+                                             disabledSprite:nil target:self selector:@selector(onResume:)];
     miniMenu = [CCMenu menuWithItems: menuItemResume, menuItemMainMenu, nil];
     miniMenu.position = ccp(device_width/2-10, device_height/2);
     [miniMenu alignItemsVerticallyWithPadding:20];
@@ -585,12 +585,12 @@
     CCSprite * timeBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_TIMEBTN]];
     CCSprite * damageBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_DAMAGEBTN]];
     
-    CCMenuItemSprite * menuItemScore = [CCMenuItemSprite itemFromNormalSprite:scoreBtn selectedSprite:scoreBtn 
-                                                     disabledSprite:scoreBtn target:self selector:@selector(onScore:)];
-    CCMenuItemSprite * menuItemTime = [CCMenuItemSprite itemFromNormalSprite:timeBtn selectedSprite:timeBtn 
-                                                               disabledSprite:timeBtn target:self selector:@selector(onTime:)];
-    CCMenuItemSprite * menuItemDamage = [CCMenuItemSprite itemFromNormalSprite:damageBtn selectedSprite:damageBtn 
-                                                               disabledSprite:damageBtn target:self selector:@selector(onDamage:)];
+    CCMenuItemSprite * menuItemScore = [CCMenuItemSprite itemFromNormalSprite:scoreBtn selectedSprite:nil 
+                                                     disabledSprite:nil target:self selector:@selector(onScore:)];
+    CCMenuItemSprite * menuItemTime = [CCMenuItemSprite itemFromNormalSprite:timeBtn selectedSprite:nil 
+                                                               disabledSprite:nil target:self selector:@selector(onTime:)];
+    CCMenuItemSprite * menuItemDamage = [CCMenuItemSprite itemFromNormalSprite:damageBtn selectedSprite:nil 
+                                                               disabledSprite:nil target:self selector:@selector(onDamage:)];
     
     CCMenu * statTypeMenu = [CCMenu menuWithItems: menuItemScore, menuItemTime, menuItemDamage, nil];
     [statTypeMenu alignItemsHorizontallyWithPadding:20];
@@ -742,14 +742,14 @@
     if (backgroundid == UITEXTURE_LEVELCLEARBACKGROUND)
     {
         continueBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_CONTINUEBTN]];
-        menuItemContinue = [CCMenuItemSprite itemFromNormalSprite:continueBtn selectedSprite:continueBtn 
-                                                   disabledSprite:continueBtn target:self selector:@selector(onContinue:)];
+        menuItemContinue = [CCMenuItemSprite itemFromNormalSprite:continueBtn selectedSprite:nil 
+                                                   disabledSprite:nil target:self selector:@selector(onContinue:)];
     }
     else
     {
         continueBtn = [CCSprite spriteWithTexture:[textureLibrary GetTextureWithKey:UITEXTURE_MAINMENUBTN]];
-        menuItemContinue = [CCMenuItemSprite itemFromNormalSprite:continueBtn selectedSprite:continueBtn 
-                                                   disabledSprite:continueBtn target:self selector:@selector(onMainMenu:)];
+        menuItemContinue = [CCMenuItemSprite itemFromNormalSprite:continueBtn selectedSprite:nil 
+                                                   disabledSprite:nil target:self selector:@selector(onMainMenu:)];
     }
     
     
